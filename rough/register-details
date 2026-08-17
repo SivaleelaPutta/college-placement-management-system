@@ -1,0 +1,17 @@
+# Save registered user profile data
+        app.config["PROFILE"] = {
+            "name": name,
+            "roll": roll,
+            "department": department,
+            "email": email,
+            "phone": "Add Phone",
+            "graduation": "2027",
+            "cgpa": "0.0",
+            "tenth": "N/A",
+            "intermediate": "N/A",
+            "backlogs": "0",
+            "skills": "Add Skills",
+            "certifications": "None",
+            "linkedin": "",
+            "github": ""
+        }

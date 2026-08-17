@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Schedule Interview</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        .header {
+            background: #1e3a8a;
+            color: white;
+            padding: 25px 40px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .header p {
+            margin: 8px 0 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 35px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 15px;
+            background: white;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .required {
+            color: red;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .schedule-btn {
+            border: none;
+            background: #1e3a8a;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .schedule-btn:hover {
+            background: #162e6b;
+        }
+
+        .cancel-btn {
+            text-decoration: none;
+            background: #6b7280;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 7px;
+        }
+
+        .cancel-btn:hover {
+            background: #4b5563;
+        }
+
+        .flash {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 7px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 700px) {
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <h1>
+        College Placement Management System
+    </h1>
+
+    <p>
+        Interview Management
+    </p>
+
+</div>
+
+
+<!-- MAIN CONTAINER -->
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>
+            Schedule Interview
+        </h2>
+
+
+        <!-- FLASH MESSAGES -->
+
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="flash">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- FORM -->
+
+        <form
+            method="POST"
+            action="{{ url_for('interview_bp.schedule_interview') }}"
+        >
+
+
+            <!-- STUDENT + COMPANY -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="student_name">
+
+                        Student Name
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="student_name"
+                        name="student_name"
+                        placeholder="Enter student name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="company_name">
+
+                        Company Name
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="company_name"
+                        name="company_name"
+                        placeholder="Enter company name"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- ROUND + INTERVIEWER -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="round_name">
+
+                        Interview Round
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <select
+                        id="round_name"
+                        name="round_name"
+                        required
+                    >
+
+                        <option value="">
+                            Select Interview Round
+                        </option>
+
+                        <option value="Aptitude Test">
+                            Aptitude Test
+                        </option>
+
+                        <option value="Technical Round">
+                            Technical Round
+                        </option>
+
+                        <option value="Coding Round">
+                            Coding Round
+                        </option>
+
+                        <option value="HR Round">
+                            HR Round
+                        </option>
+
+                        <option value="Managerial Round">
+                            Managerial Round
+                        </option>
+
+                        <option value="Final Round">
+                            Final Round
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="interviewer_name">
+
+                        Interviewer Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="interviewer_name"
+                        name="interviewer_name"
+                        placeholder="Enter interviewer name"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- DATE + TIME -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="interview_date">
+
+                        Interview Date
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <input
+                        type="date"
+                        id="interview_date"
+                        name="interview_date"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="interview_time">
+
+                        Interview Time
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <input
+                        type="time"
+                        id="interview_time"
+                        name="interview_time"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- MODE + LOCATION -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="interview_mode">
+
+                        Interview Mode
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <select
+                        id="interview_mode"
+                        name="interview_mode"
+                        required
+                    >
+
+                        <option value="">
+                            Select Interview Mode
+                        </option>
+
+                        <option value="Online">
+                            Online
+                        </option>
+
+                        <option value="Offline">
+                            Offline
+                        </option>
+
+                        <option value="Hybrid">
+                            Hybrid
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="location">
+
+                        Location
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        name="location"
+                        placeholder="Interview location"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- MEETING LINK -->
+
+            <div class="form-group">
+
+                <label for="meeting_link">
+
+                    Meeting Link
+
+                </label>
+
+                <input
+                    type="url"
+                    id="meeting_link"
+                    name="meeting_link"
+                    placeholder="https://meet.google.com/..."
+                >
+
+            </div>
+
+
+            <!-- REMARKS -->
+
+            <div class="form-group">
+
+                <label for="remarks">
+
+                    Remarks
+
+                </label>
+
+                <textarea
+                    id="remarks"
+                    name="remarks"
+                    placeholder="Enter additional information..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="schedule-btn"
+                >
+                    Schedule Interview
+                </button>
+
+
+                <a
+                    href="{{ url_for('interview_bp.interview_management') }}"
+                    class="cancel-btn"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

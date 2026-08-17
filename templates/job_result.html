@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="resume-analyzer-wrapper">
+    <main class="result-page">
+        <section class="result-header">
+            <span class="badge">MATCH ANALYSIS COMPLETE</span>
+            <h1>Job Match Result</h1>
+            <p>{{ company_name }} · {{ job_title }}</p>
+        </section>
+
+        <section class="match-score-card">
+            <div class="match-circle">
+                <strong>{{ result.match_percentage }}%</strong>
+                <span>Match</span>
+            </div>
+            <div>
+                <span class="badge">{{ result.recommendation }}</span>
+                <h2>Resume Compatibility</h2>
+                <p>Your resume has been compared with the skills identified in the Job Description.</p>
+            </div>
+        </section>
+
+        <section class="result-grid">
+            <div class="result-card">
+                <div class="card-heading"><h2>✓ Matched Skills</h2></div>
+                <div class="skill-list">
+                    {% for skill in result.matched_skills %}
+                        <span class="skill">{{ skill }}</span>
+                    {% else %}
+                        <p class="empty">No matching skills found.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="result-card">
+                <div class="card-heading"><h2>⚠ Missing Skills</h2></div>
+                <div class="skill-list">
+                    {% for skill in result.missing_skills %}
+                        <span class="missing-skill">{{ skill }}</span>
+                    {% else %}
+                        <p class="empty">No missing skills detected.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="result-card">
+            <h2>🎯 Recommendation</h2>
+            {% if result.match_percentage >= 80 %}
+                <p>Your resume is a strong match for this role. You can consider applying confidently.</p>
+            {% elif result.match_percentage >= 60 %}
+                <p>Your resume is a good match. Consider improving the missing skills before applying.</p>
+            {% elif result.match_percentage >= 40 %}
+                <p>Your resume has some relevant skills, but you should strengthen the missing technical requirements.</p>
+            {% else %}
+                <p>Your resume currently has limited overlap with this Job Description. Consider developing the missing skills.</p>
+            {% endif %}
+        </section>
+
+        <section class="result-actions">
+            <a href="{{ url_for('resume_bp.job_match_page') }}" class="primary-button">Check Another Job</a>
+            <a href="{{ url_for('resume_bp.resume_home') }}" class="secondary-button">Analyze Resume</a>
+        </section>
+    </main>
+</div>

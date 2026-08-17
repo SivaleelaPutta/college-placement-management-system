@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="resume-analyzer-wrapper">
+    <main class="result-page">
+        <section class="result-header">
+            <span class="badge">ANALYSIS COMPLETE</span>
+            <h1>Resume Analysis Report</h1>
+            <p>{{ filename }}</p>
+        </section>
+
+        <section class="summary-card">
+            <div>
+                <h2>Overall Assessment</h2>
+                <p>{{ analysis.summary }}</p>
+            </div>
+            <div class="main-score">
+                <span>Resume Score</span>
+                <strong>{{ analysis.resume_score }}</strong>
+                <small>/ 100</small>
+            </div>
+        </section>
+
+        <section class="score-grid">
+            <div class="score-card">
+                <span>ATS Score</span>
+                <strong>{{ analysis.ats_score }}%</strong>
+                <small>ATS readiness</small>
+            </div>
+            <div class="score-card">
+                <span>Skills Score</span>
+                <strong>{{ analysis.skills_score }}%</strong>
+                <small>Skills detected</small>
+            </div>
+            <div class="score-card">
+                <span>Section Score</span>
+                <strong>{{ analysis.section_score }}%</strong>
+                <small>Resume structure</small>
+            </div>
+            <div class="score-card">
+                <span>Skills Found</span>
+                <strong>{{ analysis.detected_skills|length }}</strong>
+                <small>Recognized skills</small>
+            </div>
+        </section>
+
+        <section class="result-grid">
+            <div class="result-card">
+                <div class="card-heading"><h2>🧠 Detected Skills</h2></div>
+                <div class="skill-list">
+                    {% for skill in analysis.detected_skills %}
+                        <span class="skill">{{ skill }}</span>
+                    {% else %}
+                        <p class="empty">No recognized skills were found.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="result-card">
+                <div class="card-heading"><h2>📋 Resume Sections</h2></div>
+                {% for section, present in analysis.sections.items() %}
+                    <div class="section-row">
+                        <span>{{ section }}</span>
+                        {% if present %}
+                            <span class="present">✓ Present</span>
+                        {% else %}
+                            <span class="missing">⚠ Missing</span>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="result-card suggestions-card">
+            <div class="card-heading">
+                <h2>💡 Improvement Recommendations</h2>
+                <span>AI Suggestions</span>
+            </div>
+            {% for suggestion in suggestions %}
+                <div class="suggestion">
+                    <div class="suggestion-number">{{ loop.index }}</div>
+                    <p>{{ suggestion }}</p>
+                </div>
+            {% endfor %}
+        </section>
+
+        <section class="result-actions">
+            <a href="{{ url_for('resume_bp.resume_home') }}" class="primary-button">Analyze Another Resume</a>
+            <a href="{{ url_for('resume_bp.job_match_page') }}" class="secondary-button">Match Resume With Job</a>
+        </section>
+    </main>
+</div>

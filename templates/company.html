@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Company Management - CPMS</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f4f7fc;
+            color: #333;
+        }
+
+        .page {
+            padding: 30px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        /* Header */
+
+        .page-header {
+            background: linear-gradient(
+                135deg,
+                #0d6efd,
+                #1565ff
+            );
+
+            color: white;
+
+            padding: 25px 30px;
+
+            border-radius: 16px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 10px 25px rgba(13,110,253,.20);
+        }
+
+        .page-header h1 {
+            font-size: 27px;
+            margin-bottom: 5px;
+        }
+
+        .page-header p {
+            font-size: 13px;
+            opacity: .9;
+        }
+
+        .header-icon {
+            width: 60px;
+            height: 60px;
+
+            background: rgba(255,255,255,.18);
+
+            border-radius: 14px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 25px;
+        }
+
+        /* Add company */
+
+        .management-box {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,.07);
+
+            margin-bottom: 25px;
+        }
+
+        .management-box h2 {
+            color: #222;
+            font-size: 19px;
+            margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 7px;
+
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border: 1px solid #dce3ed;
+
+            border-radius: 9px;
+
+            outline: none;
+
+            font-size: 13px;
+
+            background: #fafcff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+
+            border-color: #0d6efd;
+
+            box-shadow:
+                0 0 0 3px rgba(13,110,253,.08);
+
+            background: white;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .add-btn {
+
+            margin-top: 18px;
+
+            border: none;
+
+            background: #0d6efd;
+
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #0056d6;
+        }
+
+        /* Company table */
+
+        .table-box {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,.07);
+
+            overflow-x: auto;
+        }
+
+        .table-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+        .table-header h2 {
+            font-size: 19px;
+        }
+
+        .search {
+
+            padding: 10px 15px;
+
+            width: 250px;
+
+            border:
+                1px solid #dce3ed;
+
+            border-radius: 25px;
+
+            outline: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th {
+
+            background: #0d6efd;
+
+            color: white;
+
+            padding: 13px;
+
+            font-size: 13px;
+        }
+
+        td {
+
+            padding: 13px;
+
+            text-align: center;
+
+            border-bottom:
+                1px solid #edf0f5;
+
+            font-size: 13px;
+        }
+
+        tbody tr:hover {
+            background: #f5f9ff;
+        }
+
+        .company-name {
+            font-weight: 600;
+            color: #222;
+        }
+
+        .package {
+            color: #198754;
+            font-weight: 600;
+        }
+
+        /* Buttons */
+
+        .edit-btn,
+        .delete-btn {
+
+            border: none;
+
+            width: 34px;
+
+            height: 34px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            margin: 2px;
+        }
+
+        .edit-btn {
+
+            background: #eaf2ff;
+
+            color: #0d6efd;
+        }
+
+        .delete-btn {
+
+            background: #ffe5e7;
+
+            color: #dc3545;
+        }
+
+        .edit-btn:hover {
+            background: #0d6efd;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        @media(max-width: 700px) {
+
+            .page {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .search {
+                width: 100%;
+            }
+
+            .header-icon {
+                display: none;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+                <i class="fas fa-building"></i>
+                Company Management
+            </h1>
+
+            <p>
+                Add, edit and manage placement companies.
+            </p>
+
+        </div>
+
+        <div class="header-icon">
+
+            <i class="fas fa-building"></i>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADD COMPANY -->
+
+    <div class="management-box">
+
+        <h2>
+            <i class="fas fa-plus-circle"></i>
+            Add New Company
+        </h2>
+
+        <form method="POST">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Company Name</label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Enter company name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Job Role</label>
+
+                    <input
+                        type="text"
+                        name="role"
+                        placeholder="Software Developer"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Package</label>
+
+                    <input
+                        type="text"
+                        name="package"
+                        placeholder="7 LPA"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Location</label>
+
+                    <input
+                        type="text"
+                        name="location"
+                        placeholder="Hyderabad">
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label>Company Description</label>
+
+                    <textarea
+                        name="description"
+                        placeholder="Enter company description"></textarea>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="add-btn">
+
+                <i class="fas fa-plus"></i>
+
+                Add Company
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- COMPANY LIST -->
+
+    <div class="table-box">
+
+        <div class="table-header">
+
+            <h2>
+                <i class="fas fa-list"></i>
+                Companies
+            </h2>
+
+            <input
+                type="text"
+                id="searchCompany"
+                class="search"
+                placeholder="Search company...">
+
+        </div>
+
+
+        <table id="companyTable">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Company</th>
+
+                    <th>Job Role</th>
+
+                    <th>Package</th>
+
+                    <th>Location</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for company in companies %}
+
+                <tr>
+
+                    <td>
+                        {{ company.id }}
+                    </td>
+
+                    <td class="company-name">
+                        {{ company.name }}
+                    </td>
+
+                    <td>
+                        {{ company.role }}
+                    </td>
+
+                    <td class="package">
+                        {{ company.package }}
+                    </td>
+
+                    <td>
+                        {{ company.location }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{{ url_for('edit_company', id=company.id) }}"
+                            class="edit-btn">
+
+                            <i class="fas fa-edit"></i>
+
+                        </a>
+
+
+                        <a
+                            href="{{ url_for('delete_company', id=company.id) }}"
+                            class="delete-btn"
+                            onclick="return confirm('Delete this company?');">
+
+                            <i class="fas fa-trash"></i>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="6">
+
+                        No companies found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const search =
+    document.getElementById("searchCompany");
+
+const table =
+    document.getElementById("companyTable");
+
+search.addEventListener("keyup", function () {
+
+    const value =
+        this.value.toLowerCase();
+
+    const rows =
+        table
+        .getElementsByTagName("tbody")[0]
+        .getElementsByTagName("tr");
+
+    for (let row of rows) {
+
+        row.style.display =
+            row.textContent
+            .toLowerCase()
+            .includes(value)
+            ? ""
+            : "none";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

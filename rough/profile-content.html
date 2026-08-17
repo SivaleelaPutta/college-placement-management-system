@@ -1,0 +1,146 @@
+<div class="container">
+<div class="profile">
+<div class="header">
+<div class="left">
+<img alt="Student" src="https://via.placeholder.com/150"/>
+<div>
+<h2 id="name">Maddu Showri Sudeep</h2>
+<p id="course">B.Tech - Computer Science Engineering</p>
+<p id="cgpaText">CGPA : 8.75</p>
+</div>
+</div>
+<button class="edit-btn" onclick="openModal()">✏ Edit Profile</button>
+</div>
+<div class="content">
+<!-- Personal Information -->
+<div class="card">
+<h3>Personal Information</h3>
+<div class="info"><strong>Roll No :</strong> <span id="roll">22CSE105</span></div>
+<div class="info"><strong>Email :</strong> <span id="email">student@example.com</span></div>
+<div class="info"><strong>Phone :</strong> <span id="phone">9876543210</span></div>
+<div class="info"><strong>Department :</strong> <span id="dept">Computer Science</span></div>
+<div class="info"><strong>Graduation :</strong> 2027</div>
+</div>
+<!-- Placement -->
+<div class="card">
+<h3>Placement Status</h3>
+<span class="status">Eligible</span>
+<div class="info"><strong>Applications :</strong> 12</div>
+<div class="info"><strong>Interviews :</strong> 5</div>
+<div class="info"><strong>Offers :</strong> 2</div>
+</div>
+<!-- Skills -->
+<div class="card">
+<h3>Skills</h3>
+<div id="skillBox">
+<span class="skill">HTML</span>
+<span class="skill">CSS</span>
+<span class="skill">JavaScript</span>
+<span class="skill">Python</span>
+<span class="skill">SQL</span>
+<span class="skill">Git</span>
+</div>
+</div>
+<!-- Academic -->
+<div class="card">
+<h3>Academic Details</h3>
+<table>
+<tr>
+<td>10th</td>
+<td>95%</td>
+</tr>
+<tr>
+<td>Intermediate</td>
+<td>92%</td>
+</tr>
+<tr>
+<td>Current CGPA</td>
+<td id="cgpa">8.75</td>
+</tr>
+<tr>
+<td>Backlogs</td>
+<td>0</td>
+</tr>
+</table>
+</div>
+<!-- Certifications -->
+<div class="card">
+<h3>Certifications</h3>
+<ul>
+<li>Cisco Networking Basics</li>
+<li>Linux Unhatched</li>
+<li>Python Programming</li>
+<li>Web Development</li>
+</ul>
+</div>
+<!-- Contact -->
+<div class="card">
+<h3>Contact</h3>
+<div class="info">LinkedIn : linkedin.com/in/student</div>
+<div class="info">GitHub : github.com/student</div>
+</div>
+</div>
+</div>
+</div> Modal <div class="modal" id="modal">
+<div class="modal-content">
+<h2>Edit Profile</h2>
+<label>Name</label>
+<input id="editName" value="Maddu Showri Sudeep"/>
+<label>Email</label>
+<input id="editEmail" value="student@example.com"/>
+<label>Phone</label>
+<input id="editPhone" value="9876543210"/>
+<label>Department</label>
+<input id="editDept" value="Computer Science"/>
+<label>CGPA</label>
+<input id="editCgpa" value="8.75"/>
+<div class="buttons">
+<button class="save" onclick="saveData()">Save</button>
+<button class="cancel" onclick="closeModal()">Cancel</button>
+</div>
+</div>
+</div><script>
+
+function openModal(){
+
+document.getElementById("modal").style.display="flex";
+
+}
+
+function closeModal(){
+
+document.getElementById("modal").style.display="none";
+
+}
+
+function saveData(){
+
+document.getElementById("name").innerText=document.getElementById("editName").value;
+
+document.getElementById("email").innerText=document.getElementById("editEmail").value;
+
+document.getElementById("phone").innerText=document.getElementById("editPhone").value;
+
+document.getElementById("dept").innerText=document.getElementById("editDept").value;
+
+document.getElementById("cgpa").innerText=document.getElementById("editCgpa").value;
+
+document.getElementById("cgpaText").innerText="CGPA : "+document.getElementById("editCgpa").value;
+
+closeModal();
+
+alert("Profile Updated Successfully!");
+
+}
+
+window.onclick=function(event){
+
+if(event.target==document.getElementById("modal")){
+
+closeModal();
+
+}
+
+}
+
+</script>

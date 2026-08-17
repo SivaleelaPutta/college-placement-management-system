@@ -1,0 +1,2308 @@
+style css
+
+/* ==========================================================
+   GLOBAL
+========================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f6f8fc;
+
+    color: #172033;
+
+}
+
+
+a {
+    text-decoration: none;
+}
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.hero {
+
+    min-height: 450px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 70px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #ffffff
+        );
+
+}
+
+
+.hero-content {
+
+    max-width: 800px;
+
+}
+
+
+.hero h1 {
+
+    font-size: 55px;
+
+    line-height: 1.1;
+
+    margin: 20px 0;
+
+}
+
+
+.hero h1 span {
+
+    color: #2563eb;
+
+}
+
+
+.hero p {
+
+    color: #64748b;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    max-width: 700px;
+
+    margin:
+        0 auto 30px;
+
+}
+
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.badge {
+
+    display: inline-block;
+
+    padding:
+        7px 12px;
+
+    border-radius: 20px;
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: .8px;
+
+}
+
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.primary-button {
+
+    display: inline-block;
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding:
+        13px 22px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+}
+
+
+.primary-button:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+.secondary-button {
+
+    display: inline-block;
+
+    border-radius: 8px;
+
+    padding:
+        13px 22px;
+
+    background: #eef2f7;
+
+    color: #172033;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+}
+
+
+.full-button {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+}
+
+
+/* ==========================================================
+   UPLOAD SECTION
+========================================================== */
+
+.upload-section {
+
+    max-width: 900px;
+
+    margin:
+        70px auto;
+
+    padding:
+        0 20px;
+
+}
+
+
+.section-heading {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.section-heading h2 {
+
+    font-size: 32px;
+
+    margin:
+        12px 0;
+
+}
+
+
+.section-heading p {
+
+    color: #64748b;
+
+}
+
+
+/* ==========================================================
+   UPLOAD CARD
+========================================================== */
+
+.upload-card {
+
+    background: white;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    padding: 50px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 30px
+        rgba(15, 23, 42, .05);
+
+}
+
+
+.upload-icon {
+
+    font-size: 55px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.upload-card h3 {
+
+    font-size: 24px;
+
+}
+
+
+.upload-card p {
+
+    color: #64748b;
+
+    margin-bottom: 30px;
+
+}
+
+
+.upload-card form {
+
+    max-width: 500px;
+
+    margin: auto;
+
+}
+
+
+.file-label {
+
+    display: block;
+
+    border:
+        2px dashed #cbd5e1;
+
+    border-radius: 10px;
+
+    padding: 25px;
+
+    color: #2563eb;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.file-label:hover {
+
+    background: #eff6ff;
+
+}
+
+
+input[type="file"] {
+
+    display: none;
+
+}
+
+
+.file-name {
+
+    margin-top: 15px;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+}
+
+
+/* ==========================================================
+   FEATURES
+========================================================== */
+
+.features {
+
+    max-width: 1100px;
+
+    margin:
+        80px auto;
+
+    padding:
+        0 20px;
+
+}
+
+
+.feature-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.feature-card {
+
+    background: white;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 14px;
+
+    padding: 25px;
+
+}
+
+
+.feature-icon {
+
+    font-size: 32px;
+
+}
+
+
+.feature-card h3 {
+
+    margin-bottom: 8px;
+
+}
+
+
+.feature-card p {
+
+    color: #64748b;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+
+}
+
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+footer {
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: #64748b;
+
+    border-top:
+        1px solid #e2e8f0;
+
+}
+
+
+/* ==========================================================
+   RESULT PAGE
+========================================================== */
+
+.result-page {
+
+    max-width: 1100px;
+
+    margin:
+        50px auto;
+
+    padding:
+        0 20px;
+
+}
+
+
+.result-header {
+
+    text-align: center;
+
+    margin-bottom: 35px;
+
+}
+
+
+.result-header h1 {
+
+    font-size: 38px;
+
+    margin:
+        15px 0 8px;
+
+}
+
+
+.result-header p {
+
+    color: #64748b;
+
+}
+
+
+/* ==========================================================
+   SUMMARY
+========================================================== */
+
+.summary-card {
+
+    background: white;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.summary-card p {
+
+    color: #64748b;
+
+    line-height: 1.7;
+
+}
+
+
+.main-score {
+
+    min-width: 150px;
+
+    text-align: center;
+
+}
+
+
+.main-score span {
+
+    display: block;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+}
+
+
+.main-score strong {
+
+    display: block;
+
+    font-size: 55px;
+
+    color: #2563eb;
+
+}
+
+
+.main-score small {
+
+    color: #64748b;
+
+}
+
+
+/* ==========================================================
+   SCORE GRID
+========================================================== */
+
+.score-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.score-card {
+
+    background: white;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 14px;
+
+    padding: 25px;
+
+}
+
+
+.score-card span {
+
+    color: #64748b;
+
+    font-size: 14px;
+
+}
+
+
+.score-card strong {
+
+    display: block;
+
+    font-size: 32px;
+
+    margin:
+        8px 0;
+
+    color: #2563eb;
+
+}
+
+
+.score-card small {
+
+    color: #94a3b8;
+
+}
+
+
+/* ==========================================================
+   RESULT GRID
+========================================================== */
+
+.result-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.result-card {
+
+    background: white;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 14px;
+
+    padding: 25px;
+
+}
+
+
+.card-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.card-heading h2 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+}
+
+
+/* ==========================================================
+   SKILLS
+========================================================== */
+
+.skill-list {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+}
+
+
+.skill {
+
+    background: #e0ecff;
+
+    color: #1d4ed8;
+
+    border-radius: 20px;
+
+    padding:
+        8px 12px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+.missing-skill {
+
+    background: #fff1f2;
+
+    color: #be123c;
+
+    border-radius: 20px;
+
+    padding:
+        8px 12px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+/* ==========================================================
+   SECTION STATUS
+========================================================== */
+
+.section-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding:
+        13px 0;
+
+    border-bottom:
+        1px solid #eef2f7;
+
+    font-size: 14px;
+
+}
+
+
+.present {
+
+    color: #15803d;
+
+    font-weight: 700;
+
+}
+
+
+.missing {
+
+    color: #d97706;
+
+    font-weight: 700;
+
+}
+
+
+/* ==========================================================
+   SUGGESTIONS
+========================================================== */
+
+.suggestions-card {
+
+    margin-bottom: 20px;
+
+}
+
+
+.suggestion {
+
+    display: flex;
+
+    gap: 15px;
+
+    padding: 15px;
+
+    background: #f8fafc;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.suggestion-number {
+
+    min-width: 30px;
+
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: #dbeafe;
+
+    color: #2563eb;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 800;
+
+}
+
+
+.suggestion p {
+
+    margin: 5px 0;
+
+    line-height: 1.5;
+
+}
+
+
+/* ==========================================================
+   ACTIONS
+========================================================== */
+
+.result-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin:
+        30px 0;
+
+}
+
+
+/* ==========================================================
+   JOB FORM
+========================================================== */
+
+.job-form-card {
+
+    background: white;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 16px;
+
+    padding: 35px;
+
+}
+
+
+.job-form-card form {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.job-form-card label {
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+}
+
+
+.job-form-card input[type="text"],
+.job-form-card textarea {
+
+    padding: 13px;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+}
+
+
+.job-form-card textarea {
+
+    resize: vertical;
+
+}
+
+
+/* ==========================================================
+   MATCH SCORE
+========================================================== */
+
+.match-score-card {
+
+    background: white;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 16px;
+
+    padding: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 40px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.match-circle {
+
+    width: 180px;
+
+    height: 180px;
+
+    border-radius: 50%;
+
+    background: #eff6ff;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.match-circle strong {
+
+    font-size: 42px;
+
+    color: #2563eb;
+
+}
+
+
+.match-circle span {
+
+    color: #64748b;
+
+}
+
+
+/* ==========================================================
+   ALERT
+========================================================== */
+
+.alert {
+
+    background: #fff7ed;
+
+    border:
+        1px solid #fed7aa;
+
+    color: #9a3412;
+
+    border-radius: 8px;
+
+    padding: 10px 15px;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 850px) {
+
+    .feature-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .score-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .result-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .nav-links {
+
+        display: none;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 38px;
+
+    }
+
+
+    .feature-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .score-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .summary-card {
+
+        flex-direction: column;
+
+        text-align: center;
+
+    }
+
+
+    .result-actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .match-score-card {
+
+        flex-direction: column;
+
+        text-align: center;
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+index html
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        AI Resume Analyzer
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<main>
+
+
+<section class="hero">
+
+
+    <div class="hero-content">
+
+        <span class="badge">
+            AI-POWERED CAREER TOOL
+        </span>
+
+
+        <h1>
+            Analyze Your Resume
+            <span>Smarter</span>
+        </h1>
+
+
+        <p>
+
+            Get an instant resume score,
+            ATS readiness analysis, skill detection,
+            section analysis and personalized
+            improvement recommendations.
+
+        </p>
+
+
+        <a
+            href="#upload"
+            class="primary-button"
+        >
+            Analyze My Resume
+        </a>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     UPLOAD
+====================================================== -->
+
+<section
+    class="upload-section"
+    id="upload"
+>
+
+
+    <div class="section-heading">
+
+        <span class="badge">
+            RESUME ANALYSIS
+        </span>
+
+        <h2>
+            Upload Your Resume
+        </h2>
+
+        <p>
+            Supported formats: PDF and DOCX
+            · Maximum size: 10 MB
+        </p>
+
+    </div>
+
+
+    {% with messages =
+        get_flashed_messages()
+    %}
+
+        {% if messages %}
+
+            <div class="alert">
+
+                {% for message in messages %}
+
+                    <p>
+                        {{ message }}
+                    </p>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    <div class="upload-card">
+
+
+        <div class="upload-icon">
+            📄
+        </div>
+
+
+        <h3>
+            Upload your resume
+        </h3>
+
+
+        <p>
+            Our analyzer will extract your resume
+            information and generate a detailed report.
+        </p>
+
+
+        <form
+            action="{{ url_for('resume_bp.analyze') }}"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+
+            <label
+                class="file-label"
+                for="resume"
+            >
+
+                Choose Resume
+
+            </label>
+
+
+            <input
+                type="file"
+                id="resume"
+                name="resume"
+                accept=".pdf,.docx"
+                required
+            >
+
+
+            <div
+                id="file-name"
+                class="file-name"
+            >
+                No file selected
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-button full-button"
+            >
+                Analyze Resume
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     FEATURES
+====================================================== -->
+
+<section class="features">
+
+
+    <div class="section-heading">
+
+        <span class="badge">
+            WHAT YOU GET
+        </span>
+
+        <h2>
+            Complete Resume Analysis
+        </h2>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <h3>
+                Resume Score
+            </h3>
+
+            <p>
+                Get an overall score based on
+                resume structure, skills and ATS readiness.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🤖
+            </div>
+
+            <h3>
+                ATS Analysis
+            </h3>
+
+            <p>
+                Check whether your resume contains
+                important sections and relevant content.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🧠
+            </div>
+
+            <h3>
+                Skill Detection
+            </h3>
+
+            <p>
+                Automatically identify technical
+                and professional skills.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💡
+            </div>
+
+            <h3>
+                Smart Suggestions
+            </h3>
+
+            <p>
+                Receive personalized recommendations
+                to improve your resume.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <p>
+        AI Resume Analyzer · College Placement Management System
+    </p>
+
+</footer>
+
+
+</main>
+
+
+<script>
+
+const resumeInput =
+    document.getElementById("resume");
+
+const fileName =
+    document.getElementById("file-name");
+
+
+resumeInput.addEventListener(
+    "change",
+    function () {
+
+        if (this.files.length > 0) {
+
+            fileName.textContent =
+                this.files[0].name;
+
+        } else {
+
+            fileName.textContent =
+                "No file selected";
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+job match html
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Resume Job Matcher</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            background: #f9fafb;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 230px;
+            padding: 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            resize: vertical;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        textarea:focus,
+        input[type="file"]:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .hint {
+            margin-top: 6px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .flash {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 7px;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>AI Resume Job Matcher</h1>
+
+        <p class="subtitle">
+            Upload your resume and enter a job description
+            to analyze your resume against the job requirements.
+        </p>
+
+
+        <!-- Flash Messages -->
+
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="flash">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- FORM -->
+
+        <form
+            action="{{ url_for('resume_bp.job_match_page') }}"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            <!-- Resume -->
+
+            <div class="form-group">
+
+                <label for="resume">
+                    Upload Resume
+                </label>
+
+                <input
+                    type="file"
+                    id="resume"
+                    name="resume"
+                    accept=".pdf,.doc,.docx"
+                    required
+                >
+
+                <p class="hint">
+                    Accepted formats: PDF, DOC, DOCX
+                </p>
+
+            </div>
+
+
+            <!-- Job Description -->
+
+            <div class="form-group">
+
+                <label for="job_description">
+                    Job Description
+                </label>
+
+                <textarea
+                    id="job_description"
+                    name="job_description"
+                    placeholder="Paste the job description here..."
+                    required
+                ></textarea>
+
+                <p class="hint">
+                    Include the required skills, qualifications,
+                    experience and responsibilities.
+                </p>
+
+            </div>
+
+
+            <!-- Analyze -->
+
+            <button type="submit">
+                Analyze Resume
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+job result html
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Job Match Result
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+<main class="result-page">
+
+
+<section class="result-header">
+
+    <span class="badge">
+        MATCH ANALYSIS COMPLETE
+    </span>
+
+
+    <h1>
+        Job Match Result
+    </h1>
+
+
+    <p>
+        {{ company_name }}
+        ·
+        {{ job_title }}
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     MATCH SCORE
+====================================================== -->
+
+<section class="match-score-card">
+
+
+    <div class="match-circle">
+
+        <strong>
+            {{ result.match_percentage }}%
+        </strong>
+
+        <span>
+            Match
+        </span>
+
+    </div>
+
+
+    <div>
+
+        <span class="badge">
+            {{ result.recommendation }}
+        </span>
+
+
+        <h2>
+            Resume Compatibility
+        </h2>
+
+
+        <p>
+            Your resume has been compared with
+            the skills identified in the Job Description.
+        </p>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     SKILLS
+====================================================== -->
+
+<section class="result-grid">
+
+
+    <!-- MATCHED -->
+
+    <div class="result-card">
+
+        <div class="card-heading">
+
+            <h2>
+                ✓ Matched Skills
+            </h2>
+
+        </div>
+
+
+        <div class="skill-list">
+
+            {% for skill in
+                result.matched_skills %}
+
+                <span class="skill">
+                    {{ skill }}
+                </span>
+
+            {% else %}
+
+                <p class="empty">
+                    No matching skills found.
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- MISSING -->
+
+    <div class="result-card">
+
+        <div class="card-heading">
+
+            <h2>
+                ⚠ Missing Skills
+            </h2>
+
+        </div>
+
+
+        <div class="skill-list">
+
+            {% for skill in
+                result.missing_skills %}
+
+                <span class="missing-skill">
+                    {{ skill }}
+                </span>
+
+            {% else %}
+
+                <p class="empty">
+                    No missing skills detected.
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     RECOMMENDATION
+====================================================== -->
+
+<section class="result-card">
+
+
+    <h2>
+        🎯 Recommendation
+    </h2>
+
+
+    {% if result.match_percentage >= 80 %}
+
+        <p>
+            Your resume is a strong match for this role.
+            You can consider applying confidently.
+        </p>
+
+
+    {% elif result.match_percentage >= 60 %}
+
+        <p>
+            Your resume is a good match.
+            Consider improving the missing skills
+            before applying.
+        </p>
+
+
+    {% elif result.match_percentage >= 40 %}
+
+        <p>
+            Your resume has some relevant skills,
+            but you should strengthen the missing
+            technical requirements.
+        </p>
+
+
+    {% else %}
+
+        <p>
+            Your resume currently has limited overlap
+            with this Job Description. Consider
+            developing the missing skills.
+        </p>
+
+    {% endif %}
+
+
+</section>
+
+
+<section class="result-actions">
+
+    <a
+        href="/job-match"
+        class="primary-button"
+    >
+        Check Another Job
+    </a>
+
+
+    <a
+        href="/"
+        class="secondary-button"
+    >
+        Analyze Resume
+    </a>
+
+</section>
+
+
+</main>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+result html
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Resume Analysis Result
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+<main class="result-page">
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<section class="result-header">
+
+    <span class="badge">
+        ANALYSIS COMPLETE
+    </span>
+
+
+    <h1>
+        Resume Analysis Report
+    </h1>
+
+
+    <p>
+        {{ filename }}
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     SUMMARY
+====================================================== -->
+
+<section class="summary-card">
+
+    <div>
+
+        <h2>
+            Overall Assessment
+        </h2>
+
+        <p>
+            {{ analysis.summary }}
+        </p>
+
+    </div>
+
+
+    <div class="main-score">
+
+        <span>
+            Resume Score
+        </span>
+
+        <strong>
+            {{ analysis.resume_score }}
+        </strong>
+
+        <small>
+            / 100
+        </small>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCORE CARDS
+====================================================== -->
+
+<section class="score-grid">
+
+
+    <div class="score-card">
+
+        <span>
+            ATS Score
+        </span>
+
+        <strong>
+            {{ analysis.ats_score }}%
+        </strong>
+
+        <small>
+            ATS readiness
+        </small>
+
+    </div>
+
+
+    <div class="score-card">
+
+        <span>
+            Skills Score
+        </span>
+
+        <strong>
+            {{ analysis.skills_score }}%
+        </strong>
+
+        <small>
+            Skills detected
+        </small>
+
+    </div>
+
+
+    <div class="score-card">
+
+        <span>
+            Section Score
+        </span>
+
+        <strong>
+            {{ analysis.section_score }}%
+        </strong>
+
+        <small>
+            Resume structure
+        </small>
+
+    </div>
+
+
+    <div class="score-card">
+
+        <span>
+            Skills Found
+        </span>
+
+        <strong>
+            {{ analysis.detected_skills|length }}
+        </strong>
+
+        <small>
+            Recognized skills
+        </small>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     SKILLS + SECTIONS
+====================================================== -->
+
+<section class="result-grid">
+
+
+    <!-- DETECTED SKILLS -->
+
+    <div class="result-card">
+
+        <div class="card-heading">
+
+            <h2>
+                🧠 Detected Skills
+            </h2>
+
+        </div>
+
+
+        <div class="skill-list">
+
+            {% for skill in
+                analysis.detected_skills %}
+
+                <span class="skill">
+                    {{ skill }}
+                </span>
+
+            {% else %}
+
+                <p class="empty">
+                    No recognized skills were found.
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- SECTIONS -->
+
+    <div class="result-card">
+
+        <div class="card-heading">
+
+            <h2>
+                📋 Resume Sections
+            </h2>
+
+        </div>
+
+
+        {% for section, present in
+            analysis.sections.items() %}
+
+
+            <div class="section-row">
+
+                <span>
+                    {{ section }}
+                </span>
+
+
+                {% if present %}
+
+                    <span class="present">
+                        ✓ Present
+                    </span>
+
+                {% else %}
+
+                    <span class="missing">
+                        ⚠ Missing
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     SUGGESTIONS
+====================================================== -->
+
+<section class="result-card suggestions-card">
+
+
+    <div class="card-heading">
+
+        <h2>
+            💡 Improvement Recommendations
+        </h2>
+
+        <span>
+            AI Suggestions
+        </span>
+
+    </div>
+
+
+    {% for suggestion in suggestions %}
+
+
+        <div class="suggestion">
+
+            <div class="suggestion-number">
+
+                {{ loop.index }}
+
+            </div>
+
+
+            <p>
+                {{ suggestion }}
+            </p>
+
+        </div>
+
+
+    {% endfor %}
+
+
+</section>
+
+
+<!-- =====================================================
+     ACTIONS
+====================================================== -->
+
+<section class="result-actions">
+
+    <a
+        href="/"
+        class="primary-button"
+    >
+        Analyze Another Resume
+    </a>
+
+
+    <a
+        href="/job-match"
+        class="secondary-button"
+    >
+        Match Resume With Job
+    </a>
+
+</section>
+
+
+</main>
+
+
+</body>
+
+</html>

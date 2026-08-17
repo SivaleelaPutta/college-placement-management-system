@@ -1,0 +1,857 @@
+<style>
+/* =========================================================
+   HELP + ABOUT PAGES
+   Same CPMS font, color, card and dashboard style
+========================================================= */
+
+
+/* =========================================================
+   COMMON PAGE CONTAINER
+========================================================= */
+
+.info-page,
+.help-page {
+    min-height: calc(100vh - 70px);
+
+    padding: 35px 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+
+/* =========================================================
+   ABOUT MAIN CARD
+========================================================= */
+
+.info-card {
+
+    width: 100%;
+    max-width: 850px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.08);
+
+    border-top: 5px solid #0d6efd;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ABOUT ICON
+========================================================= */
+
+.info-icon {
+
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #e8f1ff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.info-icon i {
+
+    font-size: 32px;
+
+    color: #0d6efd;
+}
+
+
+/* =========================================================
+   ABOUT HEADING
+========================================================= */
+
+.info-card h1 {
+
+    color: #0d6efd;
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+}
+
+
+.info-intro {
+
+    color: #666;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   ABOUT INFORMATION CARDS
+========================================================= */
+
+.info-items {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    text-align: left;
+}
+
+
+.info-item {
+
+    background: #f8f9fc;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    display: flex;
+
+    gap: 15px;
+
+    border: 1px solid #edf1f7;
+
+    transition: .3s;
+}
+
+
+.info-item:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 8px 20px rgba(13,110,253,.12);
+
+    border-color: #d5e4ff;
+}
+
+
+.info-item > i {
+
+    color: #0d6efd;
+
+    font-size: 23px;
+
+    width: 30px;
+
+    flex-shrink: 0;
+
+    margin-top: 3px;
+}
+
+
+.info-item h3 {
+
+    color: #222;
+
+    font-size: 17px;
+
+    margin-bottom: 6px;
+}
+
+
+.info-item p {
+
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   HELP PAGE MAIN CARD
+========================================================= */
+
+.help-card {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.08);
+
+    border-top: 5px solid #0d6efd;
+}
+
+
+/* =========================================================
+   HELP HEADER
+========================================================= */
+
+.help-header {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.help-icon {
+
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 50%;
+
+    background: #e8f1ff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.help-icon i {
+
+    color: #0d6efd;
+
+    font-size: 30px;
+}
+
+
+.help-header h1 {
+
+    color: #0d6efd;
+
+    font-size: 28px;
+
+    margin-bottom: 7px;
+}
+
+
+.help-header p {
+
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   FAQ SECTION
+========================================================= */
+
+.faq-section h2 {
+
+    color: #0d6efd;
+
+    font-size: 20px;
+
+    margin-bottom: 18px;
+}
+
+
+.faq-section h2 i {
+
+    margin-right: 8px;
+}
+
+
+/* =========================================================
+   FAQ ITEM
+========================================================= */
+
+.faq-item {
+
+    background: #f8f9fc;
+
+    border: 1px solid #e5eaf2;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+    overflow: hidden;
+
+    transition: .3s;
+}
+
+
+.faq-item:hover {
+
+    border-color: #c9dcff;
+
+    box-shadow:
+        0 4px 12px rgba(13,110,253,.08);
+}
+
+
+/* =========================================================
+   FAQ QUESTION
+========================================================= */
+
+.faq-question {
+
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 16px 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    color: #222;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+.faq-question:hover {
+
+    color: #0d6efd;
+}
+
+
+.faq-question i {
+
+    color: #0d6efd;
+
+    transition: .3s;
+}
+
+
+/* =========================================================
+   FAQ ANSWER
+========================================================= */
+
+.faq-answer {
+
+    display: none;
+
+    padding: 0 18px 16px;
+
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+.faq-answer p {
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   ASK QUESTION SECTION
+========================================================= */
+
+.ask-section {
+
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #e5eaf2;
+}
+
+
+.ask-section h2 {
+
+    color: #0d6efd;
+
+    font-size: 20px;
+
+    margin-bottom: 8px;
+}
+
+
+.ask-section h2 i {
+
+    margin-right: 8px;
+}
+
+
+.ask-section p {
+
+    color: #666;
+
+    font-size: 14px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   QUESTION TEXTAREA
+========================================================= */
+
+#helpQuestion {
+
+    width: 100%;
+
+    min-height: 110px;
+
+    resize: vertical;
+
+    padding: 14px;
+
+    border: 2px solid #d9e2f1;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+
+    transition: .3s;
+}
+
+
+#helpQuestion:focus {
+
+    border-color: #0d6efd;
+
+    box-shadow:
+        0 0 12px rgba(13,110,253,.15);
+}
+
+
+/* =========================================================
+   ASK QUESTION BUTTON
+========================================================= */
+
+.ask-btn {
+
+    margin-top: 12px;
+
+    padding: 11px 22px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #0d6efd;
+
+    color: white;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+
+.ask-btn:hover {
+
+    background: #084298;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(13,110,253,.25);
+}
+
+
+/* =========================================================
+   HELP SUCCESS MESSAGE
+========================================================= */
+
+.help-message {
+
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 12px 15px;
+
+    background: #e8f7ee;
+
+    color: #198754;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:768px) {
+
+    .info-page,
+    .help-page {
+
+        padding: 25px 15px;
+    }
+
+
+    .info-card,
+    .help-card {
+
+        padding: 25px 20px;
+    }
+
+
+    .info-card h1,
+    .help-header h1 {
+
+        font-size: 24px;
+    }
+
+
+    .info-items {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .faq-question {
+
+        font-size: 13px;
+
+        padding: 14px;
+    }
+
+}
+
+</style>
+
+<div class="help-page">
+
+    <div class="help-card">
+
+        <!-- Header -->
+        <div class="help-header">
+
+            <div class="help-icon">
+                <i class="fas fa-question-circle"></i>
+            </div>
+
+            <h1>Help & Support</h1>
+
+            <p>
+                Find answers to frequently asked questions
+                or ask us your own question.
+            </p>
+
+        </div>
+
+
+        <!-- Frequently Asked Questions -->
+
+        <div class="faq-section">
+
+            <h2>
+                <i class="fas fa-circle-question"></i>
+                Frequently Asked Questions
+            </h2>
+
+
+            <!-- Question 1 -->
+
+            <div class="faq-item">
+
+                <button class="faq-question" onclick="toggleFAQ(this)">
+
+                    <span>
+                        How can I update my profile details?
+                    </span>
+
+                    <i class="fas fa-chevron-down"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Go to the Profile section from the left sidebar.
+                        Update your personal and academic details and
+                        click the Save button.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Question 2 -->
+
+            <div class="faq-item">
+
+                <button class="faq-question" onclick="toggleFAQ(this)">
+
+                    <span>
+                        How can I view available companies?
+                    </span>
+
+                    <i class="fas fa-chevron-down"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Click the Companies section from the left sidebar
+                        to view companies participating in placement drives.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Question 3 -->
+
+            <div class="faq-item">
+
+                <button class="faq-question" onclick="toggleFAQ(this)">
+
+                    <span>
+                        How can I check my applications?
+                    </span>
+
+                    <i class="fas fa-chevron-down"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Open the Applications section from the sidebar.
+                        You can view the applications you have submitted
+                        and their current status.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Question 4 -->
+
+            <div class="faq-item">
+
+                <button class="faq-question" onclick="toggleFAQ(this)">
+
+                    <span>
+                        Where can I practice aptitude tests?
+                    </span>
+
+                    <i class="fas fa-chevron-down"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Open the Aptitude section from the sidebar.
+                        You can access previous-year aptitude tests
+                        for placement preparation.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Question 5 -->
+
+            <div class="faq-item">
+
+                <button class="faq-question" onclick="toggleFAQ(this)">
+
+                    <span>
+                        How can I check upcoming interviews?
+                    </span>
+
+                    <i class="fas fa-chevron-down"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Click the Interviews section from the sidebar
+                        to view your upcoming placement interviews.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Question 6 -->
+
+            <div class="faq-item">
+
+                <button class="faq-question" onclick="toggleFAQ(this)">
+
+                    <span>
+                        Where can I see my job offers?
+                    </span>
+
+                    <i class="fas fa-chevron-down"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Open the Offers section to view the job offers
+                        received through the placement process.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Ask Your Question -->
+
+        <div class="ask-section">
+
+            <h2>
+                <i class="fas fa-comment-dots"></i>
+                Didn't find what you're looking for?
+            </h2>
+
+            <p>
+                Type your question below and ask for help.
+            </p>
+
+
+            <form id="helpForm" onsubmit="submitHelp(event)">
+
+                <textarea
+                    id="helpQuestion"
+                    placeholder="Type your question here..."
+                    required></textarea>
+
+
+                <button type="submit" class="ask-btn">
+
+                    <i class="fas fa-paper-plane"></i>
+
+                    Ask Question
+
+                </button>
+
+            </form>
+
+
+            <div id="helpMessage" class="help-message">
+
+                <i class="fas fa-check-circle"></i>
+
+                Your question has been submitted successfully!
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function toggleFAQ(button) {
+
+    const answer = button.nextElementSibling;
+
+    const icon = button.querySelector("i");
+
+    if (answer.style.display === "block") {
+
+        answer.style.display = "none";
+
+        icon.classList.remove("fa-chevron-up");
+        icon.classList.add("fa-chevron-down");
+
+    } else {
+
+        answer.style.display = "block";
+
+        icon.classList.remove("fa-chevron-down");
+        icon.classList.add("fa-chevron-up");
+
+    }
+
+}
+
+
+function submitHelp(event) {
+
+    event.preventDefault();
+
+    const question =
+        document.getElementById("helpQuestion").value.trim();
+
+    const message =
+        document.getElementById("helpMessage");
+
+
+    if (question !== "") {
+
+        message.style.display = "block";
+
+        document.getElementById("helpQuestion").value = "";
+
+    }
+
+}
+
+</script>

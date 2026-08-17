@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Interview Evaluation</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        .header {
+            background: #1e3a8a;
+            color: white;
+            padding: 22px 40px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 35px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #1e3a8a;
+        }
+
+        .student-info {
+            background: #eff6ff;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .student-info p {
+            margin: 6px 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .score-box {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .submit-btn {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .submit-btn:hover {
+            background: #15803d;
+        }
+
+        .back-btn {
+            background: #6b7280;
+            color: white;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 7px;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 700px) {
+
+            .score-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="header">
+
+    <h1>College Placement Management System</h1>
+
+    <p>Interview Evaluation</p>
+
+</div>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Evaluate Interview</h2>
+
+
+        <div class="student-info">
+
+            <p>
+                <strong>Student:</strong>
+                {{ interview.student_name }}
+            </p>
+
+            <p>
+                <strong>Company:</strong>
+                {{ interview.company_name }}
+            </p>
+
+            <p>
+                <strong>Round:</strong>
+                {{ interview.round_name }}
+            </p>
+
+            <p>
+                <strong>Date:</strong>
+                {{ interview.interview_date }}
+            </p>
+
+        </div>
+
+
+        <form
+            method="POST"
+            action="{{ url_for(
+                'interview_bp.interview_evaluation', interview_id=interview.interview_id
+            ) }}"
+        >
+
+            <h3>Interview Scores</h3>
+
+
+            <div class="score-grid">
+
+                <div class="score-box">
+
+                    <div class="form-group">
+
+                        <label for="technical_score">
+                            Technical Score (0-100)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="technical_score"
+                            name="technical_score"
+                            min="0"
+                            max="100"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="score-box">
+
+                    <div class="form-group">
+
+                        <label for="communication_score">
+                            Communication Score (0-100)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="communication_score"
+                            name="communication_score"
+                            min="0"
+                            max="100"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="score-box">
+
+                    <div class="form-group">
+
+                        <label for="problem_solving_score">
+                            Problem Solving Score (0-100)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="problem_solving_score"
+                            name="problem_solving_score"
+                            min="0"
+                            max="100"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="score-box">
+
+                    <div class="form-group">
+
+                        <label for="aptitude_score">
+                            Aptitude Score (0-100)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="aptitude_score"
+                            name="aptitude_score"
+                            min="0"
+                            max="100"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="recommendation">
+                    Recommendation
+                </label>
+
+                <select
+                    id="recommendation"
+                    name="recommendation"
+                    required
+                >
+
+                    <option value="">
+                        Select Recommendation
+                    </option>
+
+                    <option value="Selected">
+                        Selected
+                    </option>
+
+                    <option value="Rejected">
+                        Rejected
+                    </option>
+
+                    <option value="Waitlisted">
+                        Waitlisted
+                    </option>
+
+                    <option value="Next Round">
+                        Next Round
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="feedback">
+                    Feedback
+                </label>
+
+                <textarea
+                    id="feedback"
+                    name="feedback"
+                    placeholder="Enter interviewer feedback..."
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Save Evaluation
+            </button>
+
+
+            <a
+                href="{{ url_for(
+                    'interview_bp.interview_details',
+                    interview_id=interview.interview_id
+                ) }}"
+                class="back-btn"
+            >
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

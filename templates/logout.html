@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Logout - RGUKT Placement Portal</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd 0%,
+                    #0056d6 50%,
+                    #003c99 100%
+                );
+
+            overflow: hidden;
+        }
+
+        /* Background glow */
+
+        body::before {
+            content: "";
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            background: rgba(255,255,255,0.08);
+
+            border-radius: 50%;
+
+            top: -150px;
+            left: -150px;
+
+            filter: blur(5px);
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            background: rgba(255,255,255,0.06);
+
+            border-radius: 50%;
+
+            bottom: -200px;
+            right: -150px;
+        }
+
+
+        /* Logout Card */
+
+        .logout-card {
+
+            position: relative;
+            z-index: 2;
+
+            width: 430px;
+
+            padding: 45px 40px;
+
+            background: rgba(255,255,255,0.97);
+
+            border-radius: 24px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.25),
+                0 0 30px rgba(255,255,255,0.12);
+
+            animation: cardOpen 0.5s ease;
+        }
+
+
+        /* Logo */
+
+        .logo {
+
+            width: 90px;
+            height: 90px;
+
+            object-fit: contain;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* Icon */
+
+        .logout-icon {
+
+            width: 75px;
+            height: 75px;
+
+            margin: 5px auto 20px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #eaf2ff;
+
+            color: #0d6efd;
+
+            font-size: 30px;
+
+            box-shadow:
+                0 8px 20px rgba(13,110,253,0.15);
+        }
+
+
+        /* Heading */
+
+        h1 {
+
+            color: #222;
+
+            font-size: 27px;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+        }
+
+
+        .message {
+
+            color: #777;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* Buttons */
+
+        .buttons {
+
+            display: flex;
+
+            gap: 15px;
+
+            justify-content: center;
+        }
+
+
+        .btn {
+
+            width: 150px;
+
+            padding: 12px 20px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            border: none;
+        }
+
+
+        /* Cancel */
+
+        .cancel-btn {
+
+            background: #eef2f7;
+
+            color: #555;
+
+            border: 1px solid #d9e2f1;
+        }
+
+
+        .cancel-btn:hover {
+
+            background: #e2e8f0;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* Logout */
+
+        .logout-btn {
+
+            background: #0d6efd;
+
+            color: white;
+
+            box-shadow:
+                0 6px 15px rgba(13,110,253,0.25);
+        }
+
+
+        .logout-btn:hover {
+
+            background: #0056d6;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(13,110,253,0.35);
+        }
+
+
+        /* Portal name */
+
+        .portal-name {
+
+            margin-top: 25px;
+
+            font-size: 12px;
+
+            color: #999;
+        }
+
+
+        /* Animation */
+
+        @keyframes cardOpen {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+
+        /* Mobile */
+
+        @media(max-width:500px) {
+
+            .logout-card {
+
+                width: calc(100% - 30px);
+
+                padding: 35px 25px;
+            }
+
+            .buttons {
+
+                flex-direction: column;
+            }
+
+            .btn {
+
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div class="logout-card">
+
+        <!-- RGUKT Logo -->
+        <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt="RGUKT Logo"
+            class="logo"
+        >
+
+
+        <!-- Logout Icon -->
+        <div class="logout-icon">
+            <i class="fas fa-right-from-bracket"></i>
+        </div>
+
+
+        <h1>Logout</h1>
+
+
+        <p class="message">
+            Are you sure you want to logout from
+            <strong>RGUKT Placement Portal</strong>?
+        </p>
+
+
+        <div class="buttons">
+
+            <!-- Cancel -->
+            <a href="{{ url_for('dashboard') }}"
+               class="btn cancel-btn">
+                Cancel
+            </a>
+
+
+            <!-- Confirm Logout -->
+            <a href="{{ url_for('confirm_logout') }}"
+               class="btn logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+
+        <p class="portal-name">
+            RGUKT Placement Management System
+        </p>
+
+    </div>
+
+</body>
+</html>

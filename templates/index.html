@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="resume-analyzer-wrapper">
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">AI-POWERED CAREER TOOL</span>
+                <h1>Analyze Your Resume <span>Smarter</span></h1>
+                <p>Get an instant resume score, ATS readiness analysis, skill detection, section analysis and personalized improvement recommendations.</p>
+                <a href="#upload" class="primary-button">Analyze My Resume</a>
+            </div>
+        </section>
+
+        <section class="upload-section" id="upload">
+            <div class="section-heading">
+                <span class="badge">RESUME ANALYSIS</span>
+                <h2>Upload Your Resume</h2>
+                <p>Supported formats: PDF and DOCX · Maximum size: 10 MB</p>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="upload-card">
+                <div class="upload-icon">📄</div>
+                <h3>Upload your resume</h3>
+                <p>Our analyzer will extract your resume information and generate a detailed report.</p>
+
+                <form action="{{ url_for('resume_bp.analyze') }}" method="POST" enctype="multipart/form-data">
+                    <label class="file-label" for="resume">Choose Resume</label>
+                    <input type="file" id="resume" name="resume" accept=".pdf,.docx" required>
+                    <div id="file-name" class="file-name">No file selected</div>
+                    <button type="submit" class="primary-button full-button">Analyze Resume</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="section-heading">
+                <span class="badge">WHAT YOU GET</span>
+                <h2>Complete Resume Analysis</h2>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Resume Score</h3>
+                    <p>Get an overall score based on resume structure, skills and ATS readiness.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>ATS Analysis</h3>
+                    <p>Check whether your resume contains important sections and relevant content.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Skill Detection</h3>
+                    <p>Automatically identify technical and professional skills.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Smart Suggestions</h3>
+                    <p>Receive personalized recommendations to improve your resume.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>AI Resume Analyzer · College Placement Management System</p>
+        </footer>
+    </main>
+</div>
+
+<script>
+    const resumeInput = document.getElementById("resume");
+    const fileName = document.getElementById("file-name");
+
+    if (resumeInput) {
+        resumeInput.addEventListener("change", function () {
+            fileName.textContent = this.files.length > 0 ? this.files[0].name : "No file selected";
+        });
+    }
+</script>

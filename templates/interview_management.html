@@ -1,0 +1,557 @@
+<!--<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        color: #222;
+    }
+
+    .header {
+        background: #1e3a8a;
+        color: white;
+        padding: 22px 40px;
+    }
+
+    .header h1 {
+        margin: 0;
+    }
+
+    .header p {
+        margin: 6px 0 0;
+    }
+
+    .container {
+        width: 94%;
+        max-width: 1200px;
+        margin: 30px auto;
+    }
+
+    .top-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .top-section h2 {
+        color: #1e3a8a;
+        margin: 0;
+    }
+
+    .schedule-btn {
+        background: #1e3a8a;
+        color: white;
+        text-decoration: none;
+        padding: 12px 20px;
+        border-radius: 7px;
+    }
+
+    .schedule-btn:hover {
+        background: #162e6b;
+    }
+
+    .flash {
+        background: #dcfce7;
+        color: #166534;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 7px;
+    }
+
+    .table-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: #1e3a8a;
+        color: white;
+        padding: 13px;
+        text-align: left;
+    }
+
+    td {
+        padding: 13px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    tr:hover {
+        background: #f8fafc;
+    }
+
+    .status {
+        padding: 6px 10px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .scheduled {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    .selected {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .rejected {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .waitlisted {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    .next-round {
+        background: #e0e7ff;
+        color: #3730a3;
+    }
+
+    .completed {
+        background: #e5e5e5;
+        color: #374151;
+    }
+
+    .view-btn {
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        padding: 7px 12px;
+        border-radius: 5px;
+        font-size: 13px;
+    }
+
+    .view-btn:hover {
+        background: #1d4ed8;
+    }
+
+    .empty {
+        text-align: center;
+        padding: 50px;
+        color: #666;
+    }
+
+    @media (max-width: 700px) {
+        .header {
+            padding: 20px;
+        }
+
+        .container {
+            width: 96%;
+        }
+
+        .top-section {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+    }
+</style>
+
+<div class="top-section">
+    <h2>Scheduled Interviews</h2>
+    <a href="{{ url_for('interview_bp.schedule_interview') }}" class="schedule-btn">
+        + Schedule Interview
+    </a>
+</div>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="flash">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="table-card">
+    {% if interviews %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student</th>
+                <th>Company</th>
+                <th>Round</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Mode</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for interview in interviews %}
+            <tr>
+                <td>{{ interview.interview_id }}</td>
+                <td>{{ interview.student_name }}</td>
+                <td>{{ interview.company_name }}</td>
+                <td>{{ interview.round_name }}</td>
+                <td>{{ interview.interview_date }}</td>
+                <td>{{ interview.interview_time }}</td>
+                <td>{{ interview.interview_mode }}</td>
+                <td>
+                    {% set status_class = interview.status|lower|replace(" ", "-") %}
+                    <span class="status {{ status_class }}">
+                        {{ interview.status }}
+                    </span>
+                </td>
+                <td>
+                    <a href="{{ url_for('interview_bp.interview_details', interview_id=interview.interview_id) }}" class="view-btn">
+                        View
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty">
+        <h3>No Interviews Scheduled</h3>
+        <p>There are currently no interviews scheduled.</p>
+        <a href="{{ url_for('interview_bp.schedule_interview') }}" class="schedule-btn">
+            Schedule First Interview
+        </a>
+    </div>
+    {% endif %}
+</div>  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interview Management</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        .header {
+            background: #1e3a8a;
+            color: white;
+            padding: 22px 40px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .header p {
+            margin: 6px 0 0;
+        }
+
+        .container {
+            width: 94%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .top-section h2 {
+            color: #1e3a8a;
+            margin: 0;
+        }
+
+        .schedule-btn {
+            background: #1e3a8a;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+        }
+
+        .schedule-btn:hover {
+            background: #162e6b;
+        }
+
+        .flash {
+            background: #dcfce7;
+            color: #166534;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 7px;
+        }
+
+        .table-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+            padding: 13px;
+            text-align: left;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .status {
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .scheduled {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .selected {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .waitlisted {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .next-round {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .completed {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .view-btn {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 7px 12px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .view-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+
+        @media (max-width: 700px) {
+
+            .header {
+                padding: 20px;
+            }
+
+            .container {
+                width: 96%;
+            }
+
+            .top-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>College Placement Management System</h1>
+    <p>Interview Management</p>
+</div>
+
+<div class="container">
+
+    <div class="top-section">
+
+        <h2>Scheduled Interviews</h2>
+
+        <a
+            href="{{ url_for('interview_bp.schedule_interview') }}"
+            class="schedule-btn"
+        >
+            + Schedule Interview
+        </a>
+
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+    <div class="table-card">
+
+        {% if interviews %}
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>Company</th>
+                    <th>Round</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Mode</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for interview in interviews %}
+
+                <tr>
+
+                    <td>
+                        {{ interview.interview_id }}
+                    </td>
+
+                    <td>
+                        {{ interview.student_name }}
+                    </td>
+
+                    <td>
+                        {{ interview.company_name }}
+                    </td>
+
+                    <td>
+                        {{ interview.round_name }}
+                    </td>
+
+                    <td>
+                        {{ interview.interview_date }}
+                    </td>
+
+                    <td>
+                        {{ interview.interview_time }}
+                    </td>
+
+                    <td>
+                        {{ interview.interview_mode }}
+                    </td>
+
+                    <td>
+
+                        {% set status_class =
+                            interview.status|lower
+                            |replace(" ", "-")
+                        %}
+
+                        <span class="status {{ status_class }}">
+                            {{ interview.status }}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{{ url_for('interview_bp.interview_details', interview_id=interview.interview_id) }}"
+                            class="view-btn"
+                        >
+                            View
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+
+            <h3>No Interviews Scheduled</h3>
+
+            <p>
+                There are currently no interviews scheduled.
+            </p>
+
+            <a
+                href="{{ url_for('interview_bp.schedule_interview') }}"
+                class="schedule-btn"
+            >
+                Schedule First Interview
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

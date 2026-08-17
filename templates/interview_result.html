@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Interview Result</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        .header {
+            background: #1e3a8a;
+            color: white;
+            padding: 22px 40px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 35px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .info {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .label {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .value {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .scores {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .score {
+            background: #eff6ff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .score h3 {
+            margin: 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .score p {
+            margin: 10px 0 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .overall {
+            text-align: center;
+            padding: 25px;
+            background: #1e3a8a;
+            color: white;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        .overall h3 {
+            margin: 0;
+        }
+
+        .overall-score {
+            font-size: 45px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .recommendation {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .recommendation h2 {
+            color: inherit;
+            margin: 0;
+        }
+
+        .feedback {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 7px;
+        }
+
+        .back {
+            background: #6b7280;
+        }
+
+        .evaluate {
+            background: #16a34a;
+        }
+
+        @media (max-width: 700px) {
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scores {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="header">
+
+    <h1>College Placement Management System</h1>
+
+    <p>Interview Result</p>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- INTERVIEW INFORMATION -->
+
+    <div class="card">
+
+        <h2>Interview Information</h2>
+
+        <div class="info-grid">
+
+            <div class="info">
+
+                <div class="label">
+                    Student
+                </div>
+
+                <div class="value">
+                    {{ interview.student_name }}
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="label">
+                    Company
+                </div>
+
+                <div class="value">
+                    {{ interview.company_name }}
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="label">
+                    Interview Round
+                </div>
+
+                <div class="value">
+                    {{ interview.round_name }}
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="label">
+                    Interview Date
+                </div>
+
+                <div class="value">
+                    {{ interview.interview_date }}
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="label">
+                    Interview Time
+                </div>
+
+                <div class="value">
+                    {{ interview.interview_time }}
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+                <div class="label">
+                    Interview Mode
+                </div>
+
+                <div class="value">
+                    {{ interview.interview_mode }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SCORE CARD -->
+
+    <div class="card">
+
+        <h2>Evaluation Scores</h2>
+
+        <div class="scores">
+
+            <div class="score">
+
+                <h3>Technical</h3>
+
+                <p>
+                    {{ evaluation.technical_score }}
+                </p>
+
+            </div>
+
+
+            <div class="score">
+
+                <h3>Communication</h3>
+
+                <p>
+                    {{ evaluation.communication_score }}
+                </p>
+
+            </div>
+
+
+            <div class="score">
+
+                <h3>Problem Solving</h3>
+
+                <p>
+                    {{ evaluation.problem_solving_score }}
+                </p>
+
+            </div>
+
+
+            <div class="score">
+
+                <h3>Aptitude</h3>
+
+                <p>
+                    {{ evaluation.aptitude_score }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="overall">
+
+            <h3>
+                Overall Score
+            </h3>
+
+            <div class="overall-score">
+
+                {{ evaluation.overall_score }}
+
+                / 100
+
+            </div>
+
+        </div>
+
+
+        <div class="recommendation">
+
+            <h2>
+                {{ evaluation.recommendation }}
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- FEEDBACK -->
+
+    <div class="card">
+
+        <h2>Interviewer Feedback</h2>
+
+        <div class="feedback">
+
+            {% if evaluation.feedback %}
+
+                {{ evaluation.feedback }}
+
+            {% else %}
+
+                No feedback provided.
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="buttons">
+
+            <a
+                href="{{ url_for('interview_bp.interview_management') }}"
+                class="btn back"
+            >
+                Back to Interviews
+            </a>
+
+
+            <a
+                href="{{ url_for('interview_bp.interview_evaluation', interview_id=interview.interview_id) }}"
+                class="btn evaluate"
+            >
+                Update Evaluation
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

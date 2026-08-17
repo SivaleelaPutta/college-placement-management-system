@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="resume-analyzer-wrapper">
+    <div class="jm-container">
+        <div class="jm-card">
+            <h1>AI Resume Job Matcher</h1>
+
+            <p class="jm-subtitle">
+                Upload your resume and enter a job description
+                to analyze your resume against the job requirements.
+            </p>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="jm-flash">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form
+                action="{{ url_for('resume_bp.job_match_page') }}"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+                <div class="jm-form-group">
+                    <label for="resume">
+                        Upload Resume
+                    </label>
+                    <input
+                        type="file"
+                        id="resume"
+                        name="resume"
+                        accept=".pdf,.doc,.docx"
+                        required
+                    >
+                    <p class="jm-hint">
+                        Accepted formats: PDF, DOC, DOCX
+                    </p>
+                </div>
+
+                <div class="jm-form-group">
+                    <label for="job_description">
+                        Job Description
+                    </label>
+                    <textarea
+                        id="job_description"
+                        name="job_description"
+                        placeholder="Paste the job description here..."
+                        required
+                    ></textarea>
+                    <p class="jm-hint">
+                        Include the required skills, qualifications,
+                        experience and responsibilities.
+                    </p>
+                </div>
+
+                <button type="submit">
+                    Analyze Resume
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

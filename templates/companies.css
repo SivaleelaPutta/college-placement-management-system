@@ -1,0 +1,330 @@
+/* =========================================
+   COMPANIES PAGE
+========================================= */
+
+.companies-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.companies-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #0d6efd,
+        #1565ff
+    );
+
+    color: white;
+
+    padding: 28px 32px;
+
+    border-radius: 18px;
+
+    margin-bottom: 28px;
+
+    box-shadow:
+        0 10px 25px rgba(13,110,253,.20);
+}
+
+
+.companies-header h1 {
+    margin: 0 0 7px;
+
+    font-size: 28px;
+
+    font-weight: 700;
+}
+
+
+.companies-header h1 i {
+    margin-right: 10px;
+}
+
+
+.companies-header p {
+    margin: 0;
+
+    font-size: 14px;
+
+    opacity: .9;
+}
+
+
+/* =========================================
+   HEADER ICON
+========================================= */
+
+.companies-header-icon {
+    width: 65px;
+    height: 65px;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,.18);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+}
+
+
+/* =========================================
+   COMPANY GRID
+========================================= */
+
+.company-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 22px;
+}
+
+
+/* =========================================
+   COMPANY CARD
+========================================= */
+
+.company-card {
+    position: relative;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 25px;
+
+    min-height: 190px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    box-shadow:
+        0 6px 20px rgba(0,0,0,.07);
+
+    border: 1px solid #edf1f7;
+
+    transition: all .3s ease;
+
+    overflow: hidden;
+}
+
+
+.company-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 5px;
+    height: 100%;
+
+    background: #0d6efd;
+}
+
+
+.company-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 12px 30px rgba(13,110,253,.15);
+}
+
+
+/* =========================================
+   COMPANY ICON
+========================================= */
+
+.company-icon {
+    width: 65px;
+    height: 65px;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    background: #eaf2ff;
+
+    color: #0d6efd;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+
+    transition: .3s;
+}
+
+
+.company-card:hover .company-icon {
+    background: #0d6efd;
+
+    color: white;
+
+    transform:
+        rotate(-5deg)
+        scale(1.08);
+
+    box-shadow:
+        0 8px 18px rgba(13,110,253,.25);
+}
+
+
+/* =========================================
+   COMPANY INFORMATION
+========================================= */
+
+.company-info {
+    flex: 1;
+}
+
+
+.company-info h2 {
+    margin: 0 0 10px;
+
+    font-size: 21px;
+
+    color: #1f2937;
+}
+
+
+.company-info p {
+    margin: 0 0 8px;
+
+    color: #555;
+
+    font-size: 13px;
+}
+
+
+.company-info p i {
+    color: #0d6efd;
+
+    margin-right: 7px;
+}
+
+
+.company-info span {
+    color: #198754;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.company-info span i {
+    margin-right: 6px;
+}
+
+
+/* =========================================
+   VIEW DETAILS BUTTON
+========================================= */
+
+.company-btn {
+    border: none;
+
+    background: #0d6efd;
+
+    color: white;
+
+    padding: 11px 17px;
+
+    border-radius: 8px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+    white-space: nowrap;
+}
+
+
+.company-btn:hover {
+    background: #0056d6;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(13,110,253,.25);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width: 900px) {
+
+    .company-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media(max-width: 600px) {
+
+    .companies-page {
+        padding: 20px;
+    }
+
+
+    .companies-header {
+        padding: 22px;
+
+        align-items: flex-start;
+    }
+
+
+    .companies-header h1 {
+        font-size: 23px;
+    }
+
+
+    .companies-header-icon {
+        display: none;
+    }
+
+
+    .company-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .company-btn {
+        width: 100%;
+    }
+
+}

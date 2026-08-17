@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ year }} Aptitude Test | CPMS</title>
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/aptitude.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+    <div class="page">
+
+
+        <div class="header">
+
+            <h1>
+                {{ year }} Aptitude Test
+            </h1>
+
+            <p>
+                Answer all the questions and
+                submit your test.
+            </p>
+
+        </div>
+
+
+        <div class="content">
+
+
+            <a
+                href="{{ url_for('aptitude') }}"
+                class="back-btn"
+            >
+                ← Back to Tests
+            </a>
+
+
+            <form
+                method="POST"
+                action="{{ url_for('result', year=year) }}"
+            >
+
+
+                {% for question in questions %}
+
+                    {% set question_index = loop.index0 %}
+
+
+                    <div class="question-card">
+
+
+                        <h3>
+
+                            {{ loop.index }}.
+                            {{ question.question }}
+
+                        </h3>
+
+
+                        {% for option in question.options %}
+
+
+                            <label class="option">
+
+                                <input
+                                    type="radio"
+                                    name="question{{ question_index }}"
+                                    value="{{ option }}"
+                                    required
+                                >
+
+                                {{ option }}
+
+                            </label>
+
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+                    Submit Test
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

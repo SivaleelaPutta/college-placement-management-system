@@ -1,0 +1,633 @@
+<style>
+/* =========================================================
+   HELP + ABOUT PAGES
+   Same CPMS font, color, card and dashboard style
+========================================================= */
+
+
+/* =========================================================
+   COMMON PAGE CONTAINER
+========================================================= */
+
+.info-page,
+.help-page {
+    min-height: calc(100vh - 70px);
+
+    padding: 35px 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+
+/* =========================================================
+   ABOUT MAIN CARD
+========================================================= */
+
+.info-card {
+
+    width: 100%;
+    max-width: 850px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.08);
+
+    border-top: 5px solid #0d6efd;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ABOUT ICON
+========================================================= */
+
+.info-icon {
+
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #e8f1ff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.info-icon i {
+
+    font-size: 32px;
+
+    color: #0d6efd;
+}
+
+
+/* =========================================================
+   ABOUT HEADING
+========================================================= */
+
+.info-card h1 {
+
+    color: #0d6efd;
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+}
+
+
+.info-intro {
+
+    color: #666;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   ABOUT INFORMATION CARDS
+========================================================= */
+
+.info-items {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    text-align: left;
+}
+
+
+.info-item {
+
+    background: #f8f9fc;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    display: flex;
+
+    gap: 15px;
+
+    border: 1px solid #edf1f7;
+
+    transition: .3s;
+}
+
+
+.info-item:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 8px 20px rgba(13,110,253,.12);
+
+    border-color: #d5e4ff;
+}
+
+
+.info-item > i {
+
+    color: #0d6efd;
+
+    font-size: 23px;
+
+    width: 30px;
+
+    flex-shrink: 0;
+
+    margin-top: 3px;
+}
+
+
+.info-item h3 {
+
+    color: #222;
+
+    font-size: 17px;
+
+    margin-bottom: 6px;
+}
+
+
+.info-item p {
+
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   HELP PAGE MAIN CARD
+========================================================= */
+
+.help-card {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.08);
+
+    border-top: 5px solid #0d6efd;
+}
+
+
+/* =========================================================
+   HELP HEADER
+========================================================= */
+
+.help-header {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.help-icon {
+
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 50%;
+
+    background: #e8f1ff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.help-icon i {
+
+    color: #0d6efd;
+
+    font-size: 30px;
+}
+
+
+.help-header h1 {
+
+    color: #0d6efd;
+
+    font-size: 28px;
+
+    margin-bottom: 7px;
+}
+
+
+.help-header p {
+
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   FAQ SECTION
+========================================================= */
+
+.faq-section h2 {
+
+    color: #0d6efd;
+
+    font-size: 20px;
+
+    margin-bottom: 18px;
+}
+
+
+.faq-section h2 i {
+
+    margin-right: 8px;
+}
+
+
+/* =========================================================
+   FAQ ITEM
+========================================================= */
+
+.faq-item {
+
+    background: #f8f9fc;
+
+    border: 1px solid #e5eaf2;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+    overflow: hidden;
+
+    transition: .3s;
+}
+
+
+.faq-item:hover {
+
+    border-color: #c9dcff;
+
+    box-shadow:
+        0 4px 12px rgba(13,110,253,.08);
+}
+
+
+/* =========================================================
+   FAQ QUESTION
+========================================================= */
+
+.faq-question {
+
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 16px 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    color: #222;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+.faq-question:hover {
+
+    color: #0d6efd;
+}
+
+
+.faq-question i {
+
+    color: #0d6efd;
+
+    transition: .3s;
+}
+
+
+/* =========================================================
+   FAQ ANSWER
+========================================================= */
+
+.faq-answer {
+
+    display: none;
+
+    padding: 0 18px 16px;
+
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+.faq-answer p {
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   ASK QUESTION SECTION
+========================================================= */
+
+.ask-section {
+
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #e5eaf2;
+}
+
+
+.ask-section h2 {
+
+    color: #0d6efd;
+
+    font-size: 20px;
+
+    margin-bottom: 8px;
+}
+
+
+.ask-section h2 i {
+
+    margin-right: 8px;
+}
+
+
+.ask-section p {
+
+    color: #666;
+
+    font-size: 14px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   QUESTION TEXTAREA
+========================================================= */
+
+#helpQuestion {
+
+    width: 100%;
+
+    min-height: 110px;
+
+    resize: vertical;
+
+    padding: 14px;
+
+    border: 2px solid #d9e2f1;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+
+    transition: .3s;
+}
+
+
+#helpQuestion:focus {
+
+    border-color: #0d6efd;
+
+    box-shadow:
+        0 0 12px rgba(13,110,253,.15);
+}
+
+
+/* =========================================================
+   ASK QUESTION BUTTON
+========================================================= */
+
+.ask-btn {
+
+    margin-top: 12px;
+
+    padding: 11px 22px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #0d6efd;
+
+    color: white;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+
+.ask-btn:hover {
+
+    background: #084298;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(13,110,253,.25);
+}
+
+
+/* =========================================================
+   HELP SUCCESS MESSAGE
+========================================================= */
+
+.help-message {
+
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 12px 15px;
+
+    background: #e8f7ee;
+
+    color: #198754;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:768px) {
+
+    .info-page,
+    .help-page {
+
+        padding: 25px 15px;
+    }
+
+
+    .info-card,
+    .help-card {
+
+        padding: 25px 20px;
+    }
+
+
+    .info-card h1,
+    .help-header h1 {
+
+        font-size: 24px;
+    }
+
+
+    .info-items {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .faq-question {
+
+        font-size: 13px;
+
+        padding: 14px;
+    }
+
+}
+
+</style>
+
+<div class="info-page">
+
+    <div class="info-card">
+
+        <div class="info-icon">
+            <i class="fas fa-info-circle"></i>
+        </div>
+
+        <h1>About CPMS</h1>
+
+        <p class="info-intro">
+            College Placement Management System
+        </p>
+
+        <div class="info-items">
+
+            <div class="info-item">
+                <i class="fas fa-graduation-cap"></i>
+                <div>
+                    <h3>About the System</h3>
+                    <p>
+                        CPMS is a web-based platform designed to help
+                        students manage their campus placement activities.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <i class="fas fa-briefcase"></i>
+                <div>
+                    <h3>Placement Management</h3>
+                    <p>
+                        Students can view companies, placement drives,
+                        applications, interviews and job offers.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <i class="fas fa-brain"></i>
+                <div>
+                    <h3>Aptitude Preparation</h3>
+                    <p>
+                        The system also provides aptitude preparation
+                        resources for better placement readiness.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <i class="fas fa-users"></i>
+                <div>
+                    <h3>For Students</h3>
+                    <p>
+                        CPMS provides students with a simple and organized
+                        way to manage their placement journey.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

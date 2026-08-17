@@ -1,0 +1,517 @@
+<style>
+
+/* =========================================================
+   APTITUDE PAGE - CENTERED
+========================================================= */
+
+.aptitude-page {
+    width: 100%;
+
+    min-height: calc(100vh - 70px);
+
+    padding: 35px 30px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+}
+
+
+/* Main aptitude container */
+
+.aptitude-page .aptitude-container {
+    width: 100%;
+
+    max-width: 950px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.08);
+
+    border-top: 5px solid #0d6efd;
+}
+
+
+/* Aptitude heading */
+
+.aptitude-page .aptitude-header {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.aptitude-page .aptitude-header i {
+    font-size: 35px;
+
+    color: #0d6efd;
+
+    margin-bottom: 10px;
+}
+
+
+.aptitude-page .aptitude-header h1 {
+    color: #0d6efd;
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+}
+
+
+.aptitude-page .aptitude-header p {
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   YEAR TEST CARDS
+========================================================= */
+
+.aptitude-page .test-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+/* Individual year card */
+
+.aptitude-page .test-card {
+    background: #f8f9fc;
+
+    border-radius: 12px;
+
+    padding: 22px;
+
+    border: 1px solid #e5eaf2;
+
+    border-top: 4px solid #0d6efd;
+
+    text-align: center;
+
+    transition: .3s;
+}
+
+
+.aptitude-page .test-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 8px 20px rgba(13,110,253,.12);
+}
+
+
+/* Card icon */
+
+.aptitude-page .test-card > i {
+
+    font-size: 30px;
+
+    color: #0d6efd;
+
+    margin-bottom: 12px;
+}
+
+
+/* Year */
+
+.aptitude-page .test-card h2 {
+
+    color: #222;
+
+    font-size: 22px;
+
+    margin-bottom: 8px;
+}
+
+
+/* Description */
+
+.aptitude-page .test-card p {
+
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin-bottom: 15px;
+}
+
+
+/* Start test button */
+
+.aptitude-page .test-btn {
+
+    display: inline-block;
+
+    padding: 9px 18px;
+
+    background: #0d6efd;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: .3s;
+}
+
+
+.aptitude-page .test-btn:hover {
+
+    background: #084298;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px) {
+
+    .aptitude-page .test-grid {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    .aptitude-page {
+
+        padding: 20px 15px;
+    }
+
+    .aptitude-page .aptitude-container {
+
+        padding: 22px 15px;
+    }
+
+    .aptitude-page .test-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+/* ==========================================
+   APTITUDE SECTION ON DASHBOARD
+========================================== */
+
+.aptitude-section {
+
+    margin: 30px;
+
+    padding: 25px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+
+    border-top: 4px solid #0d6efd;
+}
+
+
+/* Heading */
+
+.aptitude-heading {
+
+    margin-bottom: 22px;
+
+}
+
+
+.aptitude-heading h2 {
+
+    color: #0d6efd;
+
+    font-size: 22px;
+
+    margin-bottom: 6px;
+}
+
+
+.aptitude-heading h2 i {
+
+    margin-right: 8px;
+}
+
+
+.aptitude-heading p {
+
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   APTITUDE CARDS
+========================================== */
+
+.aptitude-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+
+    width: 100%;
+}
+
+
+/* Individual card */
+
+.aptitude-card {
+
+    background: #f8f9fc;
+
+    padding: 22px;
+
+    border-radius: 12px;
+
+    border: 1px solid #e5eaf2;
+
+    border-top: 4px solid #0d6efd;
+
+    text-align: center;
+
+    transition: .3s;
+
+    min-width: 0;
+}
+
+
+.aptitude-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 8px 20px rgba(13,110,253,.12);
+}
+
+
+/* Icon */
+
+.aptitude-card > i {
+
+    font-size: 30px;
+
+    color: #0d6efd;
+
+    margin-bottom: 12px;
+}
+
+
+/* Heading */
+
+.aptitude-card h3 {
+
+    color: #222;
+
+    font-size: 17px;
+
+    margin-bottom: 8px;
+}
+
+
+/* Description */
+
+.aptitude-card p {
+
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin-bottom: 15px;
+}
+
+
+/* Start Test */
+
+.aptitude-card a {
+
+    display: inline-block;
+
+    padding: 9px 18px;
+
+    background: #0d6efd;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: .3s;
+}
+
+
+.aptitude-card a:hover {
+
+    background: #084298;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:900px) {
+
+    .aptitude-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    .aptitude-section {
+
+        margin: 20px 15px;
+
+        padding: 20px 15px;
+
+    }
+
+    .aptitude-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+</style>
+
+<div class="aptitude-page">
+
+    <div class="aptitude-container">
+
+        <div class="aptitude-header">
+
+            <i class="fas fa-brain"></i>
+
+            <h1>Aptitude Preparation</h1>
+
+            <p>
+                Practice previous year aptitude tests
+                for better placement preparation.
+            </p>
+
+        </div>
+
+
+        <div class="test-grid">
+
+            <!-- 2025 -->
+
+            <div class="test-card">
+
+                <i class="fas fa-file-alt"></i>
+
+                <h2>2025</h2>
+
+                <p>
+                    Practice 2025 previous year
+                    aptitude questions.
+                </p>
+
+                <a href="{{ url_for('test', year=2025) }}"
+                   class="test-btn">
+
+                    Start Test →
+
+                </a>
+
+            </div>
+
+
+            <!-- 2024 -->
+
+            <div class="test-card">
+
+                <i class="fas fa-file-alt"></i>
+
+                <h2>2024</h2>
+
+                <p>
+                    Practice 2024 previous year
+                    aptitude questions.
+                </p>
+
+                <a href="{{ url_for('test', year=2024) }}"
+                   class="test-btn">
+
+                    Start Test →
+
+                </a>
+
+            </div>
+
+
+            <!-- 2023 -->
+
+            <div class="test-card">
+
+                <i class="fas fa-file-alt"></i>
+
+                <h2>2023</h2>
+
+                <p>
+                    Practice 2023 previous year
+                    aptitude questions.
+                </p>
+
+                <a href="{{ url_for('test', year=2023) }}"
+                   class="test-btn">
+
+                    Start Test →
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

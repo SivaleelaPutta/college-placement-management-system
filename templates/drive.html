@@ -1,0 +1,981 @@
+<style>
+
+/* ==========================================
+   PLACEMENT DRIVE MANAGEMENT
+========================================== */
+
+.drive-page {
+
+    width: 100%;
+
+    min-height: calc(100vh - 70px);
+
+    padding: 35px 30px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+}
+
+
+.drive-container {
+
+    width: 100%;
+
+    max-width: 1050px;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.drive-header {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    border-top: 5px solid #0d6efd;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.08);
+
+    margin-bottom: 25px;
+}
+
+
+.drive-header-icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 50%;
+
+    background: #e8f1ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.drive-header-icon i {
+
+    font-size: 30px;
+
+    color: #0d6efd;
+}
+
+
+.drive-header h1 {
+
+    color: #0d6efd;
+
+    font-size: 27px;
+
+    margin-bottom: 7px;
+}
+
+
+.drive-header p {
+
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   FORM CARD
+========================================== */
+
+.drive-form-card {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.08);
+
+    margin-bottom: 30px;
+}
+
+
+/* Section title */
+
+.drive-section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 22px;
+
+    padding-bottom: 12px;
+
+    border-bottom: 2px solid #e8eef7;
+}
+
+
+.drive-section-title i {
+
+    color: #0d6efd;
+
+    font-size: 20px;
+}
+
+
+.drive-section-title h2 {
+
+    color: #0d6efd;
+
+    font-size: 20px;
+
+    margin: 0;
+}
+
+
+/* ==========================================
+   FORM
+========================================== */
+
+.form-group {
+
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #333;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 2px solid #d9e2f1;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 13px;
+
+    transition: .3s;
+
+    background: white;
+}
+
+
+.form-group textarea {
+
+    min-height: 90px;
+
+    resize: vertical;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+
+    border-color: #0d6efd;
+
+    box-shadow:
+        0 0 10px rgba(13,110,253,.12);
+}
+
+
+/* ==========================================
+   CREATE BUTTON
+========================================== */
+
+.create-drive-btn {
+
+    border: none;
+
+    background: #0d6efd;
+
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 8px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+
+.create-drive-btn i {
+
+    margin-right: 6px;
+}
+
+
+.create-drive-btn:hover {
+
+    background: #084298;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(13,110,253,.25);
+}
+
+
+/* ==========================================
+   EXISTING DRIVES
+========================================== */
+
+.existing-drives {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.08);
+}
+
+
+/* Drive grid */
+
+.drive-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+/* ==========================================
+   PLACEMENT DRIVE CARD
+========================================== */
+
+.placement-drive-card {
+
+    background: #f8f9fc;
+
+    border: 1px solid #e5eaf2;
+
+    border-top: 4px solid #0d6efd;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    transition: .3s;
+}
+
+
+.placement-drive-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 8px 20px rgba(13,110,253,.12);
+}
+
+
+/* Company icon */
+
+.company-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 10px;
+
+    background: #e8f1ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 12px;
+}
+
+
+.company-icon i {
+
+    color: #0d6efd;
+
+    font-size: 22px;
+}
+
+
+/* Company name */
+
+.drive-card-content h3 {
+
+    color: #222;
+
+    font-size: 19px;
+
+    margin-bottom: 3px;
+}
+
+
+.job-role {
+
+    color: #0d6efd;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 15px;
+}
+
+
+/* Drive information */
+
+.drive-info {
+
+    margin-bottom: 15px;
+}
+
+
+.drive-info p {
+
+    color: #666;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin: 7px 0;
+}
+
+
+.drive-info i {
+
+    width: 20px;
+
+    color: #0d6efd;
+}
+
+
+.drive-info strong {
+
+    color: #333;
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.drive-status {
+
+    display: inline-block;
+
+    padding: 5px 12px;
+
+    border-radius: 20px;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    margin-bottom: 15px;
+}
+
+
+.drive-status.open {
+
+    background: #198754;
+}
+
+
+.drive-status.upcoming {
+
+    background: #0d6efd;
+}
+
+
+.drive-status.closed {
+
+    background: #dc3545;
+}
+
+
+/* ==========================================
+   EDIT DELETE
+========================================== */
+
+.drive-actions {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 5px;
+}
+
+
+.drive-actions button {
+
+    border: none;
+
+    padding: 8px 12px;
+
+    border-radius: 7px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+
+.edit-btn {
+
+    background: #e8f1ff;
+
+    color: #0d6efd;
+}
+
+
+.edit-btn:hover {
+
+    background: #0d6efd;
+
+    color: white;
+}
+
+
+.delete-btn {
+
+    background: #ffe8e8;
+
+    color: #dc3545;
+}
+
+
+.delete-btn:hover {
+
+    background: #dc3545;
+
+    color: white;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:950px) {
+
+    .drive-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    .drive-page {
+
+        padding: 20px 15px;
+    }
+
+    .drive-form-card,
+    .existing-drives {
+
+        padding: 20px 15px;
+    }
+
+    .drive-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+<div class="drive-page">
+
+    <div class="drive-container">
+
+        <!-- Page Header -->
+
+        <div class="drive-header">
+
+            <div class="drive-header-icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+
+            <h1>Placement Drive Management</h1>
+
+            <p>
+                Create and manage placement drives for students.
+            </p>
+
+        </div>
+
+
+        <!-- ==========================================
+             CREATE DRIVE FORM
+        =========================================== -->
+
+        <div class="drive-form-card">
+
+            <div class="drive-section-title">
+
+                <i class="fas fa-plus-circle"></i>
+
+                <h2>Create Placement Drive</h2>
+
+            </div>
+
+
+            <form action="#" method="POST">
+
+
+                <!-- Company -->
+
+                <div class="form-group">
+
+                    <label for="company">
+                        Company Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        placeholder="Enter company name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Job Role -->
+
+                <div class="form-group">
+
+                    <label for="job_role">
+                        Job Role
+                    </label>
+
+                    <input
+                        type="text"
+                        id="job_role"
+                        name="job_role"
+                        placeholder="Example: Software Engineer"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Package -->
+
+                <div class="form-group">
+
+                    <label for="package">
+                        Package
+                    </label>
+
+                    <input
+                        type="text"
+                        id="package"
+                        name="package"
+                        placeholder="Example: 6 LPA"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Eligibility -->
+
+                <div class="form-group">
+
+                    <label for="eligibility">
+                        Eligibility
+                    </label>
+
+                    <textarea
+                        id="eligibility"
+                        name="eligibility"
+                        placeholder="Example: CGPA 7.0+, No Backlogs"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Application Deadline -->
+
+                <div class="form-group">
+
+                    <label for="deadline">
+                        Application Deadline
+                    </label>
+
+                    <input
+                        type="date"
+                        id="deadline"
+                        name="deadline"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Drive Details -->
+
+                <div class="form-group">
+
+                    <label for="details">
+                        Drive Details
+                    </label>
+
+                    <textarea
+                        id="details"
+                        name="details"
+                        placeholder="Enter additional information about the placement drive"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div class="form-group">
+
+                    <label for="status">
+                        Drive Status
+                    </label>
+
+                    <select id="status" name="status">
+
+                        <option value="Open">
+                            Open
+                        </option>
+
+                        <option value="Upcoming">
+                            Upcoming
+                        </option>
+
+                        <option value="Closed">
+                            Closed
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <button type="submit" class="create-drive-btn">
+
+                    <i class="fas fa-plus"></i>
+
+                    Create Drive
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ==========================================
+             EXISTING DRIVES
+        =========================================== -->
+
+        <div class="existing-drives">
+
+            <div class="drive-section-title">
+
+                <i class="fas fa-list"></i>
+
+                <h2>Existing Placement Drives</h2>
+
+            </div>
+
+
+            <!-- Drive Cards -->
+
+            <div class="drive-grid">
+
+
+                <!-- TCS -->
+
+                <div class="placement-drive-card">
+
+                    <div class="company-icon">
+
+                        <i class="fas fa-building"></i>
+
+                    </div>
+
+                    <div class="drive-card-content">
+
+                        <h3>TCS</h3>
+
+                        <p class="job-role">
+                            Software Engineer
+                        </p>
+
+
+                        <div class="drive-info">
+
+                            <p>
+                                <i class="fas fa-money-bill-wave"></i>
+
+                                <strong>Package:</strong>
+                                ₹4.5 LPA
+                            </p>
+
+                            <p>
+                                <i class="fas fa-graduation-cap"></i>
+
+                                <strong>Eligibility:</strong>
+                                CGPA 7.0+, No Backlogs
+                            </p>
+
+                            <p>
+                                <i class="fas fa-calendar"></i>
+
+                                <strong>Deadline:</strong>
+                                20 Aug 2026
+                            </p>
+
+                        </div>
+
+
+                        <span class="drive-status open">
+                            Open
+                        </span>
+
+
+                        <div class="drive-actions">
+
+                            <button class="edit-btn">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </button>
+
+                            <button class="delete-btn">
+                                <i class="fas fa-trash"></i>
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Infosys -->
+
+                <div class="placement-drive-card">
+
+                    <div class="company-icon">
+
+                        <i class="fas fa-building"></i>
+
+                    </div>
+
+                    <div class="drive-card-content">
+
+                        <h3>Infosys</h3>
+
+                        <p class="job-role">
+                            System Engineer
+                        </p>
+
+
+                        <div class="drive-info">
+
+                            <p>
+                                <i class="fas fa-money-bill-wave"></i>
+
+                                <strong>Package:</strong>
+                                ₹5 LPA
+                            </p>
+
+                            <p>
+                                <i class="fas fa-graduation-cap"></i>
+
+                                <strong>Eligibility:</strong>
+                                CGPA 7.5+, No Backlogs
+                            </p>
+
+                            <p>
+                                <i class="fas fa-calendar"></i>
+
+                                <strong>Deadline:</strong>
+                                25 Aug 2026
+                            </p>
+
+                        </div>
+
+
+                        <span class="drive-status open">
+                            Open
+                        </span>
+
+
+                        <div class="drive-actions">
+
+                            <button class="edit-btn">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </button>
+
+                            <button class="delete-btn">
+                                <i class="fas fa-trash"></i>
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Wipro -->
+
+                <div class="placement-drive-card">
+
+                    <div class="company-icon">
+
+                        <i class="fas fa-building"></i>
+
+                    </div>
+
+                    <div class="drive-card-content">
+
+                        <h3>Wipro</h3>
+
+                        <p class="job-role">
+                            Developer
+                        </p>
+
+
+                        <div class="drive-info">
+
+                            <p>
+                                <i class="fas fa-money-bill-wave"></i>
+
+                                <strong>Package:</strong>
+                                ₹6 LPA
+                            </p>
+
+                            <p>
+                                <i class="fas fa-graduation-cap"></i>
+
+                                <strong>Eligibility:</strong>
+                                CGPA 7.0+, No Active Backlogs
+                            </p>
+
+                            <p>
+                                <i class="fas fa-calendar"></i>
+
+                                <strong>Deadline:</strong>
+                                28 Aug 2026
+                            </p>
+
+                        </div>
+
+
+                        <span class="drive-status upcoming">
+                            Upcoming
+                        </span>
+
+
+                        <div class="drive-actions">
+
+                            <button class="edit-btn">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </button>
+
+                            <button class="delete-btn">
+                                <i class="fas fa-trash"></i>
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

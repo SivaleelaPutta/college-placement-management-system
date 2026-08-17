@@ -1,0 +1,701 @@
+<style>
+    
+/* =========================================
+   RESUME CREATOR
+========================================= */
+
+.resume-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 35px 50px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.resume-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: linear-gradient(135deg, #0d6efd, #1565ff);
+    color: white;
+
+    padding: 28px 32px;
+    border-radius: 18px;
+    margin-bottom: 25px;
+
+    box-shadow: 0 10px 25px rgba(13, 110, 253, 0.20);
+}
+
+.resume-heading h1 {
+    margin: 0 0 7px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.resume-heading h1 i {
+    margin-right: 10px;
+}
+
+.resume-heading p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.resume-icon {
+    width: 65px;
+    height: 65px;
+
+    border-radius: 15px;
+    background: rgba(255,255,255,0.18);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+}
+
+
+/* =========================================
+   RESUME CARD
+========================================= */
+
+.resume-card {
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    margin-bottom: 22px;
+
+    box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+
+    border: 1px solid #edf1f7;
+}
+
+
+/* =========================================
+   SECTION TITLE
+========================================= */
+
+.section-title {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 25px;
+}
+
+.section-title > i {
+    width: 45px;
+    height: 45px;
+
+    background: #eaf2ff;
+    color: #0d6efd;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.section-title h2 {
+    margin: 0;
+
+    font-size: 19px;
+
+    color: #1f2937;
+}
+
+.section-title p {
+    margin: 4px 0 0;
+
+    color: #8a94a6;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   TWO COLUMN FORM
+========================================= */
+
+.resume-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+
+/* =========================================
+   INPUT GROUP
+========================================= */
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #374151;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 15px;
+
+    border: 1px solid #dce3ed;
+
+    border-radius: 9px;
+
+    background: #fafcff;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 13px;
+
+    color: #333;
+
+    outline: none;
+
+    transition: 0.25s;
+}
+
+.input-group textarea {
+    resize: vertical;
+
+    min-height: 90px;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: #0d6efd;
+
+    background: white;
+
+    box-shadow: 0 0 0 3px rgba(13,110,253,0.08);
+}
+
+
+/* =========================================
+   ADD PROJECT BUTTON
+========================================= */
+
+.add-btn {
+    border: 1px dashed #0d6efd;
+
+    background: #f5f9ff;
+
+    color: #0d6efd;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.add-btn:hover {
+    background: #eaf2ff;
+}
+
+
+/* =========================================
+   BOTTOM BUTTONS
+========================================= */
+
+.resume-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 10px;
+
+    margin-bottom: 30px;
+}
+
+.save-resume-btn,
+.preview-resume-btn {
+    border: none;
+
+    padding: 13px 23px;
+
+    border-radius: 9px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.save-resume-btn {
+    background: #0d6efd;
+
+    color: white;
+}
+
+.preview-resume-btn {
+    background: white;
+
+    color: #0d6efd;
+
+    border: 1px solid #0d6efd;
+}
+
+.save-resume-btn:hover,
+.preview-resume-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(0,0,0,0.12);
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .resume-page {
+        padding: 20px;
+    }
+
+    .resume-heading {
+        padding: 22px;
+    }
+
+    .resume-grid {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+    .resume-icon {
+        display: none;
+    }
+
+    .resume-actions {
+        flex-direction: column;
+    }
+
+    .save-resume-btn,
+    .preview-resume-btn {
+        width: 100%;
+    }
+}
+
+</style>
+
+<div class="resume-page">
+
+    <div class="resume-heading">
+
+        <div>
+            <h1>
+                <i class="fas fa-file-signature"></i>
+                Resume Creator
+            </h1>
+
+            <p>
+                Create your professional resume for placement applications.
+            </p>
+        </div>
+
+        <div class="resume-icon">
+            <i class="fas fa-file-alt"></i>
+        </div>
+
+    </div>
+
+
+    <!-- Personal Information -->
+
+    <div class="resume-card">
+
+        <div class="section-title">
+
+            <i class="fas fa-user"></i>
+
+            <div>
+                <h2>Personal Information</h2>
+                <p>Enter your basic contact information</p>
+            </div>
+
+        </div>
+
+
+        <div class="resume-grid">
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text"
+                       placeholder="Enter your full name">
+            </div>
+
+            <div class="input-group">
+                <label>Student ID</label>
+                <input type="text"
+                       placeholder="Enter student ID">
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email"
+                       placeholder="Enter your email">
+            </div>
+
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input type="tel"
+                       placeholder="Enter phone number">
+            </div>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>Address</label>
+
+            <textarea
+                placeholder="Enter your address"></textarea>
+
+        </div>
+
+    </div>
+
+
+    <!-- Career Objective -->
+
+    <div class="resume-card">
+
+        <div class="section-title">
+
+            <i class="fas fa-bullseye"></i>
+
+            <div>
+                <h2>Career Objective</h2>
+                <p>Write a short professional objective</p>
+            </div>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Objective</label>
+
+            <textarea
+                placeholder="Write your career objective..."></textarea>
+
+        </div>
+
+    </div>
+
+
+    <!-- Education -->
+
+    <div class="resume-card">
+
+        <div class="section-title">
+
+            <i class="fas fa-graduation-cap"></i>
+
+            <div>
+                <h2>Education</h2>
+                <p>Add your academic qualification</p>
+            </div>
+
+        </div>
+
+
+        <div class="resume-grid">
+
+            <div class="input-group">
+                <label>Degree</label>
+                <input type="text" placeholder="B.Tech">
+            </div>
+
+            <div class="input-group">
+                <label>Branch</label>
+                <input type="text"
+                       placeholder="Computer Science and Engineering">
+            </div>
+
+            <div class="input-group">
+                <label>College / University</label>
+                <input type="text"
+                       placeholder="Enter college name">
+            </div>
+
+            <div class="input-group">
+                <label>CGPA</label>
+                <input type="text"
+                       placeholder="Enter CGPA">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Technical Skills -->
+
+    <div class="resume-card">
+
+        <div class="section-title">
+
+            <i class="fas fa-code"></i>
+
+            <div>
+                <h2>Technical Skills</h2>
+                <p>List your technical skills</p>
+            </div>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Skills</label>
+
+            <textarea
+                placeholder="Python, Java, C, SQL, HTML, CSS, JavaScript, MySQL..."></textarea>
+
+        </div>
+
+    </div>
+
+
+    <!-- Projects -->
+
+    <div class="resume-card">
+
+        <div class="section-title">
+
+            <i class="fas fa-project-diagram"></i>
+
+            <div>
+                <h2>Projects</h2>
+                <p>Add your academic or personal projects</p>
+            </div>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>Project Title</label>
+
+            <input type="text"
+                   placeholder="College Placement Management System">
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>Project Description</label>
+
+            <textarea
+                placeholder="Describe your project..."></textarea>
+
+        </div>
+
+
+        <button type="button" class="add-btn">
+
+            <i class="fas fa-plus"></i>
+            Add Another Project
+
+        </button>
+
+    </div>
+
+
+    <!-- Internship -->
+
+    <div class="resume-card">
+
+        <div class="section-title">
+
+            <i class="fas fa-briefcase"></i>
+
+            <div>
+                <h2>Internships / Experience</h2>
+                <p>Add your internship or work experience</p>
+            </div>
+
+        </div>
+
+
+        <div class="resume-grid">
+
+            <div class="input-group">
+                <label>Organization</label>
+                <input type="text"
+                       placeholder="Company / Organization">
+            </div>
+
+            <div class="input-group">
+                <label>Role</label>
+                <input type="text"
+                       placeholder="Intern / Developer / Trainee">
+            </div>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>Description</label>
+
+            <textarea
+                placeholder="Describe your responsibilities and work..."></textarea>
+
+        </div>
+
+
+        <button type="button" class="add-btn">
+
+            <i class="fas fa-plus"></i>
+            Add Experience
+
+        </button>
+
+    </div>
+
+
+    <!-- Certifications -->
+
+    <div class="resume-card">
+
+        <div class="section-title">
+
+            <i class="fas fa-certificate"></i>
+
+            <div>
+                <h2>Certifications</h2>
+                <p>Add relevant certifications</p>
+            </div>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>Certification Name</label>
+
+            <input type="text"
+                   placeholder="Certification title">
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>Issuing Organization</label>
+
+            <input type="text"
+                   placeholder="Organization name">
+
+        </div>
+
+
+        <button type="button" class="add-btn">
+
+            <i class="fas fa-plus"></i>
+            Add Certification
+
+        </button>
+
+    </div>
+
+
+    <!-- Achievements -->
+
+    <div class="resume-card">
+
+        <div class="section-title">
+
+            <i class="fas fa-trophy"></i>
+
+            <div>
+                <h2>Achievements</h2>
+                <p>Highlight your achievements</p>
+            </div>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>Achievements</label>
+
+            <textarea
+                placeholder="Hackathons, competitions, academic achievements, awards..."></textarea>
+
+        </div>
+
+    </div>
+
+
+    <!-- Buttons -->
+
+    <div class="resume-actions">
+
+        <button type="button"
+                class="save-resume-btn">
+
+            <i class="fas fa-save"></i>
+            Save Resume
+
+        </button>
+
+
+        <button type="button"
+                class="preview-resume-btn">
+
+            <i class="fas fa-eye"></i>
+            Preview Resume
+
+        </button>
+
+    </div>
+
+</div>

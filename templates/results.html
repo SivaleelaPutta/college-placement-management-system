@@ -1,0 +1,763 @@
+<!-- Results Page -->
+
+<style>
+    /* ================================
+       RESULTS PAGE
+       ================================ */
+
+    .results-page {
+        padding: 30px;
+    }
+
+    /* Page Header */
+    .results-header {
+        margin-bottom: 25px;
+    }
+
+    .results-header h1 {
+        color: #0d6efd;
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .results-header p {
+        color: #555;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    /* Summary Cards */
+    .result-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        margin-bottom: 25px;
+    }
+
+    .result-stat-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+        border-top: 3px solid #0d6efd;
+
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        transition: .3s;
+    }
+
+    .result-stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(13, 110, 253, .12);
+    }
+
+    .result-stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+
+        background: #eaf3ff;
+        color: #0d6efd;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 21px;
+    }
+
+    .result-stat-card h3 {
+        margin: 0;
+        font-size: 24px;
+        color: #222;
+    }
+
+    .result-stat-card p {
+        margin: 3px 0 0;
+        color: #777;
+        font-size: 13px;
+    }
+
+    /* Results Section */
+    .results-section {
+        background: white;
+        border-radius: 14px;
+        padding: 22px;
+
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+
+        border-top: 3px solid #0d6efd;
+    }
+
+    .results-section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        margin-bottom: 20px;
+    }
+
+    .results-section-header h2 {
+        margin: 0;
+        color: #0d6efd;
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    /* Search */
+    
+    .results-search {
+    position: relative;
+}
+
+.results-search i {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0d6efd;
+    font-size: 16px;
+    transition: .35s;
+    pointer-events: none;
+}
+
+.results-search input {
+    width: 230px;
+    height: 45px;
+    box-sizing: border-box;
+    padding: 0 18px 0 48px;
+    border: 2px solid #d9e2f1;
+    border-radius: 30px;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    transition: .35s;
+    background: white;
+}
+
+.results-search input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 15px rgba(13,110,253,.25);
+}
+
+.results-search:focus-within i {
+    color: #0d6efd;
+    transform: translateY(-50%) scale(1.2) rotate(-10deg);
+    text-shadow: 0 0 12px rgba(13,110,253,.6);
+}
+
+    /* Table */
+    .results-table-container {
+        overflow-x: auto;
+    }
+
+    .results-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .results-table th {
+        background: #0d6efd;
+        color: white;
+
+        padding: 14px 15px;
+
+        text-align: left;
+
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .results-table th:first-child {
+        border-radius: 7px 0 0 7px;
+    }
+
+    .results-table th:last-child {
+        border-radius: 0 7px 7px 0;
+    }
+
+    .results-table td {
+        padding: 16px 15px;
+
+        border-bottom: 1px solid #e5e9ef;
+
+        color: #333;
+        font-size: 13px;
+    }
+
+    .results-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .results-table tbody tr {
+        transition: .2s;
+    }
+
+    .results-table tbody tr:hover {
+        background: #f7faff;
+    }
+
+    /* Company */
+    .company-name {
+        font-weight: 600;
+        color: #222;
+    }
+
+    .company-role {
+        color: #777;
+        font-size: 12px;
+        margin-top: 3px;
+    }
+
+    /* Status */
+    .result-status {
+        display: inline-block;
+
+        padding: 6px 13px;
+
+        border-radius: 20px;
+
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .selected {
+        background: #d1f3df;
+        color: #198754;
+    }
+
+    .shortlisted {
+        background: #fff1d6;
+        color: #d97706;
+    }
+
+    .rejected {
+        background: #fde2e2;
+        color: #dc3545;
+    }
+
+    .pending {
+        background: #eaf3ff;
+        color: #0d6efd;
+    }
+
+    /* Package */
+    .package {
+        font-weight: 600;
+        color: #0d6efd;
+    }
+
+    /* View Button */
+    .result-view-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+
+        padding: 7px 12px;
+
+        border-radius: 7px;
+
+        background: #eaf3ff;
+        color: #0d6efd;
+
+        text-decoration: none;
+
+        font-size: 12px;
+        font-weight: 600;
+
+        transition: .25s;
+    }
+
+    .result-view-btn:hover {
+        background: #d8eaff;
+    }
+
+    /* Empty State */
+    .no-results {
+        text-align: center;
+        padding: 50px 20px;
+        color: #777;
+    }
+
+    .no-results i {
+        font-size: 45px;
+        color: #b8d4ff;
+        margin-bottom: 15px;
+    }
+
+    .no-results h3 {
+        color: #444;
+        margin-bottom: 7px;
+    }
+
+    .no-results p {
+        margin: 0;
+        font-size: 13px;
+    }
+
+    /* Responsive */
+    @media(max-width: 1000px) {
+
+        .result-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media(max-width: 700px) {
+
+        .results-page {
+            padding: 20px;
+        }
+
+        .results-header h1 {
+            font-size: 27px;
+        }
+
+        .results-section-header {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 15px;
+        }
+
+        .results-search input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    @media(max-width: 500px) {
+
+        .result-stats {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+
+<div class="results-page">
+
+    <!-- Page Header -->
+    <div class="results-header">
+
+        <h1>Placement Results</h1>
+
+        <p>
+            Track your placement results, selections and interview outcomes.
+        </p>
+
+    </div>
+
+
+    <!-- Summary Cards -->
+    <div class="result-stats">
+
+        <!-- Applications -->
+        <div class="result-stat-card">
+
+            <div class="result-stat-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+
+            <div>
+                <h3>18</h3>
+                <p>Applications</p>
+            </div>
+
+        </div>
+
+
+        <!-- Shortlisted -->
+        <div class="result-stat-card">
+
+            <div class="result-stat-icon">
+                <i class="fas fa-user-check"></i>
+            </div>
+
+            <div>
+                <h3>7</h3>
+                <p>Shortlisted</p>
+            </div>
+
+        </div>
+
+
+        <!-- Selected -->
+        <div class="result-stat-card">
+
+            <div class="result-stat-icon">
+                <i class="fas fa-award"></i>
+            </div>
+
+            <div>
+                <h3>2</h3>
+                <p>Selected</p>
+            </div>
+
+        </div>
+
+
+        <!-- Pending -->
+        <div class="result-stat-card">
+
+            <div class="result-stat-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+
+            <div>
+                <h3>3</h3>
+                <p>Pending</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Results Table -->
+    <div class="results-section">
+
+        <div class="results-section-header">
+
+            <h2>My Placement Results</h2>
+
+            <div class="results-search">
+
+                <i class="fas fa-search"></i>
+
+                <input
+                    type="text"
+                    placeholder="Search company..."
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="results-table-container">
+
+            <table class="results-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Company</th>
+
+                        <th>Role</th>
+
+                        <th>Package</th>
+
+                        <th>Interview Date</th>
+
+                        <th>Result</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <!-- TCS -->
+                    <tr>
+
+                        <td>
+
+                            <div class="company-name">
+                                TCS
+                            </div>
+
+                            <div class="company-role">
+                                Tata Consultancy Services
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Software Engineer
+                        </td>
+
+
+                        <td>
+                            <span class="package">
+                                ₹4.5 LPA
+                            </span>
+                        </td>
+
+
+                        <td>
+                            08 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="result-status selected">
+                                Selected
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <a href="#" class="result-view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                                View
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- Infosys -->
+                    <tr>
+
+                        <td>
+
+                            <div class="company-name">
+                                Infosys
+                            </div>
+
+                            <div class="company-role">
+                                Infosys Limited
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            System Engineer
+                        </td>
+
+
+                        <td>
+                            <span class="package">
+                                ₹5 LPA
+                            </span>
+                        </td>
+
+
+                        <td>
+                            06 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="result-status shortlisted">
+                                Shortlisted
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <a href="#" class="result-view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                                View
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- Wipro -->
+                    <tr>
+
+                        <td>
+
+                            <div class="company-name">
+                                Wipro
+                            </div>
+
+                            <div class="company-role">
+                                Wipro Technologies
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Developer
+                        </td>
+
+
+                        <td>
+                            <span class="package">
+                                ₹6 LPA
+                            </span>
+                        </td>
+
+
+                        <td>
+                            04 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="result-status rejected">
+                                Not Selected
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <a href="#" class="result-view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                                View
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- Accenture -->
+                    <tr>
+
+                        <td>
+
+                            <div class="company-name">
+                                Accenture
+                            </div>
+
+                            <div class="company-role">
+                                Accenture Solutions
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Associate Engineer
+                        </td>
+
+
+                        <td>
+                            <span class="package">
+                                ₹4.8 LPA
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            02 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="result-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <a href="#" class="result-view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                                View
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- Capgemini -->
+                    <tr>
+
+                        <td>
+
+                            <div class="company-name">
+                                Capgemini
+                            </div>
+
+                            <div class="company-role">
+                                Capgemini Technology
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Software Associate
+                        </td>
+
+
+                        <td>
+                            <span class="package">
+                                ₹4.2 LPA
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            30 Jul 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="result-status shortlisted">
+                                Shortlisted
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <a href="#" class="result-view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                                View
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
