@@ -47,8 +47,19 @@ def resumee():
 # 2. STANDARD SYSTEM ROUTES
 # ------------------------------------------------------------
 @app.route("/")
+def landing():
+    return render_template("landing.html")
+
+@app.route("/login")
 def login():
-    return render_template("login.html")
+    role = request.args.get("role", "student")
+
+    allowed_roles = {"student", "cdpc", "admin", "company"}
+
+    if role not in allowed_roles:
+        role = "student"
+
+    return render_template("login.html", selected_role=role)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():

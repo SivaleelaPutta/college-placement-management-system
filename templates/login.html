@@ -301,11 +301,32 @@ transform:translateY(0);
 
 }
 
+.selected-role {
+    width: fit-content;
+    margin: 0 auto 18px;
+    padding: 8px 14px;
+
+    background: #edf4ff;
+    color: #0d6efd;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    display : flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
 </style>
 
 </head>
 
 <body>
+
+
 
 <div class="container">
 
@@ -330,6 +351,11 @@ Access your placement portal securely.
 </div>
 
 <div class="right">
+
+<div class="selected-role" id="selectedRole">
+    <i class="fas fa-user-graduate"></i>
+    <span>Student Login</span>
+</div>
 
 <h1>Welcome Back!</h1>
 
@@ -425,7 +451,40 @@ New User?
 
 </div>
 
+<script>
+    const selectedRole = "{{ selected_role|default('student') }}";
 
+    const roleDetails = {
+        student: {
+            icon: "fa-user-graduate",
+            text: "Student Login"
+        },
+
+        cdpc: {
+            icon: "fa-building-columns",
+            text: "CDPC Login"
+        },
+
+        admin: {
+            icon: "fa-user-shield",
+            text: "Administrator Login"
+        },
+
+        company: {
+            icon: "fa-industry",
+            text: "Company Login"
+        }
+    };
+
+    const role = roleDetails[selectedRole] || roleDetails.student;
+
+    const roleContainer = document.getElementById("selectedRole");
+
+    roleContainer.innerHTML = `
+        <i class="fas ${role.icon}"></i>
+        <span>${role.text}</span>
+    `;
+</script>
 
 
 </body>
