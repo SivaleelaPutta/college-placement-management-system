@@ -30,6 +30,13 @@ def allowed_file(filename):
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
     )
 
+@app.context_processor
+def inject_user_data():
+    return {
+        "user_role": session.get("user_role", "student"),
+        "profile": app.config.get("PROFILE", {})
+    }
+
 # Register the Resume Analyzer Blueprint
 app.register_blueprint(resume_bp)
 app.register_blueprint(interview_bp)
@@ -93,11 +100,50 @@ def register():
 
 @app.route("/home")
 def home():
-    return render_template("homepage.html", page="dashboard.html")
+    return redirect(url_for("student_dashboard"))
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("homepage.html", page="dashboard.html")
+    return redirect(url_for("student_dashboard"))
+
+@app.route("/student/dashboard")
+def student_dashboard():
+    session["user_role"] = "student"
+
+    return render_template(
+        "homepage.html",
+        page="dashboard.html"
+    )
+
+
+@app.route("/cdpc/dashboard")
+def cdpc_dashboard():
+    session["user_role"] = "cdpc"
+
+    return render_template(
+        "homepage.html",
+        page="cdpc_dashboard.html"
+    )
+
+
+@app.route("/admin/dashboard")
+def admin_dashboard():
+    session["user_role"] = "admin"
+
+    return render_template(
+        "homepage.html",
+        page="admin_dashboard.html"
+    )
+
+
+@app.route("/company/dashboard")
+def company_dashboard():
+    session["user_role"] = "company"
+
+    return render_template(
+        "homepage.html",
+        page="company_dashboard.html"
+    )
 
 @app.route("/profile")
 def profile():

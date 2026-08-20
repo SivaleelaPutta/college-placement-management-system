@@ -602,62 +602,346 @@ width:100%;
     <hr class="sidebar-divider">
 
     <ul>
-         <!-- STUDENT SECTION -->
-        <div class="sidebar-section-title">
-            STUDENT SECTION
-        </div>
-        <li class="{{ 'active' if page == 'dashboard.html' else '' }}">
-            <a href="{{ url_for('dashboard') }}"><i class="fas fa-home"></i> Dashboard</a>
-        </li>
-        <li class="{{ 'active' if page == 'resume.html' else '' }}">
-            <a href="{{ url_for('resumee') }}"><i class="fas fa-home"></i>Resume Creator</a>
-        </li>
-        <li class="{{ 'active' if page == 'companies.html' else '' }}">
-            <a href="{{ url_for('companies') }}"><i class="fas fa-building"></i> Companies</a>
-        </li>
-        <li class="{{ 'active' if page == 'placement_drives.html' else '' }}">
-            <a href="{{ url_for('placement_drives') }}"><i class="fas fa-briefcase"></i>Placement Drives</a>
-        </li>
-        <li class="{{ 'active' if page == 'applications.html' else '' }}">
-            <a href="{{ url_for('applications') }}"><i class="fas fa-file-alt"></i> Applications</a>
-        </li>
-        <li class="{{ 'active' if page == 'interviews.html' else '' }}">
-            <a href="{{ url_for('interviewss') }}"><i class="fas fa-calendar-check"></i> Interviews</a>
-        </li>
-        <li class="{{ 'active' if page == 'results.html' else '' }}">
-            <a href="{{ url_for('results') }}"><i class="fas fa-chart-bar"></i>Results</a>
-        </li>
-        
-         <!-- resources section-->
-        <div class="sidebar-section-title">
-            RESOURCES
-        </div>
-        <li class="{{ 'active' if page == 'aptitude.html' else '' }}">
-            <a href="{{ url_for('aptitude') }}"><i class="fas fa-brain"></i> Aptitude Test</a>
-        </li>
-        <li class="{{ 'active' if page == 'skill_assesssment.html' else '' }}">
-            <a href="{{ url_for('skill') }}"><i class="fas fa-brain"></i>Skill Assessment</a>
-        </li>
-        <!-- AI Resume Analyzer (NEW) -->
-        <li class="{{ 'active' if page in ['index.html', 'result.html', 'job_match.html', 'job_result.html'] else '' }}">
-            <a href="{{ url_for('resume_bp.resume_home') }}"><i class="fas fa-robot"></i> Resume Analyzer</a>
-        </li>
-        <li class="{{ 'active' if page == 'help.html' else '' }}">
-            <a href="{{ url_for('help') }}">
-                <i class="fas fa-question-circle"></i>
-                Help
-            </a>
-        </li>
-        <li class="{{ 'active' if page == 'about.html' else '' }}">
-            <a href="{{ url_for('about') }}">
-                <i class="fas fa-info-circle"></i>
-                About
-            </a>
-        </li>
-        <li>
-            <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        </li>
-    </ul>
+
+    <!-- ================= STUDENT ================= -->
+    {% if user_role == 'student' %}
+
+    <div class="sidebar-section-title">
+        STUDENT SECTION
+    </div>
+
+    <li class="{{ 'active' if page == 'dashboard.html' else '' }}">
+        <a href="{{ url_for('student_dashboard') }}">
+            <i class="fas fa-home"></i>
+            Dashboard
+        </a>
+    </li>
+
+    <li class="{{ 'active' if page == 'resume.html' else '' }}">
+        <a href="{{ url_for('resumee') }}">
+            <i class="fas fa-file-signature"></i>
+            Resume Creator
+        </a>
+    </li>
+
+    <li class="{{ 'active' if page == 'companies.html' else '' }}">
+        <a href="{{ url_for('companies') }}">
+            <i class="fas fa-building"></i>
+            Companies
+        </a>
+    </li>
+
+    <li class="{{ 'active' if page == 'placement_drives.html' else '' }}">
+        <a href="{{ url_for('placement_drives') }}">
+            <i class="fas fa-briefcase"></i>
+            Placement Drives
+        </a>
+    </li>
+
+    <li class="{{ 'active' if page == 'applications.html' else '' }}">
+        <a href="{{ url_for('applications') }}">
+            <i class="fas fa-file-alt"></i>
+            Applications
+        </a>
+    </li>
+
+    <li class="{{ 'active' if page == 'interviews.html' else '' }}">
+        <a href="{{ url_for('interviewss') }}">
+            <i class="fas fa-calendar-check"></i>
+            Interviews
+        </a>
+    </li>
+
+    <li class="{{ 'active' if page == 'results.html' else '' }}">
+        <a href="{{ url_for('results') }}">
+            <i class="fas fa-chart-bar"></i>
+            Results
+        </a>
+    </li>
+
+
+    <!-- ================= RESOURCES ================= -->
+
+    <div class="sidebar-section-title">
+        RESOURCES
+    </div>
+
+    <li>
+        <a href="{{ url_for('aptitude') }}">
+            <i class="fas fa-brain"></i>
+            Aptitude Test
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('skill') }}">
+            <i class="fas fa-bullseye"></i>
+            Skill Assessment
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('resume_bp.resume_home') }}">
+            <i class="fas fa-robot"></i>
+            Resume Analyzer
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('help') }}">
+            <i class="fas fa-question-circle"></i>
+            Help
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('about') }}">
+            <i class="fas fa-info-circle"></i>
+            About
+        </a>
+    </li>
+
+
+    <!-- ================= ACCOUNT ================= -->
+
+    <div class="sidebar-section-title">
+        ACCOUNT
+    </div>
+
+    <li>
+        <a href="{{ url_for('logout') }}">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>
+    </li>
+
+
+    <!-- ================= CDPC ================= -->
+
+    {% elif user_role == 'cdpc' %}
+
+    <div class="sidebar-section-title">
+        CDPC MANAGEMENT
+    </div>
+
+    <li class="{{ 'active' if page == 'cdpc_dashboard.html' else '' }}">
+        <a href="{{ url_for('cdpc_dashboard') }}">
+            <i class="fas fa-home"></i>
+            Dashboard
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('student_management') }}">
+            <i class="fas fa-user-graduate"></i>
+            Student Management
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('company_management') }}">
+            <i class="fas fa-building"></i>
+            Company Management
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('drive_management') }}">
+            <i class="fas fa-briefcase"></i>
+            Drive Management
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('interview_management') }}">
+            <i class="fas fa-calendar-check"></i>
+            Interview Management
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('reports_analytics') }}">
+            <i class="fas fa-chart-line"></i>
+            Reports & Analytics
+        </a>
+    </li>
+
+
+    <div class="sidebar-section-title">
+        RESOURCES
+    </div>
+
+    <li>
+        <a href="{{ url_for('help') }}">
+            <i class="fas fa-question-circle"></i>
+            Help
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('about') }}">
+            <i class="fas fa-info-circle"></i>
+            About
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('logout') }}">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>
+    </li>
+
+
+    <!-- ================= ADMIN ================= -->
+
+    {% elif user_role == 'admin' %}
+
+    <div class="sidebar-section-title">
+        ADMINISTRATION
+    </div>
+
+    <li class="{{ 'active' if page == 'admin_dashboard.html' else '' }}">
+        <a href="{{ url_for('admin_dashboard') }}">
+            <i class="fas fa-home"></i>
+            Dashboard
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('student_management') }}">
+            <i class="fas fa-user-graduate"></i>
+            Student Management
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('company_management') }}">
+            <i class="fas fa-building"></i>
+            Company Management
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('drive_management') }}">
+            <i class="fas fa-briefcase"></i>
+            Drive Management
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('interview_management') }}">
+            <i class="fas fa-calendar-check"></i>
+            Interview Management
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('reports_analytics') }}">
+            <i class="fas fa-chart-line"></i>
+            Reports & Analytics
+        </a>
+    </li>
+
+
+    <div class="sidebar-section-title">
+        RESOURCES
+    </div>
+
+    <li>
+        <a href="{{ url_for('help') }}">
+            <i class="fas fa-question-circle"></i>
+            Help
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('about') }}">
+            <i class="fas fa-info-circle"></i>
+            About
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('logout') }}">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>
+    </li>
+
+
+    <!-- ================= COMPANY ================= -->
+
+    {% elif user_role == 'company' %}
+
+    <div class="sidebar-section-title">
+        COMPANY
+    </div>
+
+    <li class="{{ 'active' if page == 'company_dashboard.html' else '' }}">
+        <a href="{{ url_for('company_dashboard') }}">
+            <i class="fas fa-home"></i>
+            Dashboard
+        </a>
+    </li>
+
+    <li>
+        <a href="#">
+            <i class="fas fa-briefcase"></i>
+            Placement Drives
+        </a>
+    </li>
+
+    <li>
+        <a href="#">
+            <i class="fas fa-user-graduate"></i>
+            Available Students
+        </a>
+    </li>
+
+    <li>
+        <a href="#">
+            <i class="fas fa-file-alt"></i>
+            Applications
+        </a>
+    </li>
+
+    <li>
+        <a href="#">
+            <i class="fas fa-user-check"></i>
+            Shortlisted Students
+        </a>
+    </li>
+
+
+    <div class="sidebar-section-title">
+        RESOURCES
+    </div>
+
+    <li>
+        <a href="{{ url_for('help') }}">
+            <i class="fas fa-question-circle"></i>
+            Help
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('about') }}">
+            <i class="fas fa-info-circle"></i>
+            About
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('logout') }}">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>
+    </li>
+
+    {% endif %}
+
+</ul>
 
 </div>
 
@@ -685,7 +969,7 @@ width:100%;
 
             <div class="user-info">
                 <span class="user-name">{{ profile.name if profile else 'Showri Sudeep' }}</span>
-                <span class="user-role">Student</span>
+                <span class="user-role">{{ user_role|default('Student') }}</span>
             </div>
 
             
