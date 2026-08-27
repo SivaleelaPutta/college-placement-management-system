@@ -57,16 +57,46 @@ def resumee():
 def landing():
     return render_template("landing.html")
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    role = request.args.get("role", "student")
 
     allowed_roles = {"student", "cdpc", "admin", "company"}
+
+    if request.method == "POST":
+
+        role = request.form.get("role", "student")
+
+        if role not in allowed_roles:
+            role = "student"
+
+        # Store the selected role in the session
+        session["user_role"] = role
+
+        # Temporary login system for Phase 1
+        # Real database authentication will be added later.
+
+        if role == "student":
+            return redirect(url_for("student_dashboard"))
+
+        elif role == "cdpc":
+            return redirect(url_for("cdpc_dashboard"))
+
+        elif role == "admin":
+            return redirect(url_for("admin_dashboard"))
+
+        elif role == "company":
+            return redirect(url_for("company_dashboard"))
+
+    # GET request
+    role = request.args.get("role", "student")
 
     if role not in allowed_roles:
         role = "student"
 
-    return render_template("login.html", selected_role=role)
+    return render_template(
+        "login.html",
+        selected_role=role
+    )
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -143,6 +173,93 @@ def company_dashboard():
     return render_template(
         "homepage.html",
         page="company_dashboard.html"
+    )
+
+# ------------------------------------------------------------
+# CDPC / ADMIN MANAGEMENT ROUTES
+# ------------------------------------------------------------
+
+@app.route("/student-management")
+def student_management():
+    return render_template(
+        "management_placeholder.html",
+        title="Student Management",
+        description="Manage and monitor student placement information."
+    )
+
+
+@app.route("/company-management")
+def company_management():
+    return render_template(
+        "management_placeholder.html",
+        title="Company Management",
+        description="Manage recruiting companies and their placement activities."
+    )
+
+
+@app.route("/drive-management")
+def drive_management():
+    return render_template(
+        "management_placeholder.html",
+        title="Drive Management",
+        description="Create and manage placement drives."
+    )
+
+
+@app.route("/interview-management")
+def interview_management():
+    return render_template(
+        "management_placeholder.html",
+        title="Interview Management",
+        description="Schedule and manage student interviews."
+    )
+
+
+@app.route("/reports-analytics")
+def reports_analytics():
+    return render_template(
+        "management_placeholder.html",
+        title="Reports & Analytics",
+        description="View placement statistics and recruitment analytics."
+    )
+
+# ------------------------------------------------------------
+# ADMINISTRATION ROUTES
+# ------------------------------------------------------------
+
+@app.route("/user-management")
+def user_management():
+    return render_template(
+        "management_placeholder.html",
+        title="User Management",
+        description="Manage users and their portal access."
+    )
+
+
+@app.route("/staff-management")
+def staff_management():
+    return render_template(
+        "management_placeholder.html",
+        title="CDPC / Staff Management",
+        description="Manage CDPC and placement staff accounts."
+    )
+
+
+@app.route("/department-management")
+def department_management():
+    return render_template(
+        "management_placeholder.html",
+        title="Department Management",
+        description="Manage college departments and related information."
+    )
+
+
+@app.route("/system-reports")
+def system_reports():
+    return render_template(
+        "management_placeholder.html",
+        title="System Reports",
+        description="View system-wide administrative reports."
     )
 
 @app.route("/profile")

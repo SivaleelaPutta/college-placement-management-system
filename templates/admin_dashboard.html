@@ -1,0 +1,556 @@
+<div class="dashboard-page">
+
+    <!-- Header -->
+    <div class="dashboard-header">
+
+        <div>
+            <h1>Administrator Dashboard</h1>
+            <p>
+                Manage users, departments and the overall placement portal.
+            </p>
+        </div>
+
+        <div class="header-action">
+            <i class="fas fa-shield-halved"></i>
+            System Administration
+        </div>
+
+    </div>
+
+
+    <!-- Statistics -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+
+            <div>
+                <span>Total Users</span>
+                <h2>650</h2>
+                <p>Registered portal users</p>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+
+            <div>
+                <span>Students</span>
+                <h2>500</h2>
+                <p>Registered students</p>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-user-tie"></i>
+            </div>
+
+            <div>
+                <span>CDPC / Staff</span>
+                <h2>12</h2>
+                <p>Authorized staff members</p>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-building"></i>
+            </div>
+
+            <div>
+                <span>Companies</span>
+                <h2>42</h2>
+                <p>Registered companies</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Administration Overview -->
+    <section class="admin-section">
+
+        <div class="section-heading">
+            <h2>Administration Overview</h2>
+            <p>
+                Quick access to important system administration operations.
+            </p>
+        </div>
+
+
+        <div class="management-grid">
+
+            <!-- User Management -->
+            <div class="management-card">
+
+                <div class="card-icon">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+
+                <h3>User Management</h3>
+
+                <p>
+                    Create, update and manage student, staff,
+                    administrator and company accounts.
+                </p>
+
+                <a href="{{ url_for('user_management') }}">
+                    Manage Users
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <!-- Student Management -->
+            <div class="management-card">
+
+                <div class="card-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+
+                <h3>Student Management</h3>
+
+                <p>
+                    View student records, departments,
+                    academic information and account status.
+                </p>
+
+                <a href="{{ url_for('student_management') }}">
+                    Manage Students
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <!-- CDPC / Staff -->
+            <div class="management-card">
+
+                <div class="card-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+
+                <h3>CDPC / Staff Management</h3>
+
+                <p>
+                    Manage authorized CDPC and placement
+                    staff accounts and permissions.
+                </p>
+
+                <a href="{{ url_for('staff_management') }}">
+                    Manage Staff
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <!-- Company Management -->
+            <div class="management-card">
+
+                <div class="card-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+
+                <h3>Company Management</h3>
+
+                <p>
+                    Manage registered companies and
+                    their portal access.
+                </p>
+
+                <a href="{{ url_for('company_management') }}">
+                    Manage Companies
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <!-- Department Management -->
+            <div class="management-card">
+
+                <div class="card-icon">
+                    <i class="fas fa-sitemap"></i>
+                </div>
+
+                <h3>Department Management</h3>
+
+                <p>
+                    Manage college departments and
+                    department-specific information.
+                </p>
+
+                <a href="{{ url_for('department_management') }}">
+                    Manage Departments
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <!-- System Reports -->
+            <div class="management-card">
+
+                <div class="card-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+
+                <h3>System Reports</h3>
+
+                <p>
+                    View system-wide statistics,
+                    activity and administrative reports.
+                </p>
+
+                <a href="{{ url_for('system_reports') }}">
+                    View Reports
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Recent Activity -->
+    <section class="activity-section">
+
+        <div class="section-heading">
+            <h2>Recent System Activity</h2>
+            <p>Latest activity across the placement portal.</p>
+        </div>
+
+        <div class="activity-box">
+
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+
+                <div>
+                    <strong>New student registered</strong>
+                    <p>Student account was created recently.</p>
+                </div>
+
+                <span>Today</span>
+            </div>
+
+
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+
+                <div>
+                    <strong>New company registered</strong>
+                    <p>A company account was added to the portal.</p>
+                </div>
+
+                <span>Yesterday</span>
+            </div>
+
+
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+
+                <div>
+                    <strong>Staff account updated</strong>
+                    <p>CDPC staff information was modified.</p>
+                </div>
+
+                <span>2 days ago</span>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<style>
+
+.dashboard-page{
+    padding:30px;
+}
+
+
+/* Header */
+
+.dashboard-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+}
+
+.dashboard-header h1{
+    font-size:30px;
+    color:#1f2937;
+    margin-bottom:6px;
+}
+
+.dashboard-header p{
+    color:#6b7280;
+}
+
+.header-action{
+    background:white;
+    padding:12px 18px;
+    border-radius:12px;
+    color:#0d6efd;
+    font-weight:600;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.header-action i{
+    margin-right:8px;
+}
+
+
+/* Statistics */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:35px;
+}
+
+.stat-card{
+    background:white;
+    border-radius:16px;
+    padding:22px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    box-shadow:0 6px 20px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-4px);
+}
+
+.stat-icon{
+    width:54px;
+    height:54px;
+    border-radius:14px;
+    background:#eaf3ff;
+    color:#0d6efd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    flex-shrink:0;
+}
+
+.stat-card span{
+    font-size:13px;
+    color:#6b7280;
+}
+
+.stat-card h2{
+    font-size:25px;
+    color:#1f2937;
+    margin:3px 0;
+}
+
+.stat-card p{
+    font-size:11px;
+    color:#9ca3af;
+}
+
+
+/* Section */
+
+.admin-section,
+.activity-section{
+    margin-bottom:35px;
+}
+
+.section-heading{
+    margin-bottom:18px;
+}
+
+.section-heading h2{
+    font-size:22px;
+    color:#1f2937;
+}
+
+.section-heading p{
+    color:#6b7280;
+    font-size:14px;
+    margin-top:4px;
+}
+
+
+/* Management Cards */
+
+.management-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.management-card{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 6px 20px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.management-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 28px rgba(0,0,0,.09);
+}
+
+.card-icon{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+    background:#eaf3ff;
+    color:#0d6efd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:19px;
+    margin-bottom:18px;
+}
+
+.management-card h3{
+    color:#1f2937;
+    margin-bottom:9px;
+}
+
+.management-card p{
+    color:#6b7280;
+    font-size:13px;
+    line-height:1.6;
+    margin-bottom:18px;
+}
+
+.management-card a{
+    text-decoration:none;
+    color:#0d6efd;
+    font-size:13px;
+    font-weight:600;
+}
+
+.management-card a i{
+    margin-left:6px;
+    transition:.2s;
+}
+
+.management-card a:hover i{
+    transform:translateX(4px);
+}
+
+
+/* Activity */
+
+.activity-box{
+    background:white;
+    border-radius:16px;
+    box-shadow:0 6px 20px rgba(0,0,0,.06);
+    overflow:hidden;
+}
+
+.activity-item{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:18px 22px;
+    border-bottom:1px solid #edf0f5;
+}
+
+.activity-item:last-child{
+    border-bottom:none;
+}
+
+.activity-icon{
+    width:42px;
+    height:42px;
+    border-radius:10px;
+    background:#eaf3ff;
+    color:#0d6efd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.activity-item strong{
+    font-size:14px;
+    color:#1f2937;
+}
+
+.activity-item p{
+    font-size:12px;
+    color:#6b7280;
+    margin-top:2px;
+}
+
+.activity-item span{
+    margin-left:auto;
+    font-size:11px;
+    color:#9ca3af;
+}
+
+
+/* Responsive */
+
+@media(max-width:1000px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .management-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:650px){
+
+    .dashboard-page{
+        padding:20px;
+    }
+
+    .dashboard-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .stats-grid,
+    .management-grid{
+        grid-template-columns:1fr;
+    }
+
+    .activity-item{
+        align-items:flex-start;
+    }
+
+    .activity-item span{
+        display:none;
+    }
+
+}
+
+</style>
