@@ -162,11 +162,15 @@ font-size:22px;
     transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-/* Icon Alignment */
+/* FIX: Icon Alignment */
 .sidebar ul li a i {
     font-size: 16px !important;
-    width: 20px;
-    text-align: center;
+    min-width: 20px !important; /* Prevents icon from shrinking on long text */
+    width: 20px !important;
+    display: inline-flex !important; /* Guarantees flex centering inside the icon box */
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important; /* Removes font line-height spacing offsets */
     color: rgba(255, 255, 255, 0.88) !important;
     transition: color 0.2s ease;
 }
@@ -797,52 +801,81 @@ width:100%;
 
     {% elif user_role == 'admin' %}
 
-    <div class="sidebar-section-title">
-        ADMINISTRATION
-    </div>
+    
 
     <li class="{{ 'active' if page == 'admin_dashboard.html' else '' }}">
         <a href="{{ url_for('admin_dashboard') }}">
             <i class="fas fa-home"></i>
-            Dashboard
+            <span>Dashboard</span>
         </a>
     </li>
 
     <li>
         <a href="{{ url_for('student_management') }}">
             <i class="fas fa-user-graduate"></i>
-            Student Management
+            <span>Student Management</span>
         </a>
     </li>
 
     <li>
         <a href="{{ url_for('company_management') }}">
             <i class="fas fa-building"></i>
-            Company Management
+            <span>Company Management</span>
         </a>
     </li>
 
     <li>
         <a href="{{ url_for('drive_management') }}">
             <i class="fas fa-briefcase"></i>
-            Drive Management
+            <span>Drive Management</span>
         </a>
     </li>
 
     <li>
         <a href="{{ url_for('interview_management') }}">
             <i class="fas fa-calendar-check"></i>
-            Interview Management
+            <span>Interview Management</span>
+        </a>
+    </li>
+
+     <li>
+        <a href="{{ url_for('reports_analytics') }}">
+            <i class="fas fa-chart-line"></i>
+            <span>Reports & Analytics</span>
+        </a>
+    </li>
+
+    <div class="sidebar-section-title">
+        ADMINISTRATION
+    </div>
+  
+    <li>
+        <a href="{{ url_for('user_management') }}">
+            <i class="fas fa-users"></i>
+            <span>User Management</span>
         </a>
     </li>
 
     <li>
-        <a href="{{ url_for('reports_analytics') }}">
-            <i class="fas fa-chart-line"></i>
-            Reports & Analytics
+        <a href="{{ url_for('staff_management') }}">
+            <i class="fas fa-user-tie"></i>
+            <span>Staff Management</span>
         </a>
     </li>
 
+    <li>
+        <a href="{{ url_for('department_management') }}">
+            <i class="fas fa-sitemap"></i>
+            <span>Dept Management</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('system_reports') }}">
+            <i class="fas fa-chart-bar"></i>
+            <span>System Reports</span>
+        </a>
+    </li>
 
     <div class="sidebar-section-title">
         RESOURCES
@@ -851,21 +884,21 @@ width:100%;
     <li>
         <a href="{{ url_for('help') }}">
             <i class="fas fa-question-circle"></i>
-            Help
+            <span>Help</span>
         </a>
     </li>
 
     <li>
         <a href="{{ url_for('about') }}">
             <i class="fas fa-info-circle"></i>
-            About
+            <span>About</span>
         </a>
     </li>
 
     <li>
         <a href="{{ url_for('logout') }}">
             <i class="fas fa-sign-out-alt"></i>
-            Logout
+            <span>Logout</span>
         </a>
     </li>
 

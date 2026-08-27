@@ -182,27 +182,21 @@ def company_dashboard():
 @app.route("/student-management")
 def student_management():
     return render_template(
-        "management_placeholder.html",
-        title="Student Management",
-        description="Manage and monitor student placement information."
+        "homepage.html", page="student_management.html"
     )
 
 
 @app.route("/company-management")
 def company_management():
     return render_template(
-        "management_placeholder.html",
-        title="Company Management",
-        description="Manage recruiting companies and their placement activities."
+        "homepage.html", page="company.html"
     )
 
 
 @app.route("/drive-management")
 def drive_management():
     return render_template(
-        "management_placeholder.html",
-        title="Drive Management",
-        description="Create and manage placement drives."
+        "homepage.html", page="drive.html"
     )
 
 
@@ -218,9 +212,7 @@ def interview_management():
 @app.route("/reports-analytics")
 def reports_analytics():
     return render_template(
-        "management_placeholder.html",
-        title="Reports & Analytics",
-        description="View placement statistics and recruitment analytics."
+        "homepage.html", page="reports_analytics.html"
     )
 
 # ------------------------------------------------------------

@@ -208,7 +208,7 @@
         ========================================= */
 
         .roles {
-            max-width: 1000px;
+            max-width: 1200px;
 
             margin: 45px auto 0;
 
@@ -216,7 +216,7 @@
 
             display: grid;
 
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
 
             gap: 20px;
         }
@@ -654,7 +654,7 @@
 
 
 
-        <!-- CDPC / ADMIN -->
+        <!-- CDPC Officer -->
 
         <a href="{{ url_for('login', role='cdpc') }}"
            class="role-card">
@@ -664,7 +664,7 @@
             </div>
 
             <h3>
-                CDPC / Administrator
+                CDPC Officer
             </h3>
 
             <p>
@@ -675,6 +675,31 @@
 
             <span class="role-link">
                 Continue as CDPC
+                <i class="fas fa-arrow-right"></i>
+            </span>
+
+        </a>
+        
+        <!-- ADMIN -->
+
+        <a href="{{ url_for('login', role='admin') }}"
+           class="role-card">
+
+            <div class="role-icon">
+                <i class="fas fa-building-columns"></i>
+            </div>
+
+            <h3>
+                Administrator
+            </h3>
+
+            <p>
+                Manage students, companies, drives,
+                interviews and overall system.
+            </p>
+
+            <span class="role-link">
+                Continue as administrator
                 <i class="fas fa-arrow-right"></i>
             </span>
 
