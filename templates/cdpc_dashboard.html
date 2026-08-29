@@ -1,0 +1,471 @@
+<div class="cdpc-dashboard">
+
+    <!-- Header -->
+    <div class="dashboard-header">
+        <div>
+            <h1>CDPC Dashboard</h1>
+            <p>Manage placements, students, companies and recruitment activities.</p>
+        </div>
+
+        <div class="header-date">
+            <i class="fas fa-calendar-alt"></i>
+            Placement Management
+        </div>
+    </div>
+
+
+    <!-- Statistics -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+
+            <div>
+                <span>Total Students</span>
+                <h2>500</h2>
+                <small>Registered students</small>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-building"></i>
+            </div>
+
+            <div>
+                <span>Companies</span>
+                <h2>42</h2>
+                <small>Recruiting companies</small>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+
+            <div>
+                <span>Placement Drives</span>
+                <h2>18</h2>
+                <small>Active and completed</small>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-user-check"></i>
+            </div>
+
+            <div>
+                <span>Placed Students</span>
+                <h2>156</h2>
+                <small>Successfully placed</small>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Management Cards -->
+    <div class="section-title">
+        <h2>Management Overview</h2>
+        <p>Quick access to important placement operations.</p>
+    </div>
+
+
+    <div class="management-grid">
+
+        <a href="{{ url_for('student_management') }}" class="management-card">
+            <i class="fas fa-user-graduate"></i>
+            <h3>Student Management</h3>
+            <p>View, manage and monitor student placement information.</p>
+            <span>Manage Students <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+
+        <a href="{{ url_for('company_management') }}" class="management-card">
+            <i class="fas fa-building"></i>
+            <h3>Company Management</h3>
+            <p>Manage recruiting companies and their placement activities.</p>
+            <span>Manage Companies <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+
+        <a href="{{ url_for('drive_management') }}" class="management-card">
+            <i class="fas fa-briefcase"></i>
+            <h3>Drive Management</h3>
+            <p>Create and manage upcoming placement drives.</p>
+            <span>Manage Drives <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+
+        <a href="{{ url_for('interview_management') }}" class="management-card">
+            <i class="fas fa-calendar-check"></i>
+            <h3>Interview Management</h3>
+            <p>Schedule and monitor student interviews.</p>
+            <span>Manage Interviews <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+
+        <a href="{{ url_for('reports_analytics') }}" class="management-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Reports & Analytics</h3>
+            <p>Analyze placement statistics and recruitment performance.</p>
+            <span>View Analytics <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+
+        <a href="{{ url_for('companies') }}" class="management-card">
+            <i class="fas fa-search"></i>
+            <h3>Placement Opportunities</h3>
+            <p>Review current placement opportunities and companies.</p>
+            <span>View Opportunities <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+    </div>
+
+
+    <!-- Recent Activity -->
+    <div class="recent-section">
+
+        <div class="section-title">
+            <h2>Recent Placement Activity</h2>
+            <p>Latest updates from the placement cell.</p>
+        </div>
+
+        <div class="activity-box">
+
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+
+                <div>
+                    <h4>New company registered</h4>
+                    <p>A new company has joined the placement portal.</p>
+                </div>
+
+                <span>Today</span>
+            </div>
+
+
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+
+                <div>
+                    <h4>Placement drive scheduled</h4>
+                    <p>A new recruitment drive has been scheduled.</p>
+                </div>
+
+                <span>Yesterday</span>
+            </div>
+
+
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+
+                <div>
+                    <h4>Students placed</h4>
+                    <p>Recent placement results have been updated.</p>
+                </div>
+
+                <span>2 days ago</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<style>
+
+.cdpc-dashboard{
+    padding:30px;
+}
+
+
+/* Header */
+
+.dashboard-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.dashboard-header h1{
+    font-size:28px;
+    color:#1f2937;
+    margin-bottom:6px;
+}
+
+.dashboard-header p{
+    color:#6b7280;
+    font-size:14px;
+}
+
+.header-date{
+    background:white;
+    padding:11px 16px;
+    border-radius:10px;
+    color:#0d6efd;
+    font-size:13px;
+    font-weight:600;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+.header-date i{
+    margin-right:7px;
+}
+
+
+/* Statistics */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:35px;
+}
+
+.stat-card{
+    background:white;
+    border-radius:14px;
+    padding:22px;
+    display:flex;
+    align-items:center;
+    gap:17px;
+    box-shadow:0 5px 18px rgba(0,0,0,.07);
+    transition:.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.10);
+}
+
+.stat-icon{
+    width:52px;
+    height:52px;
+    border-radius:12px;
+    background:#eaf3ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#0d6efd;
+    font-size:21px;
+    flex-shrink:0;
+}
+
+.stat-card span{
+    color:#6b7280;
+    font-size:12px;
+}
+
+.stat-card h2{
+    margin:3px 0;
+    color:#1f2937;
+    font-size:24px;
+}
+
+.stat-card small{
+    color:#9ca3af;
+    font-size:11px;
+}
+
+
+/* Section */
+
+.section-title{
+    margin-bottom:18px;
+}
+
+.section-title h2{
+    color:#1f2937;
+    font-size:20px;
+    margin-bottom:4px;
+}
+
+.section-title p{
+    color:#6b7280;
+    font-size:13px;
+}
+
+
+/* Management */
+
+.management-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-bottom:35px;
+}
+
+.management-card{
+    background:white;
+    padding:23px;
+    border-radius:14px;
+    text-decoration:none;
+    box-shadow:0 5px 18px rgba(0,0,0,.07);
+    transition:.3s;
+    border:1px solid #eef2f7;
+}
+
+.management-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px rgba(13,110,253,.12);
+}
+
+.management-card > i{
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:#eaf3ff;
+    color:#0d6efd;
+    font-size:19px;
+    margin-bottom:15px;
+}
+
+.management-card h3{
+    color:#1f2937;
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.management-card p{
+    color:#6b7280;
+    font-size:12px;
+    line-height:1.6;
+    min-height:38px;
+}
+
+.management-card span{
+    display:inline-block;
+    margin-top:15px;
+    color:#0d6efd;
+    font-size:12px;
+    font-weight:600;
+}
+
+.management-card span i{
+    margin-left:5px;
+    transition:.2s;
+}
+
+.management-card:hover span i{
+    transform:translateX(4px);
+}
+
+
+/* Recent Activity */
+
+.recent-section{
+    margin-bottom:20px;
+}
+
+.activity-box{
+    background:white;
+    border-radius:14px;
+    padding:8px 20px;
+    box-shadow:0 5px 18px rgba(0,0,0,.07);
+}
+
+.activity-item{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:17px 0;
+    border-bottom:1px solid #eef2f7;
+}
+
+.activity-item:last-child{
+    border-bottom:none;
+}
+
+.activity-icon{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#eaf3ff;
+    color:#0d6efd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.activity-item h4{
+    color:#374151;
+    font-size:13px;
+    margin-bottom:3px;
+}
+
+.activity-item p{
+    color:#9ca3af;
+    font-size:11px;
+}
+
+.activity-item > span{
+    margin-left:auto;
+    color:#9ca3af;
+    font-size:11px;
+}
+
+
+/* Responsive */
+
+@media(max-width:1100px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .management-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    .cdpc-dashboard{
+        padding:20px;
+    }
+
+    .dashboard-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .stats-grid,
+    .management-grid{
+        grid-template-columns:1fr;
+    }
+
+    .activity-item{
+        align-items:flex-start;
+    }
+
+    .activity-item > span{
+        display:none;
+    }
+
+}
+
+</style>

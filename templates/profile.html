@@ -1,1265 +1,950 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Profile | College Placement Management System</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- templates/profile.html -->
 
 <style>
-
-/* Profile Photo Upload */
-
-.photo-upload{
-    display:flex;
-    align-items:center;
-    gap:20px;
-    margin-bottom:20px;
-}
-
-.photo-upload img{
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    object-fit:cover;
-    border:3px solid #0d6efd;
-    box-shadow:0 4px 12px rgba(13,110,253,.25);
-}
-
-.photo-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:10px 15px;
-    background:#0d6efd;
-    color:white;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:600;
-    transition:.3s;
-}
-
-.photo-btn:hover{
-    background:#0056d6;
-    transform:translateY(-2px);
-    box-shadow:0 5px 15px rgba(13,110,253,.3);
-}
-
-#editPhoto{
-    display:none;
-}
-
-.back-btn{
-    display:inline-block;
-    margin:20px;
-    padding:10px 20px;
-    background:#0d6efd;
-    color:#fff;
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:500;
-    transition:0.3s;
-}
-
-.back-btn:hover{
-    background:#084298;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-body{
-    background:#eef2f7;
-}
-
-.container{
-    width:90%;
-    max-width:1100px;
-    margin:40px auto;
-}
-
-/* Profile Card */
-
-.profile{
-    background:#fff;
-    border-radius:15px;
-    box-shadow:0 8px 20px rgba(0,0,0,.12);
-    overflow:hidden;
-}
-
-/* ============================= */
-/* PROFILE HEADER */
-/* ============================= */
-
-.header{
-    background:linear-gradient(
-        135deg,
-        #0d6efd 0%,
-        #0b63e5 45%,
-        #084298 100%
-    );
-
-    color:white;
-    padding:35px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-
-    position:relative;
-    overflow:hidden;
-}
-
-/* Soft light effect */
-
-.header::before{
-    content:"";
-    position:absolute;
-    width:300px;
-    height:300px;
-    border-radius:50%;
-    background:rgba(255,255,255,.08);
-    top:-180px;
-    right:-80px;
-}
-
-.header::after{
-    content:"";
-    position:absolute;
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:rgba(255,255,255,.05);
-    bottom:-150px;
-    left:40%;
-}
-
-/* Profile information */
-
-.left{
-    display:flex;
-    align-items:center;
-    gap:25px;
-    position:relative;
-    z-index:2;
-}
-
-.left img{
-    width:125px;
-    height:125px;
-
-    border-radius:50%;
-
-    border:4px solid white;
-
-    object-fit:cover;
-
-    background:white;
-
-    box-shadow:
-        0 0 0 4px rgba(255,255,255,.15),
-        0 8px 25px rgba(0,0,0,.25);
-
-    transition:.35s;
-}
-
-.left img:hover{
-    transform:scale(1.05);
-
-    box-shadow:
-        0 0 15px rgba(255,255,255,.8),
-        0 0 30px rgba(255,255,255,.45);
-}
-
-.left h2{
-    font-size:29px;
-    margin-bottom:6px;
-    font-weight:700;
-}
-
-.left p{
-    margin-top:6px;
-    opacity:.92;
-    font-size:15px;
-}
-
-/* Edit Profile */
-
-.edit-btn{
-    position:relative;
-    z-index:2;
-
-    background:white;
-    color:#0d6efd;
-
-    border:none;
-
-    padding:13px 25px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-size:15px;
-    font-weight:600;
-
-    transition:.35s;
-}
-
-.edit-btn:hover{
-    transform:translateY(-3px) scale(1.04);
-
-    background:#fff;
-
-    box-shadow:
-        0 0 12px rgba(255,255,255,.8),
-        0 0 25px rgba(255,255,255,.45),
-        0 8px 20px rgba(0,0,0,.2);
-}
-
-/* Grid */
-
-.content{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
-    padding:30px;
-}
-
-.card{
-    background:#f8f9fc;
-
-    border-radius:14px;
-
-    padding:22px;
-
-    box-shadow:
-        0 4px 12px rgba(0,0,0,.06);
-
-    border:1px solid rgba(13,110,253,.05);
-
-    transition:.35s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-
-    box-shadow:
-        0 10px 25px rgba(13,110,253,.12),
-        0 0 15px rgba(13,110,253,.08);
-}
-
-.card h3{
-    color:#0d6efd;
-
-    margin-bottom:18px;
-
-    display:inline-block;
-
-    padding-bottom:6px;
-
-    border-bottom:2px solid #0d6efd;
-
-    position:relative;
-}
-
-.card h3::after{
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    bottom:-2px;
-
-    width:45%;
-
-    height:2px;
-
-    background:white;
-
-    transition:.35s;
-}
-
-.card:hover h3::after{
-    width:100%;
-
-    box-shadow:
-        0 0 8px #0d6efd,
-        0 0 15px rgba(13,110,253,.6);
-}
-
-.info{
-    margin:14px 0;
-
-    color:#444;
-
-    font-size:15px;
-
-    transition:.25s;
-}
-
-.info:hover{
-    transform:translateX(4px);
-    color:#0d6efd;
-}
-
-.info strong{
-    color:#111;
-}
-
-
-
-.status{
-    display:inline-block;
-
-    background:#198754;
-
-    color:white;
-
-    padding:8px 18px;
-
-    border-radius:25px;
-
-    font-weight:600;
-
-    margin-bottom:15px;
-
-    box-shadow:
-        0 4px 12px rgba(25,135,84,.25);
-
-    transition:.3s;
-}
-
-.status:hover{
-    transform:scale(1.05);
-
-    box-shadow:
-        0 0 12px rgba(25,135,84,.6);
-}
-
-.skill{
-    display:inline-block;
-
-    padding:8px 16px;
-
-    background:#0d6efd;
-
-    color:white;
-
-    border-radius:20px;
-
-    margin:5px;
-
-    font-size:14px;
-
-    cursor:default;
-
-    transition:.3s;
-}
-
-.skill:hover{
-    transform:translateY(-4px) scale(1.05);
-
-    box-shadow:
-        0 0 10px rgba(13,110,253,.7),
-        0 0 20px rgba(13,110,253,.35);
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-table td{
-    padding:10px;
-    border-bottom:1px solid #ddd;
-}
-
-table td:first-child{
-    font-weight:600;
-}
-
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-
-    background:rgba(0,20,60,.65);
-    backdrop-filter:blur(6px);
-
-    justify-content:center;
-    align-items:center;
-
-    z-index:9999;
-    padding:20px;
-}
-
-.modal-content{
-    width:500px;
-    max-width:100%;
-
-    max-height:90vh;
-    overflow-y:auto;
-
-    background:#ffffff;
-
-    border-radius:18px;
-
-    padding:30px;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.30),
-        0 0 30px rgba(13,110,253,.15);
-
-    animation:modalOpen .25s ease;
-}
-
-
-/* Modal animation */
-
-@keyframes modalOpen{
-
-    from{
-        opacity:0;
-        transform:translateY(-20px) scale(.96);
+    /* =========================================================
+       PROFILE PAGE
+       ========================================================= */
+
+    .profile-page {
+        width: 100%;
+        min-height: calc(100vh - 80px);
+        padding: 25px;
+        box-sizing: border-box;
     }
 
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
+    .profile-header {
+        width: 100%;
+        margin-bottom: 25px;
     }
 
-}
-
-
-/* Modal heading */
-
-.modal-content h2{
-
-    color:#0d6efd;
-
-    font-size:26px;
-
-    margin-bottom:25px;
-
-    padding-bottom:12px;
-
-    border-bottom:2px solid #e8eef8;
-}
-
-
-/* Labels */
-
-.modal-content label{
-
-    display:block;
-
-    margin-top:16px;
-    margin-bottom:7px;
-
-    font-size:14px;
-
-    font-weight:600;
-
-    color:#222;
-}
-
-
-/* Inputs */
-
-.modal-content input{
-
-    width:100%;
-
-    height:45px;
-
-    padding:0 14px;
-
-    border:1px solid #d5dbe5;
-
-    border-radius:9px;
-
-    outline:none;
-
-    font-size:15px;
-
-    background:#fff;
-
-    transition:.3s;
-}
-
-
-.modal-content input:focus{
-
-    border-color:#0d6efd;
-
-    box-shadow:
-        0 0 0 3px rgba(13,110,253,.12);
-
-}
-
-
-/* Buttons container */
-
-.buttons{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:12px;
-
-    margin-top:28px;
-}
-
-
-/* Save */
-
-.save{
-
-    background:#198754;
-
-    color:white;
-
-    border:none;
-
-    padding:11px 24px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-    font-weight:600;
-
-    transition:.3s;
-}
-
-
-.save:hover{
-
-    background:#157347;
-
-    transform:translateY(-2px);
-
-    box-shadow:0 5px 15px rgba(25,135,84,.25);
-
-}
-
-
-/* Cancel */
-
-.cancel{
-
-    background:#dc3545;
-
-    color:white;
-
-    border:none;
-
-    padding:11px 24px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-    font-weight:600;
-
-    transition:.3s;
-}
-
-
-.cancel:hover{
-
-    background:#bb2d3b;
-
-    transform:translateY(-2px);
-
-    box-shadow:0 5px 15px rgba(220,53,69,.25);
-
-}
-
-
-/* Mobile */
-
-@media(max-width:600px){
-
-    .modal{
-
-        padding:15px;
-
+    .profile-header h1 {
+        margin: 0 0 8px 0;
+        font-size: 30px;
+        color: #123b72;
     }
 
-    .modal-content{
-
-        width:100%;
-
-        padding:22px;
-
-        border-radius:15px;
-
+    .profile-header p {
+        margin: 0;
+        color: #6b7280;
+        font-size: 15px;
     }
 
-    .modal-content h2{
+    /* =========================================================
+       PROFILE TOP CARD
+       ========================================================= */
 
-        font-size:22px;
-
+    .profile-top {
+        width: 100%;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        box-sizing: border-box;
     }
 
-    .buttons{
-
-        flex-direction:column;
-
+    .profile-avatar {
+        width: 85px;
+        height: 85px;
+        min-width: 85px;
+        border-radius: 50%;
+        background: #0d6efd;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: 700;
     }
 
-    .save,
-    .cancel{
-
-        width:100%;
-
+    .profile-top-info {
+        flex: 1;
+        min-width: 0;
     }
 
-}
+    .profile-top-info h2 {
+        margin: 0 0 7px 0;
+        font-size: 24px;
+        color: #172033;
+        word-break: break-word;
+    }
 
-/* Edit Profile Sections */
+    .profile-top-info p {
+        margin: 4px 0;
+        color: #6b7280;
+        word-break: break-word;
+    }
 
-.edit-section-title{
-    color:#0d6efd;
-    font-size:18px;
+    .role-badge {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 6px 13px;
+        border-radius: 20px;
+        background: #e8f1ff;
+        color: #0d6efd;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
 
-    margin-top:30px;
-    margin-bottom:15px;
+    /* =========================================================
+       MAIN PROFILE GRID
+       ========================================================= */
 
-    padding-bottom:8px;
+    .profile-grid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 25px;
+        box-sizing: border-box;
+    }
 
-    border-bottom:2px solid #e8eef8;
+    .profile-card {
+        width: 100%;
+        min-width: 0;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e5e7eb;
+        box-sizing: border-box;
+    }
 
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
+    .profile-card.full-width {
+        grid-column: 1 / -1;
+    }
 
-.edit-section-title i{
-    font-size:16px;
-}
+    .profile-card h3 {
+        margin: 0 0 20px 0;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e5e7eb;
+        color: #123b72;
+        font-size: 19px;
+    }
 
+    /* =========================================================
+       FORM
+       ========================================================= */
 
-/* Help text */
+    .profile-form-grid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
 
-.edit-help{
-    display:block;
-    margin-top:5px;
+    .form-group {
+        width: 100%;
+        min-width: 0;
+    }
 
-    color:#777;
-    font-size:12px;
-}
+    .form-group.full {
+        grid-column: 1 / -1;
+    }
 
+    .form-group label {
+        display: block;
+        margin-bottom: 7px;
+        color: #374151;
+        font-size: 14px;
+        font-weight: 600;
+    }
 
-/* Textarea */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding: 11px 13px;
+        border: 1px solid #d1d5db;
+        border-radius: 9px;
+        background: #f9fafb;
+        color: #1f2937;
+        font-size: 14px;
+        outline: none;
+        transition: 0.2s;
+        box-sizing: border-box;
+        font-family: inherit;
+    }
 
-.modal-content textarea{
+    .form-group textarea {
+        min-height: 110px;
+        resize: vertical;
+    }
 
-    width:100%;
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: #0d6efd;
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.10);
+    }
 
-    padding:12px 14px;
+    .form-group input[readonly] {
+        background: #f1f5f9;
+        cursor: not-allowed;
+    }
 
-    border:1px solid #d5dbe5;
+    /* =========================================================
+       PROFILE INFORMATION
+       ========================================================= */
 
-    border-radius:9px;
+    .info-list {
+        width: 100%;
+    }
 
-    outline:none;
+    .info-row {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 14px 0;
+        border-bottom: 1px solid #eef0f3;
+        box-sizing: border-box;
+    }
 
-    font-family:'Poppins',sans-serif;
+    .info-row:last-child {
+        border-bottom: none;
+    }
 
-    font-size:15px;
+    .info-label {
+        color: #6b7280;
+        font-size: 14px;
+        font-weight: 500;
+        min-width: 130px;
+    }
 
-    resize:vertical;
+    .info-value {
+        color: #172033;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: right;
+        overflow-wrap: anywhere;
+    }
 
-    transition:.3s;
-}
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
 
-.modal-content textarea:focus{
+    .profile-actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 25px;
+    }
 
-    border-color:#0d6efd;
+    .btn {
+        border: none;
+        border-radius: 9px;
+        padding: 11px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        transition: 0.2s;
+    }
 
-    box-shadow:
-        0 0 0 3px rgba(13,110,253,.12);
-}
+    .btn-primary {
+        background: #0d6efd;
+        color: white;
+    }
 
-/* Responsive */
+    .btn-primary:hover {
+        background: #0b5ed7;
+        transform: translateY(-1px);
+    }
 
-@media(max-width:768px){
+    .btn-secondary {
+        background: #eef2f7;
+        color: #374151;
+    }
 
-.header{
-    flex-direction:column;
-    gap:20px;
-    text-align:center;
-}
+    .btn-secondary:hover {
+        background: #e2e8f0;
+    }
 
+    /* =========================================================
+       COMPANY DESCRIPTION
+       ========================================================= */
 
-.left{
-    flex-direction:column;
-}
+    .description-box {
+        width: 100%;
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 15px;
+        color: #4b5563;
+        line-height: 1.7;
+        box-sizing: border-box;
+        overflow-wrap: anywhere;
+    }
 
-.content{
-    grid-template-columns:1fr;
-}
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
 
-.modal-content{
-    width:90%;
-}
+    @media (max-width: 1000px) {
 
-}
+        .profile-grid {
+            grid-template-columns: 1fr;
+        }
 
+        .profile-card.full-width {
+            grid-column: auto;
+        }
+
+        .profile-form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group.full {
+            grid-column: auto;
+        }
+    }
+
+    @media (max-width: 700px) {
+
+        .profile-page {
+            padding: 16px;
+        }
+
+        .profile-top {
+            padding: 20px;
+        }
+
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+            min-width: 70px;
+            font-size: 26px;
+        }
+
+        .profile-top-info h2 {
+            font-size: 20px;
+        }
+
+        .profile-card {
+            padding: 20px;
+        }
+
+        .info-row {
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .info-value {
+            text-align: left;
+        }
+
+        .profile-actions {
+            flex-direction: column;
+        }
+
+        .profile-actions .btn {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 450px) {
+
+        .profile-page {
+            padding: 10px;
+        }
+
+        .profile-top {
+            padding: 16px;
+            gap: 13px;
+        }
+
+        .profile-avatar {
+            width: 58px;
+            height: 58px;
+            min-width: 58px;
+            font-size: 22px;
+        }
+
+        .profile-top-info h2 {
+            font-size: 17px;
+        }
+
+        .profile-top-info p {
+            font-size: 13px;
+        }
+
+        .profile-card {
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .profile-header h1 {
+            font-size: 24px;
+        }
+    }
 </style>
 
-</head>
-<body>
 
+<div class="profile-page">
 
-<div class="container">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-<div class="profile">
+    <div class="profile-header">
 
-<div class="header">
+        <h1>
+            <i class="fas fa-user-circle"></i>
+            My Profile
+        </h1>
 
-<div class="left">
+        <p>
+            View and manage your College Placement Management System profile.
+        </p>
 
-<img
-    id="profilePhoto"
-    src="{{ url_for('static', filename='images/ME.png') }}"
-    alt="Student Profile"
->
+    </div>
 
-<div>
 
-<h2 id="name">{{ profile.name }}</h2>
+    {% if profile %}
 
-<p id="department">{{ profile.department }}</p>
+    <!-- =====================================================
+         PROFILE TOP
+         ===================================================== -->
 
-<p id="cgpaText">CGPA : {{ profile.cgpa }}</p>
+    <div class="profile-top">
 
-</div>
+        <div class="profile-avatar">
 
-</div>
+            {% if profile.full_name %}
+                {{ profile.full_name[0]|upper }}
+            {% else %}
+                U
+            {% endif %}
 
-<button class="edit-btn" onclick="openModal()">✏ Edit Profile</button>
+        </div>
 
-</div>
+        <div class="profile-top-info">
 
-<div class="content">
+            <h2>
+                {{ profile.full_name }}
+            </h2>
 
-<!-- Personal Information -->
+            <p>
+                <i class="fas fa-envelope"></i>
+                {{ profile.email }}
+            </p>
 
-<div class="card">
+            <span class="role-badge">
+                {{ profile.role }}
+            </span>
 
-<h3>Personal Information</h3>
+        </div>
 
-<div class="info"><strong>Roll No :</strong> <span id="roll">{{ profile.roll }}</span></div>
+    </div>
 
-<div class="info"><strong>Email :</strong><span id="email">{{ profile.email }}</span></div>
 
-<div class="info"><strong>Phone :</strong><span id="phone">{{ profile.phone }}</span></div>
+    <!-- =====================================================
+         PROFILE GRID
+         ===================================================== -->
 
-<div class="info"><strong>Department :</strong><span id="dept">{{ profile.department }}</span></div>
+    <div class="profile-grid">
 
-<div class="info"><strong>Graduation :</strong> {{ profile.graduation }}</div>
 
-</div>
+        <!-- =================================================
+             BASIC INFORMATION
+             ================================================= -->
 
-<!-- Placement -->
+        <div class="profile-card">
 
-<div class="card">
+            <h3>
+                <i class="fas fa-user"></i>
+                Basic Information
+            </h3>
 
-<h3>Placement Status</h3>
+            <div class="info-list">
 
-<span class="status">Eligible</span>
+                <div class="info-row">
 
-<div class="info"><strong>Applications :</strong> 12</div>
+                    <span class="info-label">
+                        Full Name
+                    </span>
 
-<div class="info"><strong>Interviews :</strong> 5</div>
+                    <span class="info-value">
+                        {{ profile.full_name or 'Not provided' }}
+                    </span>
 
-<div class="info"><strong>Offers :</strong> 2</div>
+                </div>
 
-</div>
 
-<!-- Skills -->
+                <div class="info-row">
 
-<div class="card">
+                    <span class="info-label">
+                        Email
+                    </span>
 
-<h3>Skills</h3>
+                    <span class="info-value">
+                        {{ profile.email or 'Not provided' }}
+                    </span>
 
-<div id="skillBox">
+                </div>
 
-    {% for skill in profile.skills.split(',') %}
 
-        <span class="skill">
-            {{ skill.strip() }}
-        </span>
+                <div class="info-row">
 
-    {% endfor %}
+                    <span class="info-label">
+                        Account Type
+                    </span>
 
-</div>
+                    <span class="info-value">
+                        {{ profile.role|capitalize }}
+                    </span>
 
-</div>
+                </div>
 
-<!-- Academic -->
 
-<div class="card">
+                <div class="info-row">
 
-<h3>Academic Details</h3>
+                    <span class="info-label">
+                        User ID
+                    </span>
 
-<table>
+                    <span class="info-value">
+                        {{ profile.user_id }}
+                    </span>
 
-<tr>
-<td>10th</td>
-<td>{{ profile.tenth }}</td>
-</tr>
+                </div>
 
-<tr>
-<td>Intermediate</td>
-<td>{{ profile.intermediate }}</td>
-</tr>
 
-<tr>
-<td>Current CGPA</td>
-<td id="cgpa">{{ profile.cgpa }}</td>
-</tr>
+                {% if profile.created_at %}
 
-<tr>
-<td>Backlogs</td>
-<td>{{ profile.backlogs }}</td>
-</tr>
+                <div class="info-row">
 
-</table>
+                    <span class="info-label">
+                        Registered
+                    </span>
 
-</div>
+                    <span class="info-value">
+                        {{ profile.created_at.strftime('%d %b %Y') if profile.created_at.strftime is defined else profile.created_at }}
+                    </span>
 
-<!-- Certifications -->
+                </div>
 
-<div class="card">
+                {% endif %}
 
-<h3>Certifications</h3>
+            </div>
 
-<ul>
+        </div>
 
-    {% for certification in profile.certifications.split(',') %}
 
-        <li>{{ certification.strip() }}</li>
+        <!-- =================================================
+             ROLE-SPECIFIC INFORMATION
+             ================================================= -->
 
-    {% endfor %}
+        {% if profile.role == 'student' %}
 
-</ul>
+        <div class="profile-card">
 
-</div>
+            <h3>
+                <i class="fas fa-graduation-cap"></i>
+                Student Information
+            </h3>
 
-<!-- Contact -->
+            <div class="info-list">
 
-<div class="card">
+                <div class="info-row">
 
-<h3>Contact</h3>
+                    <span class="info-label">
+                        Roll Number
+                    </span>
 
-<div class="info">
-    LinkedIn : {{ profile.linkedin }}
-</div>
+                    <span class="info-value">
+                        {{ profile.roll_number or 'Not provided' }}
+                    </span>
 
-<div class="info">
-    GitHub : {{ profile.github }}
-</div>
+                </div>
 
-</div>
 
-</div>
+                <div class="info-row">
 
-</div>
+                    <span class="info-label">
+                        Branch
+                    </span>
 
-</div>
+                    <span class="info-value">
+                        {{ profile.branch or 'Not provided' }}
+                    </span>
 
-<!-- =========================
-     EDIT PROFILE MODAL
-========================= -->
+                </div>
 
-<div class="modal" id="modal">
 
-    <div class="modal-content">
+                <div class="info-row">
 
-        <h2>
-            <i class="fas fa-user-edit"></i>
-            Edit Profile
-        </h2>
+                    <span class="info-label">
+                        Year
+                    </span>
 
-        <form
-            action="{{ url_for('update_profile') }}"
-            method="POST"
-            enctype="multipart/form-data"
-        >
+                    <span class="info-value">
+                        {{ profile.year or 'Not provided' }}
+                    </span>
 
-            <!-- =====================
-                 PROFILE PHOTO
-            ====================== -->
+                </div>
 
-            <label>Profile Photo</label>
 
-            <div class="photo-upload">
+                <div class="info-row">
 
-                <img
-                    id="editPhotoPreview"
-                    src="{{ url_for('static', filename='images/ME.png') }}"
-                    alt="Profile Photo"
-                >
+                    <span class="info-label">
+                        Phone
+                    </span>
 
-                <div>
+                    <span class="info-value">
+                        {{ profile.phone or 'Not provided' }}
+                    </span>
 
-                    <label
-                        for="editPhoto"
-                        class="photo-btn"
-                    >
-                        <i class="fas fa-camera"></i>
-                        Change Photo
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Date of Birth
+                    </span>
+
+                    <span class="info-value">
+                        {{ profile.dob or 'Not provided' }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Gender
+                    </span>
+
+                    <span class="info-value">
+                        {{ profile.gender or 'Not provided' }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Student Address -->
+
+        <div class="profile-card full-width">
+
+            <h3>
+                <i class="fas fa-map-marker-alt"></i>
+                Address
+            </h3>
+
+            <div class="description-box">
+
+                {{ profile.address or 'Address not provided.' }}
+
+            </div>
+
+        </div>
+
+
+        {% elif profile.role == 'company' %}
+
+
+        <!-- =================================================
+             COMPANY INFORMATION
+             ================================================= -->
+
+        <div class="profile-card">
+
+            <h3>
+                <i class="fas fa-building"></i>
+                Company Information
+            </h3>
+
+            <div class="info-list">
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Company Name
+                    </span>
+
+                    <span class="info-value">
+                        {{ profile.company_name or 'Not provided' }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Industry
+                    </span>
+
+                    <span class="info-value">
+                        {{ profile.industry or 'Not provided' }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Location
+                    </span>
+
+                    <span class="info-value">
+                        {{ profile.location or 'Not provided' }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Website
+                    </span>
+
+                    <span class="info-value">
+                        {% if profile.website %}
+                            {{ profile.website }}
+                        {% else %}
+                            Not provided
+                        {% endif %}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <h3>
+                <i class="fas fa-info-circle"></i>
+                Company Description
+            </h3>
+
+            <div class="description-box">
+
+                {{ profile.description or 'Company description not provided.' }}
+
+            </div>
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- =================================================
+             ADMIN / CDPC
+             ================================================= -->
+
+        <div class="profile-card">
+
+            <h3>
+                <i class="fas fa-shield-alt"></i>
+                Account Information
+            </h3>
+
+            <div class="info-list">
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Account Type
+                    </span>
+
+                    <span class="info-value">
+                        {{ profile.role|capitalize }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        User ID
+                    </span>
+
+                    <span class="info-value">
+                        {{ profile.user_id }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Email
+                    </span>
+
+                    <span class="info-value">
+                        {{ profile.email }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <h3>
+                <i class="fas fa-cogs"></i>
+                Access Level
+            </h3>
+
+            <div class="description-box">
+
+                {% if profile.role == 'admin' %}
+
+                    Administrator account with system-level
+                    placement management access.
+
+                {% elif profile.role == 'cdpc' %}
+
+                    CDPC account with placement coordination
+                    and management access.
+
+                {% else %}
+
+                    User account.
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        {% endif %}
+
+
+        <!-- =================================================
+             ACCOUNT DETAILS
+             ================================================= -->
+
+        <div class="profile-card full-width">
+
+            <h3>
+                <i class="fas fa-id-card"></i>
+                Account Details
+            </h3>
+
+            <div class="profile-form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        Full Name
                     </label>
 
                     <input
-                        type="file"
-                        id="editPhoto"
-                        name="profile_photo"
-                        accept="image/png,image/jpeg,image/jpg,image/webp"
-                        onchange="previewPhoto(event)"
+                        type="text"
+                        value="{{ profile.full_name or '' }}"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        value="{{ profile.email or '' }}"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Account Type
+                    </label>
+
+                    <input
+                        type="text"
+                        value="{{ profile.role|capitalize }}"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        User ID
+                    </label>
+
+                    <input
+                        type="text"
+                        value="{{ profile.user_id }}"
+                        readonly
                     >
 
                 </div>
 
             </div>
 
+        </div>
 
-            <!-- =====================
-                 PERSONAL INFORMATION
-            ====================== -->
-
-            <h3 class="edit-section-title">
-                <i class="fas fa-user"></i>
-                Personal Information
-            </h3>
-
-
-            <label for="editName">
-                Full Name
-            </label>
-
-            <input
-                type="text"
-                id="editName"
-                name="name"
-                value="{{ profile.name }}"
-                required
-            >
-
-
-            <label for="editRoll">
-                Roll Number
-            </label>
-
-            <input
-                type="text"
-                id="editRoll"
-                name="roll"
-                value="{{ profile.roll }}"
-                required
-            >
-
-
-            <label for="editEmail">
-                Email
-            </label>
-
-            <input
-                type="email"
-                id="editEmail"
-                name="email"
-                value="{{ profile.email }}"
-                required
-            >
-
-
-            <label for="editPhone">
-                Phone
-            </label>
-
-            <input
-                type="text"
-                id="editPhone"
-                name="phone"
-                value="{{ profile.phone }}"
-                required
-            >
-
-
-            <label for="editDept">
-                Department
-            </label>
-
-            <input
-                type="text"
-                id="editDept"
-                name="department"
-                value="{{ profile.department }}"
-                required
-            >
-
-
-            <label for="editGraduation">
-                Graduation Year
-            </label>
-
-            <input
-                type="number"
-                id="editGraduation"
-                name="graduation"
-                value="{{ profile.graduation }}"
-                required
-            >
-
-
-            <!-- =====================
-                 ACADEMIC INFORMATION
-            ====================== -->
-
-            <h3 class="edit-section-title">
-                <i class="fas fa-graduation-cap"></i>
-                Academic Information
-            </h3>
-
-
-            <label for="editCgpa">
-                Current CGPA
-            </label>
-
-            <input
-                type="text"
-                id="editCgpa"
-                name="cgpa"
-                value="{{ profile.cgpa }}"
-                required
-            >
-
-
-            <label for="editTenth">
-                10th Percentage
-            </label>
-
-            <input
-                type="text"
-                id="editTenth"
-                name="tenth"
-                value="{{ profile.tenth }}"
-                required
-            >
-
-
-            <label for="editIntermediate">
-                Intermediate Percentage
-            </label>
-
-            <input
-                type="text"
-                id="editIntermediate"
-                name="intermediate"
-                value="{{ profile.intermediate }}"
-                required
-            >
-
-
-            <label for="editBacklogs">
-                Backlogs
-            </label>
-
-            <input
-                type="number"
-                id="editBacklogs"
-                name="backlogs"
-                value="{{ profile.backlogs }}"
-                min="0"
-                required
-            >
-
-
-            <!-- =====================
-                 SKILLS
-            ====================== -->
-
-            <h3 class="edit-section-title">
-                <i class="fas fa-code"></i>
-                Skills
-            </h3>
-
-            <label for="editSkills">
-                Skills
-            </label>
-
-            <input
-                type="text"
-                id="editSkills"
-                name="skills"
-                value="{{ profile.skills }}"
-                placeholder="HTML, CSS, JavaScript, Python, SQL"
-            >
-
-            <small class="edit-help">
-                Separate skills using commas.
-            </small>
-
-
-            <!-- =====================
-                 CERTIFICATIONS
-            ====================== -->
-
-            <h3 class="edit-section-title">
-                <i class="fas fa-certificate"></i>
-                Certifications
-            </h3>
-
-            <label for="editCertifications">
-                Certifications
-            </label>
-
-            <textarea
-                id="editCertifications"
-                name="certifications"
-                rows="4"
-                placeholder="Enter certifications separated by commas"
-            >{{ profile.certifications }}</textarea>
-
-            <small class="edit-help">
-                Separate certifications using commas.
-            </small>
-
-
-            <!-- =====================
-                 SOCIAL / CONTACT
-            ====================== -->
-
-            <h3 class="edit-section-title">
-                <i class="fas fa-link"></i>
-                Social Profiles
-            </h3>
-
-
-            <label for="editLinkedin">
-                LinkedIn
-            </label>
-
-            <input
-                type="text"
-                id="editLinkedin"
-                name="linkedin"
-                value="{{ profile.linkedin }}"
-                placeholder="linkedin.com/in/your-profile"
-            >
-
-
-            <label for="editGithub">
-                GitHub
-            </label>
-
-            <input
-                type="text"
-                id="editGithub"
-                name="github"
-                value="{{ profile.github }}"
-                placeholder="github.com/your-profile"
-            >
-
-
-            <!-- =====================
-                 BUTTONS
-            ====================== -->
-            <div class="info">
-            LinkedIn : {{ profile.linkedin }}
-            </div>
-
-           <div class="info">
-           GitHub : {{ profile.github }}
-           </div>
-            <div class="buttons">
-
-                <button
-                    type="button"
-                    class="cancel"
-                    onclick="closeModal()"
-                >
-                    Cancel
-                </button>
-
-                <button
-                    type="submit"
-                    class="save"
-                >
-                    <i class="fas fa-save"></i>
-                    Save Changes
-                </button>
-
-            </div>
-
-        </form>
 
     </div>
 
+
+    {% else %}
+
+    <!-- =====================================================
+         PROFILE NOT FOUND
+         ===================================================== -->
+
+    <div class="profile-card">
+
+        <h3>
+            <i class="fas fa-exclamation-circle"></i>
+            Profile Not Found
+        </h3>
+
+        <p>
+            Your profile information could not be loaded.
+            Please try logging in again.
+        </p>
+
+    </div>
+
+    {% endif %}
+
 </div>
 
-<script>
-
-function previewPhoto(event){
-
-    const file = event.target.files[0];
-
-    if(file){
-
-        const reader = new FileReader();
-
-        reader.onload = function(e){
-
-            document.getElementById("editPhotoPreview").src = e.target.result;
-
-        };
-
-        reader.readAsDataURL(file);
-    }
-}
-
-function openModal(){
-
-document.getElementById("modal").style.display="flex";
-
-}
-
-function closeModal(){
-
-document.getElementById("modal").style.display="none";
-
-}
-
-window.onclick=function(event){
-
-if(event.target==document.getElementById("modal")){
-
-closeModal();
-
-}
-
-}
-
-</script>
-
-</body>
-</html>

@@ -1,0 +1,1109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        College Placement Management System
+    </title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f5f8fc;
+
+            color: #172033;
+
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+            height: 72px;
+
+            background: #ffffff;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+        }
+
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .brand-logo {
+            width: 44px;
+
+            height: 44px;
+
+            border-radius: 8px;
+
+            background: #174f8b;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+
+            font-size: 16px;
+        }
+
+
+        .brand-text h2 {
+            font-size: 17px;
+
+            color: #123f73;
+        }
+
+
+        .brand-text p {
+            font-size: 11px;
+
+            color: #6b7280;
+
+            margin-top: 2px;
+        }
+
+
+        .nav-buttons {
+            display: flex;
+
+            gap: 12px;
+        }
+
+
+        .nav-login,
+        .nav-register {
+            text-decoration: none;
+
+            padding: 10px 20px;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        .nav-login {
+            color: #174f8b;
+
+            border:
+                1px solid #174f8b;
+        }
+
+
+        .nav-register {
+            background: #174f8b;
+
+            color: white;
+        }
+
+
+        .nav-login:hover {
+            background: #eef5fc;
+        }
+
+
+        .nav-register:hover {
+            background: #103b69;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            min-height:
+                calc(100vh - 72px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 60px 7%;
+        }
+
+
+        .hero-container {
+            width: 1150px;
+
+            max-width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                1.1fr 0.9fr;
+
+            gap: 60px;
+
+            align-items: center;
+        }
+
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+
+        .badge {
+            display: inline-block;
+
+            background: #eaf2fb;
+
+            color: #174f8b;
+
+            padding: 8px 14px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 20px;
+        }
+
+
+        .hero h1 {
+            font-size: 48px;
+
+            line-height: 1.15;
+
+            color: #123f73;
+
+            margin-bottom: 20px;
+        }
+
+
+        .hero h1 span {
+            color: #174f8b;
+        }
+
+
+        .hero-description {
+            color: #64748b;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            max-width: 600px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .hero-buttons {
+            display: flex;
+
+            gap: 14px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .primary-btn,
+        .secondary-btn {
+            text-decoration: none;
+
+            padding: 13px 25px;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+        }
+
+
+        .primary-btn {
+            background: #174f8b;
+
+            color: white;
+        }
+
+
+        .secondary-btn {
+            background: white;
+
+            color: #174f8b;
+
+            border:
+                1px solid #174f8b;
+        }
+
+
+        .primary-btn:hover {
+            background: #103b69;
+        }
+
+
+        .secondary-btn:hover {
+            background: #eef5fc;
+        }
+
+
+        /* =====================================================
+           HERO CARD
+        ===================================================== */
+
+        .hero-card {
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(15, 23, 42, 0.08);
+        }
+
+
+        .dashboard-title {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .dashboard-title h3 {
+            color: #173f70;
+
+            font-size: 18px;
+        }
+
+
+        .status {
+            font-size: 11px;
+
+            background: #ecfdf5;
+
+            color: #15803d;
+
+            padding: 6px 9px;
+
+            border-radius: 15px;
+        }
+
+
+        .stat-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 14px;
+        }
+
+
+        .stat {
+            padding: 20px;
+
+            background: #f8fafc;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 10px;
+        }
+
+
+        .stat-icon {
+            font-size: 22px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .stat h4 {
+            font-size: 24px;
+
+            color: #123f73;
+        }
+
+
+        .stat p {
+            color: #64748b;
+
+            font-size: 12px;
+
+            margin-top: 4px;
+        }
+
+
+        /* =====================================================
+           FEATURES
+        ===================================================== */
+
+        .features {
+            background: white;
+
+            padding:
+                70px 7%;
+        }
+
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 40px;
+        }
+
+
+        .section-title h2 {
+            color: #123f73;
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-title p {
+            color: #64748b;
+
+            font-size: 15px;
+        }
+
+
+        .feature-grid {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .feature {
+            padding: 25px;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            background: #ffffff;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .feature:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 8px 25px
+                rgba(15, 23, 42, 0.08);
+        }
+
+
+        .feature-icon {
+            width: 45px;
+
+            height: 45px;
+
+            background: #eaf2fb;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 21px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .feature h3 {
+            color: #173f70;
+
+            font-size: 16px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .feature p {
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           ROLES
+        ===================================================== */
+
+        .roles {
+            padding:
+                70px 7%;
+
+            background: #f5f8fc;
+        }
+
+
+        .role-grid {
+            max-width: 1000px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .role-card {
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            text-align: center;
+        }
+
+
+        .role-icon {
+            font-size: 30px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .role-card h3 {
+            color: #173f70;
+
+            font-size: 16px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .role-card p {
+            color: #64748b;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            background: #123f73;
+
+            color: white;
+
+            padding: 25px 7%;
+
+            text-align: center;
+        }
+
+
+        footer p {
+            font-size: 13px;
+
+            opacity: 0.9;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width:900px) {
+
+            .hero-container {
+                grid-template-columns: 1fr;
+
+                gap: 40px;
+            }
+
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+
+            .feature-grid,
+            .role-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media(max-width:600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+
+            .brand-text {
+                display: none;
+            }
+
+
+            .nav-login,
+            .nav-register {
+                padding:
+                    8px 12px;
+
+                font-size: 12px;
+            }
+
+
+            .hero {
+                padding:
+                    45px 20px;
+            }
+
+
+            .hero h1 {
+                font-size: 31px;
+            }
+
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+
+            .feature-grid,
+            .role-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .features,
+            .roles {
+                padding:
+                    50px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar">
+
+    <div class="brand">
+
+        <div class="brand-logo">
+            CPMS
+        </div>
+
+        <div class="brand-text">
+
+            <h2>
+                College Placement Management System
+            </h2>
+
+            <p>
+                RGUKT Placement Portal
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="nav-buttons">
+
+        <a
+            href="{{ url_for('login') }}"
+            class="nav-login"
+        >
+            Login
+        </a>
+
+
+        <a
+            href="{{ url_for('register') }}"
+            class="nav-register"
+        >
+            Register
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HERO SECTION
+========================================================= -->
+
+<section class="hero">
+
+    <div class="hero-container">
+
+
+        <div class="hero-content">
+
+            <div class="badge">
+                RGUKT Placement Portal
+            </div>
+
+
+            <h1>
+
+                Connecting
+
+                <span>
+                    Students
+                </span>
+
+                with
+
+                <span>
+                    Opportunities
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                A centralized College Placement Management
+                System designed to simplify student placement,
+                company recruitment, assessments, interviews
+                and placement tracking.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="{{ url_for('login') }}"
+                    class="primary-btn"
+                >
+                    Get Started
+                </a>
+
+
+                <a
+                    href="{{ url_for('register') }}"
+                    class="secondary-btn"
+                >
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DASHBOARD PREVIEW
+        ================================================= -->
+
+        <div class="hero-card">
+
+            <div class="dashboard-title">
+
+                <h3>
+                    Placement Overview
+                </h3>
+
+                <span class="status">
+                    System Active
+                </span>
+
+            </div>
+
+
+            <div class="stat-grid">
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">
+                        🎓
+                    </div>
+
+                    <h4>
+                        Students
+                    </h4>
+
+                    <p>
+                        Student placement profiles
+                    </p>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">
+                        🏢
+                    </div>
+
+                    <h4>
+                        Companies
+                    </h4>
+
+                    <p>
+                        Recruiting organizations
+                    </p>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">
+                        💼
+                    </div>
+
+                    <h4>
+                        Drives
+                    </h4>
+
+                    <p>
+                        Placement opportunities
+                    </p>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">
+                        📊
+                    </div>
+
+                    <h4>
+                        Results
+                    </h4>
+
+                    <p>
+                        Placement statistics
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FEATURES
+========================================================= -->
+
+<section class="features">
+
+    <div class="section-title">
+
+        <h2>
+            Everything in One Platform
+        </h2>
+
+        <p>
+            Manage the complete placement process efficiently.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📄
+            </div>
+
+            <h3>
+                Resume Creator
+            </h3>
+
+            <p>
+                Create and manage professional student
+                resumes for placement applications.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🏢
+            </div>
+
+            <h3>
+                Placement Drives
+            </h3>
+
+            <p>
+                Discover placement opportunities and
+                apply for eligible recruitment drives.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🎯
+            </div>
+
+            <h3>
+                Skill Assessment
+            </h3>
+
+            <p>
+                Evaluate technical and aptitude skills
+                through online assessments.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🤖
+            </div>
+
+            <h3>
+                AI Resume Analyzer
+            </h3>
+
+            <p>
+                Analyze resumes and receive ATS scores,
+                missing skills and improvement suggestions.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     USER ROLES
+========================================================= -->
+
+<section class="roles">
+
+    <div class="section-title">
+
+        <h2>
+            One System, Four Roles
+        </h2>
+
+        <p>
+            Each user gets access to features based on
+            their registered role.
+        </p>
+
+    </div>
+
+
+    <div class="role-grid">
+
+
+        <div class="role-card">
+
+            <div class="role-icon">
+                🎓
+            </div>
+
+            <h3>
+                Student
+            </h3>
+
+            <p>
+                Manage profile, resume, applications,
+                assessments, interviews and results.
+            </p>
+
+        </div>
+
+
+        <div class="role-card">
+
+            <div class="role-icon">
+                🏫
+            </div>
+
+            <h3>
+                Admin
+            </h3>
+
+            <p>
+                Manage users, system information,
+                analytics and placement activities.
+            </p>
+
+        </div>
+
+
+        <div class="role-card">
+
+            <div class="role-icon">
+                📋
+            </div>
+
+            <h3>
+                CDPC
+            </h3>
+
+            <p>
+                Manage students, companies, drives,
+                applications and placement reports.
+            </p>
+
+        </div>
+
+
+        <div class="role-card">
+
+            <div class="role-icon">
+                🏢
+            </div>
+
+            <h3>
+                Company
+            </h3>
+
+            <p>
+                Create placement drives, view applicants,
+                shortlist students and manage interviews.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <p>
+        © 2026 College Placement Management System
+        | RGUKT
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
