@@ -123,24 +123,6 @@ def interviewss():
 def results():
     return render_template("homepage.html", page="results.html")
 
-# ADMIN / TPO MODULES
-
-@app.route('/student_management')
-def student_management():
-    return render_template('homepage.html', page='student_management.html')
-
-@app.route('/company_management')
-def company_management():
-    return render_template('homepage.html', page='company.html')
-
-@app.route('/drive-management')
-def drive_management():
-    return render_template("homepage.html", page="drive.html")
-
-@app.route('/reports-analytics')
-def reports_analytics():
-    return render_template("homepage.html", page="reports_analytics.html")
-
 @app.route("/aptitude")
 def aptitude():
     years = [2025, 2024, 2023]

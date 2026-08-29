@@ -128,152 +128,71 @@ margin-bottom:30px;
 font-size:22px;
 }
 
-.sidebar ul{
-list-style:none;
+/* Sidebar Menu Container */
+.sidebar ul {
+    list-style: none;
+    padding: 0 12px;
 }
 
-.sidebar ul li{
-    position:relative;
-    display:flex;
-    align-items:center;
-    gap:11px;
-
-    padding:14px 18px;
-    margin:5px 10px;
-
-    border-radius:12px;
-    cursor:pointer;
-    overflow:hidden;
-
-    transition:all .3s ease;
+/* Sidebar Item Base State */
+.sidebar ul li {
+    position: relative;
+    margin: 4px 0;
+    padding: 0 !important; /* Move padding to <a> so entire box is clickable */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.sidebar ul li:hover{
-    background:rgba(255,255,255,.18);
-    backdrop-filter:blur(10px);
-    transform:translateX(10px) scale(1.03);
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,.20),
-        0 0 15px rgba(255,255,255,.20),
-        0 0 30px rgba(13,110,253,.55);
+/* Make <a> tag expand to full size of the box */
+.sidebar ul li a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 10px 14px !important; /* Gives the click area full inner space */
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2px !important;
+    text-decoration: none !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    border-radius: 8px;
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.sidebar ul li i{
-    width:24px;
-    font-size:17px;
-    min-width: 24px;
-    transition:all .35s ease;
+/* Icon Alignment */
+.sidebar ul li a i {
+    font-size: 16px !important;
+    width: 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.88) !important;
+    transition: color 0.2s ease;
 }
 
-.sidebar ul li:hover i{
-    transform:scale(1.25) rotate(-10deg);
-    color:#fff;
+/* Hover State */
+.sidebar ul li:hover {
+    background: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar ul li a{
-    color:white;
-    text-decoration:none;
-    font-size:14px;
-    font-weight:500;
-    transition:.3s;
-
-    display:flex;
-    align-items:center;
-    gap:11px;
-
-    white-space:nowrap;
+.sidebar ul li:hover a,
+.sidebar ul li:hover a i {
+    color: #0d6efd !important;
+    font-weight: 600 !important;
 }
 
-/* Extra sidebar */
-
-.sidebar ul li:hover i{
-    transform:rotate(-12deg) scale(1.25);
-
-    color:#ffffff;
-
-    text-shadow:
-        0 0 10px #fff,
-        0 0 20px #5dade2,
-        0 0 35px #5dade2;
+/* Active State */
+.sidebar ul li.active {
+    background: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-
-
-.sidebar ul li::after{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:-120%;
-
-    width:60%;
-
-    height:100%;
-
-    background:linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,.45),
-        transparent
-    );
-
-    transition:.6s;
-}
-
-.sidebar ul li:hover::after{
-
-    left:130%;
-}
-
-.sidebar ul li::before{
-    content:"";
-    position:absolute;
-    left:0;
-    top:15%;
-    width:5px;
-    height:70%;
-    background:#fff;
-    border-radius:10px;
-    transform:scaleY(0);
-    transition:.35s;
-}
-
-.sidebar ul li:hover::before{
-    transform:scaleY(1);
-    box-shadow:0 0 12px white;
-}
-
-/* active sidebar */
-
-.sidebar ul li.active{
-    background:rgba(255,255,255,.18);
-    backdrop-filter:blur(10px);
-
-    box-shadow:
-        0 0 15px rgba(13,110,253,.6),
-        0 0 30px rgba(13,110,253,.35);
-
-    transform:translateX(10px);
-}
-
-.sidebar ul li.active::before{
-    transform:scaleY(1);
-
-    box-shadow:
-        0 0 12px white,
-        0 0 24px #5dade2;
-}
-
-.sidebar ul li.active i{
-    color:white;
-
-    text-shadow:
-        0 0 10px white,
-        0 0 20px #5dade2;
+.sidebar ul li.active a,
+.sidebar ul li.active a i {
+    color: #0d6efd !important;
+    font-weight: 600 !important;
 }
 
 /* =========================
@@ -344,17 +263,14 @@ list-style:none;
 /* ============================= */
 
 .sidebar-section-title {
-    margin: 24px 20px 12px 30px;
-
-    color: rgba(255,255,255,0.65);
-
-    font-size: 12px;
-    font-weight: 700;
-
-    letter-spacing: 1.8px;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.2px !important;
+    color: rgba(255, 255, 255, 0.6) !important;
     text-transform: uppercase;
-
-    cursor: default;
+    padding: 16px 14px 6px 14px !important;
+    margin: 0 !important;
 }
 
 
@@ -664,368 +580,6 @@ width:100%;
 
 </style> 
 
-<!--<style>
-:root {
-    /* Dark Theme Palette */
-    --bg-body: #0a0f1d;          /* Deep dark blue background */
-    --bg-sidebar: #0e1526;       /* Dark sidebar background */
-    --bg-card: #151d30;          /* Card / Container surface background */
-    --bg-card-hover: #1c2740;    /* Interactive card hover state */
-    
-    /* Typography Colors */
-    --text-primary: #ffffff;      /* Bright white headings & text */
-    --text-secondary: #94a3b8;    /* Muted section labels and subtitles */
-    --text-muted: #64748b;        /* Low-contrast detail text */
-
-    /* Accent & Action Colors */
-    --accent-purple: #6366f1;     /* Primary purple buttons & active indicators */
-    --accent-blue: #2563eb;       /* Primary blue highlights */
-    --accent-green: #10b981;      /* Badge / Success indicators */
-    
-    /* Layout Borders & Lines */
-    --border-color: #1e293b;      /* Subtle dark border line */
-    --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.45);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    background-color: var(--bg-body) !important;
-    color: var(--text-primary) !important;
-    display: flex;
-    overflow-x: hidden;
-}
-
-/* Navbar / Top Bar */
-.navbar {
-    width: 100%;
-    height: 70px;
-    background-color: var(--bg-sidebar) !important;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 30px;
-    position: relative;
-    z-index: 100;
-}
-
-.search-box {
-    position: relative;
-    width: 320px;
-}
-
-.search {
-    width: 100%;
-    height: 42px;
-    padding: 0 18px 0 48px;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 30px;
-    outline: none;
-    font-size: 14px;
-    transition: .35s;
-    background-color: var(--bg-body) !important;
-    color: var(--text-primary) !important;
-}
-
-.search-box i {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-secondary);
-    font-size: 15px;
-    transition: .35s;
-    pointer-events: none;
-}
-
-.search:focus {
-    border-color: var(--accent-purple) !important;
-    box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
-}
-
-.nav-icon {
-    position: relative;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: var(--bg-card) !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transition: .35s;
-    border: 1px solid var(--border-color) !important;
-}
-
-.nav-icon i {
-    font-size: 15px;
-    color: var(--text-secondary);
-}
-
-.nav-icon:hover {
-    background: var(--accent-purple) !important;
-    transform: rotate(90deg) scale(1.08);
-}
-
-.nav-icon:hover i {
-    color: white;
-}
-
-.nav-badge {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #ef4444;
-    color: white;
-    font-size: 10px;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid var(--bg-sidebar);
-}
-
-.user-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary) !important;
-}
-
-.user-role {
-    font-size: 12px;
-    color: var(--text-secondary) !important;
-}
-
-.profile-pic {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--accent-purple);
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: var(--bg-sidebar) !important;
-    color: white;
-    position: fixed;
-    left: 0;
-    top: 0;
-    padding-top: 15px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border-right: 1px solid var(--border-color);
-}
-
-.sidebar::-webkit-scrollbar {
-    width: 5px;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-    background: var(--border-color);
-    border-radius: 10px;
-}
-
-.sidebar .sidebar-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 18px 16px 14px;
-    width: 100%;
-}
-
-.sidebar .sidebar-brand img {
-    width: 50px !important;
-    height: 50px !important;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.sidebar .brand-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-    white-space: nowrap;
-}
-
-.sidebar .brand-text span:first-child {
-    font-size: 22px !important;
-    font-weight: 800;
-    color: white;
-}
-
-.sidebar .brand-text span:last-child {
-    font-size: 13px !important;
-    font-weight: 500;
-    color: var(--text-secondary);
-}
-
-.sidebar-divider {
-    border: 0;
-    height: 1px;
-    background: var(--border-color) !important;
-    margin: 0 15px 15px 15px;
-}
-
-.sidebar-section-title {
-    margin: 20px 20px 10px 20px;
-    color: var(--text-secondary) !important;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-}
-
-.sidebar ul li {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    margin: 4px 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all .25s ease;
-}
-
-.sidebar ul li a {
-    color: var(--text-secondary) !important;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    white-space: nowrap;
-}
-
-.sidebar ul li i {
-    width: 20px;
-    font-size: 16px;
-    min-width: 20px;
-    color: var(--text-secondary);
-}
-
-.sidebar ul li:hover,
-.sidebar ul li.active {
-    background: rgba(99, 102, 241, 0.15) !important;
-}
-
-.sidebar ul li:hover a,
-.sidebar ul li.active a,
-.sidebar ul li:hover i,
-.sidebar ul li.active i {
-    color: #ffffff !important;
-}
-
-.sidebar ul li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 15%;
-    width: 4px;
-    height: 70%;
-    background: var(--accent-purple);
-    border-radius: 10px;
-    transform: scaleY(0);
-    transition: .25s;
-}
-
-.sidebar ul li:hover::before,
-.sidebar ul li.active::before {
-    transform: scaleY(1);
-    box-shadow: 0 0 10px var(--accent-purple);
-}
-
-/* Main Content Area */
-.main {
-    margin-left: 250px;
-    width: calc(100% - 250px);
-    min-height: 100vh;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Cards & Panels */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    padding: 0 30px;
-}
-
-.card, .table-box, .notice {
-    background-color: var(--bg-card) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 12px;
-    padding: 22px;
-    box-shadow: var(--shadow-soft);
-    color: var(--text-primary) !important;
-    transition: .3s;
-}
-
-.card:hover {
-    background-color: var(--bg-card-hover) !important;
-    transform: translateY(-4px);
-}
-
-.card i {
-    font-size: 30px;
-    color: var(--accent-purple);
-    margin-bottom: 12px;
-}
-
-.card h2 {
-    margin: 8px 0;
-    color: var(--text-primary) !important;
-}
-
-.card p {
-    color: var(--text-secondary) !important;
-}
-
-/* Tables */
-table th {
-    background: #111827 !important;
-    color: var(--text-secondary) !important;
-    padding: 14px;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-table td {
-    padding: 14px;
-    text-align: center;
-    border-bottom: 1px solid var(--border-color) !important;
-    color: var(--text-primary) !important;
-}
-
-/* Responsive Rules */
-@media(max-width:768px) {
-    .sidebar { width: 250px; }
-    .main { margin-left: 250px; width: calc(100% - 250px); }
-}
-
-@media(max-width:600px) {
-    .sidebar { display: none; }
-    .main { margin-left: 0; width: 100%; }
-}
-</style> -->
 
 </head>
 
@@ -1073,41 +627,7 @@ table td {
         <li class="{{ 'active' if page == 'results.html' else '' }}">
             <a href="{{ url_for('results') }}"><i class="fas fa-chart-bar"></i>Results</a>
         </li>
-        <!-- ADMIN / TPO SECTION -->
-        <div class="sidebar-section-title">
-            ADMIN / TPO
-        </div>
-        <li class="{{ 'active' if page in ['student_management.html'] else '' }}">
-            <a href="{{ url_for('student_management') }}">
-                <i class="fas fa-users"></i>
-                Student Management
-            </a>
-        </li>
-
-        <li class="{{ 'active' if page == 'company.html' else '' }}">
-            <a href="{{ url_for('company_management') }}">
-                <i class="fas fa-building"></i>
-                Company Management
-            </a>
-        </li>   
-        <li class="{{ 'active' if page == 'drive.html' else '' }}">
-            <a href="{{ url_for('drive_management') }}">
-                <i class="fas fa-briefcase"></i>
-                Drive Management
-            </a>
-        </li>
-        <li class="{{ 'active' if page == 'interview_management.html' else '' }}">
-            <a href="{{ url_for('interview_bp.interview_management') }}">
-                <i class="fas fa-calendar-check"></i>
-                Interview Management
-            </a>
-        </li>
-        <li class="{{ 'active' if page == 'reports_analytics.html' else '' }}">
-            <a href="{{ url_for('reports_analytics') }}">
-                <i class="fas fa-chart-pie"></i>
-                Reports & Analytics
-            </a>
-        </li>
+        
          <!-- resources section-->
         <div class="sidebar-section-title">
             RESOURCES
