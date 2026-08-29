@@ -1,112 +1,2017 @@
-<!-- Dashboard Content -->
-        <div id="dashboardContent">
 
-            <!-- Welcome -->
-            <div class="welcome">
+<!DOCTYPE html>
+<html lang="en">
 
-                <h1>Placement Dashboard</h1>
+<head>
 
-                <p>Welcome to the College Placement Management System.</p>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            </div>
+<title>Dashboard | College Placement Management System</title>
 
-            <!-- Dashboard Cards -->
-            <div class="cards">
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
 
-                <div class="card">
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f3f6fa;
+    color:#1f2937;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:260px;
+    height:100vh;
+
+    background:#0b4f9c;
+
+    color:white;
+
+    overflow-y:auto;
+
+    z-index:1000;
+
+    box-shadow:4px 0 15px rgba(0,0,0,.08);
+}
+
+
+/* Logo */
+
+.logo{
+
+    height:75px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 22px;
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo i{
+
+    font-size:28px;
+}
+
+.logo span{
+
+    font-size:17px;
+
+    font-weight:700;
+
+    line-height:1.2;
+}
+
+
+/* Sidebar sections */
+
+.menu-title{
+
+    padding:22px 22px 9px;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    color:#bcd5f2;
+
+    letter-spacing:1px;
+}
+
+
+/* Menu links */
+
+.menu a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    margin:4px 12px;
+
+    padding:12px 14px;
+
+    color:#eaf3ff;
+
+    text-decoration:none;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    transition:.25s;
+}
+
+.menu a i{
+
+    width:20px;
+
+    text-align:center;
+
+    font-size:15px;
+}
+
+.menu a:hover{
+
+    background:rgba(255,255,255,.13);
+
+    color:white;
+
+    transform:translateX(3px);
+}
+
+.menu a.active{
+
+    background:white;
+
+    color:#0b4f9c;
+
+    font-weight:600;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+
+
+/* Logout */
+
+.logout-link{
+
+    margin-top:15px !important;
+
+    color:#ffd6d6 !important;
+}
+
+.logout-link:hover{
+
+    background:#dc3545 !important;
+
+    color:white !important;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+
+    margin-left:260px;
+
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   TOP NAVBAR
+========================================================= */
+
+.navbar{
+
+    height:75px;
+
+    background:white;
+
+    border-bottom:1px solid #e5e7eb;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:500;
+}
+
+
+/* Search */
+
+.search{
+
+    width:350px;
+
+    position:relative;
+}
+
+.search input{
+
+    width:100%;
+
+    height:42px;
+
+    border:1px solid #dce2ea;
+
+    border-radius:8px;
+
+    padding:0 15px 0 42px;
+
+    outline:none;
+
+    font-size:14px;
+
+    background:#f8fafc;
+}
+
+.search i{
+
+    position:absolute;
+
+    left:15px;
+
+    top:13px;
+
+    color:#7b8794;
+}
+
+
+/* Right navbar */
+
+.nav-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+
+/* Navbar icons */
+
+.nav-icon{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:8px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#475569;
+
+    text-decoration:none;
+
+    position:relative;
+
+    transition:.2s;
+}
+
+.nav-icon:hover{
+
+    background:#eef5ff;
+
+    color:#0b4f9c;
+}
+
+
+/* Notification badge */
+
+.badge{
+
+    position:absolute;
+
+    top:3px;
+
+    right:2px;
+
+    width:17px;
+
+    height:17px;
+
+    border-radius:50%;
+
+    background:#dc3545;
+
+    color:white;
+
+    font-size:9px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+/* User */
+
+.user-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding-left:10px;
+
+    border-left:1px solid #e5e7eb;
+}
+
+.user-avatar{
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:50%;
+
+    background:#0b4f9c;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:600;
+}
+
+.user-text{
+
+    line-height:1.25;
+}
+
+.user-text strong{
+
+    display:block;
+
+    font-size:13px;
+}
+
+.user-text small{
+
+    color:#7b8794;
+
+    font-size:11px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+
+    padding:30px;
+}
+
+
+/* Welcome */
+
+.welcome{
+
+    background:white;
+
+    padding:25px 28px;
+
+    border-radius:12px;
+
+    border:1px solid #e5e7eb;
+
+    margin-bottom:25px;
+}
+
+.welcome h1{
+
+    font-size:25px;
+
+    color:#123c68;
+
+    margin-bottom:6px;
+}
+
+.welcome p{
+
+    color:#718096;
+
+    font-size:14px;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:20px;
+
+    margin-bottom:25px;
+}
+
+.card{
+
+    background:white;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+    padding:22px;
+
+    transition:.25s;
+}
+
+.card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.07);
+}
+
+.card-icon{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:9px;
+
+    background:#eaf3ff;
+
+    color:#0b4f9c;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:19px;
+
+    margin-bottom:15px;
+}
+
+.card h2{
+
+    font-size:25px;
+
+    color:#172b4d;
+
+    margin-bottom:3px;
+}
+
+.card p{
+
+    font-size:13px;
+
+    color:#718096;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.section-grid{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:22px;
+}
+
+.table-box,
+.notice{
+
+    background:white;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+    padding:23px;
+}
+
+.table-box h2,
+.notice h3{
+
+    color:#123c68;
+
+    margin-bottom:18px;
+
+    font-size:18px;
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+th{
+
+    background:#f7f9fc;
+
+    color:#52606d;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    text-align:left;
+
+    padding:13px;
+}
+
+td{
+
+    padding:13px;
+
+    border-top:1px solid #edf0f4;
+
+    font-size:13px;
+
+    color:#475569;
+}
+
+.status{
+
+    display:inline-block;
+
+    padding:5px 11px;
+
+    border-radius:20px;
+
+    font-size:11px;
+
+    font-weight:600;
+}
+
+.open{
+
+    background:#e6f7ed;
+
+    color:#198754;
+}
+
+.closed{
+
+    background:#fdeaea;
+
+    color:#dc3545;
+}
+
+
+/* Announcements */
+
+.notice ul{
+
+    list-style:none;
+}
+
+.notice li{
+
+    padding:13px 0;
+
+    border-bottom:1px solid #edf0f4;
+
+    font-size:13px;
+
+    color:#52606d;
+
+    line-height:1.5;
+}
+
+.notice li:last-child{
+
+    border-bottom:none;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.mobile-menu{
+
+    display:none;
+
+    border:none;
+
+    background:none;
+
+    font-size:21px;
+
+    color:#123c68;
+
+    cursor:pointer;
+}
+
+
+@media(max-width:1100px){
+
+    .cards{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .section-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:800px){
+
+    .sidebar{
+
+        transform:translateX(-100%);
+
+        transition:.3s;
+    }
+
+    .sidebar.show{
+
+        transform:translateX(0);
+    }
+
+    .main{
+
+        margin-left:0;
+    }
+
+    .mobile-menu{
+
+        display:block;
+    }
+
+    .navbar{
+
+        padding:0 15px;
+    }
+
+    .search{
+
+        display:none;
+    }
+
+    .user-text{
+
+        display:none;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .cards{
+
+        grid-template-columns:1fr;
+    }
+
+    .content{
+
+        padding:15px;
+    }
+
+    .navbar{
+
+        height:65px;
+    }
+
+    .welcome h1{
+
+        font-size:21px;
+    }
+
+    .table-box{
+
+        overflow-x:auto;
+    }
+
+    table{
+
+        min-width:650px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     SIDEBAR
+======================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <i class="fas fa-graduation-cap"></i>
+
+        <span>
+            CPMS<br>
+            <small>Placement Management</small>
+        </span>
+
+    </div>
+
+
+    <div class="menu">
+
+
+        <!-- =================================================
+             STUDENT SIDEBAR
+        ================================================== -->
+
+        {% if role == "student" %}
+
+        <div class="menu-title">
+            STUDENT
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="active">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+        <a href="{{ url_for('resumee') }}">
+            <i class="fas fa-file-lines"></i>
+            <span>Resume Creator</span>
+        </a>
+
+        <a href="{{ url_for('companies') }}">
+            <i class="fas fa-building"></i>
+            <span>Companies</span>
+        </a>
+
+        <a href="{{ url_for('placement_drives') }}">
+            <i class="fas fa-briefcase"></i>
+            <span>Placement Drives</span>
+        </a>
+
+        <a href="{{ url_for('applications') }}">
+            <i class="fas fa-file-signature"></i>
+            <span>Applications</span>
+        </a>
+
+        <a href="{{ url_for('interviewss') }}">
+            <i class="fas fa-calendar-check"></i>
+            <span>Interviews</span>
+        </a>
+
+        <a href="{{ url_for('results') }}">
+            <i class="fas fa-trophy"></i>
+            <span>Results</span>
+        </a>
+
+
+        <div class="menu-title">
+            ASSESSMENTS & AI
+        </div>
+
+        <a href="{{ url_for('aptitude') }}">
+            <i class="fas fa-brain"></i>
+            <span>Aptitude Test</span>
+        </a>
+
+        <a href="{{ url_for('skill') }}">
+            <i class="fas fa-bullseye"></i>
+            <span>Skill Assessment</span>
+        </a>
+
+
+        <div class="menu-title">
+            SUPPORT
+        </div>
+
+        <a href="{{ url_for('help') }}">
+            <i class="fas fa-circle-question"></i>
+            <span>Help</span>
+        </a>
+
+        <a href="{{ url_for('about') }}">
+            <i class="fas fa-circle-info"></i>
+            <span>About</span>
+        </a>
+
+        <a href="{{ url_for('logout') }}" class="logout-link">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+
+        <!-- =================================================
+             ADMIN SIDEBAR
+        ================================================== -->
+
+        {% elif role == "admin" %}
+
+        <div class="menu-title">
+            ADMINISTRATOR
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="active">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+
+        <div class="menu-title">
+            MANAGEMENT
+        </div>
+
+        <a href="{{ url_for('student_management') }}">
+            <i class="fas fa-users"></i>
+            <span>Student Management</span>
+        </a>
+
+        <a href="{{ url_for('user_management') }}">
+            <i class="fas fa-user-shield"></i>
+            <span>User Management</span>
+        </a>
+
+        <a href="{{ url_for('company_management') }}">
+            <i class="fas fa-building"></i>
+            <span>Company Management</span>
+        </a>
+
+        <a href="{{ url_for('drive_management') }}">
+            <i class="fas fa-briefcase"></i>
+            <span>Drive Management</span>
+        </a>
+
+        <a href="{{ url_for('applications') }}">
+            <i class="fas fa-file-signature"></i>
+            <span>Application Management</span>
+        </a>
+
+        <a href="{{ url_for('interviewss') }}">
+            <i class="fas fa-calendar-check"></i>
+            <span>Interview Management</span>
+        </a>
+
+        <a href="{{ url_for('results') }}">
+            <i class="fas fa-trophy"></i>
+            <span>Results Management</span>
+        </a>
+
+
+        <div class="menu-title">
+            ANALYTICS
+        </div>
+
+        <a href="{{ url_for('reports_analytics') }}">
+            <i class="fas fa-chart-line"></i>
+            <span>Analytics & Reports</span>
+        </a>
+
+
+        <div class="menu-title">
+            SYSTEM
+        </div>
+
+        <a href="{{ url_for('help') }}">
+            <i class="fas fa-circle-question"></i>
+            <span>Help</span>
+        </a>
+
+        <a href="{{ url_for('about') }}">
+            <i class="fas fa-circle-info"></i>
+            <span>About</span>
+        </a>
+
+        <a href="{{ url_for('logout') }}" class="logout-link">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+
+        <!-- =================================================
+             CDPC SIDEBAR
+        ================================================== -->
+
+        {% elif role == "cdpc" %}
+
+        <div class="menu-title">
+            CDPC
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="active">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+
+        <div class="menu-title">
+            MANAGEMENT
+        </div>
+
+        <a href="{{ url_for('student_management') }}">
+            <i class="fas fa-users"></i>
+            <span>Student Management</span>
+        </a>
+
+        <a href="{{ url_for('company_management') }}">
+            <i class="fas fa-building"></i>
+            <span>Company Management</span>
+        </a>
+
+        <a href="{{ url_for('drive_management') }}">
+            <i class="fas fa-briefcase"></i>
+            <span>Drive Management</span>
+        </a>
+
+        <a href="{{ url_for('applications') }}">
+            <i class="fas fa-file-signature"></i>
+            <span>Application Management</span>
+        </a>
+
+        <a href="{{ url_for('interviewss') }}">
+            <i class="fas fa-calendar-check"></i>
+            <span>Interview Management</span>
+        </a>
+
+        <a href="{{ url_for('results') }}">
+            <i class="fas fa-trophy"></i>
+            <span>Results Management</span>
+        </a>
+
+
+        <div class="menu-title">
+            ANALYTICS
+        </div>
+
+        <a href="{{ url_for('reports_analytics') }}">
+            <i class="fas fa-chart-pie"></i>
+            <span>Analytics & Reports</span>
+        </a>
+
+
+        <div class="menu-title">
+            SUPPORT
+        </div>
+
+        <a href="{{ url_for('help') }}">
+            <i class="fas fa-circle-question"></i>
+            <span>Help</span>
+        </a>
+
+        <a href="{{ url_for('about') }}">
+            <i class="fas fa-circle-info"></i>
+            <span>About</span>
+        </a>
+
+        <a href="{{ url_for('logout') }}" class="logout-link">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+
+        <!-- =================================================
+             COMPANY SIDEBAR
+        ================================================== -->
+
+        {% elif role == "company" %}
+
+        <div class="menu-title">
+            COMPANY
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="active">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+
+        <div class="menu-title">
+            PLACEMENT
+
+        </div>
+
+        <a href="{{ url_for('placement_drives') }}">
+            <i class="fas fa-briefcase"></i>
+            <span>Placement Drives</span>
+        </a>
+
+        <a href="{{ url_for('applications') }}">
+            <i class="fas fa-users"></i>
+            <span>Applicants</span>
+        </a>
+
+        <a href="{{ url_for('interviewss') }}">
+            <i class="fas fa-calendar-check"></i>
+            <span>Interviews</span>
+        </a>
+
+        <a href="{{ url_for('results') }}">
+            <i class="fas fa-trophy"></i>
+            <span>Results</span>
+        </a>
+
+
+        <div class="menu-title">
+            SUPPORT
+        </div>
+
+        <a href="{{ url_for('help') }}">
+            <i class="fas fa-circle-question"></i>
+            <span>Help</span>
+        </a>
+
+        <a href="{{ url_for('about') }}">
+            <i class="fas fa-circle-info"></i>
+            <span>About</span>
+        </a>
+
+        <a href="{{ url_for('logout') }}" class="logout-link">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</aside>
+
+
+<!-- =======================================================
+     MAIN
+======================================================== -->
+
+<main class="main">
+
+
+    <!-- ===================================================
+         NAVBAR
+    ==================================================== -->
+
+    <nav class="navbar">
+
+        <button
+            class="mobile-menu"
+            onclick="toggleSidebar()">
+
+            <i class="fas fa-bars"></i>
+
+        </button>
+
+
+        <div class="search">
+
+            <i class="fas fa-search"></i>
+
+            <input
+                type="text"
+                placeholder="Search..."
+                id="searchInput"
+            >
+
+        </div>
+
+
+        <div class="nav-right">
+
+
+            <!-- Notifications -->
+
+            <a
+                href="#"
+                class="nav-icon"
+                title="Notifications">
+
+                <i class="fas fa-bell"></i>
+
+                <span class="badge">
+                    3
+                </span>
+
+            </a>
+
+
+            <!-- Settings -->
+
+            <a
+                href="#"
+                class="nav-icon"
+                title="Settings">
+
+                <i class="fas fa-gear"></i>
+
+            </a>
+
+
+            <!-- User -->
+
+            <a
+                href="{{ url_for('profile') }}"
+                class="user-info"
+                style="text-decoration:none;color:inherit;">
+
+                <div class="user-avatar">
+
+                    {{ session.get("full_name", "U")[0]|upper }}
+
+                </div>
+
+                <div class="user-text">
+
+                    <strong>
+                        {{ session.get("full_name", "User") }}
+                    </strong>
+
+                    <small>
+
+                        {% if role == "student" %}
+                            Student
+                        {% elif role == "admin" %}
+                            Administrator
+                        {% elif role == "cdpc" %}
+                            CDPC
+                        {% elif role == "company" %}
+                            Company
+                        {% endif %}
+
+                    </small>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ===================================================
+         DASHBOARD CONTENT
+    ==================================================== -->
+
+    <div class="content">
+
+
+        <!-- =================================================
+             STUDENT DASHBOARD
+        ================================================== -->
+
+        {% if role == "student" %}
+
+        <div class="welcome">
+
+            <h1>
+                Student Placement Dashboard
+            </h1>
+
+            <p>
+                Welcome, {{ session.get("full_name") }}.
+                Manage your placement activities from here.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">
                     <i class="fas fa-building"></i>
-                    <h2>35</h2>
-                    <p>Companies Visited</p>
                 </div>
 
-                <div class="card">
-                    <i class="fas fa-file-alt"></i>
-                    <h2>18</h2>
-                    <p>Applications Sent</p>
-                </div>
+                <h2>
+                    {{ stats.companies }}
+                </h2>
 
-                <div class="card">
-                    <i class="fas fa-calendar-check"></i>
-                    <h2>6</h2>
-                    <p>Upcoming Interviews</p>
-                </div>
-
-                <div class="card">
-                    <i class="fas fa-award"></i>
-                    <h2>2</h2>
-                    <p>Job Offers</p>
-                </div>
+                <p>
+                    Companies Available
+                </p>
 
             </div>
 
-            <!-- Company Table -->
-            <div class="section">
 
-                <div class="table-box">
+            <div class="card">
 
-                    <h2 style="margin-bottom:20px;color:#0d6efd;">Latest Placement Drives</h2>
-
-                    <table>
-
-                        <tr>
-                            <th>Company</th>
-                            <th>Role</th>
-                            <th>Package</th>
-                            <th>Last Date</th>
-                            <th>Status</th>
-                        </tr>
-
-                        <tr>
-                            <td>TCS</td>
-                            <td>Software Engineer</td>
-                            <td>₹4.5 LPA</td>
-                            <td>10 Aug 2026</td>
-                            <td><span class="status open">Open</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Infosys</td>
-                            <td>System Engineer</td>
-                            <td>₹5 LPA</td>
-                            <td>12 Aug 2026</td>
-                            <td><span class="status open">Open</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Wipro</td>
-                            <td>Developer</td>
-                            <td>₹6 LPA</td>
-                            <td>15 Aug 2026</td>
-                            <td><span class="status open">Open</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Accenture</td>
-                            <td>Associate Engineer</td>
-                            <td>₹4.8 LPA</td>
-                            <td>30 Jul 2026</td>
-                            <td><span class="status closed">Closed</span></td>
-                        </tr>
-
-                    </table>
-
+                <div class="card-icon">
+                    <i class="fas fa-file-signature"></i>
                 </div>
 
-                <!-- Announcement -->
-                <div class="notice">
+                <h2>
+                    {{ stats.applications }}
+                </h2>
 
-                    <h3>Latest Announcements</h3>
+                <p>
+                    Applications
+                </p>
 
-                    <ul>
-                        <li>📢 TCS recruitment registration closes on <b>10 August 2026</b>.</li>
-                        <li>📢 Infosys online assessment starts next week.</li>
-                        <li>📢 Students must update their profile before applying.</li>
-                        <li>📢 Placement orientation will be held in Seminar Hall on Monday.</li>
-                    </ul>
+            </div>
 
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-calendar-check"></i>
                 </div>
+
+                <h2>
+                    {{ stats.interviews }}
+                </h2>
+
+                <p>
+                    Interviews
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+
+                <h2>
+                    {{ stats.offers }}
+                </h2>
+
+                <p>
+                    Job Offers
+                </p>
 
             </div>
 
         </div>
-        <!-- End Dashboard Content -->
+
+
+        <div class="section-grid">
+
+            <div class="table-box">
+
+                <h2>
+                    Latest Placement Drives
+                </h2>
+
+                <table>
+
+                    <tr>
+                        <th>Company</th>
+                        <th>Role</th>
+                        <th>Package</th>
+                        <th>Status</th>
+                    </tr>
+
+                    <tr>
+                        <td>TCS</td>
+                        <td>Software Engineer</td>
+                        <td>₹4.5 LPA</td>
+                        <td>
+                            <span class="status open">
+                                Open
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Infosys</td>
+                        <td>System Engineer</td>
+                        <td>₹5 LPA</td>
+                        <td>
+                            <span class="status open">
+                                Open
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Wipro</td>
+                        <td>Developer</td>
+                        <td>₹6 LPA</td>
+                        <td>
+                            <span class="status open">
+                                Open
+                            </span>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+
+            <div class="notice">
+
+                <h3>
+                    Latest Announcements
+                </h3>
+
+                <ul>
+
+                    <li>
+                        📢 Update your profile before applying.
+                    </li>
+
+                    <li>
+                        📢 New placement drives are available.
+                    </li>
+
+                    <li>
+                        📢 Check upcoming interview schedules.
+                    </li>
+
+                    <li>
+                        📢 Complete your skill assessment.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ADMIN DASHBOARD
+        ================================================== -->
+
+        {% elif role == "admin" %}
+
+        <div class="welcome">
+
+            <h1>
+                Administrator Dashboard
+            </h1>
+
+            <p>
+                Welcome, {{ session.get("full_name") }}.
+                Manage the complete placement management system.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+
+                <h2>
+                    {{ stats.companies }}
+                </h2>
+
+                <p>
+                    Companies
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+
+                <h2>
+                    {{ stats.applications }}
+                </h2>
+
+                <p>
+                    Applications
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+
+                <h2>
+                    {{ stats.interviews }}
+                </h2>
+
+                <p>
+                    Interviews
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+
+                <h2>
+                    {{ stats.offers }}
+                </h2>
+
+                <p>
+                    Offers
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="section-grid">
+
+            <div class="table-box">
+
+                <h2>
+                    System Overview
+                </h2>
+
+                <table>
+
+                    <tr>
+                        <th>Module</th>
+                        <th>Status</th>
+                    </tr>
+
+                    <tr>
+                        <td>Student Management</td>
+                        <td>
+                            <span class="status open">
+                                Active
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Company Management</td>
+                        <td>
+                            <span class="status open">
+                                Active
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Placement Drives</td>
+                        <td>
+                            <span class="status open">
+                                Active
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Reports & Analytics</td>
+                        <td>
+                            <span class="status open">
+                                Active
+                            </span>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+
+            <div class="notice">
+
+                <h3>
+                    Administrator Notices
+                </h3>
+
+                <ul>
+
+                    <li>
+                        📢 Review placement statistics.
+                    </li>
+
+                    <li>
+                        📢 Manage registered users.
+                    </li>
+
+                    <li>
+                        📢 Monitor placement drives.
+                    </li>
+
+                    <li>
+                        📢 Generate placement reports.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CDPC DASHBOARD
+        ================================================== -->
+
+        {% elif role == "cdpc" %}
+
+        <div class="welcome">
+
+            <h1>
+                CDPC Dashboard
+            </h1>
+
+            <p>
+                Welcome, {{ session.get("full_name") }}.
+                Manage students, companies and placement activities.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+
+                <h2>
+                    {{ stats.companies }}
+                </h2>
+
+                <p>
+                    Companies
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+
+                <h2>
+                    {{ stats.applications }}
+                </h2>
+
+                <p>
+                    Applications
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+
+                <h2>
+                    {{ stats.interviews }}
+                </h2>
+
+                <p>
+                    Interviews
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+
+                <h2>
+                    {{ stats.offers }}
+                </h2>
+
+                <p>
+                    Offers
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="section-grid">
+
+            <div class="table-box">
+
+                <h2>
+                    Placement Management
+                </h2>
+
+                <table>
+
+                    <tr>
+                        <th>Module</th>
+                        <th>Action</th>
+                    </tr>
+
+                    <tr>
+                        <td>Students</td>
+                        <td>
+                            <span class="status open">
+                                Manage
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Companies</td>
+                        <td>
+                            <span class="status open">
+                                Manage
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Placement Drives</td>
+                        <td>
+                            <span class="status open">
+                                Manage
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Applications</td>
+                        <td>
+                            <span class="status open">
+                                Manage
+                            </span>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+
+            <div class="notice">
+
+                <h3>
+                    CDPC Announcements
+                </h3>
+
+                <ul>
+
+                    <li>
+                        📢 Verify student applications.
+                    </li>
+
+                    <li>
+                        📢 Coordinate upcoming drives.
+                    </li>
+
+                    <li>
+                        📢 Monitor interview schedules.
+                    </li>
+
+                    <li>
+                        📢 Update placement results.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             COMPANY DASHBOARD
+        ================================================== -->
+
+        {% elif role == "company" %}
+
+        <div class="welcome">
+
+            <h1>
+                Company Dashboard
+            </h1>
+
+            <p>
+                Welcome, {{ session.get("full_name") }}.
+                Manage your recruitment activities.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+
+                <h2>
+                    {{ stats.companies }}
+                </h2>
+
+                <p>
+                    Placement Drives
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+
+                <h2>
+                    {{ stats.applications }}
+                </h2>
+
+                <p>
+                    Applicants
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+
+                <h2>
+                    {{ stats.interviews }}
+                </h2>
+
+                <p>
+                    Interviews
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+
+                <h2>
+                    {{ stats.offers }}
+                </h2>
+
+                <p>
+                    Selected Students
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="section-grid">
+
+            <div class="table-box">
+
+                <h2>
+                    Recruitment Overview
+                </h2>
+
+                <table>
+
+                    <tr>
+                        <th>Module</th>
+                        <th>Status</th>
+                    </tr>
+
+                    <tr>
+                        <td>Placement Drives</td>
+                        <td>
+                            <span class="status open">
+                                Active
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Applicants</td>
+                        <td>
+                            <span class="status open">
+                                Available
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Interviews</td>
+                        <td>
+                            <span class="status open">
+                                Scheduled
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Results</td>
+                        <td>
+                            <span class="status open">
+                                Manage
+                            </span>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+
+            <div class="notice">
+
+                <h3>
+                    Company Announcements
+                </h3>
+
+                <ul>
+
+                    <li>
+                        📢 Review shortlisted applicants.
+                    </li>
+
+                    <li>
+                        📢 Schedule interviews.
+                    </li>
+
+                    <li>
+                        📢 Update interview feedback.
+                    </li>
+
+                    <li>
+                        📢 Publish recruitment results.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList
+        .toggle("show");
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+const searchInput =
+    document.getElementById("searchInput");
+
+if(searchInput){
+
+    searchInput.addEventListener(
+        "keyup",
+        function(){
+
+            const value =
+                this.value.toLowerCase();
+
+            const links =
+                document.querySelectorAll(
+                    ".menu a"
+                );
+
+            links.forEach(
+                function(link){
+
+                    const text =
+                        link.innerText.toLowerCase();
+
+                    if(text.includes(value)){
+
+                        link.style.display =
+                            "flex";
+
+                    }else{
+
+                        link.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>
+

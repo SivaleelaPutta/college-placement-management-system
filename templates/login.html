@@ -1,493 +1,293 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>RGUKT Placement Management System</title>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
-}
-
-body{
-
-background:#eef3fb;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-padding:30px;
-
-}
-
-.container{
-width:1200px;
-max-width:100%;
-background:white;
-display:flex;
-border-radius:24px;
-overflow:hidden;
-box-shadow:
-0 25px 60px rgba(0,0,0,.18);
-animation:fadeUp .7s ease;
-}
-
-.left{
-    flex:1;
-    padding:60px;
-    background:
-        linear-gradient(rgba(5,45,115,.72), rgba(5,45,115,.72)),
-        url("{{ url_for('static', filename='images/rgukt-campus.jpg') }}");
-
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-
-    color:white;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.logo{
-width:160px;
-height:160px;
-background:white;
-padding:1px;
-border-radius:50%;
-box-shadow:0 10px 30px rgba(0,0,0,.35);
-margin-bottom:30px;
-}
-
-.left h1{
-font-size:60px;
-font-weight:700;
-letter-spacing:2px;
-margin-bottom:10px;
-}
-
-.left h2{
-font-size:30px;
-font-weight:500;
-margin-bottom:22px;
-opacity:.95;
-}
-
-.left hr{
-
-width:70%;
-margin-bottom:25px;
-
-}
-
-.left p{
-
-font-size:20px;
-line-height:1.8;
 
-}
+    <meta charset="UTF-8">
 
-.right{
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-flex:1;
-padding:60px;
+    <title>CPMS - Login</title>
 
-}
+    <style>
 
-.right h1{
+        * {
+            box-sizing: border-box;
+        }
 
-text-align:center;
-color:#0d2c7c;
-font-size:42px;
-margin-bottom:10px;
+        body {
+            margin: 0;
 
-}
+            min-height: 100vh;
 
-.subtitle{
+            background: #f4f7fb;
 
-text-align:center;
-color:#666;
-margin-bottom:35px;
+            font-family: Arial, sans-serif;
 
-}
+            display: flex;
 
-label{
-font-weight:600;
-display:block;
-margin-bottom:8px;
-margin-top:20px;
-}
+            align-items: center;
 
-.input-box{
-    display:flex;
-    align-items:center;
-    border:2px solid #d8dce5;
-    border-radius:14px;
-    padding:15px;
-    transition:.3s;
-    background:white;
-}
+            justify-content: center;
 
-.input-box:focus-within{
-    border-color:#1565ff;
-    box-shadow:0 0 18px rgba(21,101,255,.18);
-}
+            padding: 20px;
+        }
 
-.input-box i{
-    color:#666;
-}
+        .login-box {
+            width: 430px;
 
-.input-box input{
-    width:100%;
-    border:none;
-    outline:none;
-    padding-left:12px;
-    font-size:16px;
-    background:transparent;
-}
+            max-width: 100%;
 
-.eye{
+            background: white;
 
-cursor:pointer;
+            padding: 35px;
 
-}
+            border-radius: 15px;
 
-.options{
+            box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+        }
 
-display:flex;
-justify-content:space-between;
-margin:20px 0;
+        h1 {
+            text-align: center;
 
-}
+            color: #123f73;
 
-.options a{
+            margin-bottom: 8px;
+        }
 
-text-decoration:none;
-color:#1565ff;
-font-weight:bold;
+        .subtitle {
+            text-align: center;
 
-}
+            color: #6b7280;
 
-.login{
-    width:100%;
-    padding:16px;
-    border:none;
-    border-radius:14px;
+            margin-bottom: 25px;
+        }
 
-    background:linear-gradient(90deg,#1565ff,#0d6efd);
+        label {
+            display: block;
 
-    color:white;
-    font-size:18px;
-    font-weight:600;
+            margin-top: 15px;
 
-    cursor:pointer;
+            margin-bottom: 7px;
 
-    transition:.35s;
-}
+            font-weight: 600;
 
-.login:hover{
+            color: #374151;
+        }
 
-    transform:translateY(-3px);
+        input,
+        select {
+            width: 100%;
 
-    box-shadow:0 12px 30px rgba(21,101,255,.35);
+            padding: 12px;
 
-    background:linear-gradient(90deg,#004fd1,#1565ff);
+            border: 1px solid #d1d5db;
 
-}
+            border-radius: 7px;
 
-.or{
+            font-size: 14px;
+        }
 
-text-align:center;
-margin:25px 0;
-font-weight:bold;
-color:#888;
+        input:focus,
+        select:focus {
+            outline: none;
 
-}
+            border-color: #164b87;
+        }
 
-.google{
+        button {
+            width: 100%;
 
-width:100%;
-padding:15px;
-border:2px solid #1565ff;
-border-radius:12px;
-background:white;
-cursor:pointer;
-font-size:18px;
-display:flex;
-justify-content:center;
-align-items:center;
-gap:12px;
+            margin-top: 25px;
 
-}
+            padding: 13px;
 
-.google img{
+            background: #164b87;
 
-width:25px;
+            color: white;
 
-}
+            border: none;
 
-.bottom{
+            border-radius: 7px;
 
-text-align:center;
-margin-top:30px;
+            font-size: 15px;
 
-}
+            font-weight: bold;
 
-.bottom a{
+            cursor: pointer;
+        }
 
-color:#1565ff;
-text-decoration:none;
-font-weight:bold;
+        button:hover {
+            background: #103961;
+        }
 
-}
+        .message {
+            padding: 10px;
 
-footer{
+            margin-bottom: 15px;
 
-margin-top:20px;
-text-align:center;
-color:#666;
+            border-radius: 6px;
 
-}
+            background: #fff3cd;
 
-@media(max-width:900px){
+            color: #664d03;
 
-.container{
+            font-size: 14px;
+        }
 
-flex-direction:column;
+        .bottom {
+            text-align: center;
 
-}
+            margin-top: 20px;
 
-.left{
+            color: #6b7280;
 
-text-align:center;
+            font-size: 14px;
+        }
 
-}
+        .bottom a {
+            color: #164b87;
 
-.logo{
+            text-decoration: none;
 
-margin:auto auto 25px;
+            font-weight: bold;
+        }
 
-}
+        .back {
+            display: block;
 
-.left hr{
+            text-align: center;
 
-margin:auto;
-margin-top:20px;
-margin-bottom:20px;
+            margin-top: 15px;
 
-}
+            color: #6b7280;
 
-}
+            text-decoration: none;
 
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(40px);
-}
+            font-size: 14px;
+        }
 
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-.selected-role {
-    width: fit-content;
-    margin: 0 auto 18px;
-    padding: 8px 14px;
-
-    background: #edf4ff;
-    color: #0d6efd;
-
-    border-radius: 20px;
-
-    font-size: 13px;
-    font-weight: 600;
-
-    display : flex;
-    align-items: center;
-    gap: 8px;
-}
-
-
-</style>
+    </style>
 
 </head>
 
 <body>
 
+<div class="login-box">
+
+    <h1>
+        Welcome Back
+    </h1>
+
+    <p class="subtitle">
+        College Placement Management System
+    </p>
 
 
-<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
 
-<div class="left">
+        {% if messages %}
 
-<img src="{{ url_for('static', filename='images/new-logo.png') }}" class="logo">
+            {% for category, message in messages %}
 
-<h1>RGUKT</h1>
+                <div class="message">
+                    {{ message }}
+                </div>
 
-<h2>Placement Management System</h2>
+            {% endfor %}
 
-<hr>
+        {% endif %}
 
-<p>
-
-Empowering students through innovation,
-opportunities, and career excellence.
-Access your placement portal securely.
-
-</p>
-
-</div>
-
-<div class="right">
-
-<div class="selected-role" id="selectedRole">
-    <i class="fas fa-user-graduate"></i>
-    <span><center>Student Login</center></span>
-</div>
-
-<h1>Welcome Back!</h1>
-
-<p class="subtitle">
-
-Login to continue to your dashboard
-
-</p>
-
-<form action="{{ url_for('login') }}" method="POST">
-
-<input type="hidden" name="role" value="{{ selected_role|default('student') }}">
-
-<label>Email / Roll Number</label>
-
-<div class="input-box">
-
-<i class="fa-solid fa-user"></i>
-
-<input
-type="text"
-placeholder="Enter Email or Roll Number" required
-oninvalid="this.setCustomValidity('Please enter your Email.')"
-oninput="this.setCustomValidity('')">
-
-</div>
-
-<label>Password</label>
-
-<div class="input-box">
-
-<i class="fa-solid fa-lock"></i>
-
-<input
-type="password"
-id="password"
-placeholder="Enter Password" required
-oninvalid="this.setCustomValidity('Please enter your Password.')"
-oninput="this.setCustomValidity('')">
-
-<i
-class="fa-solid fa-eye eye"
-id="toggle"></i>
-
-</div>
-
-<div class="options">
-
-<label>
-
-<input type="checkbox">
-
-Remember me
-
-</label>
-
-<a href="#">Forgot Password?</a>
-
-</div>
+    {% endwith %}
 
 
-
-<button type="submit" class= "login">
-    Login
-</button>
+    <form action="{{ url_for('login') }}"
+          method="POST">
 
 
-<div class="or">
+        <label>
+            Email
+        </label>
 
-OR
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
 
-</div>
 
-<button
-type="button"
-class="google">
+        <label>
+            Password
+        </label>
 
-<img src="{{ url_for('static', filename='images/google.png') }}">
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+        >
 
-Continue with Google
 
-</button>
+        <label>
+            Account Type
+        </label>
 
-<p class="bottom">
+        <select name="role" required>
 
-New User?
+            <option value="">
+                Select Account Type
+            </option>
 
-<a href="{{ url_for('register') }}">Create an Account</a>
+            <option value="student">
+                Student
+            </option>
 
-</p>
+            <option value="admin">
+                Admin
+            </option>
 
-</form>
+            <option value="cdpc">
+                CDPC
+            </option>
+
+            <option value="company">
+                Company
+            </option>
+
+        </select>
+
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+
+    <div class="bottom">
+
+        Don't have an account?
+
+        <a href="{{ url_for('register') }}">
+            Register
+        </a>
+
+    </div>
+
+
+    <a class="back"
+       href="{{ url_for('landing') }}">
+
+        ← Back to Home
+
+    </a>
 
 </div>
-
-</div>
-
-<script>
-    const selectedRole = "{{ selected_role|default('student') }}";
-
-    const roleDetails = {
-        student: {
-            icon: "fa-user-graduate",
-            text: "Student Login"
-        },
-
-        cdpc: {
-            icon: "fa-building-columns",
-            text: "CDPC Login"
-        },
-
-        admin: {
-            icon: "fa-user-shield",
-            text: "Administrator Login"
-        },
-
-        company: {
-            icon: "fa-industry",
-            text: "Company Login"
-        }
-    };
-
-    const role = roleDetails[selectedRole] || roleDetails.student;
-
-    const roleContainer = document.getElementById("selectedRole");
-
-    roleContainer.innerHTML = `
-        <i class="fas ${role.icon}"></i>
-        <span>${role.text}</span>
-    `;
-</script>
-
 
 </body>
+
 </html>
+

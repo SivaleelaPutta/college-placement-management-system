@@ -1,1031 +1,927 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>College Placement Management System - Dashboard</title>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+<title>College Placement Management System</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
 body{
-    background:#f4f7fc;
-    display:flex;
-    overflow-x:hidden;
-}
-/* navicon for settings */
-
-.nav-icon{
-    position:relative;
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    background:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-decoration:none;
-    transition:.35s;
-    border:2px solid #e5e7eb;
+    background:#f4f7fb;
+    color:#172033;
 }
 
-.nav-icon i{
-    font-size:15px;
-    color:#0d6efd;
-    transition:.35s;
-}
-
-.nav-icon:hover{
-    background:#0d6efd;
-    transform:rotate(90deg) scale(1.08);
-    box-shadow:
-        0 0 15px rgba(13,110,253,.45),
-        0 0 30px rgba(13,110,253,.25);
-}
-
-.nav-icon:hover i{
-    color:white;
-}
-
-/* notification */
-
-.notification-icon:hover{
-    transform:scale(1.04);
-}
-
-.notification-icon:hover i{
-    color:white;
-}
-
-.nav-badge{
-    position:absolute;
-    top:-5px;
-    right:-5px;
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:#ff3b30;
-    color:white;
-    font-size:10px;
-    font-weight:600;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border:2px solid white;
-}
-
-/* Sidebar */
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
 .sidebar{
-width:250px;
-height:100vh;
-background:#0d6efd;
-color:white;
-position:fixed;
-left:0;
-top:0;
-padding-top:20px;
-overflow-y: auto;
-overflow-x: hidden;
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+
+    background:#0b3d91;
+    color:white;
+
+    overflow-y:auto;
+    z-index:1000;
+
+    box-shadow:4px 0 18px rgba(0,0,0,.08);
 }
 
-.sidebar::-webkit-scrollbar {
-    width: 6px;
-}
-
-.sidebar::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.35);
-    border-radius: 10px;
-}
-
-.sidebar::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.6);
-}
-
-.sidebar a {
-    white-space: nowrap;
-}
-
-.sidebar h2{
-text-align:center;
-margin-bottom:30px;
-font-size:22px;
-}
-
-/* Sidebar Menu Container */
-.sidebar ul {
-    list-style: none;
-    padding: 0 12px;
-}
-
-/* Sidebar Item Base State */
-.sidebar ul li {
-    position: relative;
-    margin: 4px 0;
-    padding: 0 !important; /* Move padding to <a> so entire box is clickable */
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-/* Make <a> tag expand to full size of the box */
-.sidebar ul li a {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    width: 100% !important;
-    height: 100% !important;
-    padding: 10px 14px !important; /* Gives the click area full inner space */
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.2px !important;
-    text-decoration: none !important;
-    color: rgba(255, 255, 255, 0.88) !important;
-    border-radius: 8px;
-    transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-/* FIX: Icon Alignment */
-.sidebar ul li a i {
-    font-size: 16px !important;
-    min-width: 20px !important; /* Prevents icon from shrinking on long text */
-    width: 20px !important;
-    display: inline-flex !important; /* Guarantees flex centering inside the icon box */
-    align-items: center !important;
-    justify-content: center !important;
-    line-height: 1 !important; /* Removes font line-height spacing offsets */
-    color: rgba(255, 255, 255, 0.88) !important;
-    transition: color 0.2s ease;
-}
-
-/* Hover State */
-.sidebar ul li:hover {
-    background: #ffffff !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar ul li:hover a,
-.sidebar ul li:hover a i {
-    color: #0d6efd !important;
-    font-weight: 600 !important;
-}
-
-/* Active State */
-.sidebar ul li.active {
-    background: #ffffff !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar ul li.active a,
-.sidebar ul li.active a i {
-    color: #0d6efd !important;
-    font-weight: 600 !important;
-}
-
-/* =========================
-   SIDEBAR BRAND (FIXED FOR 250PX)
-   ========================= */
-
-.sidebar .sidebar-brand {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    padding: 10px 18px 16px 12px;
-    margin-bottom: 0;
-
-    width: 100%;
-}
-
-
-/* RGUKT Logo */
-.sidebar .sidebar-brand img {
-    width: 60px !important;
-    height: 60px !important;
-
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-
-/* Brand Text */
-.sidebar .brand-text {
-    display: flex;
-    flex-direction: column;
-
-    line-height: 1.1;
-    white-space: nowrap;
-}
-
-
-/* RGUKT Title */
-.sidebar .brand-text span:first-child {
-    font-size: 25px !important;
-    font-weight: 800;
-
-    color: white;
-    letter-spacing: 0.5px;
-}
-
-
-/* Placement Portal Subtitle */
-.sidebar .brand-text span:last-child {
-    font-size: 14px !important;
-    font-weight: 500;
-
-    color: rgba(255, 255, 255, 0.95);
-    margin-top: 2px;
-}
-
-/* Horizontal Line Separator */
-.sidebar-divider {
-    border: 0;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.25);
-    margin: 0 15px 18px 15px;
-}
-
-/* ============================= */
-/* SIDEBAR SECTION TITLES */
-/* ============================= */
-
-.sidebar-section-title {
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    letter-spacing: 1.2px !important;
-    color: rgba(255, 255, 255, 0.6) !important;
-    text-transform: uppercase;
-    padding: 16px 14px 6px 14px !important;
-    margin: 0 !important;
-}
-
-
-/* First section title */
-.sidebar-section-title:first-of-type {
-    margin-top: 5px;
-}
-
-
-/* Space before ADMIN / TPO */
-.sidebar-section-title:not(:first-of-type) {
-    margin-top: 30px;
-    padding-top: 20px;
-
-    border-top: 1px solid rgba(255,255,255,0.20);
-
-    margin-left: 30px;
-    margin-right: 20px;
-}
-
-
-/* Prevent any hover-style behavior */
-.sidebar-section-title:hover {
-    background: none;
-    transform: none;
-    box-shadow: none;
-    color: rgba(255,255,255,0.75);
-}
-
-/* Main Content */
-
-.main{
-    margin-left:250px;
-    width:calc(100% - 250px);
-    min-height:100vh;
-    flex:1;
+.logo{
+    height:75px;
     display:flex;
-    flex-direction:column;
-}
-
-/* Navbar */
-
-.navbar{
-    width:100%;
-    height:70px;
-    background:white;
-    display:flex;
-    justify-content:space-between;
     align-items:center;
-    padding:0 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Boosted shadow visibility */
-    position: relative; /* Fixes stacking order */
-    z-index: 100;       /* Ensures shadow sits above content area */
+
+    padding:0 22px;
+
+    border-bottom:1px solid rgba(255,255,255,.15);
 }
 
-.search-box{
-    position:relative;
-    width:320px;
+.logo i{
+    font-size:25px;
+    margin-right:12px;
 }
 
-.search{
-    width:100%;
+.logo span{
+    font-size:17px;
+    font-weight:700;
+    line-height:1.25;
+}
+
+.user-box{
+    padding:20px;
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.user-box .avatar{
+    width:45px;
     height:45px;
-    padding:0 18px 0 48px;
-    border:2px solid #d9e2f1;
-    border-radius:30px;
-    outline:none;
-    font-size:15px;
-    transition:.35s;
+
+    border-radius:50%;
+
     background:white;
-}
+    color:#0b3d91;
 
-.search-box i{
-    position:absolute;
-    left:18px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#0d6efd;
-    font-size:16px;
-    transition:.35s;
-    pointer-events:none;
-}
-
-.search:focus{
-    border-color:#0d6efd;
-    box-shadow:0 0 15px rgba(13,110,253,.25);
-}
-
-.search-box:focus-within i{
-    color:#0d6efd;
-    transform:translateY(-50%) scale(1.2) rotate(-10deg);
-    text-shadow:0 0 12px rgba(13,110,253,.6);
-}
-
-.profile-section{
     display:flex;
     align-items:center;
-    gap:15px;
-}
+    justify-content:center;
 
+    font-weight:700;
+    font-size:18px;
 
-.user-info{
-    display:flex;
-    flex-direction:column;
-    text-align:right;
+    margin-bottom:10px;
 }
 
 .user-name{
-    font-size:15px;
     font-weight:600;
-    color:#333;
+    font-size:14px;
 }
 
 .user-role{
     font-size:12px;
-    color:#777;
+    opacity:.75;
+    margin-top:3px;
 }
 
-.profile-pic{
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    object-fit:cover;
-    border:3px solid #0d6efd;
-    cursor:pointer;
-    transition:0.3s;
+/* =========================================================
+   MENU
+========================================================= */
+
+.menu-title{
+    font-size:11px;
+    font-weight:600;
+
+    color:rgba(255,255,255,.55);
+
+    padding:20px 20px 8px;
+
+    letter-spacing:.8px;
 }
 
-.profile-pic:hover{
-    transform:scale(1.08);
-    box-shadow:0 5px 15px rgba(13,110,253,0.3);
+/* IMPORTANT:
+   Only the actual menu link is clickable.
+*/
+
+.menu-link{
+    display:flex;
+    align-items:center;
+
+    margin:4px 12px;
+
+    padding:11px 13px;
+
+    color:white;
+    text-decoration:none;
+
+    border-radius:8px;
+
+    font-size:13px;
+    font-weight:500;
+
+    transition:.2s;
 }
 
-/* Welcome */
-
-.welcome{
-padding:30px;
+.menu-link i{
+    width:25px;
+    font-size:15px;
 }
 
-.welcome h1{
-color:#0d6efd;
-margin-bottom:8px;
+.menu-link:hover{
+    background:rgba(255,255,255,.12);
 }
 
-/* Cards */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-    padding:0 30px;
+.menu-link.active{
+    background:white;
+    color:#0b3d91;
+    font-weight:600;
 }
 
-.card{
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-border-top:4px solid #0d6efd;
-transition:.3s;
+.logout-link{
+    margin-bottom:20px;
 }
 
-.card:hover{
-transform:translateY(-5px);
-}
-
-.card i{
-font-size:35px;
-color:#0d6efd;
-margin-bottom:15px;
-}
-
-.card h2{
-margin:10px 0;
-color:#222;
-}
-
-.card p{
-color:#666;
-}
-
-/* Table */
-
-.section{
-padding:30px;
-}
-
-.table-box{
-background:white;
-border-radius:12px;
-padding:20px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-overflow-x:auto;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-table th{
-background:#0d6efd;
-color:white;
-padding:14px;
-}
-
-table td{
-padding:14px;
-text-align:center;
-border-bottom:1px solid #ddd;
-}
-
-.status{
-padding:6px 15px;
-border-radius:20px;
-color:white;
-font-size:13px;
-font-weight:600;
-}
-
-.open{
-background:#198754;
-}
-
-.closed{
-background:#dc3545;
-}
-
-/* Announcement */
-
-.notice{
-background:white;
-padding:20px;
-border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-margin-top:25px;
-}
-
-.notice h3{
-margin-bottom:15px;
-color:#0d6efd;
-}
-
-.notice ul{
-padding-left:20px;
-}
-
-.notice li{
-margin:10px 0;
-}
-
-/* Responsive */
-
-@media(max-width:768px){
-
-    .sidebar {
-        width: 250px;
-        height: 100vh;
-        background: #0d6efd;
-        color: white;
-        position: fixed;
-        left: 0;
-        top: 0;
-        padding-top: 20px;
-    }
-
-    .main {
-        margin-left: 250px;
-        width: calc(100% - 250px);
-        min-height: 100vh;
-    }
-
-    .search{
-        width:180px;
-    }
-
-}
-
-
-
-
-@media(max-width:600px){
-
-.sidebar{
-display:none;
-}
-
-
+/* =========================================================
+   MAIN
+========================================================= */
 
 .main{
-margin-left:0;
-width:100%;
+    margin-left:260px;
+    min-height:100vh;
 }
 
+/* =========================================================
+   NAVBAR
+========================================================= */
+
 .navbar{
-flex-direction:column;
-height:auto;
-padding:15px;
-gap:10px;
+    height:75px;
+
+    background:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    border-bottom:1px solid #e6eaf0;
+
+    position:sticky;
+    top:0;
+    z-index:900;
 }
 
 .search{
-width:100%;
+    width:350px;
+    max-width:45%;
+
+    position:relative;
 }
 
+.search input{
+    width:100%;
+
+    height:40px;
+
+    padding:0 15px 0 42px;
+
+    border:1px solid #dce2ea;
+
+    border-radius:8px;
+
+    outline:none;
+
+    font-size:13px;
+
+    background:#f8fafc;
 }
 
-</style> 
+.search i{
+    position:absolute;
 
+    left:15px;
+    top:12px;
+
+    color:#7c8798;
+
+    font-size:14px;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.nav-icon{
+    width:38px;
+    height:38px;
+
+    border-radius:8px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#536174;
+
+    text-decoration:none;
+
+    transition:.2s;
+
+    position:relative;
+}
+
+.nav-icon:hover{
+    background:#eef4ff;
+    color:#0d6efd;
+}
+
+.notification-dot{
+    position:absolute;
+
+    top:6px;
+    right:6px;
+
+    width:7px;
+    height:7px;
+
+    background:#dc3545;
+
+    border-radius:50%;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+    padding:30px;
+}
+
+/* =========================================================
+   FLASH MESSAGES
+========================================================= */
+
+.flash{
+    padding:12px 16px;
+    margin-bottom:20px;
+
+    border-radius:8px;
+
+    font-size:13px;
+}
+
+.flash.success{
+    background:#e8f7ef;
+    color:#146c43;
+}
+
+.flash.error{
+    background:#fdecec;
+    color:#b02a37;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.mobile-menu{
+    display:none;
+
+    border:none;
+    background:none;
+
+    font-size:21px;
+
+    color:#172033;
+
+    cursor:pointer;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .sidebar{
+        left:-260px;
+        transition:.25s;
+    }
+
+    .sidebar.show{
+        left:0;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .navbar{
+        padding:0 18px;
+    }
+
+    .search{
+        display:none;
+    }
+
+    .content{
+        padding:20px;
+    }
+}
+
+</style>
 
 </head>
 
 <body>
 
-<!-- Sidebar -->
 
-<div class="sidebar">
+<!-- ========================================================
+     SIDEBAR
+========================================================= -->
 
-   <div class="sidebar-brand">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="RGUKT Logo">
+<aside class="sidebar" id="sidebar">
 
-        <div class="brand-text">
-            <span>RGUKT</span>
-            <span>Placement Portal</span>
+    <div class="logo">
+
+        <i class="fas fa-graduation-cap"></i>
+
+        <span>
+            College Placement<br>
+            Management System
+        </span>
+
+    </div>
+
+
+    <!-- USER -->
+
+    <div class="user-box">
+
+        <div class="avatar">
+
+            {% if session.get('full_name') %}
+                {{ session.get('full_name')[0]|upper }}
+            {% else %}
+                U
+            {% endif %}
+
         </div>
-    </div>
-    
-    <!-- Horizontal Line Separator -->
-    <hr class="sidebar-divider">
 
-    <ul>
+        <div class="user-name">
+            {{ session.get('full_name', 'User') }}
+        </div>
 
-    <!-- ================= STUDENT ================= -->
-    {% if user_role == 'student' %}
+        <div class="user-role">
 
-    <div class="sidebar-section-title">
-        STUDENT SECTION
-    </div>
+            {% if session.get('role') == 'student' %}
+                Student
+            {% elif session.get('role') == 'company' %}
+                Company
+            {% elif session.get('role') == 'cdpc' %}
+                CDPC
+            {% elif session.get('role') == 'admin' %}
+                Administrator
+            {% else %}
+                User
+            {% endif %}
 
-    <li class="{{ 'active' if page == 'dashboard.html' else '' }}">
-        <a href="{{ url_for('student_dashboard') }}">
-            <i class="fas fa-home"></i>
-            Dashboard
-        </a>
-    </li>
+        </div>
 
-    <li class="{{ 'active' if page == 'resume.html' else '' }}">
-        <a href="{{ url_for('resumee') }}">
-            <i class="fas fa-file-signature"></i>
-            Resume Creator
-        </a>
-    </li>
-
-    <li class="{{ 'active' if page == 'companies.html' else '' }}">
-        <a href="{{ url_for('companies') }}">
-            <i class="fas fa-building"></i>
-            Companies
-        </a>
-    </li>
-
-    <li class="{{ 'active' if page == 'placement_drives.html' else '' }}">
-        <a href="{{ url_for('placement_drives') }}">
-            <i class="fas fa-briefcase"></i>
-            Placement Drives
-        </a>
-    </li>
-
-    <li class="{{ 'active' if page == 'applications.html' else '' }}">
-        <a href="{{ url_for('applications') }}">
-            <i class="fas fa-file-alt"></i>
-            Applications
-        </a>
-    </li>
-
-    <li class="{{ 'active' if page == 'interviews.html' else '' }}">
-        <a href="{{ url_for('interviewss') }}">
-            <i class="fas fa-calendar-check"></i>
-            Interviews
-        </a>
-    </li>
-
-    <li class="{{ 'active' if page == 'results.html' else '' }}">
-        <a href="{{ url_for('results') }}">
-            <i class="fas fa-chart-bar"></i>
-            Results
-        </a>
-    </li>
-
-
-    <!-- ================= RESOURCES ================= -->
-
-    <div class="sidebar-section-title">
-        RESOURCES
     </div>
 
-    <li>
-        <a href="{{ url_for('aptitude') }}">
-            <i class="fas fa-brain"></i>
-            Aptitude Test
-        </a>
-    </li>
 
-    <li>
-        <a href="{{ url_for('skill') }}">
-            <i class="fas fa-bullseye"></i>
-            Skill Assessment
-        </a>
-    </li>
+    <!-- ====================================================
+         STUDENT MENU
+    ===================================================== -->
 
-    <li>
-        <a href="{{ url_for('resume_bp.resume_home') }}">
-            <i class="fas fa-robot"></i>
-            Resume Analyzer
-        </a>
-    </li>
+    {% if session.get('role') == 'student' %}
 
-    <li>
-        <a href="{{ url_for('help') }}">
-            <i class="fas fa-question-circle"></i>
-            Help
-        </a>
-    </li>
+        <div class="menu-title">
+            STUDENT
+        </div>
 
-    <li>
-        <a href="{{ url_for('about') }}">
-            <i class="fas fa-info-circle"></i>
-            About
-        </a>
-    </li>
-
-
-    <!-- ================= ACCOUNT ================= -->
-
-    <div class="sidebar-section-title">
-        ACCOUNT
-    </div>
-
-    <li>
-        <a href="{{ url_for('logout') }}">
-            <i class="fas fa-sign-out-alt"></i>
-            Logout
-        </a>
-    </li>
-
-
-    <!-- ================= CDPC ================= -->
-
-    {% elif user_role == 'cdpc' %}
-
-    <div class="sidebar-section-title">
-        CDPC MANAGEMENT
-    </div>
-
-    <li class="{{ 'active' if page == 'cdpc_dashboard.html' else '' }}">
-        <a href="{{ url_for('cdpc_dashboard') }}">
-            <i class="fas fa-home"></i>
-            Dashboard
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('student_management') }}">
-            <i class="fas fa-user-graduate"></i>
-            Student Management
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('company_management') }}">
-            <i class="fas fa-building"></i>
-            Company Management
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('drive_management') }}">
-            <i class="fas fa-briefcase"></i>
-            Drive Management
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('interview_management') }}">
-            <i class="fas fa-calendar-check"></i>
-            Interview Management
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('reports_analytics') }}">
-            <i class="fas fa-chart-line"></i>
-            Reports & Analytics
-        </a>
-    </li>
-
-
-    <div class="sidebar-section-title">
-        RESOURCES
-    </div>
-
-    <li>
-        <a href="{{ url_for('help') }}">
-            <i class="fas fa-question-circle"></i>
-            Help
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('about') }}">
-            <i class="fas fa-info-circle"></i>
-            About
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('logout') }}">
-            <i class="fas fa-sign-out-alt"></i>
-            Logout
-        </a>
-    </li>
-
-
-    <!-- ================= ADMIN ================= -->
-
-    {% elif user_role == 'admin' %}
-
-    
-
-    <li class="{{ 'active' if page == 'admin_dashboard.html' else '' }}">
-        <a href="{{ url_for('admin_dashboard') }}">
+        <a href="{{ url_for('dashboard') }}"
+           class="menu-link {% if page == 'dashboard.html' %}active{% endif %}">
             <i class="fas fa-home"></i>
             <span>Dashboard</span>
         </a>
-    </li>
 
-    <li>
-        <a href="{{ url_for('student_management') }}">
-            <i class="fas fa-user-graduate"></i>
-            <span>Student Management</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('company_management') }}">
-            <i class="fas fa-building"></i>
-            <span>Company Management</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('drive_management') }}">
-            <i class="fas fa-briefcase"></i>
-            <span>Drive Management</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('interview_management') }}">
-            <i class="fas fa-calendar-check"></i>
-            <span>Interview Management</span>
-        </a>
-    </li>
-
-     <li>
-        <a href="{{ url_for('reports_analytics') }}">
-            <i class="fas fa-chart-line"></i>
-            <span>Reports & Analytics</span>
-        </a>
-    </li>
-
-    <div class="sidebar-section-title">
-        ADMINISTRATION
-    </div>
-  
-    <li>
-        <a href="{{ url_for('user_management') }}">
-            <i class="fas fa-users"></i>
-            <span>User Management</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('staff_management') }}">
-            <i class="fas fa-user-tie"></i>
-            <span>Staff Management</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('department_management') }}">
-            <i class="fas fa-sitemap"></i>
-            <span>Dept Management</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('system_reports') }}">
-            <i class="fas fa-chart-bar"></i>
-            <span>System Reports</span>
-        </a>
-    </li>
-
-    <div class="sidebar-section-title">
-        RESOURCES
-    </div>
-
-    <li>
-        <a href="{{ url_for('help') }}">
-            <i class="fas fa-question-circle"></i>
-            <span>Help</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('about') }}">
-            <i class="fas fa-info-circle"></i>
-            <span>About</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('logout') }}">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Logout</span>
-        </a>
-    </li>
-
-
-    <!-- ================= COMPANY ================= -->
-
-    {% elif user_role == 'company' %}
-
-    <div class="sidebar-section-title">
-        COMPANY
-    </div>
-
-    <li class="{{ 'active' if page == 'company_dashboard.html' else '' }}">
-        <a href="{{ url_for('company_dashboard') }}">
-            <i class="fas fa-home"></i>
-            Dashboard
-        </a>
-    </li>
-
-    <li>
-        <a href="#">
-            <i class="fas fa-briefcase"></i>
-            Placement Drives
-        </a>
-    </li>
-
-    <li>
-        <a href="#">
-            <i class="fas fa-user-graduate"></i>
-            Available Students
-        </a>
-    </li>
-
-    <li>
-        <a href="#">
+        <a href="{{ url_for('resumee') }}"
+           class="menu-link">
             <i class="fas fa-file-alt"></i>
-            Applications
+            <span>Resume Creator</span>
         </a>
-    </li>
 
-    <li>
-        <a href="#">
-            <i class="fas fa-user-check"></i>
-            Shortlisted Students
+        <a href="{{ url_for('companies') }}"
+           class="menu-link">
+            <i class="fas fa-building"></i>
+            <span>Companies</span>
         </a>
-    </li>
 
-
-    <div class="sidebar-section-title">
-        RESOURCES
-    </div>
-
-    <li>
-        <a href="{{ url_for('help') }}">
-            <i class="fas fa-question-circle"></i>
-            Help
+        <a href="{{ url_for('placement_drives') }}"
+           class="menu-link">
+            <i class="fas fa-briefcase"></i>
+            <span>Placement Drives</span>
         </a>
-    </li>
 
-    <li>
-        <a href="{{ url_for('about') }}">
-            <i class="fas fa-info-circle"></i>
-            Aboutt
+        <a href="{{ url_for('applications') }}"
+           class="menu-link">
+            <i class="fas fa-file-signature"></i>
+            <span>Applications</span>
         </a>
-    </li>
 
-    <li>
-        <a href="{{ url_for('logout') }}">
-            <i class="fas fa-sign-out-alt"></i>
-            Logout
+        <a href="{{ url_for('interviewss') }}"
+           class="menu-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Interviews</span>
         </a>
-    </li>
+
+        <a href="{{ url_for('results') }}"
+           class="menu-link">
+            <i class="fas fa-award"></i>
+            <span>Results</span>
+        </a>
+
+
+        <div class="menu-title">
+            ASSESSMENTS & AI
+        </div>
+
+        <a href="{{ url_for('aptitude') }}"
+           class="menu-link">
+            <i class="fas fa-brain"></i>
+            <span>Aptitude Test</span>
+        </a>
+
+        <a href="{{ url_for('skill') }}"
+           class="menu-link">
+            <i class="fas fa-bullseye"></i>
+            <span>Skill Assessment</span>
+        </a>
+
+
+        <div class="menu-title">
+            ACCOUNT
+        </div>
+
+        <a href="{{ url_for('profile') }}"
+           class="menu-link {% if page == 'profile.html' %}active{% endif %}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
 
     {% endif %}
 
-</ul>
 
-</div>
+    <!-- ====================================================
+         COMPANY MENU
+    ===================================================== -->
 
-<!-- Main -->
-<div class="main">
+    {% if session.get('role') == 'company' %}
 
-    <!-- Navbar -->
-    <div class="navbar">
-
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search ..." class="search">
+        <div class="menu-title">
+            COMPANY
         </div>
 
-        <div class="profile-section">
+        <a href="{{ url_for('dashboard') }}"
+           class="menu-link {% if page == 'company_dashboard.html' %}active{% endif %}">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
 
-            <a href="#" class="nav-icon notification-icon">
-                <i class="fas fa-bell"></i>
-                <span class="nav-badge">3</span>
-            </a>
+        <a href="{{ url_for('companies') }}"
+           class="menu-link">
+            <i class="fas fa-users"></i>
+            <span>Students</span>
+        </a>
 
-            <a href="#" class="nav-icon">
-                <i class="fas fa-cog"></i>
-            </a>
+        <a href="{{ url_for('placement_drives') }}"
+           class="menu-link">
+            <i class="fas fa-briefcase"></i>
+            <span>Placement Drives</span>
+        </a>
 
-            <div class="user-info">
-                <span class="user-name">{{ profile.name if profile else 'Showri Sudeep' }}</span>
-                <span class="user-role">{{ user_role|default('Student') }}</span>
-            </div>
+        <a href="{{ url_for('applications') }}"
+           class="menu-link">
+            <i class="fas fa-users-viewfinder"></i>
+            <span>Applicants</span>
+        </a>
 
-            
-           <a href="{{ url_for('profile') }}">
-                <img src="{{ url_for('static', filename='images/ME.png') }}"
-                class="profile-pic">
-           </a>
+        <a href="{{ url_for('interviewss') }}"
+           class="menu-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Interviews</span>
+        </a>
+
+        <a href="{{ url_for('results') }}"
+           class="menu-link">
+            <i class="fas fa-award"></i>
+            <span>Results</span>
+        </a>
+
+
+        <div class="menu-title">
+            ACCOUNT
         </div>
 
+        <a href="{{ url_for('profile') }}"
+           class="menu-link {% if page == 'profile.html' %}active{% endif %}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         CDPC MENU
+    ===================================================== -->
+
+    {% if session.get('role') == 'cdpc' %}
+
+        <div class="menu-title">
+            MANAGEMENT
+        </div>
+
+        <a href="{{ url_for('dashboard') }}"
+           class="menu-link {% if page == 'admin_dashboard.html' %}active{% endif %}">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ url_for('student_management') }}"
+           class="menu-link">
+            <i class="fas fa-user-graduate"></i>
+            <span>Student Management</span>
+        </a>
+
+        <a href="{{ url_for('company_management') }}"
+           class="menu-link">
+            <i class="fas fa-building"></i>
+            <span>Company Management</span>
+        </a>
+
+        <a href="{{ url_for('drive_management') }}"
+           class="menu-link">
+            <i class="fas fa-briefcase"></i>
+            <span>Drive Management</span>
+        </a>
+
+        <a href="{{ url_for('applications') }}"
+           class="menu-link">
+            <i class="fas fa-file-signature"></i>
+            <span>Application Management</span>
+        </a>
+
+        <a href="{{ url_for('interviewss') }}"
+           class="menu-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Interview Management</span>
+        </a>
+
+        <a href="{{ url_for('results') }}"
+           class="menu-link">
+            <i class="fas fa-award"></i>
+            <span>Results Management</span>
+        </a>
+
+
+        <div class="menu-title">
+            ANALYTICS
+        </div>
+
+        <a href="{{ url_for('reports_analytics') }}"
+           class="menu-link">
+            <i class="fas fa-chart-line"></i>
+            <span>Analytics & Reports</span>
+        </a>
+
+
+        <div class="menu-title">
+            ACCOUNT
+        </div>
+
+        <a href="{{ url_for('profile') }}"
+           class="menu-link {% if page == 'profile.html' %}active{% endif %}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         ADMIN MENU
+    ===================================================== -->
+
+    {% if session.get('role') == 'admin' %}
+
+        <div class="menu-title">
+            MANAGEMENT
+        </div>
+
+        <a href="{{ url_for('dashboard') }}"
+           class="menu-link {% if page == 'admin_dashboard.html' %}active{% endif %}">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ url_for('student_management') }}"
+           class="menu-link">
+            <i class="fas fa-user-graduate"></i>
+            <span>Student Management</span>
+        </a>
+
+        <a href="{{ url_for('company_management') }}"
+           class="menu-link">
+            <i class="fas fa-building"></i>
+            <span>Company Management</span>
+        </a>
+
+        <a href="{{ url_for('drive_management') }}"
+           class="menu-link">
+            <i class="fas fa-briefcase"></i>
+            <span>Drive Management</span>
+        </a>
+
+        <a href="{{ url_for('applications') }}"
+           class="menu-link">
+            <i class="fas fa-file-signature"></i>
+            <span>Application Management</span>
+        </a>
+
+        <a href="{{ url_for('interviewss') }}"
+           class="menu-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Interview Management</span>
+        </a>
+
+        <a href="{{ url_for('results') }}"
+           class="menu-link">
+            <i class="fas fa-award"></i>
+            <span>Results Management</span>
+        </a>
+
+
+        <div class="menu-title">
+            SYSTEM
+        </div>
+
+        <a href="{{ url_for('reports_analytics') }}"
+           class="menu-link">
+            <i class="fas fa-chart-line"></i>
+            <span>Analytics & Reports</span>
+        </a>
+
+
+        <div class="menu-title">
+            ACCOUNT
+        </div>
+
+        <a href="{{ url_for('profile') }}"
+           class="menu-link {% if page == 'profile.html' %}active{% endif %}">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         SUPPORT
+    ===================================================== -->
+
+    <div class="menu-title">
+        SUPPORT
     </div>
 
-    <!-- Content Area -->
-    <div id="contentArea">
+    <a href="{{ url_for('help') }}"
+       class="menu-link">
+        <i class="fas fa-circle-question"></i>
+        <span>Help</span>
+    </a>
+
+    <a href="{{ url_for('about') }}"
+       class="menu-link">
+        <i class="fas fa-circle-info"></i>
+        <span>About</span>
+    </a>
+
+    <a href="{{ url_for('logout') }}"
+       class="menu-link logout-link">
+        <i class="fas fa-right-from-bracket"></i>
+        <span>Logout</span>
+    </a>
+
+</aside>
+
+
+<!-- ========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<main class="main">
+
+
+    <!-- ====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <nav class="navbar">
+
+        <button class="mobile-menu"
+                onclick="toggleSidebar()">
+
+            <i class="fas fa-bars"></i>
+
+        </button>
+
+
+        <div class="search">
+
+            <i class="fas fa-search"></i>
+
+            <input
+                type="text"
+                placeholder="Search..."
+                id="searchInput"
+            >
+
+        </div>
+
+
+        <div class="nav-right">
+
+            <a href="{{ url_for('help') }}"
+               class="nav-icon"
+               title="Help">
+
+                <i class="fas fa-circle-question"></i>
+
+            </a>
+
+
+            <a href="{{ url_for('profile') }}"
+               class="nav-icon"
+               title="Profile">
+
+                <i class="fas fa-user"></i>
+
+            </a>
+
+
+            <a href="{{ url_for('logout') }}"
+               class="nav-icon"
+               title="Logout">
+
+                <i class="fas fa-right-from-bracket"></i>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ====================================================
+         PAGE CONTENT
+    ===================================================== -->
+
+    <section class="content">
+
+
+        <!-- FLASH MESSAGES -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="flash {{ category }}">
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- =================================================
+             DYNAMIC PAGE
+        ================================================== -->
 
         {% if page %}
+
             {% include page %}
+
         {% endif %}
 
-</div>
-<!-- End Main -->
+
+    </section>
+
+</main>
 
 
+<!-- ========================================================
+     JAVASCRIPT
+========================================================= -->
 
+<script>
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("show");
+
+}
+
+
+/* Close mobile sidebar after clicking an actual link */
+
+document.querySelectorAll(".menu-link").forEach(function(link){
+
+    link.addEventListener("click", function(){
+
+        document
+            .getElementById("sidebar")
+            .classList.remove("show");
+
+    });
+
+});
+
+
+/* Search */
+
+const searchInput =
+    document.getElementById("searchInput");
+
+if(searchInput){
+
+    searchInput.addEventListener("keyup", function(){
+
+        const value =
+            this.value.toLowerCase();
+
+        const links =
+            document.querySelectorAll(".menu-link");
+
+        links.forEach(function(link){
+
+            const text =
+                link.innerText.toLowerCase();
+
+            if(value === "" || text.includes(value)){
+
+                link.style.display = "flex";
+
+            }else{
+
+                link.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+}
+
+</script>
 
 </body>
 </html>
+

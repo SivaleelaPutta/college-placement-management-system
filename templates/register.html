@@ -1,365 +1,632 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RGUKT Placement Portal - Registration</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CPMS - Registration</title>
 
     <style>
+
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background: #eef2f7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0;
+
             min-height: 100vh;
-            padding: 20px;
+
+            background: #f4f7fb;
+
+            font-family: Arial, sans-serif;
+
+            display: flex;
+
+            justify-content: center;
+
+            padding: 30px 15px;
         }
 
-        /* Expanded container dimensions */
-        .auth-container {
-            display: flex;
-            width: 1200px;
-            max-width: 95%;
-            min-height: 620px;
+        .register-box {
+            width: 650px;
+
+            max-width: 100%;
+
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 10px 35px rgba(0,0,0,0.08);
         }
 
-        /* Left Side Panel */
-        .brand-section {
-            width: 40%;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: white;
-            padding: 50px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
+        h1 {
             text-align: center;
-            position: relative;
+
+            color: #123f73;
+
+            margin-bottom: 8px;
         }
 
-        .brand-top {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .subtitle {
+            text-align: center;
+
+            color: #6b7280;
+
+            margin-bottom: 25px;
         }
 
-        .brand-logo {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            background: white;
-            padding: 6px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 25px rgba(13, 110, 253, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        /* Larger emblem inside fixed ring */
-        .brand-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transform: scale(1.3);
-        }
-
-        .brand-title {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .brand-subtitle {
-            font-size: 15px;
-            opacity: 0.85;
-            margin-bottom: 20px;
-        }
-
-        /* Feature Badges */
-        .feature-pills {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .pill {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 12px 18px;
-            border-radius: 12px;
-            font-size: 13.5px;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            color: #e2e8f0;
-        }
-
-        .pill i {
-            color: #38bdf8;
-            font-size: 16px;
-        }
-
-        /* Right Side: Form Panel */
-        .form-section {
-            width: 60%;
-            padding: 50px 55px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .form-header {
-            margin-bottom: 30px;
-        }
-
-        .form-header h2 {
-            font-size: 28px;
-            color: #0f172a;
-            font-weight: 700;
-        }
-
-        .form-header p {
-            color: #64748b;
-            font-size: 14px;
-            margin-top: 4px;
-        }
-
-        /* 2-Column Form Grid */
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 4px;
-        }
-
-        .form-group.full-width {
-            grid-column: span 2;
-        }
-
-        .form-group label {
+        label {
             display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #334155;
+
+            margin-top: 14px;
+
             margin-bottom: 6px;
+
+            font-weight: 600;
+
+            color: #374151;
         }
 
-        .input-box {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .input-box i {
-            position: absolute;
-            left: 16px;
-            color: #0d6efd;
-            font-size: 15px;
-        }
-
-        .input-box input, .input-box select {
+        input,
+        select,
+        textarea {
             width: 100%;
-            height: 48px;
-            padding: 0 16px 0 44px;
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
+
+            padding: 11px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+        }
+
+        textarea {
+            min-height: 90px;
+
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
             outline: none;
-            font-size: 14px;
-            transition: 0.3s;
-            background: #fff;
+
+            border-color: #164b87;
         }
 
-        .input-box input:focus, .input-box select:focus {
-            border-color: #0d6efd;
-            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
-        }
-
-        .btn-submit {
-            grid-column: span 2;
-            width: 100%;
-            height: 48px;
-            background: #0d6efd;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 15.5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-
-        .btn-submit:hover {
-            background: #0284c7;
-            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
-        }
-
-        .auth-footer {
-            text-align: center;
+        .section {
             margin-top: 25px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .section h2 {
+            color: #164b87;
+
+            font-size: 18px;
+
+            margin-bottom: 5px;
+        }
+
+        .student-fields,
+        .company-fields {
+            display: none;
+        }
+
+        button {
+            width: 100%;
+
+            margin-top: 28px;
+
+            padding: 13px;
+
+            background: #164b87;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #103961;
+        }
+
+        .message {
+            padding: 10px;
+
+            margin-bottom: 15px;
+
+            border-radius: 6px;
+
+            background: #fff3cd;
+
+            color: #664d03;
+
             font-size: 14px;
-            color: #64748b;
         }
 
-        .auth-footer a {
-            color: #0d6efd;
+        .bottom {
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+        .bottom a {
+            color: #164b87;
+
             text-decoration: none;
-            font-weight: 600;
+
+            font-weight: bold;
         }
 
-        .auth-footer a:hover {
-            text-decoration: underline;
+        .row {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 15px;
         }
 
-        @media (max-width: 850px) {
-            .auth-container {
-                flex-direction: column;
-            }
-            .brand-section, .form-section {
-                width: 100%;
-                padding: 35px 25px;
-            }
-            .form-grid {
+        @media(max-width:600px) {
+
+            .row {
                 grid-template-columns: 1fr;
             }
-            .form-group.full-width {
-                grid-column: span 1;
-            }
-            .btn-submit {
-                grid-column: span 1;
+
+            .register-box {
+                padding: 25px 18px;
             }
         }
+
     </style>
+
 </head>
+
 <body>
 
-    <div class="auth-container">
-        
-        <!-- Left Section -->
-        <div class="brand-section">
-            <div class="brand-top">
-                <div class="brand-logo">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="RGUKT Logo">
-                </div>
-                <h1 class="brand-title">RGUKT</h1>
-                <p class="brand-subtitle">Placement Portal</p>
-            </div>
+<div class="register-box">
 
-            <div class="feature-pills">
-                <div class="pill">
-                    <i class="fas fa-id-badge"></i>
-                    <span>Student Profile Setup</span>
-                </div>
-                <div class="pill">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Apply for Drive Notifications</span>
-                </div>
-                <div class="pill">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Track Real-time Application Status</span>
-                </div>
-            </div>
+    <h1>
+        Create Account
+    </h1>
 
-            <p style="font-size: 12px; opacity: 0.6; margin-top: 20px;">
-                Placement Cell © RGUKT
-            </p>
+    <p class="subtitle">
+        College Placement Management System
+    </p>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+                <div class="message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    <form
+        action="{{ url_for('register') }}"
+        method="POST"
+    >
+
+
+        <!-- ================================================= -->
+        <!-- COMMON DETAILS -->
+        <!-- ================================================= -->
+
+        <div class="section">
+
+            <h2>
+                Account Information
+            </h2>
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                name="full_name"
+                placeholder="Enter full name"
+                required
+            >
+
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter email"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Minimum 6 characters"
+                minlength="6"
+                required
+            >
+
+
+            <label>
+                Account Type
+            </label>
+
+            <select
+                name="role"
+                id="role"
+                required
+                onchange="showFields()"
+            >
+
+                <option value="">
+                    Select Account Type
+                </option>
+
+                <option value="student">
+                    Student
+                </option>
+
+                <option value="admin">
+                    Admin
+                </option>
+
+                <option value="cdpc">
+                    CDPC
+                </option>
+
+                <option value="company">
+                    Company
+                </option>
+
+            </select>
+
         </div>
 
-        <!-- Right Section -->
-        <div class="form-section">
-            <div class="form-header">
-                <h2>New Student Registration</h2>
-                <p>Fill in your details to create your placement account</p>
-            </div>
 
-            <form action="{{ url_for('register') }}" method="POST">
-                <div class="form-grid">
-                    
-                    <!-- Full Name -->
-                    <div class="form-group">
-                        <label for="fullName">Full Name</label>
-                        <div class="input-box">
-                            <i class="fas fa-user"></i>
-                            <input type="text" id="fullName" name="name" placeholder="Full name" required>
-                        </div>
+        <!-- ================================================= -->
+        <!-- STUDENT DETAILS -->
+        <!-- ================================================= -->
+
+        <div
+            id="studentFields"
+            class="student-fields"
+        >
+
+            <div class="section">
+
+                <h2>
+                    Student Information
+                </h2>
+
+
+                <div class="row">
+
+                    <div>
+
+                        <label>
+                            Roll Number
+                        </label>
+
+                        <input
+                            type="text"
+                            name="roll_number"
+                            placeholder="Enter roll number"
+                        >
+
                     </div>
 
-                    <!-- Roll Number -->
-                    <div class="form-group">
-                        <label for="roll">Roll Number</label>
-                        <div class="input-box">
-                            <i class="fas fa-id-card"></i>
-                            <input type="text" id="roll" name="roll" placeholder="e.g. O200001" required>
-                        </div>
+
+                    <div>
+
+                        <label>
+                            Branch
+                        </label>
+
+                        <input
+                            type="text"
+                            name="branch"
+                            placeholder="CSE"
+                        >
+
                     </div>
 
-                    <!-- Department -->
-                    <div class="form-group">
-                        <label for="dept">Department</label>
-                        <div class="input-box">
-                            <i class="fas fa-graduation-cap"></i>
-                            <select id="dept" name="department" required>
-                                <option value="" disabled selected>Select Branch</option>
-                                <option value="CSE">CSE</option>
-                                <option value="ECE">ECE</option>
-                                <option value="EEE">EEE</option>
-                                <option value="MECH">MECH</option>
-                                <option value="CIVIL">CIVIL</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Campus Email -->
-                    <div class="form-group">
-                        <label for="email">Campus Email</label>
-                        <div class="input-box">
-                            <i class="fas fa-envelope"></i>
-                            <input type="email" id="email" name="email" placeholder="student@rgukto.ac.in" required>
-                        </div>
-                    </div>
-
-                    <!-- Password -->
-                    <div class="form-group full-width">
-                        <label for="password">Create Password</label>
-                        <div class="input-box">
-                            <i class="fas fa-lock"></i>
-                            <input type="password" id="password" name="password" placeholder="Minimum 6 characters" required>
-                        </div>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="btn-submit">Register Account</button>
                 </div>
-            </form>
 
-            <div class="auth-footer">
-                Already registered? <a href="{{ url_for('login') }}">Login here</a>
+
+                <div class="row">
+
+                    <div>
+
+                        <label>
+                            Year
+                        </label>
+
+                        <select name="year">
+
+                            <option value="">
+                                Select Year
+                            </option>
+
+                            <option value="1">
+                                1st Year
+                            </option>
+
+                            <option value="2">
+                                2nd Year
+                            </option>
+
+                            <option value="3">
+                                3rd Year
+                            </option>
+
+                            <option value="4">
+                                4th Year
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Phone
+                        </label>
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            placeholder="Enter phone number"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div>
+
+                        <label>
+                            Date of Birth
+                        </label>
+
+                        <input
+                            type="date"
+                            name="dob"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Gender
+                        </label>
+
+                        <select name="gender">
+
+                            <option value="">
+                                Select Gender
+                            </option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <label>
+                    Address
+                </label>
+
+                <textarea
+                    name="address"
+                    placeholder="Enter address"
+                ></textarea>
+
             </div>
+
         </div>
+
+
+        <!-- ================================================= -->
+        <!-- COMPANY DETAILS -->
+        <!-- ================================================= -->
+
+        <div
+            id="companyFields"
+            class="company-fields"
+        >
+
+            <div class="section">
+
+                <h2>
+                    Company Information
+                </h2>
+
+
+                <label>
+                    Company Name
+                </label>
+
+                <input
+                    type="text"
+                    name="company_name"
+                    placeholder="Enter company name"
+                >
+
+
+                <label>
+                    Industry
+                </label>
+
+                <input
+                    type="text"
+                    name="industry"
+                    placeholder="IT / Finance / Consulting"
+                >
+
+
+                <label>
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    name="location"
+                    placeholder="Company location"
+                >
+
+
+                <label>
+                    Website
+                </label>
+
+                <input
+                    type="url"
+                    name="website"
+                    placeholder="https://example.com"
+                >
+
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    name="description"
+                    placeholder="Describe your company"
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- SUBMIT -->
+        <!-- ================================================= -->
+
+        <button type="submit">
+
+            Create Account
+
+        </button>
+
+
+    </form>
+
+
+    <div class="bottom">
+
+        Already have an account?
+
+        <a href="{{ url_for('login') }}">
+            Login
+        </a>
 
     </div>
 
+</div>
+
+
+<script>
+
+function showFields() {
+
+    const role =
+        document.getElementById("role").value;
+
+    const student =
+        document.getElementById("studentFields");
+
+    const company =
+        document.getElementById("companyFields");
+
+
+    student.style.display = "none";
+
+    company.style.display = "none";
+
+
+    if (role === "student") {
+
+        student.style.display = "block";
+
+    }
+
+
+    if (role === "company") {
+
+        company.style.display = "block";
+
+    }
+
+}
+
+</script>
+
 </body>
+
 </html>
+
