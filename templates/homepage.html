@@ -38,70 +38,58 @@ body{
     width:260px;
     height:100vh;
 
-    background:#0b3d91;
+    background:#1673f9;
     color:white;
 
     overflow-y:auto;
     z-index:1000;
 
-    box-shadow:4px 0 18px rgba(0,0,0,.08);
+    box-shadow:4px 0 18px rgba(0,0,0,.12);
 }
 
 .logo{
-    height:75px;
+    height:105px;
+
     display:flex;
     align-items:center;
 
     padding:0 22px;
 
-    border-bottom:1px solid rgba(255,255,255,.15);
+    border-bottom:1px solid rgba(255,255,255,.18);
+
+    gap:12px;
 }
 
-.logo i{
-    font-size:25px;
-    margin-right:12px;
+.logo img{
+    width:44px;
+    height:44px;
+
+    object-fit:contain;
+
+    flex-shrink:0;
 }
 
 .logo span{
-    font-size:17px;
+    font-size:22px;
     font-weight:700;
-    line-height:1.25;
+
+    line-height:1.05;
+
+    color:white;
 }
 
-.user-box{
-    padding:20px;
-    border-bottom:1px solid rgba(255,255,255,.12);
+.logo span small{
+    display:block;
+
+    font-size:13px;
+
+    font-weight:500;
+
+    margin-top:4px;
+
+    color:white;
 }
 
-.user-box .avatar{
-    width:45px;
-    height:45px;
-
-    border-radius:50%;
-
-    background:white;
-    color:#0b3d91;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-weight:700;
-    font-size:18px;
-
-    margin-bottom:10px;
-}
-
-.user-name{
-    font-weight:600;
-    font-size:14px;
-}
-
-.user-role{
-    font-size:12px;
-    opacity:.75;
-    margin-top:3px;
-}
 
 /* =========================================================
    MENU
@@ -111,7 +99,7 @@ body{
     font-size:11px;
     font-weight:600;
 
-    color:rgba(255,255,255,.55);
+    color:rgba(255,255,255,.65);
 
     padding:20px 20px 8px;
 
@@ -121,6 +109,22 @@ body{
 /* IMPORTANT:
    Only the actual menu link is clickable.
 */
+
+/* =========================================================
+   MENU (OPTION 1: SOLID WHITE FLOATING PILL)
+========================================================= */
+
+.menu-title{
+    font-size:11px;
+    font-weight:600;
+    color:rgba(255,255,255,.65);
+    padding:20px 20px 8px;
+    letter-spacing:.8px;
+}
+
+/* =========================================================
+   MENU (MERGED VARIATION 3 WITH ORIGINAL TEXT & LAYOUT)
+========================================================= */
 
 .menu-link{
     display:flex;
@@ -141,19 +145,68 @@ body{
     transition:.2s;
 }
 
+.menu-link i,
+.menu-link span{
+    transition:transform 0.25s ease;
+}
+
 .menu-link i{
     width:25px;
     font-size:15px;
 }
 
+/* HOVER STATE: Floating white card with moving text & icon */
 .menu-link:hover{
-    background:rgba(255,255,255,.12);
+    background:#ffffff;
+
+    color:#1673f9;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
+.menu-link:hover span{
+    transform:translateX(5px);
+}
+
+.menu-link:hover i{
+    transform:translateX(2px) scale(1.08);
+}
+
+/* ACTIVE STATE */
 .menu-link.active{
-    background:white;
-    color:#0b3d91;
+    background:#ffffff;
+
+    color:#1673f9;
+
     font-weight:600;
+
+    transform:none;
+
+    box-shadow:0 4px 14px rgba(0, 0, 0, 0.15);
+
+    transition:.2s;
+}
+
+.menu-link.active span{
+    transform:translateX(4px);
+}
+
+.menu-link.active i{
+    transform:scale(1.05);
+}
+
+.menu-link.active:hover{
+    background:#ffffff;
+
+    color:#1673f9;
+
+    font-weight:600;
+
+    transform:none;
+
+    box-shadow:0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .logout-link{
@@ -166,7 +219,12 @@ body{
 
 .main{
     margin-left:260px;
+
     min-height:100vh;
+
+    width:calc(100% - 260px);
+
+    min-width:0;
 }
 
 /* =========================================================
@@ -175,16 +233,15 @@ body{
 
 .navbar{
     height:75px;
-
-    background:white;
-
+    background:#ffffff;
     display:flex;
     align-items:center;
     justify-content:space-between;
-
-    padding:0 30px;
-
-    border-bottom:1px solid #e6eaf0;
+    padding:0 35px;
+    
+    /* Soft elevation drop shadow matching second picture */
+    box-shadow:0 4px 20px rgba(0, 0, 0, 0.15);
+    border-bottom:none;
 
     position:sticky;
     top:0;
@@ -192,83 +249,136 @@ body{
 }
 
 .search{
-    width:350px;
+    width:360px;
     max-width:45%;
-
     position:relative;
 }
 
 .search input{
     width:100%;
-
-    height:40px;
-
+    height:42px;
     padding:0 15px 0 42px;
-
-    border:1px solid #dce2ea;
-
-    border-radius:8px;
-
+    border:1px solid #e2e8f0;
+    border-radius:22px;
     outline:none;
-
     font-size:13px;
+    background:#ffffff;
+    color:#4a5568;
+    transition:border-color 0.2s;
+}
 
-    background:#f8fafc;
+.search input::placeholder{
+    color:#a0aec0;
+}
+
+.search input:focus{
+    border-color:#3182ce;
 }
 
 .search i{
     position:absolute;
-
-    left:15px;
-    top:12px;
-
-    color:#7c8798;
-
+    left:16px;
+    top:14px;
+    color:#3182ce;
     font-size:14px;
 }
 
 .nav-right{
     display:flex;
     align-items:center;
-    gap:18px;
+    gap:14px;
 }
 
-.nav-icon{
+.nav-btn{
     width:38px;
     height:38px;
-
-    border-radius:8px;
-
+    border-radius:50%;
+    background:#f0f6ff;
+    border:1px solid #e2e8f0;
     display:flex;
     align-items:center;
     justify-content:center;
-
-    color:#536174;
-
+    color:#3182ce;
     text-decoration:none;
-
-    transition:.2s;
-
+    transition:all .2s ease;
     position:relative;
 }
 
-.nav-icon:hover{
-    background:#eef4ff;
-    color:#0d6efd;
+.nav-btn:hover{
+    background:#e2e8f0;
+    color:#2b6cb0;
 }
 
-.notification-dot{
+.notification-btn{
+    position:relative;
+}
+
+.notification-badge{
     position:absolute;
-
-    top:6px;
-    right:6px;
-
-    width:7px;
-    height:7px;
-
-    background:#dc3545;
-
+    top:-2px;
+    right:-2px;
+    min-width:16px;
+    height:16px;
+    padding:0 4px;
     border-radius:50%;
+    background:#e53e3e;
+    color:#ffffff;
+    font-size:10px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid #ffffff;
+}
+
+/* =========================================================
+   NAVBAR PROFILE
+========================================================= */
+
+.nav-profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color:#2d3748;
+    margin-left:8px;
+}
+
+.nav-user-text{
+    text-align:right;
+    line-height:1.25;
+}
+
+.nav-user-text strong{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    color:#2d3748;
+}
+
+.nav-user-text small{
+    display:block;
+    margin-top:2px;
+    font-size:11px;
+    color:#718096;
+}
+
+.nav-avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    overflow:hidden;
+    background:#e2e8f0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.nav-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 /* =========================================================
@@ -277,6 +387,25 @@ body{
 
 .content{
     padding:30px;
+
+    width:100%;
+
+    min-width:0;
+}
+
+/* =========================================================
+   PREVENT DYNAMIC DASHBOARD CONTENT FROM OVERFLOWING
+========================================================= */
+
+.content > *{
+    max-width:100%;
+    min-width:0;
+}
+
+.content .dashboard-content{
+    width:100%;
+    max-width:100%;
+    min-width:0;
 }
 
 /* =========================================================
@@ -370,52 +499,15 @@ body{
 
     <div class="logo">
 
-        <i class="fas fa-graduation-cap"></i>
+        <img src="{{ url_for('static', filename='images/logo.png') }}"
+             alt="RGUKT Logo">
 
         <span>
-            College Placement<br>
-            Management System
+            RGUKT<br>
+            <small>Placement Portal</small>
         </span>
 
     </div>
-
-
-    <!-- USER -->
-
-    <div class="user-box">
-
-        <div class="avatar">
-
-            {% if session.get('full_name') %}
-                {{ session.get('full_name')[0]|upper }}
-            {% else %}
-                U
-            {% endif %}
-
-        </div>
-
-        <div class="user-name">
-            {{ session.get('full_name', 'User') }}
-        </div>
-
-        <div class="user-role">
-
-            {% if session.get('role') == 'student' %}
-                Student
-            {% elif session.get('role') == 'company' %}
-                Company
-            {% elif session.get('role') == 'cdpc' %}
-                CDPC
-            {% elif session.get('role') == 'admin' %}
-                Administrator
-            {% else %}
-                User
-            {% endif %}
-
-        </div>
-
-    </div>
-
 
     <!-- ====================================================
          STUDENT MENU
@@ -434,37 +526,37 @@ body{
         </a>
 
         <a href="{{ url_for('resumee') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'resume.html' %}active{% endif %}">
             <i class="fas fa-file-alt"></i>
             <span>Resume Creator</span>
         </a>
 
         <a href="{{ url_for('companies') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'companies.html' %}active{% endif %}">
             <i class="fas fa-building"></i>
             <span>Companies</span>
         </a>
 
         <a href="{{ url_for('placement_drives') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'placement_drives.html' %}active{% endif %}">
             <i class="fas fa-briefcase"></i>
             <span>Placement Drives</span>
         </a>
 
         <a href="{{ url_for('applications') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'applications.html' %}active{% endif %}">
             <i class="fas fa-file-signature"></i>
             <span>Applications</span>
         </a>
 
         <a href="{{ url_for('interviewss') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'interviews.html' %}active{% endif %}">
             <i class="fas fa-calendar-check"></i>
             <span>Interviews</span>
         </a>
 
         <a href="{{ url_for('results') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'results.html' %}active{% endif %}">
             <i class="fas fa-award"></i>
             <span>Results</span>
         </a>
@@ -475,13 +567,13 @@ body{
         </div>
 
         <a href="{{ url_for('aptitude') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'aptitude.html' %}active{% endif %}">
             <i class="fas fa-brain"></i>
             <span>Aptitude Test</span>
         </a>
 
         <a href="{{ url_for('skill') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'skill_assessment.html' %}active{% endif %}">
             <i class="fas fa-bullseye"></i>
             <span>Skill Assessment</span>
         </a>
@@ -516,32 +608,32 @@ body{
             <span>Dashboard</span>
         </a>
 
-        <a href="{{ url_for('companies') }}"
+        <a href="#"
            class="menu-link">
             <i class="fas fa-users"></i>
             <span>Students</span>
         </a>
 
-        <a href="{{ url_for('placement_drives') }}"
+        <a href="#"
            class="menu-link">
             <i class="fas fa-briefcase"></i>
             <span>Placement Drives</span>
         </a>
 
-        <a href="{{ url_for('applications') }}"
+        <a href="#"
            class="menu-link">
             <i class="fas fa-users-viewfinder"></i>
             <span>Applicants</span>
         </a>
 
-        <a href="{{ url_for('interviewss') }}"
+        <a href="#"
            class="menu-link">
             <i class="fas fa-calendar-check"></i>
             <span>Interviews</span>
         </a>
 
-        <a href="{{ url_for('results') }}"
-           class="menu-link">
+        <a href="#"
+           class="menu-link {% if page == 'results.html' %}active{% endif %}">
             <i class="fas fa-award"></i>
             <span>Results</span>
         </a>
@@ -577,37 +669,37 @@ body{
         </a>
 
         <a href="{{ url_for('student_management') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'student_management.html' %}active{% endif %}">
             <i class="fas fa-user-graduate"></i>
             <span>Student Management</span>
         </a>
 
         <a href="{{ url_for('company_management') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'company.html' %}active{% endif %}">
             <i class="fas fa-building"></i>
             <span>Company Management</span>
         </a>
 
         <a href="{{ url_for('drive_management') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'drive.html' %}active{% endif %}">
             <i class="fas fa-briefcase"></i>
             <span>Drive Management</span>
         </a>
 
-        <a href="{{ url_for('applications') }}"
-           class="menu-link">
+        <a href="#"
+           class="menu-link {% if page == 'applications.html' %}active{% endif %}">
             <i class="fas fa-file-signature"></i>
             <span>Application Management</span>
         </a>
 
-        <a href="{{ url_for('interviewss') }}"
-           class="menu-link">
+        <a href="#"
+           class="menu-link {% if page == 'interview_management.html' %}active{% endif %}">
             <i class="fas fa-calendar-check"></i>
             <span>Interview Management</span>
         </a>
 
-        <a href="{{ url_for('results') }}"
-           class="menu-link">
+        <a href="#"
+           class="menu-link {% if page == 'results.html' %}active{% endif %}">
             <i class="fas fa-award"></i>
             <span>Results Management</span>
         </a>
@@ -618,7 +710,7 @@ body{
         </div>
 
         <a href="{{ url_for('reports_analytics') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'reports_analytics.html' %}active{% endif %}">
             <i class="fas fa-chart-line"></i>
             <span>Analytics & Reports</span>
         </a>
@@ -654,37 +746,37 @@ body{
         </a>
 
         <a href="{{ url_for('student_management') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'student_management.html' %}active{% endif %}">
             <i class="fas fa-user-graduate"></i>
             <span>Student Management</span>
         </a>
 
         <a href="{{ url_for('company_management') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'company.html' %}active{% endif %}">
             <i class="fas fa-building"></i>
             <span>Company Management</span>
         </a>
 
         <a href="{{ url_for('drive_management') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'drive.html' %}active{% endif %}">
             <i class="fas fa-briefcase"></i>
             <span>Drive Management</span>
         </a>
 
-        <a href="{{ url_for('applications') }}"
+        <a href="#"
            class="menu-link">
             <i class="fas fa-file-signature"></i>
             <span>Application Management</span>
         </a>
 
-        <a href="{{ url_for('interviewss') }}"
-           class="menu-link">
+        <a href="#"
+           class="menu-link {% if page == 'interview_management.html' %}active{% endif %}">
             <i class="fas fa-calendar-check"></i>
             <span>Interview Management</span>
         </a>
 
-        <a href="{{ url_for('results') }}"
-           class="menu-link">
+        <a href="#"
+           class="menu-link {% if page == 'results.html' %}active{% endif %}">
             <i class="fas fa-award"></i>
             <span>Results Management</span>
         </a>
@@ -694,12 +786,17 @@ body{
             SYSTEM
         </div>
 
+        <a href="{{ url_for('user_management') }}"
+           class="menu-link {% if page == 'user_management.html' %}active{% endif %}">
+            <i class="fas fa-home"></i>
+            <span>User management</span>
+        </a>
+
         <a href="{{ url_for('reports_analytics') }}"
-           class="menu-link">
+           class="menu-link {% if page == 'reports_analytics.html' %}active{% endif %}">
             <i class="fas fa-chart-line"></i>
             <span>Analytics & Reports</span>
         </a>
-
 
         <div class="menu-title">
             ACCOUNT
@@ -723,19 +820,19 @@ body{
     </div>
 
     <a href="{{ url_for('help') }}"
-       class="menu-link">
+       class="menu-link {% if page == 'help.html' %}active{% endif %}">
         <i class="fas fa-circle-question"></i>
         <span>Help</span>
     </a>
 
     <a href="{{ url_for('about') }}"
-       class="menu-link">
+       class="menu-link {% if page == 'about.html' %}active{% endif %}">
         <i class="fas fa-circle-info"></i>
         <span>About</span>
     </a>
 
     <a href="{{ url_for('logout') }}"
-       class="menu-link logout-link">
+       class="menu-link logout-link {% if page == 'logout.html' %}active{% endif %}">
         <i class="fas fa-right-from-bracket"></i>
         <span>Logout</span>
     </a>
@@ -756,58 +853,64 @@ body{
 
     <nav class="navbar">
 
-        <button class="mobile-menu"
-                onclick="toggleSidebar()">
-
+        <button class="mobile-menu" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
-
         </button>
 
-
         <div class="search">
-
             <i class="fas fa-search"></i>
-
             <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search companies..."
                 id="searchInput"
             >
-
         </div>
-
 
         <div class="nav-right">
 
-            <a href="{{ url_for('help') }}"
-               class="nav-icon"
-               title="Help">
-
-                <i class="fas fa-circle-question"></i>
-
+            <!-- Notifications Icon Button -->
+            <a href="#" class="nav-btn notification-btn" title="Notifications">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
             </a>
 
-
-            <a href="{{ url_for('profile') }}"
-               class="nav-icon"
-               title="Profile">
-
-                <i class="fas fa-user"></i>
-
+            <!-- Settings Icon Button -->
+            <a href="#" class="nav-btn" title="Settings">
+                <i class="fas fa-gear"></i>
             </a>
 
+            <!-- User Profile Link -->
+            <a href="{{ url_for('profile') }}" class="nav-profile">
+                <div class="nav-user-text">
+                    <strong>
+                        {{ session.get('full_name', 'User') }}
+                    </strong>
+                    <small>
+                        {% if session.get('role') == 'student' %}
+                            Student
+                        {% elif session.get('role') == 'company' %}
+                            Company
+                        {% elif session.get('role') == 'cdpc' %}
+                            CDPC
+                        {% elif session.get('role') == 'admin' %}
+                            Administrator
+                        {% else %}
+                            User
+                        {% endif %}
+                    </small>
+                </div>
 
-            <a href="{{ url_for('logout') }}"
-               class="nav-icon"
-               title="Logout">
-
-                <i class="fas fa-right-from-bracket"></i>
-
+                <!-- Avatar Image Container -->
+                <div class="nav-avatar">
+                    {{ session.get('full_name', 'U')[0]|upper }}
+                    <!--<img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile Photo">-->
+                </div>
             </a>
 
         </div>
 
     </nav>
+        
 
 
     <!-- ====================================================
