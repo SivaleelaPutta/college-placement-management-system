@@ -1,3 +1,4 @@
+
 import os
 
 from flask import (
@@ -980,7 +981,8 @@ def dashboard():
 
 
     return render_template(
-        "dashboard.html",
+        "homepage.html",
+        page="dashboard.html",
         role=role,
         stats=stats,
         user_name=session.get("full_name"),
