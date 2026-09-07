@@ -16,3 +16,9 @@ def get_db_connection():
     except mysql.connector.Error as e:
         print("❌ MySQL connection error:", e)
         return None
+
+
+if __name__ == "__main__":
+    conn = get_db_connection()
+    if conn:
+        conn.close()
