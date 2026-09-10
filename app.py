@@ -1,4 +1,3 @@
-
 import os
 
 from flask import (
@@ -18,6 +17,10 @@ from werkzeug.security import (
     generate_password_hash,
     check_password_hash
 )
+
+# ============================================================
+# BLUEPRINT IMPORTS
+# ============================================================
 
 from resume_bp import resume_bp
 from interview_bp import interview_bp
@@ -48,7 +51,9 @@ DB_CONFIG = {
 # FOLDERS
 # ============================================================
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(
+    os.path.abspath(__file__)
+)
 
 IMAGE_FOLDER = os.path.join(
     BASE_DIR,
@@ -61,11 +66,20 @@ UPLOAD_FOLDER = os.path.join(
     "uploads"
 )
 
-os.makedirs(IMAGE_FOLDER, exist_ok=True)
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(
+    IMAGE_FOLDER,
+    exist_ok=True
+)
+
+os.makedirs(
+    UPLOAD_FOLDER,
+    exist_ok=True
+)
 
 app.config["IMAGE_FOLDER"] = IMAGE_FOLDER
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+# Maximum upload size = 10 MB
 app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
 
 
@@ -88,17 +102,37 @@ def get_db_connection():
 
     except Error as e:
 
-        print("MYSQL CONNECTION ERROR:", e)
+        print(
+            "MYSQL CONNECTION ERROR:",
+            e
+        )
 
         return None
 
 
 # ============================================================
-# BLUEPRINTS
+# REGISTER BLUEPRINTS
 # ============================================================
 
 app.register_blueprint(resume_bp)
 app.register_blueprint(interview_bp)
+
+
+# ============================================================
+# FILE TOO LARGE ERROR
+# ============================================================
+
+@app.errorhandler(413)
+def request_entity_too_large(error):
+
+    flash(
+        "Uploaded file is too large. Maximum allowed size is 10 MB.",
+        "error"
+    )
+
+    return redirect(
+        url_for("resume_bp.resume_home")
+    )
 
 
 # ============================================================
@@ -117,14 +151,19 @@ def login_required():
 @app.route("/")
 def landing():
 
-    return render_template("landing.html")
+    return render_template(
+        "landing.html"
+    )
 
 
 # ============================================================
 # LOGIN
 # ============================================================
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route(
+    "/login",
+    methods=["GET", "POST"]
+)
 def login():
 
     if request.method == "POST":
@@ -144,7 +183,6 @@ def login():
             ""
         ).strip().lower()
 
-
         if not email or not password or not role:
 
             flash(
@@ -152,8 +190,9 @@ def login():
                 "error"
             )
 
-            return redirect(url_for("login"))
-
+            return redirect(
+                url_for("login")
+            )
 
         valid_roles = [
             "student",
@@ -169,8 +208,9 @@ def login():
                 "error"
             )
 
-            return redirect(url_for("login"))
-
+            return redirect(
+                url_for("login")
+            )
 
         connection = get_db_connection()
 
@@ -181,8 +221,9 @@ def login():
                 "error"
             )
 
-            return redirect(url_for("login"))
-
+            return redirect(
+                url_for("login")
+            )
 
         cursor = connection.cursor(
             dictionary=True
@@ -210,7 +251,6 @@ def login():
 
             user = cursor.fetchone()
 
-
             if user is None:
 
                 flash(
@@ -218,8 +258,9 @@ def login():
                     "error"
                 )
 
-                return redirect(url_for("login"))
-
+                return redirect(
+                    url_for("login")
+                )
 
             if not check_password_hash(
                 user["password"],
@@ -231,8 +272,9 @@ def login():
                     "error"
                 )
 
-                return redirect(url_for("login"))
-
+                return redirect(
+                    url_for("login")
+                )
 
             session.clear()
 
@@ -242,37 +284,44 @@ def login():
             session["email"] = user["email"]
             session["role"] = user["role"]
 
-
-            # ALL ROLES GO TO ONE DASHBOARD
-            return redirect(url_for("dashboard"))
-
+            return redirect(
+                url_for("dashboard")
+            )
 
         except Error as e:
 
-            print("LOGIN ERROR:", e)
+            print(
+                "LOGIN ERROR:",
+                e
+            )
 
             flash(
                 "Login failed.",
                 "error"
             )
 
-            return redirect(url_for("login"))
-
+            return redirect(
+                url_for("login")
+            )
 
         finally:
 
             cursor.close()
             connection.close()
 
-
-    return render_template("login.html")
+    return render_template(
+        "login.html"
+    )
 
 
 # ============================================================
 # REGISTRATION
 # ============================================================
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route(
+    "/register",
+    methods=["GET", "POST"]
+)
 def register():
 
     if request.method == "POST":
@@ -297,6 +346,9 @@ def register():
             ""
         ).strip().lower()
 
+        # ----------------------------------------------------
+        # BASIC VALIDATION
+        # ----------------------------------------------------
 
         if not full_name:
 
@@ -305,8 +357,9 @@ def register():
                 "error"
             )
 
-            return redirect(url_for("register"))
-
+            return redirect(
+                url_for("register")
+            )
 
         if not email:
 
@@ -315,8 +368,9 @@ def register():
                 "error"
             )
 
-            return redirect(url_for("register"))
-
+            return redirect(
+                url_for("register")
+            )
 
         if not password:
 
@@ -325,8 +379,9 @@ def register():
                 "error"
             )
 
-            return redirect(url_for("register"))
-
+            return redirect(
+                url_for("register")
+            )
 
         if len(password) < 6:
 
@@ -335,8 +390,9 @@ def register():
                 "error"
             )
 
-            return redirect(url_for("register"))
-
+            return redirect(
+                url_for("register")
+            )
 
         valid_roles = [
             "student",
@@ -352,10 +408,13 @@ def register():
                 "error"
             )
 
-            return redirect(url_for("register"))
+            return redirect(
+                url_for("register")
+            )
 
-
+        # ----------------------------------------------------
         # STUDENT DETAILS
+        # ----------------------------------------------------
 
         roll_number = request.form.get(
             "roll_number",
@@ -392,8 +451,9 @@ def register():
             ""
         ).strip()
 
-
+        # ----------------------------------------------------
         # COMPANY DETAILS
+        # ----------------------------------------------------
 
         company_name = request.form.get(
             "company_name",
@@ -420,11 +480,9 @@ def register():
             ""
         ).strip()
 
-
         password_hash = generate_password_hash(
             password
         )
-
 
         connection = get_db_connection()
 
@@ -435,12 +493,17 @@ def register():
                 "error"
             )
 
-            return redirect(url_for("register"))
-
+            return redirect(
+                url_for("register")
+            )
 
         cursor = connection.cursor()
 
         try:
+
+            # ------------------------------------------------
+            # CHECK EXISTING USER
+            # ------------------------------------------------
 
             cursor.execute(
                 """
@@ -453,7 +516,6 @@ def register():
 
             existing_user = cursor.fetchone()
 
-
             if existing_user:
 
                 flash(
@@ -461,8 +523,13 @@ def register():
                     "error"
                 )
 
-                return redirect(url_for("register"))
+                return redirect(
+                    url_for("register")
+                )
 
+            # ------------------------------------------------
+            # COMPANY VALIDATION
+            # ------------------------------------------------
 
             if role == "company" and not company_name:
 
@@ -471,8 +538,13 @@ def register():
                     "error"
                 )
 
-                return redirect(url_for("register"))
+                return redirect(
+                    url_for("register")
+                )
 
+            # ------------------------------------------------
+            # INSERT USER
+            # ------------------------------------------------
 
             cursor.execute(
                 """
@@ -499,11 +571,11 @@ def register():
                 )
             )
 
-
             user_id = cursor.lastrowid
 
-
-            # STUDENT PROFILE
+            # ------------------------------------------------
+            # INSERT STUDENT PROFILE
+            # ------------------------------------------------
 
             if role == "student":
 
@@ -550,8 +622,9 @@ def register():
                     )
                 )
 
-
-            # COMPANY PROFILE
+            # ------------------------------------------------
+            # INSERT COMPANY PROFILE
+            # ------------------------------------------------
 
             elif role == "company":
 
@@ -586,9 +659,7 @@ def register():
                     )
                 )
 
-
             connection.commit()
-
 
             flash(
                 "Registration successful. Please login.",
@@ -598,7 +669,6 @@ def register():
             return redirect(
                 url_for("login")
             )
-
 
         except Error as e:
 
@@ -618,21 +688,24 @@ def register():
                 url_for("register")
             )
 
-
         finally:
 
             cursor.close()
             connection.close()
 
-
-    return render_template("register.html")
+    return render_template(
+        "register.html"
+    )
 
 
 # ============================================================
 # DASHBOARD STATISTICS
 # ============================================================
 
-def get_dashboard_stats(role, user_id):
+def get_dashboard_stats(
+    role,
+    user_id
+):
 
     stats = {
         "companies": 0,
@@ -645,18 +718,14 @@ def get_dashboard_stats(role, user_id):
         "results": 0
     }
 
-
     connection = get_db_connection()
 
     if connection is None:
-
         return stats
-
 
     cursor = connection.cursor(
         dictionary=True
     )
-
 
     try:
 
@@ -677,13 +746,11 @@ def get_dashboard_stats(role, user_id):
 
             student = cursor.fetchone()
 
-
             if student:
 
                 student_id = student["student_id"]
 
-
-                # Companies / open drives
+                # Open placement drives
 
                 cursor.execute(
                     """
@@ -693,8 +760,9 @@ def get_dashboard_stats(role, user_id):
                     """
                 )
 
-                stats["companies"] = cursor.fetchone()["total"]
-
+                stats["companies"] = (
+                    cursor.fetchone()["total"]
+                )
 
                 # Applications
 
@@ -707,8 +775,9 @@ def get_dashboard_stats(role, user_id):
                     (student_id,)
                 )
 
-                stats["applications"] = cursor.fetchone()["total"]
-
+                stats["applications"] = (
+                    cursor.fetchone()["total"]
+                )
 
                 # Interviews
 
@@ -717,14 +786,16 @@ def get_dashboard_stats(role, user_id):
                     SELECT COUNT(*) AS total
                     FROM interviews i
                     INNER JOIN applications a
-                        ON i.application_id = a.application_id
+                        ON i.application_id =
+                           a.application_id
                     WHERE a.student_id = %s
                     """,
                     (student_id,)
                 )
 
-                stats["interviews"] = cursor.fetchone()["total"]
-
+                stats["interviews"] = (
+                    cursor.fetchone()["total"]
+                )
 
                 # Offers
 
@@ -733,15 +804,17 @@ def get_dashboard_stats(role, user_id):
                     SELECT COUNT(*) AS total
                     FROM results r
                     INNER JOIN applications a
-                        ON r.application_id = a.application_id
+                        ON r.application_id =
+                           a.application_id
                     WHERE a.student_id = %s
                     AND r.result_status = 'Selected'
                     """,
                     (student_id,)
                 )
 
-                stats["offers"] = cursor.fetchone()["total"]
-
+                stats["offers"] = (
+                    cursor.fetchone()["total"]
+                )
 
         # ====================================================
         # ADMIN / CDPC
@@ -759,8 +832,9 @@ def get_dashboard_stats(role, user_id):
                 """
             )
 
-            stats["students"] = cursor.fetchone()["total"]
-
+            stats["students"] = (
+                cursor.fetchone()["total"]
+            )
 
             cursor.execute(
                 """
@@ -769,8 +843,9 @@ def get_dashboard_stats(role, user_id):
                 """
             )
 
-            stats["companies"] = cursor.fetchone()["total"]
-
+            stats["companies"] = (
+                cursor.fetchone()["total"]
+            )
 
             cursor.execute(
                 """
@@ -779,8 +854,9 @@ def get_dashboard_stats(role, user_id):
                 """
             )
 
-            stats["drives"] = cursor.fetchone()["total"]
-
+            stats["drives"] = (
+                cursor.fetchone()["total"]
+            )
 
             cursor.execute(
                 """
@@ -789,8 +865,9 @@ def get_dashboard_stats(role, user_id):
                 """
             )
 
-            stats["applications"] = cursor.fetchone()["total"]
-
+            stats["applications"] = (
+                cursor.fetchone()["total"]
+            )
 
             cursor.execute(
                 """
@@ -799,8 +876,9 @@ def get_dashboard_stats(role, user_id):
                 """
             )
 
-            stats["interviews"] = cursor.fetchone()["total"]
-
+            stats["interviews"] = (
+                cursor.fetchone()["total"]
+            )
 
             cursor.execute(
                 """
@@ -810,8 +888,9 @@ def get_dashboard_stats(role, user_id):
                 """
             )
 
-            stats["offers"] = cursor.fetchone()["total"]
-
+            stats["offers"] = (
+                cursor.fetchone()["total"]
+            )
 
         # ====================================================
         # COMPANY
@@ -830,11 +909,9 @@ def get_dashboard_stats(role, user_id):
 
             company = cursor.fetchone()
 
-
             if company:
 
                 company_id = company["company_id"]
-
 
                 # Drives
 
@@ -847,8 +924,9 @@ def get_dashboard_stats(role, user_id):
                     (company_id,)
                 )
 
-                stats["drives"] = cursor.fetchone()["total"]
-
+                stats["drives"] = (
+                    cursor.fetchone()["total"]
+                )
 
                 # Applications
 
@@ -863,8 +941,9 @@ def get_dashboard_stats(role, user_id):
                     (company_id,)
                 )
 
-                stats["applications"] = cursor.fetchone()["total"]
-
+                stats["applications"] = (
+                    cursor.fetchone()["total"]
+                )
 
                 # Shortlisted
 
@@ -880,8 +959,9 @@ def get_dashboard_stats(role, user_id):
                     (company_id,)
                 )
 
-                stats["shortlisted"] = cursor.fetchone()["total"]
-
+                stats["shortlisted"] = (
+                    cursor.fetchone()["total"]
+                )
 
                 # Interviews
 
@@ -890,7 +970,8 @@ def get_dashboard_stats(role, user_id):
                     SELECT COUNT(*) AS total
                     FROM interviews i
                     INNER JOIN applications a
-                        ON i.application_id = a.application_id
+                        ON i.application_id =
+                           a.application_id
                     INNER JOIN placement_drives d
                         ON a.drive_id = d.drive_id
                     WHERE d.company_id = %s
@@ -898,8 +979,9 @@ def get_dashboard_stats(role, user_id):
                     (company_id,)
                 )
 
-                stats["interviews"] = cursor.fetchone()["total"]
-
+                stats["interviews"] = (
+                    cursor.fetchone()["total"]
+                )
 
                 # Offers
 
@@ -908,7 +990,8 @@ def get_dashboard_stats(role, user_id):
                     SELECT COUNT(*) AS total
                     FROM results r
                     INNER JOIN applications a
-                        ON r.application_id = a.application_id
+                        ON r.application_id =
+                           a.application_id
                     INNER JOIN placement_drives d
                         ON a.drive_id = d.drive_id
                     WHERE d.company_id = %s
@@ -917,11 +1000,11 @@ def get_dashboard_stats(role, user_id):
                     (company_id,)
                 )
 
-                stats["offers"] = cursor.fetchone()["total"]
-
+                stats["offers"] = (
+                    cursor.fetchone()["total"]
+                )
 
         return stats
-
 
     except Error as e:
 
@@ -932,7 +1015,6 @@ def get_dashboard_stats(role, user_id):
 
         return stats
 
-
     finally:
 
         cursor.close()
@@ -940,7 +1022,7 @@ def get_dashboard_stats(role, user_id):
 
 
 # ============================================================
-# ONE DASHBOARD FOR ALL ROLES
+# DASHBOARD
 # ============================================================
 
 @app.route("/dashboard")
@@ -952,10 +1034,8 @@ def dashboard():
             url_for("login")
         )
 
-
     role = session.get("role")
     user_id = session.get("user_id")
-
 
     valid_roles = [
         "student",
@@ -963,7 +1043,6 @@ def dashboard():
         "cdpc",
         "company"
     ]
-
 
     if role not in valid_roles:
 
@@ -973,12 +1052,10 @@ def dashboard():
             url_for("landing")
         )
 
-
     stats = get_dashboard_stats(
         role,
         user_id
     )
-
 
     return render_template(
         "homepage.html",
@@ -1021,10 +1098,8 @@ def profile():
             url_for("login")
         )
 
-
     user_id = session.get("user_id")
     role = session.get("role")
-
 
     connection = get_db_connection()
 
@@ -1039,20 +1114,17 @@ def profile():
             url_for("dashboard")
         )
 
-
     cursor = connection.cursor(
         dictionary=True
     )
-
 
     try:
 
         profile_data = None
 
-
-        # ====================================================
-        # STUDENT
-        # ====================================================
+        # ----------------------------------------------------
+        # STUDENT PROFILE
+        # ----------------------------------------------------
 
         if role == "student":
 
@@ -1064,7 +1136,6 @@ def profile():
                     u.email,
                     u.role,
                     u.created_at,
-
                     s.student_id,
                     s.roll_number,
                     s.branch,
@@ -1073,12 +1144,9 @@ def profile():
                     s.dob,
                     s.gender,
                     s.address
-
                 FROM users u
-
                 INNER JOIN students s
                     ON u.user_id = s.user_id
-
                 WHERE u.user_id = %s
                 """,
                 (user_id,)
@@ -1086,10 +1154,9 @@ def profile():
 
             profile_data = cursor.fetchone()
 
-
-        # ====================================================
-        # ADMIN / CDPC
-        # ====================================================
+        # ----------------------------------------------------
+        # ADMIN / CDPC PROFILE
+        # ----------------------------------------------------
 
         elif role in [
             "admin",
@@ -1104,9 +1171,7 @@ def profile():
                     email,
                     role,
                     created_at
-
                 FROM users
-
                 WHERE user_id = %s
                 """,
                 (user_id,)
@@ -1114,10 +1179,9 @@ def profile():
 
             profile_data = cursor.fetchone()
 
-
-        # ====================================================
-        # COMPANY
-        # ====================================================
+        # ----------------------------------------------------
+        # COMPANY PROFILE
+        # ----------------------------------------------------
 
         elif role == "company":
 
@@ -1129,26 +1193,21 @@ def profile():
                     u.email,
                     u.role,
                     u.created_at,
-
                     c.company_id,
                     c.company_name,
                     c.industry,
                     c.location,
                     c.website,
                     c.description
-
                 FROM users u
-
                 INNER JOIN companies c
                     ON u.user_id = c.user_id
-
                 WHERE u.user_id = %s
                 """,
                 (user_id,)
             )
 
             profile_data = cursor.fetchone()
-
 
         if profile_data is None:
 
@@ -1161,13 +1220,11 @@ def profile():
                 url_for("dashboard")
             )
 
-
         return render_template(
             "homepage.html",
             page="profile.html",
             profile=profile_data
         )
-
 
     except Error as e:
 
@@ -1184,7 +1241,6 @@ def profile():
         return redirect(
             url_for("dashboard")
         )
-
 
     finally:
 
@@ -1208,10 +1264,8 @@ def update_profile():
             url_for("login")
         )
 
-
     user_id = session.get("user_id")
     role = session.get("role")
-
 
     full_name = request.form.get(
         "name",
@@ -1223,6 +1277,16 @@ def update_profile():
         ""
     ).strip()
 
+    if not full_name or not email:
+
+        flash(
+            "Name and email are required.",
+            "error"
+        )
+
+        return redirect(
+            url_for("profile")
+        )
 
     connection = get_db_connection()
 
@@ -1237,11 +1301,43 @@ def update_profile():
             url_for("profile")
         )
 
-
     cursor = connection.cursor()
 
-
     try:
+
+        # ----------------------------------------------------
+        # CHECK DUPLICATE EMAIL
+        # ----------------------------------------------------
+
+        cursor.execute(
+            """
+            SELECT user_id
+            FROM users
+            WHERE email = %s
+            AND user_id != %s
+            """,
+            (
+                email,
+                user_id
+            )
+        )
+
+        existing_user = cursor.fetchone()
+
+        if existing_user:
+
+            flash(
+                "This email is already being used.",
+                "error"
+            )
+
+            return redirect(
+                url_for("profile")
+            )
+
+        # ----------------------------------------------------
+        # UPDATE USERS
+        # ----------------------------------------------------
 
         cursor.execute(
             """
@@ -1258,6 +1354,9 @@ def update_profile():
             )
         )
 
+        # ----------------------------------------------------
+        # UPDATE STUDENT
+        # ----------------------------------------------------
 
         if role == "student":
 
@@ -1281,18 +1380,11 @@ def update_profile():
                 ""
             ).strip()
 
-            backlogs = request.form.get(
-                "backlogs",
-                "0"
-            ).strip()
-
-
             year_value = (
                 int(graduation)
                 if graduation.isdigit()
                 else None
             )
-
 
             cursor.execute(
                 """
@@ -1313,6 +1405,9 @@ def update_profile():
                 )
             )
 
+        # ----------------------------------------------------
+        # UPDATE COMPANY
+        # ----------------------------------------------------
 
         elif role == "company":
 
@@ -1341,7 +1436,6 @@ def update_profile():
                 ""
             ).strip()
 
-
             cursor.execute(
                 """
                 UPDATE companies
@@ -1363,24 +1457,19 @@ def update_profile():
                 )
             )
 
-
         connection.commit()
-
 
         session["full_name"] = full_name
         session["email"] = email
-
 
         flash(
             "Profile updated successfully.",
             "success"
         )
 
-
         return redirect(
             url_for("profile")
         )
-
 
     except Error as e:
 
@@ -1400,7 +1489,6 @@ def update_profile():
             url_for("profile")
         )
 
-
     finally:
 
         cursor.close()
@@ -1408,11 +1496,29 @@ def update_profile():
 
 
 # ============================================================
-# RESUME
+# RESUME ANALYZER COMPATIBILITY ROUTE
 # ============================================================
 
 @app.route("/resumee")
 def resumee():
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    return redirect(
+        url_for("resume_bp.resume_home")
+    )
+
+
+# ============================================================
+# RESUME CREATOR
+# ============================================================
+
+@app.route("/resume")
+def resume():
 
     if not login_required():
 
@@ -1553,7 +1659,6 @@ def user_management():
             url_for("login")
         )
 
-
     if session.get("role") != "admin":
 
         flash(
@@ -1564,7 +1669,6 @@ def user_management():
         return redirect(
             url_for("dashboard")
         )
-
 
     return render_template(
         "homepage.html",
@@ -1611,7 +1715,7 @@ def drive_management():
 
 
 # ============================================================
-# REPORTS
+# REPORTS & ANALYTICS
 # ============================================================
 
 @app.route("/reports-analytics")
@@ -1642,13 +1746,11 @@ def aptitude():
             url_for("login")
         )
 
-
     years = [
         2025,
         2024,
         2023
     ]
-
 
     return render_template(
         "homepage.html",
@@ -1731,11 +1833,17 @@ def about():
 
 
 # ============================================================
-# LOGOUT
+# LOGOUT PAGE
 # ============================================================
 
 @app.route("/logout")
 def logout():
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
 
     return render_template(
         "homepage.html",
@@ -1751,11 +1859,6 @@ def logout():
 def confirm_logout():
 
     session.clear()
-
-    flash(
-        "You have been logged out successfully.",
-        "success"
-    )
 
     return redirect(
         url_for("landing")
