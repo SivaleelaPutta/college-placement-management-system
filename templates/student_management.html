@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<<<<<<< HEAD
     <title>Student Management | Placement Portal</title>
+=======
+    <title>Student Management</title>
+>>>>>>> 5f077a0 (student-management)
 
     <style>
         * {
@@ -15,6 +19,7 @@
 
         body {
             font-family: Arial, sans-serif;
+<<<<<<< HEAD
             background: #f4f7fb;
             color: #172033;
         }
@@ -66,6 +71,16 @@
             padding: 18px 25px;
             border-radius: 12px;
             margin-bottom: 25px;
+=======
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        .header {
+            background: #1e3a8a;
+            color: white;
+            padding: 20px 30px;
+>>>>>>> 5f077a0 (student-management)
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -74,8 +89,10 @@
 
         .topbar h1 {
             font-size: 25px;
+            margin-bottom: 5px;
         }
 
+<<<<<<< HEAD
         .admin {
             font-weight: bold;
         }
@@ -111,12 +128,116 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
+=======
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .home-link {
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 6px;
+        }
+
+        .home-link:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .top-section h2 {
+            font-size: 25px;
+            color: #1e293b;
+        }
+
+        .add-btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .search-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-form input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .search-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .search-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .clear-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #e5e7eb;
+            color: #374151;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .clear-btn:hover {
+            background: #d1d5db;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+>>>>>>> 5f077a0 (student-management)
             margin-bottom: 25px;
         }
 
         .stat-card {
             background: white;
             padding: 22px;
+<<<<<<< HEAD
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.06);
         }
@@ -181,6 +302,28 @@
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+=======
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+>>>>>>> 5f077a0 (student-management)
             overflow-x: auto;
         }
 
@@ -217,6 +360,7 @@
         .delete-btn {
             background: #dc3545;
             color: white;
+<<<<<<< HEAD
             border: none;
             padding: 7px 12px;
             border-radius: 6px;
@@ -225,6 +369,17 @@
 
         .delete-btn:hover {
             background: #b02a37;
+=======
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 13px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+>>>>>>> 5f077a0 (student-management)
         }
 
         /* FLASH MESSAGES */
@@ -235,16 +390,88 @@
             background: #e8f4ff;
         }
 
+<<<<<<< HEAD
         /* RESPONSIVE */
         @media (max-width: 900px) {
             .sidebar {
                 width: 200px;
             }
 
+=======
+        .action-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .action-btn {
+            text-decoration: none;
+            padding: 7px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .view {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .edit {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .delete {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 50px 20px;
+            color: #64748b;
+        }
+
+        .no-data h3 {
+            margin-bottom: 10px;
+            color: #334155;
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash {
+            padding: 12px 15px;
+            background: #dcfce7;
+            color: #166534;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 600px) {
+>>>>>>> 5f077a0 (student-management)
             .stats {
                 grid-template-columns: 1fr;
             }
 
+<<<<<<< HEAD
             .form-grid {
                 grid-template-columns: 1fr;
             }
@@ -281,11 +508,24 @@
                 display: block;
             }
         }
+=======
+            .top-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+        }
+>>>>>>> 5f077a0 (student-management)
     </style>
 </head>
 
 <body>
 
+<<<<<<< HEAD
 <div class="layout">
 
     <!-- SIDEBAR -->
@@ -341,6 +581,29 @@
 
     <!-- MAIN CONTENT -->
     <main class="main">
+=======
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+<header class="header">
+
+    <div>
+        <h1>Student Management</h1>
+        <p>College Placement Management System</p>
+    </div>
+
+    <a href="{{ url_for('dashboard') }}" class="home-link">
+        Home
+    </a>
+
+</header>
+
+
+<!-- ============================================================
+     MAIN CONTAINER
+============================================================ -->
+>>>>>>> 5f077a0 (student-management)
 
         <!-- TOP BAR -->
         <div class="topbar">
@@ -353,26 +616,51 @@
 
         </div>
 
+<<<<<<< HEAD
 
         <!-- FLASH MESSAGES -->
+=======
+    <!-- Flash Messages -->
+>>>>>>> 5f077a0 (student-management)
 
         {% with messages = get_flashed_messages(with_categories=true) %}
 
+<<<<<<< HEAD
             {% for category, message in messages %}
 
                 <div class="message">
                     {{ message }}
                 </div>
+=======
+        {% if messages %}
 
-            {% endfor %}
+            <div class="flash-messages">
+
+                {% for message in messages %}
+
+                    <div class="flash">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+>>>>>>> 5f077a0 (student-management)
+
+            </div>
 
         {% endwith %}
 
 
+<<<<<<< HEAD
         <!-- PAGE HEADER -->
+=======
+    <!-- ========================================================
+         TITLE + ADD BUTTON
+    ========================================================= -->
+>>>>>>> 5f077a0 (student-management)
 
         <div class="page-header">
 
+<<<<<<< HEAD
             <div>
                 <h2>Students</h2>
                 <p>Manage registered students</p>
@@ -383,23 +671,280 @@
             </a>
 
         </div>
+=======
+        <h2>Students</h2>
+
+        <a
+            href="{{ url_for('add_student') }}"
+            class="add-btn"
+        >
+            + Add Student
+        </a>
+>>>>>>> 5f077a0 (student-management)
 
 
         <!-- STATISTICS -->
 
+<<<<<<< HEAD
         <div class="stats">
+=======
+    <!-- ========================================================
+         SEARCH
+    ========================================================= -->
+>>>>>>> 5f077a0 (student-management)
 
             <div class="stat-card">
 
+<<<<<<< HEAD
                 <h3>{{ students|length }}</h3>
 
                 <p>Total Students</p>
+=======
+        <form
+            action="{{ url_for('search_students') }}"
+            method="GET"
+            class="search-form"
+        >
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search by roll number, name, email, phone or branch..."
+                value="{{ search|default('') }}"
+            >
+
+            <button
+                type="submit"
+                class="search-btn"
+            >
+                Search
+            </button>
+
+            <a
+                href="{{ url_for('student_management') }}"
+                class="clear-btn"
+            >
+                Clear
+            </a>
+
+        </form>
+
+    </div>
+
+
+    <!-- ========================================================
+         STATISTICS
+    ========================================================= -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <h3>Total Students</h3>
+
+            <div class="number">
+                {{ students|length }}
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>CSE Students</h3>
+
+            <div class="number">
+
+                {{
+                    students
+                    |selectattr('branch', 'equalto', 'CSE')
+                    |list
+                    |length
+                }}
 
             </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>CGPA 7+</h3>
+
+            <div class="number">
+
+                {{
+                    students
+                    |selectattr('cgpa', 'ge', 7)
+                    |list
+                    |length
+                }}
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>No Backlogs</h3>
+
+            <div class="number">
+
+                {{
+                    students
+                    |selectattr('backlogs', 'equalto', 0)
+                    |list
+                    |length
+                }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         STUDENT TABLE
+    ========================================================= -->
+
+    <div class="table-container">
+
+        {% if students %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Roll No</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Branch</th>
+                    <th>Year</th>
+                    <th>CGPA</th>
+                    <th>Backlogs</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for student in students %}
+
+                <tr>
+
+                    <td>
+                        {{ student.student_id }}
+                    </td>
+
+                    <td>
+                        {{ student.roll_no }}
+                    </td>
+
+                    <td>
+                        {{ student.full_name }}
+                    </td>
+
+                    <td>
+                        {{ student.email }}
+                    </td>
+
+                    <td>
+                        {{ student.phone }}
+                    </td>
+
+                    <td>
+                        {{ student.branch }}
+                    </td>
+
+                    <td>
+                        {{ student.year }}
+                    </td>
+
+                    <td>
+                        {{ student.cgpa }}
+                    </td>
+
+                    <td>
+                        {{ student.backlogs }}
+                    </td>
+
+                    <td>
+
+                        <div class="action-buttons">
+
+                            <a
+                                href="{{ url_for('view_student', student_id=student.student_id) }}"
+                                class="action-btn view"
+                            >
+                                View
+                            </a>
+
+                            <a
+                                href="{{ url_for('edit_student', student_id=student.student_id) }}"
+                                class="action-btn edit"
+                            >
+                                Edit
+                            </a>
+
+                            <a
+                                href="{{ url_for('delete_student', student_id=student.student_id) }}"
+                                class="action-btn delete"
+                                onclick="return confirm('Are you sure you want to delete this student?');"
+                            >
+                                Delete
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <!-- ====================================================
+             NO STUDENTS
+        ===================================================== -->
+
+        <div class="no-data">
+
+            <h3>No Students Found</h3>
+
+            <p>
+                There are currently no students in the system.
+            </p>
+
+            <br>
+>>>>>>> 5f077a0 (student-management)
+
+            <a
+                href="{{ url_for('add_student') }}"
+                class="add-btn"
+            >
+                + Add First Student
+            </a>
+
+        </div>
 
 
             <div class="stat-card">
 
+<<<<<<< HEAD
                 <h3>
                     {{ students|selectattr('cgpa')|list|length }}
                 </h3>
@@ -655,5 +1200,9 @@ function searchStudents() {
 
 </script>
 
+=======
+</div>
+
+>>>>>>> 5f077a0 (student-management)
 </body>
 </html>
