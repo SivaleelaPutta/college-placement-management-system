@@ -1631,7 +1631,7 @@ def results():
 # STUDENT MANAGEMENT
 # ============================================================
 
-@app.route("/student_management")
+@app.route("/students")
 def student_management():
 
     if not login_required():
@@ -1640,10 +1640,960 @@ def student_management():
             url_for("login")
         )
 
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT
+                s.student_id,
+                s.roll_number AS roll_no,
+                u.full_name,
+                u.email,
+                s.phone,
+                s.branch,
+                s.year,
+                0 AS cgpa,
+                0 AS backlogs
+            FROM students s
+            INNER JOIN users u
+                ON s.user_id = u.user_id
+            WHERE u.role = 'student'
+            ORDER BY s.student_id DESC
+            """
+        )
+
+        students = cursor.fetchall()
+
+        statistics = calculate_student_statistics(
+            students
+        )
+
+        return render_template(
+            "homepage.html",
+            page="student_management.html",
+            students=students,
+            statistics=statistics
+        )
+
+    except Error as e:
+
+        print(
+            "STUDENT MANAGEMENT ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to load student records.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# ADD STUDENT
+# ============================================================
+
+@app.route(
+    "/students/add",
+    methods=["GET", "POST"]
+)
+def add_student():
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    if request.method == "POST":
+
+        roll_no = request.form.get(
+            "roll_no",
+            ""
+        ).strip()
+
+        full_name = request.form.get(
+            "full_name",
+            ""
+        ).strip()
+
+        email = request.form.get(
+            "email",
+            ""
+        ).strip()
+
+        phone = request.form.get(
+            "phone",
+            ""
+        ).strip()
+
+        branch = request.form.get(
+            "branch",
+            ""
+        ).strip()
+
+        year = request.form.get(
+            "year",
+            ""
+        ).strip()
+
+        password = request.form.get(
+            "password",
+            "student123"
+        )
+
+        if not full_name or not email:
+
+            flash(
+                "Full name and email are required.",
+                "error"
+            )
+
+            return redirect(
+                url_for("add_student")
+            )
+
+        connection = get_db_connection()
+
+        if connection is None:
+
+            flash(
+                "Database connection failed.",
+                "error"
+            )
+
+            return redirect(
+                url_for("add_student")
+            )
+
+        cursor = connection.cursor()
+
+        try:
+
+            # Check duplicate email
+
+            cursor.execute(
+                """
+                SELECT user_id
+                FROM users
+                WHERE email = %s
+                """,
+                (email,)
+            )
+
+            existing_user = cursor.fetchone()
+
+            if existing_user:
+
+                flash(
+                    "A user with this email already exists.",
+                    "error"
+                )
+
+                return redirect(
+                    url_for("add_student")
+                )
+
+            year_value = (
+                int(year)
+                if year.isdigit()
+                else None
+            )
+
+            password_hash = generate_password_hash(
+                password
+            )
+
+            # Insert into users
+
+            cursor.execute(
+                """
+                INSERT INTO users
+                (
+                    full_name,
+                    email,
+                    password,
+                    role
+                )
+                VALUES
+                (
+                    %s,
+                    %s,
+                    %s,
+                    'student'
+                )
+                """,
+                (
+                    full_name,
+                    email,
+                    password_hash
+                )
+            )
+
+            user_id = cursor.lastrowid
+
+            # Insert into students
+
+            cursor.execute(
+                """
+                INSERT INTO students
+                (
+                    user_id,
+                    roll_number,
+                    branch,
+                    year,
+                    phone
+                )
+                VALUES
+                (
+                    %s,
+                    %s,
+                    %s,
+                    %s,
+                    %s
+                )
+                """,
+                (
+                    user_id,
+                    roll_no or None,
+                    branch or None,
+                    year_value,
+                    phone or None
+                )
+            )
+
+            connection.commit()
+
+            flash(
+                "Student added successfully.",
+                "success"
+            )
+
+            return redirect(
+                url_for("student_management")
+            )
+
+        except Error as e:
+
+            connection.rollback()
+
+            print(
+                "ADD STUDENT ERROR:",
+                e
+            )
+
+            flash(
+                "Unable to add student.",
+                "error"
+            )
+
+            return redirect(
+                url_for("add_student")
+            )
+
+        finally:
+
+            cursor.close()
+            connection.close()
+
     return render_template(
         "homepage.html",
-        page="student_management.html"
+        page="add_student.html"
     )
+
+
+# ============================================================
+# SEARCH STUDENTS
+# ============================================================
+
+@app.route(
+    "/students/search",
+    methods=["GET", "POST"]
+)
+def search_students():
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    search_text = request.values.get(
+        "search",
+        ""
+    ).strip()
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("student_management")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        if search_text:
+
+            search_pattern = (
+                "%" + search_text + "%"
+            )
+
+            cursor.execute(
+                """
+                SELECT
+                    s.student_id,
+                    s.roll_number AS roll_no,
+                    u.full_name,
+                    u.email,
+                    s.phone,
+                    s.branch,
+                    s.year,
+                    0 AS cgpa,
+                    0 AS backlogs
+                FROM students s
+                INNER JOIN users u
+                    ON s.user_id = u.user_id
+                WHERE u.role = 'student'
+                AND (
+                    s.roll_number LIKE %s
+                    OR u.full_name LIKE %s
+                    OR u.email LIKE %s
+                    OR s.branch LIKE %s
+                    OR s.phone LIKE %s
+                )
+                ORDER BY s.student_id DESC
+                """,
+                (
+                    search_pattern,
+                    search_pattern,
+                    search_pattern,
+                    search_pattern,
+                    search_pattern
+                )
+            )
+
+        else:
+
+            cursor.execute(
+                """
+                SELECT
+                    s.student_id,
+                    s.roll_number AS roll_no,
+                    u.full_name,
+                    u.email,
+                    s.phone,
+                    s.branch,
+                    s.year,
+                    0 AS cgpa,
+                    0 AS backlogs
+                FROM students s
+                INNER JOIN users u
+                    ON s.user_id = u.user_id
+                WHERE u.role = 'student'
+                ORDER BY s.student_id DESC
+                """
+            )
+
+        students = cursor.fetchall()
+
+        statistics = calculate_student_statistics(
+            students
+        )
+
+        return render_template(
+            "homepage.html",
+            page="student_management.html",
+            students=students,
+            statistics=statistics,
+            search_text=search_text
+        )
+
+    except Error as e:
+
+        print(
+            "SEARCH STUDENTS ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to search students.",
+            "error"
+        )
+
+        return redirect(
+            url_for("student_management")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# VIEW STUDENT
+# ============================================================
+
+@app.route(
+    "/students/view/<int:student_id>"
+)
+def view_student(student_id):
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("student_management")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT
+                s.student_id,
+                s.user_id,
+                s.roll_number AS roll_no,
+                u.full_name,
+                u.email,
+                s.phone,
+                s.branch,
+                s.year,
+                s.dob,
+                s.gender,
+                s.address,
+                0 AS cgpa,
+                0 AS backlogs
+            FROM students s
+            INNER JOIN users u
+                ON s.user_id = u.user_id
+            WHERE s.student_id = %s
+            AND u.role = 'student'
+            """,
+            (student_id,)
+        )
+
+        student = cursor.fetchone()
+
+        if student is None:
+
+            flash(
+                "Student not found.",
+                "error"
+            )
+
+            return redirect(
+                url_for("student_management")
+            )
+
+        return render_template(
+            "homepage.html",
+            page="view_student.html",
+            student=student
+        )
+
+    except Error as e:
+
+        print(
+            "VIEW STUDENT ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to load student details.",
+            "error"
+        )
+
+        return redirect(
+            url_for("student_management")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# EDIT STUDENT
+# ============================================================
+
+@app.route(
+    "/students/edit/<int:student_id>",
+    methods=["GET", "POST"]
+)
+def edit_student(student_id):
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("student_management")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        # ----------------------------------------------------
+        # UPDATE
+        # ----------------------------------------------------
+
+        if request.method == "POST":
+
+            roll_no = request.form.get(
+                "roll_no",
+                ""
+            ).strip()
+
+            full_name = request.form.get(
+                "full_name",
+                ""
+            ).strip()
+
+            email = request.form.get(
+                "email",
+                ""
+            ).strip()
+
+            phone = request.form.get(
+                "phone",
+                ""
+            ).strip()
+
+            branch = request.form.get(
+                "branch",
+                ""
+            ).strip()
+
+            year = request.form.get(
+                "year",
+                ""
+            ).strip()
+
+            if not full_name or not email:
+
+                flash(
+                    "Full name and email are required.",
+                    "error"
+                )
+
+                return redirect(
+                    url_for(
+                        "edit_student",
+                        student_id=student_id
+                    )
+                )
+
+            # Get user_id
+
+            cursor.execute(
+                """
+                SELECT user_id
+                FROM students
+                WHERE student_id = %s
+                """,
+                (student_id,)
+            )
+
+            student_record = cursor.fetchone()
+
+            if student_record is None:
+
+                flash(
+                    "Student not found.",
+                    "error"
+                )
+
+                return redirect(
+                    url_for("student_management")
+                )
+
+            user_id = student_record["user_id"]
+
+            # Check duplicate email
+
+            cursor.execute(
+                """
+                SELECT user_id
+                FROM users
+                WHERE email = %s
+                AND user_id != %s
+                """,
+                (
+                    email,
+                    user_id
+                )
+            )
+
+            duplicate_email = cursor.fetchone()
+
+            if duplicate_email:
+
+                flash(
+                    "This email is already being used.",
+                    "error"
+                )
+
+                return redirect(
+                    url_for(
+                        "edit_student",
+                        student_id=student_id
+                    )
+                )
+
+            year_value = (
+                int(year)
+                if year.isdigit()
+                else None
+            )
+
+            # Update users
+
+            cursor.execute(
+                """
+                UPDATE users
+                SET
+                    full_name = %s,
+                    email = %s
+                WHERE user_id = %s
+                """,
+                (
+                    full_name,
+                    email,
+                    user_id
+                )
+            )
+
+            # Update students
+
+            cursor.execute(
+                """
+                UPDATE students
+                SET
+                    roll_number = %s,
+                    branch = %s,
+                    year = %s,
+                    phone = %s
+                WHERE student_id = %s
+                """,
+                (
+                    roll_no or None,
+                    branch or None,
+                    year_value,
+                    phone or None,
+                    student_id
+                )
+            )
+
+            connection.commit()
+
+            flash(
+                "Student updated successfully.",
+                "success"
+            )
+
+            return redirect(
+                url_for(
+                    "view_student",
+                    student_id=student_id
+                )
+            )
+
+        # ----------------------------------------------------
+        # LOAD STUDENT
+        # ----------------------------------------------------
+
+        cursor.execute(
+            """
+            SELECT
+                s.student_id,
+                s.user_id,
+                s.roll_number AS roll_no,
+                u.full_name,
+                u.email,
+                s.phone,
+                s.branch,
+                s.year,
+                s.dob,
+                s.gender,
+                s.address,
+                0 AS cgpa,
+                0 AS backlogs
+            FROM students s
+            INNER JOIN users u
+                ON s.user_id = u.user_id
+            WHERE s.student_id = %s
+            AND u.role = 'student'
+            """,
+            (student_id,)
+        )
+
+        student = cursor.fetchone()
+
+        if student is None:
+
+            flash(
+                "Student not found.",
+                "error"
+            )
+
+            return redirect(
+                url_for("student_management")
+            )
+
+        return render_template(
+            "homepage.html",
+            page="edit_student.html",
+            student=student
+        )
+
+    except Error as e:
+
+        connection.rollback()
+
+        print(
+            "EDIT STUDENT ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to update student.",
+            "error"
+        )
+
+        return redirect(
+            url_for("student_management")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# DELETE STUDENT
+# ============================================================
+
+@app.route(
+    "/students/delete/<int:student_id>",
+    methods=["GET", "POST"]
+)
+def delete_student(student_id):
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("student_management")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT user_id
+            FROM students
+            WHERE student_id = %s
+            """,
+            (student_id,)
+        )
+
+        student = cursor.fetchone()
+
+        if student is None:
+
+            flash(
+                "Student not found.",
+                "error"
+            )
+
+            return redirect(
+                url_for("student_management")
+            )
+
+        user_id = student["user_id"]
+
+        # ----------------------------------------------------
+        # DELETE STUDENT PROFILE
+        # ----------------------------------------------------
+
+        cursor.execute(
+            """
+            DELETE FROM students
+            WHERE student_id = %s
+            """,
+            (student_id,)
+        )
+
+        # ----------------------------------------------------
+        # DELETE USER ACCOUNT
+        # ----------------------------------------------------
+
+        cursor.execute(
+            """
+            DELETE FROM users
+            WHERE user_id = %s
+            AND role = 'student'
+            """,
+            (user_id,)
+        )
+
+        connection.commit()
+
+        flash(
+            "Student deleted successfully.",
+            "success"
+        )
+
+        return redirect(
+            url_for("student_management")
+        )
+
+    except Error as e:
+
+        connection.rollback()
+
+        print(
+            "DELETE STUDENT ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to delete student. The student may have related placement records.",
+            "error"
+        )
+
+        return redirect(
+            url_for("student_management")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# STUDENT STATISTICS
+# ============================================================
+
+def calculate_student_statistics(students):
+
+    total_students = len(students)
+
+    cse_students = sum(
+        1
+        for student in students
+        if str(
+            student.get("branch") or ""
+        ).upper() == "CSE"
+    )
+
+    high_cgpa_students = sum(
+        1
+        for student in students
+        if float(
+            student.get("cgpa") or 0
+        ) >= 7
+    )
+
+    no_backlog_students = sum(
+        1
+        for student in students
+        if int(
+            student.get("backlogs") or 0
+        ) == 0
+    )
+
+    return {
+        "total_students": total_students,
+        "cse_students": cse_students,
+        "high_cgpa_students": high_cgpa_students,
+        "no_backlog_students": no_backlog_students
+    }
 
 
 # ============================================================
