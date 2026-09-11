@@ -1,4 +1,4 @@
-<style>
+python3 -m py_compile app.py<style>
 
 *{
 margin:0;

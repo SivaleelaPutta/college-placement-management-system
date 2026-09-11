@@ -1,68 +1,48 @@
+
 <style>
 
-/* =========================================
-   APPLICATIONS PAGE
-========================================= */
+/* ==========================================
+   APPLICATION MANAGEMENT
+========================================== */
 
 .applications-page {
     width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 30px;
-}
-
-/* HEADER */
-
-.page-header {
+    min-height: calc(100vh - 70px);
+    padding: 35px 30px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    background: linear-gradient(135deg, #0d6efd, #1565ff);
-    color: white;
-
-    padding: 28px 32px;
-    border-radius: 18px;
-    margin-bottom: 25px;
-
-    box-shadow: 0 10px 25px rgba(13,110,253,.20);
-}
-
-.page-header h1 {
-    margin: 0 0 7px;
-    font-size: 28px;
-    font-weight: 700;
-}
-
-.page-header h1 i {
-    margin-right: 10px;
-}
-
-.page-header p {
-    margin: 0;
-    font-size: 14px;
-    opacity: .9;
-}
-
-.header-icon {
-    width: 65px;
-    height: 65px;
-
-    border-radius: 15px;
-
-    background: rgba(255,255,255,.18);
-
-    display: flex;
-    align-items: center;
     justify-content: center;
+}
 
-    font-size: 28px;
+.applications-container {
+    width: 100%;
+    max-width: 1100px;
 }
 
 
-/* =========================================
-   STATISTICS
-========================================= */
+/* Header */
+
+.applications-header {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    border-top: 5px solid #0d6efd;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    margin-bottom: 25px;
+}
+
+.applications-header h1 {
+    color: #0d6efd;
+    font-size: 27px;
+    margin-bottom: 7px;
+}
+
+.applications-header p {
+    color: #666;
+    font-size: 14px;
+}
+
+
+/* Statistics */
 
 .application-stats {
     display: grid;
@@ -71,278 +51,305 @@
     margin-bottom: 25px;
 }
 
-.stat-card {
+.application-stat {
     background: white;
-
     padding: 20px;
-
-    border-radius: 14px;
-
+    border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0,0,0,.07);
-
-    border-top: 4px solid #0d6efd;
-
     display: flex;
     align-items: center;
-    gap: 15px;
-
-    transition: .3s;
+    gap: 14px;
 }
 
-.stat-card:hover {
-    transform: translateY(-5px);
-
-    box-shadow:
-        0 10px 25px rgba(13,110,253,.15);
-}
-
-.stat-icon {
-    width: 48px;
-    height: 48px;
-
-    border-radius: 12px;
-
-    background: #eaf2ff;
+.application-stat-icon {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    border-radius: 10px;
+    background: #e8f1ff;
     color: #0d6efd;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    font-size: 20px;
 }
 
-.stat-card h3 {
-    font-size: 22px;
+.application-stat h3 {
+    margin: 0;
+    font-size: 21px;
     color: #222;
-    margin: 0;
 }
 
-.stat-card p {
-    font-size: 12px;
+.application-stat p {
+    margin: 3px 0 0;
     color: #777;
-    margin: 0;
+    font-size: 11px;
 }
 
 
-/* =========================================
-   APPLICATION TABLE
-========================================= */
+/* Application cards */
 
-.application-box {
+.application-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.application-card {
     background: white;
-
-    border-radius: 15px;
-
     padding: 22px;
-
-    box-shadow: 0 5px 15px rgba(0,0,0,.07);
-
-    overflow-x: auto;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    border-left: 5px solid #0d6efd;
+    transition: .3s;
 }
 
-.application-box-header {
+.application-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(13,110,253,.12);
+}
+
+
+.application-top {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+
+.company-info {
+    display: flex;
+    gap: 14px;
     align-items: center;
-
-    margin-bottom: 20px;
 }
 
-.application-box-header h2 {
-    color: #222;
-    font-size: 19px;
-    margin: 0 0 4px;
+.company-icon {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 10px;
+    background: #e8f1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.application-box-header span {
-    color: #777;
-    font-size: 13px;
-}
-
-
-/* TABLE */
-
-.application-box table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 900px;
-}
-
-.application-box th {
-    background: #0d6efd;
-    color: white;
-
-    padding: 14px 12px;
-
-    font-size: 13px;
-    font-weight: 600;
-
-    text-align: center;
-}
-
-.application-box th:first-child {
-    border-radius: 8px 0 0 8px;
-}
-
-.application-box th:last-child {
-    border-radius: 0 8px 8px 0;
-}
-
-.application-box td {
-    padding: 15px 12px;
-
-    text-align: center;
-
-    border-bottom: 1px solid #edf0f5;
-
-    font-size: 13px;
-
-    color: #555;
-}
-
-.application-box tbody tr {
-    transition: .25s;
-}
-
-.application-box tbody tr:hover {
-    background: #f5f9ff;
-}
-
-
-/* COMPANY */
-
-.company-name {
-    font-weight: 600;
-    color: #222;
-}
-
-
-/* ROLE */
-
-.role {
+.company-icon i {
     color: #0d6efd;
-    font-weight: 500;
+    font-size: 22px;
 }
 
+.company-info h3 {
+    margin: 0 0 4px;
+    color: #222;
+    font-size: 18px;
+}
 
-/* PACKAGE */
-
-.package {
+.job-title {
+    margin: 0;
+    color: #0d6efd;
+    font-size: 13px;
     font-weight: 600;
-    color: #198754;
 }
 
 
-/* =========================================
-   STATUS
-========================================= */
+/* Status */
 
-.status {
+.application-status {
     display: inline-block;
-
     padding: 6px 13px;
-
     border-radius: 20px;
-
     font-size: 11px;
-
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .status-applied {
-    background: #eaf2ff;
+    background: #e8f1ff;
     color: #0d6efd;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
 }
 
 .status-shortlisted {
-    background: #fff4d6;
-    color: #b77900;
+    background: #cff4fc;
+    color: #087990;
 }
 
 .status-interview {
-    background: #e8f8f0;
-    color: #198754;
+    background: #e2d9f3;
+    color: #59359a;
 }
 
 .status-selected {
-    background: #d9f7e8;
-    color: #087443;
+    background: #d1e7dd;
+    color: #146c43;
 }
 
 .status-rejected {
-    background: #ffe5e7;
-    color: #dc3545;
+    background: #f8d7da;
+    color: #842029;
 }
 
 
-/* =========================================
-   ACTION BUTTON
-========================================= */
+/* Information */
 
-.action-btn {
-    border: none;
+.application-info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #eef2f7;
+}
 
-    background: #eaf2ff;
+.info-item {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+}
+
+.info-item i {
     color: #0d6efd;
-
-    width: 34px;
-    height: 34px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    transition: .25s;
+    margin-top: 2px;
 }
 
-.action-btn:hover {
+.info-item span {
+    display: block;
+}
+
+.info-label {
+    color: #888;
+    font-size: 10px;
+    margin-bottom: 3px;
+}
+
+.info-value {
+    color: #333;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* Bottom */
+
+.application-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid #eef2f7;
+}
+
+.application-date {
+    color: #888;
+    font-size: 11px;
+}
+
+.view-application-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 14px;
+    background: #e8f1ff;
+    color: #0d6efd;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.view-application-btn:hover {
     background: #0d6efd;
     color: white;
-
-    transform: scale(1.08);
-
-    box-shadow:
-        0 0 12px rgba(13,110,253,.35);
 }
 
 
-/* =========================================
-   MOBILE
-========================================= */
+/* Empty state */
 
-@media(max-width: 900px) {
+.empty-applications {
+    background: white;
+    padding: 60px 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+.empty-applications i {
+    font-size: 50px;
+    color: #b8c7da;
+    margin-bottom: 15px;
+}
+
+.empty-applications h2 {
+    color: #555;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.empty-applications p {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.browse-drives-btn {
+    display: inline-block;
+    padding: 11px 18px;
+    background: #0d6efd;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.browse-drives-btn:hover {
+    background: #084298;
+}
+
+
+/* Responsive */
+
+@media(max-width:900px) {
 
     .application-stats {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .application-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
 }
 
-@media(max-width: 768px) {
+@media(max-width:650px) {
 
     .applications-page {
-        padding: 20px;
+        padding: 20px 15px;
     }
-
-    .page-header {
-        padding: 22px;
-    }
-
-    .page-header h1 {
-        font-size: 23px;
-    }
-
-    .header-icon {
-        display: none;
-    }
-
-}
-
-@media(max-width: 550px) {
 
     .application-stats {
         grid-template-columns: 1fr;
+    }
+
+    .application-top {
+        flex-direction: column;
+    }
+
+    .application-info {
+        grid-template-columns: 1fr;
+    }
+
+    .application-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
     }
 
 }
@@ -352,209 +359,353 @@
 
 <div class="applications-page">
 
-    <div class="page-header">
-        <div>
+    <div class="applications-container">
+
+
+        <!-- Header -->
+
+        <div class="applications-header">
+
             <h1>
-                <i class="fas fa-file-alt"></i>
-                Applications
+                <i class="fas fa-file-signature"></i>
+                My Applications
             </h1>
 
             <p>
-                Track and manage your placement applications.
+                Track all your placement applications and their current status.
             </p>
-        </div>
 
-        <div class="header-icon">
-            <i class="fas fa-paper-plane"></i>
-        </div>
-    </div>
-
-
-    <div class="application-stats">
-
-        <div class="stat-card">
-            <div class="stat-icon">
-                <i class="fas fa-file-alt"></i>
-            </div>
-
-            <div>
-                <h3>8</h3>
-                <p>Total Applications</p>
-            </div>
         </div>
 
 
-        <div class="stat-card">
-            <div class="stat-icon">
-                <i class="fas fa-clock"></i>
+        <!-- Statistics -->
+
+        <div class="application-stats">
+
+
+            <div class="application-stat">
+
+                <div class="application-stat-icon">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+
+                <div>
+                    <h3>{{ total_applications }}</h3>
+                    <p>Total Applications</p>
+                </div>
+
             </div>
 
-            <div>
-                <h3>3</h3>
-                <p>Applications Pending</p>
-            </div>
-        </div>
 
+            <div class="application-stat">
 
-        <div class="stat-card">
-            <div class="stat-icon">
-                <i class="fas fa-user-check"></i>
-            </div>
+                <div class="application-stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
 
-            <div>
-                <h3>2</h3>
-                <p>Shortlisted</p>
-            </div>
-        </div>
+                <div>
+                    <h3>{{ pending_applications }}</h3>
+                    <p>Pending</p>
+                </div>
 
-
-        <div class="stat-card">
-            <div class="stat-icon">
-                <i class="fas fa-trophy"></i>
             </div>
 
-            <div>
-                <h3>1</h3>
-                <p>Selected</p>
+
+            <div class="application-stat">
+
+                <div class="application-stat-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+
+                <div>
+                    <h3>{{ shortlisted_applications }}</h3>
+                    <p>Shortlisted</p>
+                </div>
+
             </div>
-        </div>
-
-    </div>
 
 
-    <div class="application-box">
+            <div class="application-stat">
 
-        <div class="application-box-header">
+                <div class="application-stat-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
 
-            <div>
-                <h2>My Applications</h2>
+                <div>
+                    <h3>{{ selected_applications }}</h3>
+                    <p>Selected</p>
+                </div>
 
-                <span>
-                    Placement applications submitted by you
-                </span>
             </div>
 
         </div>
 
 
-        <table id="applicationsTable">
+        {% if applications %}
 
-            <thead>
-                <tr>
-                    <th>Company</th>
-                    <th>Job Role</th>
-                    <th>Package</th>
-                    <th>Applied Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+        <!-- Application List -->
 
-            <tbody>
+        <div class="application-list">
 
-                <tr>
-                    <td class="company-name">TCS</td>
-                    <td class="role">Software Developer</td>
-                    <td class="package">7 LPA</td>
-                    <td>10 Aug 2026</td>
+            {% for application in applications %}
 
-                    <td>
-                        <span class="status status-applied">
+            <div class="application-card">
+
+
+                <!-- Top -->
+
+                <div class="application-top">
+
+                    <div class="company-info">
+
+                        <div class="company-icon">
+
+                            <i class="fas fa-building"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                {{ application.company_name }}
+                            </h3>
+
+                            <p class="job-title">
+                                {{ application.job_title }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Status -->
+
+                    {% set app_status = (application.status or 'Applied')|lower %}
+
+                    {% if app_status == 'applied' %}
+
+                        <span class="application-status status-applied">
                             Applied
                         </span>
-                    </td>
 
-                    <td>
-                        <button class="action-btn" title="View Details">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </td>
-                </tr>
+                    {% elif app_status == 'pending' %}
 
+                        <span class="application-status status-pending">
+                            Pending
+                        </span>
 
-                <tr>
-                    <td class="company-name">Infosys</td>
-                    <td class="role">System Engineer</td>
-                    <td class="package">6.5 LPA</td>
-                    <td>08 Aug 2026</td>
+                    {% elif app_status == 'shortlisted' %}
 
-                    <td>
-                        <span class="status status-shortlisted">
+                        <span class="application-status status-shortlisted">
                             Shortlisted
                         </span>
-                    </td>
 
-                    <td>
-                        <button class="action-btn" title="View Details">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </td>
-                </tr>
+                    {% elif app_status == 'interview' %}
 
-
-                <tr>
-                    <td class="company-name">Wipro</td>
-                    <td class="role">Project Engineer</td>
-                    <td class="package">5.5 LPA</td>
-                    <td>05 Aug 2026</td>
-
-                    <td>
-                        <span class="status status-interview">
+                        <span class="application-status status-interview">
                             Interview
                         </span>
-                    </td>
 
-                    <td>
-                        <button class="action-btn" title="View Details">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </td>
-                </tr>
+                    {% elif app_status == 'selected' %}
 
-
-                <tr>
-                    <td class="company-name">Deloitte</td>
-                    <td class="role">Analyst</td>
-                    <td class="package">8 LPA</td>
-                    <td>02 Aug 2026</td>
-
-                    <td>
-                        <span class="status status-selected">
+                        <span class="application-status status-selected">
                             Selected
                         </span>
-                    </td>
 
-                    <td>
-                        <button class="action-btn" title="View Details">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </td>
-                </tr>
+                    {% elif app_status == 'rejected' %}
 
-
-                <tr>
-                    <td class="company-name">Accenture</td>
-                    <td class="role">Associate Software Engineer</td>
-                    <td class="package">6 LPA</td>
-                    <td>30 Jul 2026</td>
-
-                    <td>
-                        <span class="status status-rejected">
+                        <span class="application-status status-rejected">
                             Rejected
                         </span>
-                    </td>
 
-                    <td>
-                        <button class="action-btn" title="View Details">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </td>
-                </tr>
+                    {% else %}
 
-            </tbody>
+                        <span class="application-status status-applied">
+                            {{ application.status }}
+                        </span>
 
-        </table>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Information -->
+
+                <div class="application-info">
+
+
+                    <!-- Package -->
+
+                    <div class="info-item">
+
+                        <i class="fas fa-money-bill-wave"></i>
+
+                        <div>
+
+                            <span class="info-label">
+                                Package
+                            </span>
+
+                            <span class="info-value">
+                                {{ application.package or 'Not specified' }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Location -->
+
+                    <div class="info-item">
+
+                        <i class="fas fa-map-marker-alt"></i>
+
+                        <div>
+
+                            <span class="info-label">
+                                Location
+                            </span>
+
+                            <span class="info-value">
+                                {{ application.location or 'Not specified' }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Drive Date -->
+
+                    <div class="info-item">
+
+                        <i class="fas fa-calendar"></i>
+
+                        <div>
+
+                            <span class="info-label">
+                                Drive Date
+                            </span>
+
+                            <span class="info-value">
+
+                                {% if application.drive_date %}
+                                    {{ application.drive_date.strftime('%d %b %Y') }}
+                                {% else %}
+                                    Not specified
+                                {% endif %}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Deadline -->
+
+                    <div class="info-item">
+
+                        <i class="fas fa-clock"></i>
+
+                        <div>
+
+                            <span class="info-label">
+                                Deadline
+                            </span>
+
+                            <span class="info-value">
+
+                                {% if application.application_deadline %}
+                                    {{ application.application_deadline.strftime('%d %b %Y') }}
+                                {% else %}
+                                    Not specified
+                                {% endif %}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Bottom -->
+
+                <div class="application-bottom">
+
+                    <span class="application-date">
+
+                        <i class="fas fa-calendar-check"></i>
+
+                        Applied on:
+
+                        {% if application.application_date %}
+
+                            {{ application.application_date.strftime('%d %b %Y, %I:%M %p') }}
+
+                        {% else %}
+
+                            Not available
+
+                        {% endif %}
+
+                    </span>
+
+
+                    <a
+                        href="{{ url_for('application_details', application_id=application.application_id) }}"
+                        class="view-application-btn"
+                    >
+
+                        <i class="fas fa-eye"></i>
+
+                        View Details
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <!-- Empty State -->
+
+        <div class="empty-applications">
+
+            <i class="fas fa-file-circle-xmark"></i>
+
+            <h2>
+                No Applications Yet
+            </h2>
+
+            <p>
+                You haven't applied for any placement drives yet.
+            </p>
+
+            <a
+                href="{{ url_for('placement_drives') }}"
+                class="browse-drives-btn"
+            >
+                <i class="fas fa-briefcase"></i>
+                Browse Placement Drives
+            </a>
+
+        </div>
+
+        {% endif %}
+
 
     </div>
 
 </div>
+

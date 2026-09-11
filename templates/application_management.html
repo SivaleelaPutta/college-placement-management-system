@@ -1,0 +1,364 @@
+
+<div class="dashboard-content">
+
+    <style>
+        .application-management {
+            padding: 10px 0 30px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #1f2937;
+        }
+
+        .page-header p {
+            margin: 6px 0 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-card .stat-title {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .management-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e5e7eb;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .search-box input,
+        .filter-box select {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .search-box input:focus,
+        .filter-box select:focus {
+            border-color: #4f46e5;
+        }
+
+        .filter-box {
+            width: 200px;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .applications-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1100px;
+        }
+
+        .applications-table th {
+            background: #f9fafb;
+            color: #374151;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+            padding: 14px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            white-space: nowrap;
+        }
+
+        .applications-table td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+            color: #4b5563;
+            font-size: 13px;
+        }
+
+        .applications-table tr:hover {
+            background: #fafafa;
+        }
+
+        .student-name {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .student-email {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 3px;
+        }
+
+        .job-title {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .company-name {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .small-text {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 3px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .status-applied {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .status-shortlisted {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-interview {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .status-selected {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-form {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+        }
+
+        .status-form select {
+            padding: 7px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 12px;
+            background: white;
+        }
+
+        .update-btn {
+            border: none;
+            background: #4f46e5;
+            color: white;
+            padding: 8px 11px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .update-btn:hover {
+            background: #4338ca;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        .empty-state i {
+            font-size: 45px;
+            margin-bottom: 15px;
+            color: #9ca3af;
+        }
+
+        .empty-state h3 {
+            margin: 0 0 8px;
+            color: #374151;
+        }
+
+        .empty-state p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-box {
+                width: 100%;
+            }
+
+            .page-header h1 {
+                font-size: 23px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .management-card {
+                padding: 15px;
+            }
+        }
+    </style>
+
+
+    <div class="application-management">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div>
+                <h1>
+                    <i class="fas fa-file-signature"></i>
+                    Application Management
+                </h1>
+
+                <p>
+                    Manage student applications and update their placement status.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- STATISTICS -->
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-title">Total Applications</div>
+                <div class="stat-number">
+                    {{ total_applications }}
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-title">Applied</div>
+                <div class="stat-number">
+                    {{ applied_count }}
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-title">Shortlisted</div>
+                <div class="stat-number">
+                    {{ shortlisted_count }}
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-title">Interview</div>
+                <div class="stat-number">
+                    {{ interview_count }}
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-title">Selected</div>
+                <div class="stat-number">
+                    {{ selected_count }}
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- APPLICATION TABLE -->
+        <div class="management-card">
+
+            <!-- SEARCH + FILTER -->
+            <div class="toolbar">
+
+                <div class="search-box">
+                    <input
+                        type="text"
+                        id="applicationSearch"
+                        placeholder="Search student, roll number, company or job..."
+                        onkeyup="filterApplications()"
+                    >
+                </div>
+
+                <div class="filter-box">
+                    <select
+                        id="statusFilter"
+                        onchange="filterApplications()"
+                    >
+                        <option value="All">All Statuses</option>
+                        <option value="Applied">Applied</option>
+                        <option value="Shortlisted">Shortlisted</option>
+                        <option value="Interview">Interview</option>
+                        <option value="Selected">Selected</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+
+            </div>
+
+
