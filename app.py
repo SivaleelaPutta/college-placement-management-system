@@ -1,4 +1,6 @@
+
 import os
+from datetime import date
 
 from flask import (
     Flask,
@@ -345,10 +347,6 @@ def register():
             "role",
             ""
         ).strip().lower()
-
-        # ----------------------------------------------------
-        # BASIC VALIDATION
-        # ----------------------------------------------------
 
         if not full_name:
 
@@ -702,10 +700,7 @@ def register():
 # DASHBOARD STATISTICS
 # ============================================================
 
-def get_dashboard_stats(
-    role,
-    user_id
-):
+def get_dashboard_stats(role, user_id):
 
     stats = {
         "companies": 0,
@@ -750,8 +745,6 @@ def get_dashboard_stats(
 
                 student_id = student["student_id"]
 
-                # Open placement drives
-
                 cursor.execute(
                     """
                     SELECT COUNT(*) AS total
@@ -763,8 +756,6 @@ def get_dashboard_stats(
                 stats["companies"] = (
                     cursor.fetchone()["total"]
                 )
-
-                # Applications
 
                 cursor.execute(
                     """
@@ -779,15 +770,12 @@ def get_dashboard_stats(
                     cursor.fetchone()["total"]
                 )
 
-                # Interviews
-
                 cursor.execute(
                     """
                     SELECT COUNT(*) AS total
                     FROM interviews i
                     INNER JOIN applications a
-                        ON i.application_id =
-                           a.application_id
+                        ON i.application_id = a.application_id
                     WHERE a.student_id = %s
                     """,
                     (student_id,)
@@ -797,15 +785,12 @@ def get_dashboard_stats(
                     cursor.fetchone()["total"]
                 )
 
-                # Offers
-
                 cursor.execute(
                     """
                     SELECT COUNT(*) AS total
                     FROM results r
                     INNER JOIN applications a
-                        ON r.application_id =
-                           a.application_id
+                        ON r.application_id = a.application_id
                     WHERE a.student_id = %s
                     AND r.result_status = 'Selected'
                     """,
@@ -820,10 +805,7 @@ def get_dashboard_stats(
         # ADMIN / CDPC
         # ====================================================
 
-        elif role in [
-            "admin",
-            "cdpc"
-        ]:
+        elif role in ["admin", "cdpc"]:
 
             cursor.execute(
                 """
@@ -913,8 +895,6 @@ def get_dashboard_stats(
 
                 company_id = company["company_id"]
 
-                # Drives
-
                 cursor.execute(
                     """
                     SELECT COUNT(*) AS total
@@ -927,8 +907,6 @@ def get_dashboard_stats(
                 stats["drives"] = (
                     cursor.fetchone()["total"]
                 )
-
-                # Applications
 
                 cursor.execute(
                     """
@@ -944,8 +922,6 @@ def get_dashboard_stats(
                 stats["applications"] = (
                     cursor.fetchone()["total"]
                 )
-
-                # Shortlisted
 
                 cursor.execute(
                     """
@@ -963,15 +939,12 @@ def get_dashboard_stats(
                     cursor.fetchone()["total"]
                 )
 
-                # Interviews
-
                 cursor.execute(
                     """
                     SELECT COUNT(*) AS total
                     FROM interviews i
                     INNER JOIN applications a
-                        ON i.application_id =
-                           a.application_id
+                        ON i.application_id = a.application_id
                     INNER JOIN placement_drives d
                         ON a.drive_id = d.drive_id
                     WHERE d.company_id = %s
@@ -983,15 +956,12 @@ def get_dashboard_stats(
                     cursor.fetchone()["total"]
                 )
 
-                # Offers
-
                 cursor.execute(
                     """
                     SELECT COUNT(*) AS total
                     FROM results r
                     INNER JOIN applications a
-                        ON r.application_id =
-                           a.application_id
+                        ON r.application_id = a.application_id
                     INNER JOIN placement_drives d
                         ON a.drive_id = d.drive_id
                     WHERE d.company_id = %s
@@ -1122,10 +1092,6 @@ def profile():
 
         profile_data = None
 
-        # ----------------------------------------------------
-        # STUDENT PROFILE
-        # ----------------------------------------------------
-
         if role == "student":
 
             cursor.execute(
@@ -1154,14 +1120,7 @@ def profile():
 
             profile_data = cursor.fetchone()
 
-        # ----------------------------------------------------
-        # ADMIN / CDPC PROFILE
-        # ----------------------------------------------------
-
-        elif role in [
-            "admin",
-            "cdpc"
-        ]:
+        elif role in ["admin", "cdpc"]:
 
             cursor.execute(
                 """
@@ -1178,10 +1137,6 @@ def profile():
             )
 
             profile_data = cursor.fetchone()
-
-        # ----------------------------------------------------
-        # COMPANY PROFILE
-        # ----------------------------------------------------
 
         elif role == "company":
 
@@ -1305,10 +1260,6 @@ def update_profile():
 
     try:
 
-        # ----------------------------------------------------
-        # CHECK DUPLICATE EMAIL
-        # ----------------------------------------------------
-
         cursor.execute(
             """
             SELECT user_id
@@ -1335,10 +1286,6 @@ def update_profile():
                 url_for("profile")
             )
 
-        # ----------------------------------------------------
-        # UPDATE USERS
-        # ----------------------------------------------------
-
         cursor.execute(
             """
             UPDATE users
@@ -1353,10 +1300,6 @@ def update_profile():
                 user_id
             )
         )
-
-        # ----------------------------------------------------
-        # UPDATE STUDENT
-        # ----------------------------------------------------
 
         if role == "student":
 
@@ -1404,10 +1347,6 @@ def update_profile():
                     user_id
                 )
             )
-
-        # ----------------------------------------------------
-        # UPDATE COMPANY
-        # ----------------------------------------------------
 
         elif role == "company":
 
@@ -1564,14 +1503,506 @@ def placement_drives():
             url_for("login")
         )
 
-    return render_template(
-        "homepage.html",
-        page="placement_drives.html"
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
     )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT
+                pd.drive_id,
+                pd.company_id,
+                pd.job_title,
+                pd.description,
+                pd.eligibility,
+                pd.package,
+                pd.drive_date,
+                pd.application_deadline,
+                pd.status,
+
+                c.company_name,
+                c.industry,
+                c.location,
+                c.website,
+                c.description AS company_description
+
+            FROM placement_drives pd
+
+            INNER JOIN companies c
+                ON pd.company_id = c.company_id
+
+            ORDER BY
+                CASE
+                    WHEN pd.status = 'Open' THEN 1
+                    WHEN pd.status = 'Closing Soon' THEN 2
+                    ELSE 3
+                END,
+                pd.application_deadline ASC
+            """
+        )
+
+        drives = cursor.fetchall()
+
+        student_id = None
+
+        if session.get("role") == "student":
+
+            cursor.execute(
+                """
+                SELECT student_id
+                FROM students
+                WHERE user_id = %s
+                """,
+                (session["user_id"],)
+            )
+
+            student = cursor.fetchone()
+
+            if student:
+
+                student_id = student["student_id"]
+
+        applied_drive_ids = set()
+
+        if student_id:
+
+            cursor.execute(
+                """
+                SELECT drive_id
+                FROM applications
+                WHERE student_id = %s
+                """,
+                (student_id,)
+            )
+
+            applied_rows = cursor.fetchall()
+
+            applied_drive_ids = {
+                row["drive_id"]
+                for row in applied_rows
+            }
+
+        for drive in drives:
+
+            drive["already_applied"] = (
+                drive["drive_id"]
+                in applied_drive_ids
+            )
+
+        active_drives = sum(
+            1
+            for drive in drives
+            if str(
+                drive["status"] or ""
+            ).lower() == "open"
+        )
+
+        companies_count = len(
+            {
+                drive["company_id"]
+                for drive in drives
+            }
+        )
+
+        closing_soon = sum(
+            1
+            for drive in drives
+            if str(
+                drive["status"] or ""
+            ).lower() == "closing soon"
+        )
+
+        return render_template(
+            "homepage.html",
+            page="placement_drives.html",
+            drives=drives,
+            active_drives=active_drives,
+            companies_count=companies_count,
+            closing_soon=closing_soon
+        )
+
+    except Error as e:
+
+        print(
+            "PLACEMENT DRIVES ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to load placement drives.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
 
 
 # ============================================================
-# APPLICATIONS
+# DRIVE DETAILS
+# ============================================================
+
+@app.route("/drive/<int:drive_id>")
+def drive_details(drive_id):
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("placement_drives")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT
+                pd.drive_id,
+                pd.company_id,
+                pd.job_title,
+                pd.description,
+                pd.eligibility,
+                pd.package,
+                pd.drive_date,
+                pd.application_deadline,
+                pd.status,
+
+                c.company_name,
+                c.industry,
+                c.location,
+                c.website,
+                c.description AS company_description
+
+            FROM placement_drives pd
+
+            INNER JOIN companies c
+                ON pd.company_id = c.company_id
+
+            WHERE pd.drive_id = %s
+            """,
+            (drive_id,)
+        )
+
+        drive = cursor.fetchone()
+
+        if not drive:
+
+            flash(
+                "Placement drive not found.",
+                "warning"
+            )
+
+            return redirect(
+                url_for("placement_drives")
+            )
+
+        already_applied = False
+
+        if session.get("role") == "student":
+
+            cursor.execute(
+                """
+                SELECT student_id
+                FROM students
+                WHERE user_id = %s
+                """,
+                (session["user_id"],)
+            )
+
+            student = cursor.fetchone()
+
+            if student:
+
+                cursor.execute(
+                    """
+                    SELECT application_id
+                    FROM applications
+                    WHERE student_id = %s
+                    AND drive_id = %s
+                    """,
+                    (
+                        student["student_id"],
+                        drive_id
+                    )
+                )
+
+                already_applied = (
+                    cursor.fetchone()
+                    is not None
+                )
+
+        return render_template(
+            "homepage.html",
+            page="drive_details.html",
+            drive=drive,
+            already_applied=already_applied
+        )
+
+    except Error as e:
+
+        print(
+            "DRIVE DETAILS ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to load drive details.",
+            "error"
+        )
+
+        return redirect(
+            url_for("placement_drives")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# APPLY FOR PLACEMENT DRIVE
+# ============================================================
+
+@app.route(
+    "/apply/<int:drive_id>",
+    methods=["POST"]
+)
+def apply_for_drive(drive_id):
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    if session.get("role") != "student":
+
+        flash(
+            "Only students can apply for placement drives.",
+            "error"
+        )
+
+        return redirect(
+            url_for("placement_drives")
+        )
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("placement_drives")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT student_id
+            FROM students
+            WHERE user_id = %s
+            """,
+            (session["user_id"],)
+        )
+
+        student = cursor.fetchone()
+
+        if not student:
+
+            flash(
+                "Student profile not found.",
+                "error"
+            )
+
+            return redirect(
+                url_for("placement_drives")
+            )
+
+        student_id = student["student_id"]
+
+        cursor.execute(
+            """
+            SELECT
+                drive_id,
+                application_deadline,
+                status
+            FROM placement_drives
+            WHERE drive_id = %s
+            """,
+            (drive_id,)
+        )
+
+        drive = cursor.fetchone()
+
+        if not drive:
+
+            flash(
+                "Placement drive not found.",
+                "error"
+            )
+
+            return redirect(
+                url_for("placement_drives")
+            )
+
+        if str(
+            drive["status"] or ""
+        ).lower() != "open":
+
+            flash(
+                "Applications for this drive are closed.",
+                "warning"
+            )
+
+            return redirect(
+                url_for("placement_drives")
+            )
+
+        if (
+            drive["application_deadline"]
+            and drive["application_deadline"]
+            < date.today()
+        ):
+
+            flash(
+                "The application deadline has passed.",
+                "warning"
+            )
+
+            return redirect(
+                url_for("placement_drives")
+            )
+
+        cursor.execute(
+            """
+            SELECT application_id
+            FROM applications
+            WHERE student_id = %s
+            AND drive_id = %s
+            """,
+            (
+                student_id,
+                drive_id
+            )
+        )
+
+        existing_application = cursor.fetchone()
+
+        if existing_application:
+
+            flash(
+                "You have already applied for this drive.",
+                "info"
+            )
+
+            return redirect(
+                url_for("applications")
+            )
+
+        cursor.execute(
+            """
+            INSERT INTO applications
+            (
+                student_id,
+                drive_id,
+                status
+            )
+            VALUES
+            (
+                %s,
+                %s,
+                'Applied'
+            )
+            """,
+            (
+                student_id,
+                drive_id
+            )
+        )
+
+        connection.commit()
+
+        flash(
+            "Application submitted successfully!",
+            "success"
+        )
+
+        return redirect(
+            url_for("applications")
+        )
+
+    except Error as e:
+
+        connection.rollback()
+
+        print(
+            "APPLICATION SUBMISSION ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to submit application.",
+            "error"
+        )
+
+        return redirect(
+            url_for("placement_drives")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# STUDENT APPLICATIONS
 # ============================================================
 
 @app.route("/applications")
@@ -1583,10 +2014,640 @@ def applications():
             url_for("login")
         )
 
-    return render_template(
-        "homepage.html",
-        page="applications.html"
+    if session.get("role") != "student":
+
+        flash(
+            "Only students can view applications.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
     )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT student_id
+            FROM students
+            WHERE user_id = %s
+            """,
+            (session["user_id"],)
+        )
+
+        student = cursor.fetchone()
+
+        if not student:
+
+            flash(
+                "Student profile not found.",
+                "error"
+            )
+
+            return redirect(
+                url_for("dashboard")
+            )
+
+        student_id = student["student_id"]
+
+        cursor.execute(
+            """
+            SELECT
+                a.application_id,
+                a.application_date,
+                a.status,
+
+                pd.drive_id,
+                pd.job_title,
+                pd.package,
+                pd.drive_date,
+                pd.application_deadline,
+
+                c.company_name,
+                c.location
+
+            FROM applications a
+
+            INNER JOIN placement_drives pd
+                ON a.drive_id = pd.drive_id
+
+            INNER JOIN companies c
+                ON pd.company_id = c.company_id
+
+            WHERE a.student_id = %s
+
+            ORDER BY a.application_date DESC
+            """,
+            (student_id,)
+        )
+
+        application_list = cursor.fetchall()
+
+        total_applications = len(
+            application_list
+        )
+
+        pending_applications = sum(
+            1
+            for application in application_list
+            if str(
+                application["status"] or ""
+            ).lower()
+            in ["applied", "pending"]
+        )
+
+        shortlisted_applications = sum(
+            1
+            for application in application_list
+            if str(
+                application["status"] or ""
+            ).lower() == "shortlisted"
+        )
+
+        selected_applications = sum(
+            1
+            for application in application_list
+            if str(
+                application["status"] or ""
+            ).lower() == "selected"
+        )
+
+        return render_template(
+            "homepage.html",
+            page="applications.html",
+            applications=application_list,
+            total_applications=total_applications,
+            pending_applications=pending_applications,
+            shortlisted_applications=shortlisted_applications,
+            selected_applications=selected_applications
+        )
+
+    except Error as e:
+
+        print(
+            "APPLICATIONS ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to load applications.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# APPLICATION DETAILS
+# ============================================================
+
+@app.route(
+    "/application/<int:application_id>"
+)
+def application_details(application_id):
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    if session.get("role") != "student":
+
+        flash(
+            "Access denied.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("applications")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT
+                a.application_id,
+                a.application_date,
+                a.status AS application_status,
+
+                pd.drive_id,
+                pd.job_title,
+                pd.description,
+                pd.eligibility,
+                pd.package,
+                pd.drive_date,
+                pd.application_deadline,
+                pd.status AS drive_status,
+
+                c.company_id,
+                c.company_name,
+                c.industry,
+                c.location,
+                c.website,
+                c.description AS company_description
+
+            FROM applications a
+
+            INNER JOIN placement_drives pd
+                ON a.drive_id = pd.drive_id
+
+            INNER JOIN companies c
+                ON pd.company_id = c.company_id
+
+            INNER JOIN students s
+                ON a.student_id = s.student_id
+
+            WHERE a.application_id = %s
+
+            AND s.user_id = %s
+            """,
+            (
+                application_id,
+                session["user_id"]
+            )
+        )
+
+        application = cursor.fetchone()
+
+        if not application:
+
+            flash(
+                "Application not found.",
+                "warning"
+            )
+
+            return redirect(
+                url_for("applications")
+            )
+
+        # ----------------------------------------------------
+        # INTERVIEWS
+        # ----------------------------------------------------
+
+        cursor.execute(
+            """
+            SELECT
+                interview_id,
+                interview_date,
+                interview_time,
+                interview_mode,
+                meeting_link,
+                status,
+                feedback
+            FROM interviews
+            WHERE application_id = %s
+            ORDER BY
+                interview_date ASC,
+                interview_time ASC
+            """,
+            (application_id,)
+        )
+
+        interviews = cursor.fetchall()
+
+        # ----------------------------------------------------
+        # RESULTS
+        # ----------------------------------------------------
+
+        cursor.execute(
+            """
+            SELECT
+                result_id,
+                result_status,
+                package,
+                result_date
+            FROM results
+            WHERE application_id = %s
+            ORDER BY result_date DESC
+            """,
+            (application_id,)
+        )
+
+        results = cursor.fetchall()
+
+        return render_template(
+            "homepage.html",
+            page="application_details.html",
+            application=application,
+            interviews=interviews,
+            results=results
+        )
+
+    except Error as e:
+
+        print(
+            "APPLICATION DETAILS ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to load application details.",
+            "error"
+        )
+
+        return redirect(
+            url_for("applications")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# CDPC / ADMIN APPLICATION MANAGEMENT
+# ============================================================
+
+@app.route("/application-management")
+def application_management():
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    if session.get("role") not in [
+        "cdpc",
+        "admin"
+    ]:
+
+        flash(
+            "Access denied. Only CDPC and Admin can manage applications.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT
+                a.application_id,
+                a.application_date,
+                a.status,
+
+                s.student_id,
+                s.roll_number,
+                s.branch,
+                s.year,
+
+                u.full_name AS student_name,
+                u.email AS student_email,
+
+                pd.drive_id,
+                pd.job_title,
+                pd.package,
+                pd.drive_date,
+                pd.application_deadline,
+
+                c.company_id,
+                c.company_name,
+                c.location
+
+            FROM applications a
+
+            INNER JOIN students s
+                ON a.student_id = s.student_id
+
+            INNER JOIN users u
+                ON s.user_id = u.user_id
+
+            INNER JOIN placement_drives pd
+                ON a.drive_id = pd.drive_id
+
+            INNER JOIN companies c
+                ON pd.company_id = c.company_id
+
+            ORDER BY a.application_date DESC
+            """
+        )
+
+        application_list = cursor.fetchall()
+
+        total_applications = len(
+            application_list
+        )
+
+        applied_count = sum(
+            1
+            for application in application_list
+            if str(
+                application["status"] or ""
+            ).lower() == "applied"
+        )
+
+        shortlisted_count = sum(
+            1
+            for application in application_list
+            if str(
+                application["status"] or ""
+            ).lower() == "shortlisted"
+        )
+
+        interview_count = sum(
+            1
+            for application in application_list
+            if str(
+                application["status"] or ""
+            ).lower() == "interview"
+        )
+
+        selected_count = sum(
+            1
+            for application in application_list
+            if str(
+                application["status"] or ""
+            ).lower() == "selected"
+        )
+
+        rejected_count = sum(
+            1
+            for application in application_list
+            if str(
+                application["status"] or ""
+            ).lower() == "rejected"
+        )
+
+        return render_template(
+            "homepage.html",
+            page="application_management.html",
+            applications=application_list,
+            total_applications=total_applications,
+            applied_count=applied_count,
+            shortlisted_count=shortlisted_count,
+            interview_count=interview_count,
+            selected_count=selected_count,
+            rejected_count=rejected_count
+        )
+
+    except Error as e:
+
+        print(
+            "APPLICATION MANAGEMENT ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to load applications.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# UPDATE APPLICATION STATUS
+# ============================================================
+
+@app.route(
+    "/update-application-status/<int:application_id>",
+    methods=["POST"]
+)
+def update_application_status(application_id):
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    if session.get("role") not in [
+        "cdpc",
+        "admin"
+    ]:
+
+        flash(
+            "Access denied. Only CDPC and Admin can update applications.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    new_status = request.form.get(
+        "status",
+        ""
+    ).strip()
+
+    allowed_statuses = [
+        "Applied",
+        "Shortlisted",
+        "Interview",
+        "Selected",
+        "Rejected"
+    ]
+
+    if new_status not in allowed_statuses:
+
+        flash(
+            "Invalid application status.",
+            "error"
+        )
+
+        return redirect(
+            url_for("application_management")
+        )
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("application_management")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT application_id
+            FROM applications
+            WHERE application_id = %s
+            """,
+            (application_id,)
+        )
+
+        application = cursor.fetchone()
+
+        if not application:
+
+            flash(
+                "Application not found.",
+                "warning"
+            )
+
+            return redirect(
+                url_for("application_management")
+            )
+
+        cursor.execute(
+            """
+            UPDATE applications
+            SET status = %s
+            WHERE application_id = %s
+            """,
+            (
+                new_status,
+                application_id
+            )
+        )
+
+        connection.commit()
+
+        flash(
+            f"Application status updated to {new_status}.",
+            "success"
+        )
+
+        return redirect(
+            url_for("application_management")
+        )
+
+    except Error as e:
+
+        connection.rollback()
+
+        print(
+            "UPDATE APPLICATION STATUS ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to update application status.",
+            "error"
+        )
+
+        return redirect(
+            url_for("application_management")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
 
 
 # ============================================================
@@ -1671,10 +2732,14 @@ def student_management():
                 s.year,
                 0 AS cgpa,
                 0 AS backlogs
+
             FROM students s
+
             INNER JOIN users u
                 ON s.user_id = u.user_id
+
             WHERE u.role = 'student'
+
             ORDER BY s.student_id DESC
             """
         )
@@ -1795,8 +2860,6 @@ def add_student():
 
         try:
 
-            # Check duplicate email
-
             cursor.execute(
                 """
                 SELECT user_id
@@ -1829,8 +2892,6 @@ def add_student():
                 password
             )
 
-            # Insert into users
-
             cursor.execute(
                 """
                 INSERT INTO users
@@ -1856,8 +2917,6 @@ def add_student():
             )
 
             user_id = cursor.lastrowid
-
-            # Insert into students
 
             cursor.execute(
                 """
@@ -1970,7 +3029,9 @@ def search_students():
         if search_text:
 
             search_pattern = (
-                "%" + search_text + "%"
+                "%"
+                + search_text
+                + "%"
             )
 
             cursor.execute(
@@ -1985,10 +3046,14 @@ def search_students():
                     s.year,
                     0 AS cgpa,
                     0 AS backlogs
+
                 FROM students s
+
                 INNER JOIN users u
                     ON s.user_id = u.user_id
+
                 WHERE u.role = 'student'
+
                 AND (
                     s.roll_number LIKE %s
                     OR u.full_name LIKE %s
@@ -1996,6 +3061,7 @@ def search_students():
                     OR s.branch LIKE %s
                     OR s.phone LIKE %s
                 )
+
                 ORDER BY s.student_id DESC
                 """,
                 (
@@ -2021,10 +3087,14 @@ def search_students():
                     s.year,
                     0 AS cgpa,
                     0 AS backlogs
+
                 FROM students s
+
                 INNER JOIN users u
                     ON s.user_id = u.user_id
+
                 WHERE u.role = 'student'
+
                 ORDER BY s.student_id DESC
                 """
             )
@@ -2115,9 +3185,12 @@ def view_student(student_id):
                 s.address,
                 0 AS cgpa,
                 0 AS backlogs
+
             FROM students s
+
             INNER JOIN users u
                 ON s.user_id = u.user_id
+
             WHERE s.student_id = %s
             AND u.role = 'student'
             """,
@@ -2200,10 +3273,6 @@ def edit_student(student_id):
 
     try:
 
-        # ----------------------------------------------------
-        # UPDATE
-        # ----------------------------------------------------
-
         if request.method == "POST":
 
             roll_no = request.form.get(
@@ -2250,8 +3319,6 @@ def edit_student(student_id):
                     )
                 )
 
-            # Get user_id
-
             cursor.execute(
                 """
                 SELECT user_id
@@ -2275,8 +3342,6 @@ def edit_student(student_id):
                 )
 
             user_id = student_record["user_id"]
-
-            # Check duplicate email
 
             cursor.execute(
                 """
@@ -2313,8 +3378,6 @@ def edit_student(student_id):
                 else None
             )
 
-            # Update users
-
             cursor.execute(
                 """
                 UPDATE users
@@ -2329,8 +3392,6 @@ def edit_student(student_id):
                     user_id
                 )
             )
-
-            # Update students
 
             cursor.execute(
                 """
@@ -2365,10 +3426,6 @@ def edit_student(student_id):
                 )
             )
 
-        # ----------------------------------------------------
-        # LOAD STUDENT
-        # ----------------------------------------------------
-
         cursor.execute(
             """
             SELECT
@@ -2385,9 +3442,12 @@ def edit_student(student_id):
                 s.address,
                 0 AS cgpa,
                 0 AS backlogs
+
             FROM students s
+
             INNER JOIN users u
                 ON s.user_id = u.user_id
+
             WHERE s.student_id = %s
             AND u.role = 'student'
             """,
@@ -2496,10 +3556,6 @@ def delete_student(student_id):
 
         user_id = student["user_id"]
 
-        # ----------------------------------------------------
-        # DELETE STUDENT PROFILE
-        # ----------------------------------------------------
-
         cursor.execute(
             """
             DELETE FROM students
@@ -2507,10 +3563,6 @@ def delete_student(student_id):
             """,
             (student_id,)
         )
-
-        # ----------------------------------------------------
-        # DELETE USER ACCOUNT
-        # ----------------------------------------------------
 
         cursor.execute(
             """
@@ -2826,3 +3878,4 @@ if __name__ == "__main__":
         port=5000,
         debug=True
     )
+

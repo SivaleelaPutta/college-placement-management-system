@@ -1,0 +1,1093 @@
+
+<style>
+
+/* ==========================================
+   APPLICATION DETAILS
+========================================== */
+
+.application-details-page {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    padding: 35px 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.application-details-container {
+    width: 100%;
+    max-width: 1050px;
+}
+
+
+/* Back button */
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 18px;
+    text-decoration: none;
+    color: #0d6efd;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    color: #084298;
+}
+
+
+/* Header */
+
+.application-details-header {
+    background: white;
+    padding: 28px;
+    border-radius: 15px;
+    border-top: 5px solid #0d6efd;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.company-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.company-icon {
+    width: 65px;
+    height: 65px;
+    min-width: 65px;
+    border-radius: 13px;
+    background: #e8f1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.company-icon i {
+    color: #0d6efd;
+    font-size: 28px;
+}
+
+.company-section h1 {
+    margin: 0 0 5px;
+    color: #222;
+    font-size: 25px;
+}
+
+.job-title {
+    margin: 0;
+    color: #0d6efd;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* Status */
+
+.application-status {
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-applied {
+    background: #e8f1ff;
+    color: #0d6efd;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-shortlisted {
+    background: #cff4fc;
+    color: #087990;
+}
+
+.status-interview {
+    background: #e2d9f3;
+    color: #59359a;
+}
+
+.status-selected {
+    background: #d1e7dd;
+    color: #146c43;
+}
+
+.status-rejected {
+    background: #f8d7da;
+    color: #842029;
+}
+
+
+/* Grid */
+
+.application-details-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 22px;
+}
+
+
+/* Cards */
+
+.details-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    margin-bottom: 22px;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 13px;
+    margin-bottom: 18px;
+    border-bottom: 2px solid #e8eef7;
+}
+
+.card-title i {
+    color: #0d6efd;
+    font-size: 19px;
+}
+
+.card-title h2 {
+    margin: 0;
+    color: #0d6efd;
+    font-size: 19px;
+}
+
+
+/* Info */
+
+.info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 8px;
+    background: #e8f1ff;
+    color: #0d6efd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-content {
+    flex: 1;
+}
+
+.info-label {
+    display: block;
+    color: #888;
+    font-size: 10px;
+    margin-bottom: 3px;
+}
+
+.info-value {
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* Description */
+
+.description {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.8;
+    white-space: pre-line;
+}
+
+
+/* Timeline */
+
+.timeline {
+    position: relative;
+    padding-left: 28px;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background: #dce7f5;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 22px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -27px;
+    top: 2px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #0d6efd;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #0d6efd;
+}
+
+.timeline-item h3 {
+    margin: 0 0 4px;
+    color: #333;
+    font-size: 14px;
+}
+
+.timeline-item p {
+    margin: 0;
+    color: #777;
+    font-size: 11px;
+}
+
+
+/* Interview */
+
+.interview-card {
+    background: #f8f9fc;
+    border: 1px solid #e5eaf2;
+    border-left: 4px solid #0d6efd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 12px;
+}
+
+.interview-card:last-child {
+    margin-bottom: 0;
+}
+
+.interview-card h3 {
+    margin: 0 0 10px;
+    color: #333;
+    font-size: 14px;
+}
+
+.interview-item {
+    display: flex;
+    gap: 8px;
+    color: #666;
+    font-size: 12px;
+    margin: 7px 0;
+}
+
+.interview-item i {
+    color: #0d6efd;
+    width: 15px;
+}
+
+
+/* Result */
+
+.result-card {
+    padding: 18px;
+    border-radius: 10px;
+    background: #f8f9fc;
+    border-left: 4px solid #198754;
+    margin-bottom: 12px;
+}
+
+.result-card h3 {
+    color: #198754;
+    font-size: 15px;
+    margin: 0 0 10px;
+}
+
+.result-item {
+    color: #666;
+    font-size: 12px;
+    margin: 6px 0;
+}
+
+
+/* Empty */
+
+.empty-section {
+    text-align: center;
+    padding: 25px 10px;
+    color: #888;
+}
+
+.empty-section i {
+    font-size: 30px;
+    color: #b8c7da;
+    margin-bottom: 8px;
+}
+
+.empty-section p {
+    font-size: 12px;
+    margin: 0;
+}
+
+
+/* Responsive */
+
+@media(max-width:800px) {
+
+    .application-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .application-details-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+
+@media(max-width:600px) {
+
+    .application-details-page {
+        padding: 20px 15px;
+    }
+
+    .details-card {
+        padding: 20px 15px;
+    }
+
+    .company-section h1 {
+        font-size: 21px;
+    }
+
+}
+
+</style>
+
+
+<div class="application-details-page">
+
+    <div class="application-details-container">
+
+
+        <!-- Back -->
+
+        <a
+            href="{{ url_for('applications') }}"
+            class="back-btn"
+        >
+            <i class="fas fa-arrow-left"></i>
+            Back to My Applications
+        </a>
+
+
+        <!-- Header -->
+
+        <div class="application-details-header">
+
+            <div class="company-section">
+
+                <div class="company-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+
+                <div>
+
+                    <h1>
+                        {{ application.company_name }}
+                    </h1>
+
+                    <p class="job-title">
+                        {{ application.job_title }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Application Status -->
+
+            {% set app_status =
+                (application.application_status or 'Applied')|lower
+            %}
+
+            {% if app_status == 'applied' %}
+
+                <span class="application-status status-applied">
+                    Applied
+                </span>
+
+            {% elif app_status == 'pending' %}
+
+                <span class="application-status status-pending">
+                    Pending
+                </span>
+
+            {% elif app_status == 'shortlisted' %}
+
+                <span class="application-status status-shortlisted">
+                    Shortlisted
+                </span>
+
+            {% elif app_status == 'interview' %}
+
+                <span class="application-status status-interview">
+                    Interview
+                </span>
+
+            {% elif app_status == 'selected' %}
+
+                <span class="application-status status-selected">
+                    Selected
+                </span>
+
+            {% elif app_status == 'rejected' %}
+
+                <span class="application-status status-rejected">
+                    Rejected
+                </span>
+
+            {% else %}
+
+                <span class="application-status status-applied">
+                    {{ application.application_status }}
+                </span>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="application-details-grid">
+
+
+            <!-- LEFT COLUMN -->
+
+            <div>
+
+
+                <!-- Job Information -->
+
+                <div class="details-card">
+
+                    <div class="card-title">
+
+                        <i class="fas fa-briefcase"></i>
+
+                        <h2>Job Information</h2>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+
+                        <div class="info-content">
+
+                            <span class="info-label">
+                                Job Role
+                            </span>
+
+                            <span class="info-value">
+                                {{ application.job_title }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+
+                        <div class="info-content">
+
+                            <span class="info-label">
+                                Package
+                            </span>
+
+                            <span class="info-value">
+                                {{ application.package or 'Not specified' }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+
+                        <div class="info-content">
+
+                            <span class="info-label">
+                                Location
+                            </span>
+
+                            <span class="info-value">
+                                {{ application.location or 'Not specified' }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+
+                        <div class="info-content">
+
+                            <span class="info-label">
+                                Drive Date
+                            </span>
+
+                            <span class="info-value">
+
+                                {% if application.drive_date %}
+                                    {{ application.drive_date.strftime('%d %b %Y') }}
+                                {% else %}
+                                    Not specified
+                                {% endif %}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+
+                        <div class="info-content">
+
+                            <span class="info-label">
+                                Application Deadline
+                            </span>
+
+                            <span class="info-value">
+
+                                {% if application.application_deadline %}
+                                    {{ application.application_deadline.strftime('%d %b %Y') }}
+                                {% else %}
+                                    Not specified
+                                {% endif %}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Job Description -->
+
+                <div class="details-card">
+
+                    <div class="card-title">
+
+                        <i class="fas fa-file-alt"></i>
+
+                        <h2>Job Description</h2>
+
+                    </div>
+
+                    <p class="description">
+                        {{ application.description or
+                           'No job description has been provided.' }}
+                    </p>
+
+                </div>
+
+
+                <!-- Eligibility -->
+
+                <div class="details-card">
+
+                    <div class="card-title">
+
+                        <i class="fas fa-graduation-cap"></i>
+
+                        <h2>Eligibility</h2>
+
+                    </div>
+
+                    <p class="description">
+                        {{ application.eligibility or
+                           'Eligibility criteria not specified.' }}
+                    </p>
+
+                </div>
+
+
+                <!-- Interviews -->
+
+                <div class="details-card">
+
+                    <div class="card-title">
+
+                        <i class="fas fa-calendar-check"></i>
+
+                        <h2>Interview Schedule</h2>
+
+                    </div>
+
+
+                    {% if interviews %}
+
+                        {% for interview in interviews %}
+
+                        <div class="interview-card">
+
+                            <h3>
+                                Interview {{ loop.index }}
+                            </h3>
+
+
+                            {% if interview.interview_date %}
+
+                            <div class="interview-item">
+
+                                <i class="fas fa-calendar"></i>
+
+                                <span>
+                                    {{ interview.interview_date.strftime('%d %b %Y') }}
+                                </span>
+
+                            </div>
+
+                            {% endif %}
+
+
+                            {% if interview.interview_time %}
+
+                            <div class="interview-item">
+
+                                <i class="fas fa-clock"></i>
+
+                                <span>
+                                    {{ interview.interview_time }}
+                                </span>
+
+                            </div>
+
+                            {% endif %}
+
+
+                            {% if interview.interview_mode %}
+
+                            <div class="interview-item">
+
+                                <i class="fas fa-video"></i>
+
+                                <span>
+                                    {{ interview.interview_mode }}
+                                </span>
+
+                            </div>
+
+                            {% endif %}
+
+
+                            {% if interview.meeting_link %}
+
+                            <div class="interview-item">
+
+                                <i class="fas fa-link"></i>
+
+                                <a
+                                    href="{{ interview.meeting_link }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Join Interview
+                                </a>
+
+                            </div>
+
+                            {% endif %}
+
+
+                            <div class="interview-item">
+
+                                <i class="fas fa-info-circle"></i>
+
+                                <span>
+                                    Status:
+                                    {{ interview.status or 'Scheduled' }}
+                                </span>
+
+                            </div>
+
+
+                            {% if interview.feedback %}
+
+                            <div class="interview-item">
+
+                                <i class="fas fa-comment"></i>
+
+                                <span>
+                                    {{ interview.feedback }}
+                                </span>
+
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <div class="empty-section">
+
+                            <i class="fas fa-calendar-xmark"></i>
+
+                            <p>
+                                No interview has been scheduled yet.
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT COLUMN -->
+
+            <div>
+
+
+                <!-- Application Information -->
+
+                <div class="details-card">
+
+                    <div class="card-title">
+
+                        <i class="fas fa-file-signature"></i>
+
+                        <h2>Application Information</h2>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-hashtag"></i>
+                        </div>
+
+                        <div class="info-content">
+
+                            <span class="info-label">
+                                Application ID
+                            </span>
+
+                            <span class="info-value">
+                                #{{ application.application_id }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+
+                        <div class="info-content">
+
+                            <span class="info-label">
+                                Applied On
+                            </span>
+
+                            <span class="info-value">
+
+                                {% if application.application_date %}
+                                    {{ application.application_date.strftime('%d %b %Y') }}
+                                {% else %}
+                                    Not available
+                                {% endif %}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+
+                        <div class="info-content">
+
+                            <span class="info-label">
+                                Company
+                            </span>
+
+                            <span class="info-value">
+                                {{ application.company_name }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-location-dot"></i>
+                        </div>
+
+                        <div class="info-content">
+
+                            <span class="info-label">
+                                Location
+                            </span>
+
+                            <span class="info-value">
+                                {{ application.location or 'Not specified' }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Application Timeline -->
+
+                <div class="details-card">
+
+                    <div class="card-title">
+
+                        <i class="fas fa-route"></i>
+
+                        <h2>Application Progress</h2>
+
+                    </div>
+
+
+                    <div class="timeline">
+
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-dot"></div>
+
+                            <h3>
+                                Application Submitted
+                            </h3>
+
+                            <p>
+                                Your application has been submitted successfully.
+                            </p>
+
+                        </div>
+
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-dot"></div>
+
+                            <h3>
+                                Application Review
+                            </h3>
+
+                            <p>
+                                The application is being reviewed by the placement team.
+                            </p>
+
+                        </div>
+
+
+                        {% if app_status in ['shortlisted', 'interview', 'selected'] %}
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-dot"></div>
+
+                            <h3>
+                                Shortlisted
+                            </h3>
+
+                            <p>
+                                You have been shortlisted for the next stage.
+                            </p>
+
+                        </div>
+
+                        {% endif %}
+
+
+                        {% if app_status in ['interview', 'selected'] %}
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-dot"></div>
+
+                            <h3>
+                                Interview
+                            </h3>
+
+                            <p>
+                                Interview stage has been reached.
+                            </p>
+
+                        </div>
+
+                        {% endif %}
+
+
+                        {% if app_status == 'selected' %}
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-dot"></div>
+
+                            <h3>
+                                Selected
+                            </h3>
+
+                            <p>
+                                Congratulations! You have been selected.
+                            </p>
+
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- Results -->
+
+                <div class="details-card">
+
+                    <div class="card-title">
+
+                        <i class="fas fa-trophy"></i>
+
+                        <h2>Result</h2>
+
+                    </div>
+
+
+                    {% if results %}
+
+                        {% for result in results %}
+
+                        <div class="result-card">
+
+                            <h3>
+                                {{ result.result_status or 'Result Available' }}
+                            </h3>
+
+
+                            {% if result.package %}
+
+                            <p class="result-item">
+
+                                <strong>Package:</strong>
+
+                                {{ result.package }}
+
+                            </p>
+
+                            {% endif %}
+
+
+                            {% if result.result_date %}
+
+                            <p class="result-item">
+
+                                <strong>Date:</strong>
+
+                                {{ result.result_date.strftime('%d %b %Y') }}
+
+                            </p>
+
+                            {% endif %}
+
+                        </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <div class="empty-section">
+
+                            <i class="fas fa-trophy"></i>
+
+                            <p>
+                                No result has been published yet.
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

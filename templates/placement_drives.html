@@ -1,1032 +1,690 @@
-<!-- Placement Drives Page -->
 
 <style>
-    /* ================================
-       PLACEMENT DRIVES PAGE
-       ================================ */
+.drive-page {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    padding: 35px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
 
-    .placement-page {
-        padding: 30px;
+.drive-container {
+    width: 100%;
+    max-width: 1100px;
+}
+
+.drive-header {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    border-top: 5px solid #0d6efd;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    margin-bottom: 25px;
+}
+
+.drive-header-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: #e8f1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drive-header-icon i {
+    font-size: 30px;
+    color: #0d6efd;
+}
+
+.drive-header h1 {
+    color: #0d6efd;
+    font-size: 27px;
+    margin-bottom: 7px;
+}
+
+.drive-header p {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Statistics */
+
+.drive-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.drive-stat {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.07);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.drive-stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: #e8f1ff;
+    color: #0d6efd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.drive-stat h3 {
+    margin: 0;
+    color: #222;
+    font-size: 22px;
+}
+
+.drive-stat p {
+    margin: 3px 0 0;
+    color: #777;
+    font-size: 12px;
+}
+
+/* Search */
+
+.drive-tools {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.07);
+    margin-bottom: 25px;
+}
+
+.drive-search {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #d9e2f1;
+    border-radius: 8px;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.drive-search:focus {
+    border-color: #0d6efd;
+}
+
+/* Existing drives */
+
+.existing-drives {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+.drive-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e8eef7;
+}
+
+.drive-section-title i {
+    color: #0d6efd;
+    font-size: 20px;
+}
+
+.drive-section-title h2 {
+    color: #0d6efd;
+    font-size: 20px;
+    margin: 0;
+}
+
+.drive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.placement-drive-card {
+    background: #f8f9fc;
+    border: 1px solid #e5eaf2;
+    border-top: 4px solid #0d6efd;
+    border-radius: 12px;
+    padding: 20px;
+    transition: .3s;
+}
+
+.placement-drive-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(13,110,253,.12);
+}
+
+.company-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background: #e8f1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.company-icon i {
+    color: #0d6efd;
+    font-size: 22px;
+}
+
+.drive-card-content h3 {
+    color: #222;
+    font-size: 19px;
+    margin-bottom: 3px;
+}
+
+.job-role {
+    color: #0d6efd;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.drive-info {
+    margin-bottom: 15px;
+}
+
+.drive-info p {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 7px 0;
+}
+
+.drive-info i {
+    width: 20px;
+    color: #0d6efd;
+}
+
+.drive-info strong {
+    color: #333;
+}
+
+.drive-status {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.drive-status.open {
+    background: #198754;
+}
+
+.drive-status.upcoming {
+    background: #0d6efd;
+}
+
+.drive-status.closing {
+    background: #fd7e14;
+}
+
+.drive-status.closed {
+    background: #dc3545;
+}
+
+/* Buttons */
+
+.drive-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.view-drive-btn,
+.apply-drive-btn,
+.applied-drive-btn {
+    border: none;
+    padding: 9px 13px;
+    border-radius: 7px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.view-drive-btn {
+    background: #e8f1ff;
+    color: #0d6efd;
+}
+
+.view-drive-btn:hover {
+    background: #0d6efd;
+    color: white;
+}
+
+.apply-drive-btn {
+    background: #198754;
+    color: white;
+}
+
+.apply-drive-btn:hover {
+    background: #146c43;
+}
+
+.applied-drive-btn {
+    background: #d1e7dd;
+    color: #146c43;
+    cursor: default;
+}
+
+.closed-btn {
+    background: #f1f1f1;
+    color: #777;
+    cursor: default;
+}
+
+.empty-drives {
+    text-align: center;
+    padding: 50px 20px;
+    color: #777;
+}
+
+.empty-drives i {
+    font-size: 45px;
+    color: #b8c7da;
+    margin-bottom: 15px;
+}
+
+.empty-drives h3 {
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* Responsive */
+
+@media(max-width:950px) {
+    .drive-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Page Header */
-    .placement-header {
-        margin-bottom: 25px;
-    }
-
-    .placement-header h1 {
-        color: #0d6efd;
-        font-size: 32px;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-
-    .placement-header p {
-        color: #555;
-        font-size: 16px;
-        margin: 0;
-    }
-
-    /* Search and Filter Area */
-    .drive-toolbar {
-        background: white;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 5px 15px rgba(0,0,0,.08);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 25px;
-    }
-
-    .drive-search {
-    position: relative;
-    flex: 1;
-    }
-
-    .drive-search i {
-        position: absolute;
-        left: 18px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #0d6efd;
-        font-size: 16px;
-        transition: .35s;
-        pointer-events: none;
-    }
-
-    .drive-search input {
-        width: 100%;
-        height: 45px;
-        box-sizing: border-box;
-        padding: 0 18px 0 48px;
-        border: 2px solid #d9e2f1;
-        border-radius: 30px;
-        outline: none;
-        font-family: 'Poppins', sans-serif;
-        font-size: 15px;
-        transition: .35s;
-        background: white;
-    }
-
-    .drive-search input:focus {
-        border-color: #0d6efd;
-        box-shadow: 0 0 15px rgba(13,110,253,.25);
-    }
-
-    .drive-search:focus-within i {
-        color: #0d6efd;
-        transform: translateY(-50%) scale(1.2) rotate(-10deg);
-        text-shadow: 0 0 12px rgba(13,110,253,.6);
-    }
-
-    .drive-filter {
-        padding: 13px 18px;
-        border: 1px solid #d8e2f0;
-        border-radius: 10px;
-        background: white;
-        color: #333;
-        font-family: 'Poppins', sans-serif;
-        font-size: 16px;
-        outline: none;
-        cursor: pointer;
-    }
-
-    .drive-filter:focus {
-        border-color: #0d6efd;
-    }
-
-    /* Statistics */
     .drive-stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        margin-bottom: 25px;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width:600px) {
+    .drive-page {
+        padding: 20px 15px;
     }
 
-    .drive-stat {
-        background: white;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 5px 15px rgba(0,0,0,.08);
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        border-top: 3px solid #0d6efd;
+    .existing-drives {
+        padding: 20px 15px;
     }
 
-    .drive-stat-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 12px;
-        background: #eaf3ff;
-        color: #0d6efd;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .drive-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .drive-header h1 {
         font-size: 22px;
     }
-
-    .drive-stat h3 {
-        margin: 0;
-        font-size: 24px;
-        color: #222;
-    }
-
-    .drive-stat p {
-        margin: 3px 0 0;
-        color: #777;
-        font-size: 13px;
-    }
-
-    /* Section Title */
-    .drive-section-title {
-        color: #0d6efd;
-        font-size: 22px;
-        font-weight: 700;
-        margin: 0 0 18px;
-    }
-
-    /* Drives Grid */
-    .drives-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    /* Drive Card */
-    .drive-card {
-        background: white;
-        border-radius: 14px;
-        padding: 22px;
-        box-shadow: 0 5px 15px rgba(0,0,0,.08);
-        border-top: 3px solid #0d6efd;
-        transition: .3s;
-    }
-
-    .drive-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 22px rgba(13,110,253,.14);
-    }
-
-    /* Card Header */
-    .drive-card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 18px;
-    }
-
-    .company-info {
-        display: flex;
-        align-items: center;
-        gap: 13px;
-    }
-
-    .company-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 12px;
-        background: #eaf3ff;
-        color: #0d6efd;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 21px;
-    }
-
-    .company-info h3 {
-        margin: 0;
-        color: #222;
-        font-size: 19px;
-    }
-
-    .company-info p {
-        margin: 3px 0 0;
-        color: #777;
-        font-size: 13px;
-    }
-
-    /* Status */
-    .drive-status {
-        padding: 6px 14px;
-        border-radius: 20px;
-        color: white;
-        font-size: 12px;
-        font-weight: 600;
-    }
-
-    .drive-status.open {
-        background: #198754;
-    }
-
-    .drive-status.closed {
-        background: #dc3545;
-    }
-
-    .drive-status.soon {
-        background: #fd7e14;
-    }
-
-    /* Job Role */
-    .drive-role {
-        color: #0d6efd;
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 18px;
-    }
-
-    /* Drive Details */
-    .drive-details {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 13px;
-        margin-bottom: 20px;
-    }
-
-    .detail-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 9px;
-    }
-
-    .detail-item i {
-        color: #0d6efd;
-        margin-top: 3px;
-        width: 15px;
-    }
-
-    .detail-item span {
-        display: block;
-    }
-
-    .detail-label {
-        font-size: 11px;
-        color: #888;
-        margin-bottom: 2px;
-    }
-
-    .detail-value {
-        font-size: 13px;
-        color: #333;
-        font-weight: 500;
-    }
-
-    /* Eligibility */
-    .eligibility {
-        background: #f5f8fc;
-        border-radius: 9px;
-        padding: 12px 14px;
-        margin-bottom: 18px;
-    }
-
-    .eligibility-title {
-        color: #0d6efd;
-        font-size: 13px;
-        font-weight: 600;
-        margin-bottom: 5px;
-    }
-
-    .eligibility p {
-        margin: 0;
-        color: #555;
-        font-size: 12px;
-        line-height: 1.5;
-    }
-
-    /* Buttons */
-    .drive-actions {
-        display: flex;
-        gap: 10px;
-    }
-
-    .drive-btn {
-        flex: 1;
-        padding: 11px 15px;
-        border-radius: 8px;
-        text-align: center;
-        text-decoration: none;
-        font-family: 'Poppins', sans-serif;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: .3s;
-    }
-
-    .view-btn {
-        background: #eaf3ff;
-        color: #0d6efd;
-        border: 1px solid #cfe2ff;
-    }
-
-    .view-btn:hover {
-        background: #dcecff;
-    }
-
-    .apply-btn {
-        background: #0d6efd;
-        color: white;
-        border: 1px solid #0d6efd;
-    }
-
-    .apply-btn:hover {
-        background: #0056d6;
-    }
-
-    .apply-btn.disabled {
-        background: #adb5bd;
-        border-color: #adb5bd;
-        cursor: not-allowed;
-    }
-
-    /* ================================
-       RESPONSIVE
-       ================================ */
-
-    @media(max-width:900px) {
-
-        .drives-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .drive-stats {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    @media(max-width:600px) {
-
-        .placement-page {
-            padding: 20px;
-        }
-
-        .placement-header h1 {
-            font-size: 26px;
-        }
-
-        .drive-toolbar {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .drive-details {
-            grid-template-columns: 1fr;
-        }
-
-        .drive-card-header {
-            flex-direction: column;
-            gap: 12px;
-        }
-    }
+}
 </style>
 
 
-<div class="placement-page">
+<div class="drive-page">
 
-    <!-- Page Header -->
-    <div class="placement-header">
+    <div class="drive-container">
 
-        <h1>Placement Drives</h1>
+        <!-- Header -->
 
-        <p>
-            Explore available placement opportunities and apply before the deadline.
-        </p>
+        <div class="drive-header">
 
-    </div>
+            <div class="drive-header-icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+
+            <h1>Placement Drives</h1>
+
+            <p>
+                Explore available placement opportunities and apply for suitable drives.
+            </p>
+
+        </div>
 
 
-    <!-- Search and Filter -->
-    <div class="drive-toolbar">
+        <!-- Statistics -->
 
-        <div class="drive-search">
+        <div class="drive-stats">
 
-            <i class="fas fa-search"></i>
+            <div class="drive-stat">
+
+                <div class="drive-stat-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+
+                <div>
+                    <h3>{{ active_drives }}</h3>
+                    <p>Active Drives</p>
+                </div>
+
+            </div>
+
+
+            <div class="drive-stat">
+
+                <div class="drive-stat-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+
+                <div>
+                    <h3>{{ companies_count }}</h3>
+                    <p>Companies</p>
+                </div>
+
+            </div>
+
+
+            <div class="drive-stat">
+
+                <div class="drive-stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+
+                <div>
+                    <h3>{{ closing_soon }}</h3>
+                    <p>Closing Soon</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Search -->
+
+        <div class="drive-tools">
 
             <input
                 type="text"
-                placeholder="Search companies or job roles..."
+                id="driveSearch"
+                class="drive-search"
+                placeholder="Search company, job role, package..."
             >
 
         </div>
 
 
-        <select class="drive-filter">
+        <!-- Existing Drives -->
 
-            <option value="">All Drives</option>
-            <option value="open">Open</option>
-            <option value="soon">Closing Soon</option>
-            <option value="closed">Closed</option>
+        <div class="existing-drives">
 
-        </select>
+            <div class="drive-section-title">
 
-    </div>
+                <i class="fas fa-list"></i>
+
+                <h2>Available Placement Drives</h2>
+
+            </div>
 
 
-    <!-- Statistics -->
-    <div class="drive-stats">
+            {% if drives %}
 
-        <div class="drive-stat">
+            <div class="drive-grid" id="driveGrid">
 
-            <div class="drive-stat-icon">
+                {% for drive in drives %}
+
+                <div class="placement-drive-card">
+
+                    <div class="company-icon">
+
+                        <i class="fas fa-building"></i>
+
+                    </div>
+
+
+                    <div class="drive-card-content">
+
+                        <h3 class="company-name">
+                            {{ drive.company_name }}
+                        </h3>
+
+                        <p class="job-role">
+                            {{ drive.job_title }}
+                        </p>
+
+
+                        <div class="drive-info">
+
+                            <p>
+                                <i class="fas fa-money-bill-wave"></i>
+                                <strong>Package:</strong>
+                                {{ drive.package or 'Not specified' }}
+                            </p>
+
+
+                            <p>
+                                <i class="fas fa-graduation-cap"></i>
+                                <strong>Eligibility:</strong>
+                                {{ drive.eligibility or 'Not specified' }}
+                            </p>
+
+
+                            <p>
+                                <i class="fas fa-calendar"></i>
+                                <strong>Deadline:</strong>
+
+                                {% if drive.application_deadline %}
+                                    {{ drive.application_deadline.strftime('%d %b %Y') }}
+                                {% else %}
+                                    Not specified
+                                {% endif %}
+
+                            </p>
+
+
+                            <p>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <strong>Location:</strong>
+                                {{ drive.location or 'Not specified' }}
+                            </p>
+
+                        </div>
+
+
+                        {% set drive_status = (drive.status or 'Open')|lower %}
+
+                        {% if drive_status == 'open' %}
+
+                            <span class="drive-status open">
+                                Open
+                            </span>
+
+                        {% elif drive_status == 'closing soon' %}
+
+                            <span class="drive-status closing">
+                                Closing Soon
+                            </span>
+
+                        {% elif drive_status == 'upcoming' %}
+
+                            <span class="drive-status upcoming">
+                                Upcoming
+                            </span>
+
+                        {% else %}
+
+                            <span class="drive-status closed">
+                                {{ drive.status or 'Closed' }}
+                            </span>
+
+                        {% endif %}
+
+
+                        <div class="drive-actions">
+
+                            <!-- View Details -->
+
+                            <a
+                                href="{{ url_for('drive_details', drive_id=drive.drive_id) }}"
+                                class="view-drive-btn"
+                            >
+                                <i class="fas fa-eye"></i>
+                                View Details
+                            </a>
+
+
+                            <!-- Student Apply -->
+
+                            {% if session.get('role') == 'student' %}
+
+                                {% if drive.already_applied %}
+
+                                    <span class="applied-drive-btn">
+                                        <i class="fas fa-check"></i>
+                                        Applied
+                                    </span>
+
+                                {% elif drive_status == 'open' or drive_status == 'closing soon' %}
+
+                                    <form
+                                        action="{{ url_for('apply_for_drive', drive_id=drive.drive_id) }}"
+                                        method="POST"
+                                        style="display:inline;"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="apply-drive-btn"
+                                            onclick="return confirm('Are you sure you want to apply for this placement drive?');"
+                                        >
+                                            <i class="fas fa-paper-plane"></i>
+                                            Apply
+                                        </button>
+
+                                    </form>
+
+                                {% else %}
+
+                                    <span class="applied-drive-btn closed-btn">
+                                        Applications Closed
+                                    </span>
+
+                                {% endif %}
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- No Search Results -->
+
+            <div
+                id="noSearchResults"
+                class="empty-drives"
+                style="display:none;"
+            >
+
+                <i class="fas fa-search"></i>
+
+                <h3>No drives found</h3>
+
+                <p>
+                    Try searching with another company or job role.
+                </p>
+
+            </div>
+
+
+            {% else %}
+
+            <!-- No Drives -->
+
+            <div class="empty-drives">
+
                 <i class="fas fa-briefcase"></i>
-            </div>
 
-            <div>
-                <h3>12</h3>
-                <p>Active Drives</p>
-            </div>
-
-        </div>
-
-
-        <div class="drive-stat">
-
-            <div class="drive-stat-icon">
-                <i class="fas fa-building"></i>
-            </div>
-
-            <div>
-                <h3>8</h3>
-                <p>Companies</p>
-            </div>
-
-        </div>
-
-
-        <div class="drive-stat">
-
-            <div class="drive-stat-icon">
-                <i class="fas fa-clock"></i>
-            </div>
-
-            <div>
-                <h3>4</h3>
-                <p>Closing Soon</p>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Available Drives -->
-
-    <h2 class="drive-section-title">
-        Available Placement Drives
-    </h2>
-
-
-    <div class="drives-grid">
-
-
-        <!-- TCS -->
-
-        <div class="drive-card">
-
-            <div class="drive-card-header">
-
-                <div class="company-info">
-
-                    <div class="company-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-
-                    <div>
-
-                        <h3>TCS</h3>
-
-                        <p>Tata Consultancy Services</p>
-
-                    </div>
-
-                </div>
-
-                <span class="drive-status open">
-                    Open
-                </span>
-
-            </div>
-
-
-            <div class="drive-role">
-                Software Engineer
-            </div>
-
-
-            <div class="drive-details">
-
-                <div class="detail-item">
-
-                    <i class="fas fa-money-bill-wave"></i>
-
-                    <div>
-
-                        <span class="detail-label">Package</span>
-
-                        <span class="detail-value">
-                            ₹4.5 LPA
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-graduation-cap"></i>
-
-                    <div>
-
-                        <span class="detail-label">Minimum CGPA</span>
-
-                        <span class="detail-value">
-                            6.0
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-calendar-alt"></i>
-
-                    <div>
-
-                        <span class="detail-label">Last Date</span>
-
-                        <span class="detail-value">
-                            10 Aug 2026
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-map-marker-alt"></i>
-
-                    <div>
-
-                        <span class="detail-label">Location</span>
-
-                        <span class="detail-value">
-                            Across India
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="eligibility">
-
-                <div class="eligibility-title">
-                    Eligibility
-                </div>
+                <h3>No Placement Drives Available</h3>
 
                 <p>
-                    B.Tech / B.E students from CSE, IT and related branches.
+                    There are currently no placement drives available.
                 </p>
 
             </div>
 
-
-            <div class="drive-actions">
-
-                <a href="#" class="drive-btn view-btn">
-                    <i class="fas fa-eye"></i>
-                    View Details
-                </a>
-
-                <a href="#" class="drive-btn apply-btn">
-                    <i class="fas fa-paper-plane"></i>
-                    Apply Now
-                </a>
-
-            </div>
+            {% endif %}
 
         </div>
-
-
-
-        <!-- Infosys -->
-
-        <div class="drive-card">
-
-            <div class="drive-card-header">
-
-                <div class="company-info">
-
-                    <div class="company-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-
-                    <div>
-
-                        <h3>Infosys</h3>
-
-                        <p>Infosys Limited</p>
-
-                    </div>
-
-                </div>
-
-                <span class="drive-status open">
-                    Open
-                </span>
-
-            </div>
-
-
-            <div class="drive-role">
-                System Engineer
-            </div>
-
-
-            <div class="drive-details">
-
-                <div class="detail-item">
-
-                    <i class="fas fa-money-bill-wave"></i>
-
-                    <div>
-
-                        <span class="detail-label">Package</span>
-
-                        <span class="detail-value">
-                            ₹5 LPA
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-graduation-cap"></i>
-
-                    <div>
-
-                        <span class="detail-label">Minimum CGPA</span>
-
-                        <span class="detail-value">
-                            6.0
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-calendar-alt"></i>
-
-                    <div>
-
-                        <span class="detail-label">Last Date</span>
-
-                        <span class="detail-value">
-                            12 Aug 2026
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-map-marker-alt"></i>
-
-                    <div>
-
-                        <span class="detail-label">Location</span>
-
-                        <span class="detail-value">
-                            Bengaluru
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="eligibility">
-
-                <div class="eligibility-title">
-                    Eligibility
-                </div>
-
-                <p>
-                    B.Tech / B.E students with minimum 6.0 CGPA and no active backlogs.
-                </p>
-
-            </div>
-
-
-            <div class="drive-actions">
-
-                <a href="#" class="drive-btn view-btn">
-                    <i class="fas fa-eye"></i>
-                    View Details
-                </a>
-
-                <a href="#" class="drive-btn apply-btn">
-                    <i class="fas fa-paper-plane"></i>
-                    Apply Now
-                </a>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- Wipro -->
-
-        <div class="drive-card">
-
-            <div class="drive-card-header">
-
-                <div class="company-info">
-
-                    <div class="company-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-
-                    <div>
-
-                        <h3>Wipro</h3>
-
-                        <p>Wipro Technologies</p>
-
-                    </div>
-
-                </div>
-
-                <span class="drive-status soon">
-                    Closing Soon
-                </span>
-
-            </div>
-
-
-            <div class="drive-role">
-                Developer
-            </div>
-
-
-            <div class="drive-details">
-
-                <div class="detail-item">
-
-                    <i class="fas fa-money-bill-wave"></i>
-
-                    <div>
-
-                        <span class="detail-label">Package</span>
-
-                        <span class="detail-value">
-                            ₹6 LPA
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-graduation-cap"></i>
-
-                    <div>
-
-                        <span class="detail-label">Minimum CGPA</span>
-
-                        <span class="detail-value">
-                            6.0
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-calendar-alt"></i>
-
-                    <div>
-
-                        <span class="detail-label">Last Date</span>
-
-                        <span class="detail-value">
-                            15 Aug 2026
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-map-marker-alt"></i>
-
-                    <div>
-
-                        <span class="detail-label">Location</span>
-
-                        <span class="detail-value">
-                            Hyderabad
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="eligibility">
-
-                <div class="eligibility-title">
-                    Eligibility
-                </div>
-
-                <p>
-                    B.Tech / B.E students from CSE, IT and ECE branches.
-                </p>
-
-            </div>
-
-
-            <div class="drive-actions">
-
-                <a href="#" class="drive-btn view-btn">
-                    <i class="fas fa-eye"></i>
-                    View Details
-                </a>
-
-                <a href="#" class="drive-btn apply-btn">
-                    <i class="fas fa-paper-plane"></i>
-                    Apply Now
-                </a>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- Accenture -->
-
-        <div class="drive-card">
-
-            <div class="drive-card-header">
-
-                <div class="company-info">
-
-                    <div class="company-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-
-                    <div>
-
-                        <h3>Accenture</h3>
-
-                        <p>Accenture Solutions</p>
-
-                    </div>
-
-                </div>
-
-                <span class="drive-status closed">
-                    Closed
-                </span>
-
-            </div>
-
-
-            <div class="drive-role">
-                Associate Engineer
-            </div>
-
-
-            <div class="drive-details">
-
-                <div class="detail-item">
-
-                    <i class="fas fa-money-bill-wave"></i>
-
-                    <div>
-
-                        <span class="detail-label">Package</span>
-
-                        <span class="detail-value">
-                            ₹4.8 LPA
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-graduation-cap"></i>
-
-                    <div>
-
-                        <span class="detail-label">Minimum CGPA</span>
-
-                        <span class="detail-value">
-                            6.0
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-calendar-alt"></i>
-
-                    <div>
-
-                        <span class="detail-label">Last Date</span>
-
-                        <span class="detail-value">
-                            30 Jul 2026
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <i class="fas fa-map-marker-alt"></i>
-
-                    <div>
-
-                        <span class="detail-label">Location</span>
-
-                        <span class="detail-value">
-                            Pune
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="eligibility">
-
-                <div class="eligibility-title">
-                    Eligibility
-                </div>
-
-                <p>
-                    B.Tech / B.E students with minimum 6.0 CGPA.
-                </p>
-
-            </div>
-
-
-            <div class="drive-actions">
-
-                <a href="#" class="drive-btn view-btn">
-                    <i class="fas fa-eye"></i>
-                    View Details
-                </a>
-
-                <span class="drive-btn apply-btn disabled">
-                    <i class="fas fa-lock"></i>
-                    Applications Closed
-                </span>
-
-            </div>
-
-        </div>
-
 
     </div>
 
 </div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const searchInput = document.getElementById("driveSearch");
+    const cards = document.querySelectorAll(".placement-drive-card");
+    const noResults = document.getElementById("noSearchResults");
+
+    if (!searchInput) {
+        return;
+    }
+
+    searchInput.addEventListener("input", function () {
+
+        const searchValue = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        cards.forEach(function (card) {
+
+            const text = card.innerText.toLowerCase();
+
+            if (text.includes(searchValue)) {
+
+                card.style.display = "";
+
+                visibleCount++;
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+        if (noResults) {
+
+            noResults.style.display =
+                visibleCount === 0 ? "block" : "none";
+
+        }
+
+    });
+
+});
+
+</script>
