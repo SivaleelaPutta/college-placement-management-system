@@ -1,0 +1,392 @@
+<div class="dashboard-content">
+
+```
+<style>
+    .user-management {
+        padding: 10px 0 30px;
+    }
+
+    .user-management .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+    }
+
+    .user-management .page-header h1 {
+        margin: 0;
+        font-size: 28px;
+        color: #1f2937;
+    }
+
+    .user-management .page-header p {
+        margin: 6px 0 0;
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+    .user-management .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        margin-bottom: 25px;
+    }
+
+    .user-management .stat-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e5e7eb;
+    }
+
+    .user-management .stat-card .label {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .user-management .stat-card .value {
+        color: #111827;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .user-management .table-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 22px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e5e7eb;
+    }
+
+    .user-management .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    .user-management .table-header h2 {
+        margin: 0;
+        font-size: 20px;
+        color: #1f2937;
+    }
+
+    .user-management .search-box {
+        min-width: 250px;
+        padding: 10px 13px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .user-management .search-box:focus {
+        border-color: #2563eb;
+    }
+
+    .user-management .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .user-management table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 750px;
+    }
+
+    .user-management th {
+        background: #f9fafb;
+        color: #374151;
+        font-size: 13px;
+        font-weight: 600;
+        text-align: left;
+        padding: 13px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .user-management td {
+        padding: 14px 13px;
+        border-bottom: 1px solid #f0f0f0;
+        color: #4b5563;
+        font-size: 14px;
+    }
+
+    .user-management tr:hover td {
+        background: #f9fafb;
+    }
+
+    .user-management .role-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .user-management .role-admin {
+        background: #ede9fe;
+        color: #6d28d9;
+    }
+
+    .user-management .role-student {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    .user-management .role-company {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    .user-management .role-cdpc {
+        background: #fef3c7;
+        color: #b45309;
+    }
+
+    .user-management .status-active {
+        color: #15803d;
+        font-weight: 600;
+    }
+
+    .user-management .status-inactive {
+        color: #dc2626;
+        font-weight: 600;
+    }
+
+    .user-management .empty-state {
+        text-align: center;
+        padding: 45px 20px;
+        color: #6b7280;
+    }
+
+    .user-management .empty-state h3 {
+        margin: 0 0 8px;
+        color: #374151;
+    }
+
+    @media (max-width: 1000px) {
+        .user-management .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .user-management .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .user-management .page-header h1 {
+            font-size: 24px;
+        }
+
+        .user-management .table-card {
+            padding: 15px;
+        }
+
+        .user-management .search-box {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+</style>
+
+<div class="user-management">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div>
+            <h1>User Management</h1>
+            <p>Manage students, administrators, CDPC members and company accounts.</p>
+        </div>
+    </div>
+
+    <!-- STATISTICS -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="label">Total Users</div>
+            <div class="value">
+                {{ users|length if users is defined else 0 }}
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="label">Students</div>
+            <div class="value">
+                {{ users|selectattr('role', 'equalto', 'student')|list|length if users is defined else 0 }}
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="label">Companies</div>
+            <div class="value">
+                {{ users|selectattr('role', 'equalto', 'company')|list|length if users is defined else 0 }}
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="label">Administrators</div>
+            <div class="value">
+                {{ users|selectattr('role', 'equalto', 'admin')|list|length if users is defined else 0 }}
+            </div>
+        </div>
+
+    </div>
+
+    <!-- USERS TABLE -->
+    <div class="table-card">
+
+        <div class="table-header">
+            <h2>Registered Users</h2>
+
+            <input
+                type="text"
+                id="userSearch"
+                class="search-box"
+                placeholder="Search users..."
+                onkeyup="searchUsers()"
+            >
+        </div>
+
+        {% if users is defined and users|length > 0 %}
+
+        <div class="table-wrapper">
+
+            <table id="usersTable">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for user in users %}
+
+                    <tr>
+
+                        <td>
+                            {{ user.id if user.id is defined else loop.index }}
+                        </td>
+
+                        <td>
+                            {{ user.full_name if user.full_name is defined else
+                               user.name if user.name is defined else "N/A" }}
+                        </td>
+
+                        <td>
+                            {{ user.email if user.email is defined else "N/A" }}
+                        </td>
+
+                        <td>
+
+                            {% set user_role = user.role if user.role is defined else "unknown" %}
+
+                            <span class="role-badge
+                                {% if user_role == 'admin' %}
+                                    role-admin
+                                {% elif user_role == 'student' %}
+                                    role-student
+                                {% elif user_role == 'company' %}
+                                    role-company
+                                {% elif user_role == 'cdpc' %}
+                                    role-cdpc
+                                {% endif %}
+                            ">
+                                {{ user_role|capitalize }}
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            {% if user.is_active is defined %}
+
+                                {% if user.is_active %}
+                                    <span class="status-active">Active</span>
+                                {% else %}
+                                    <span class="status-inactive">Inactive</span>
+                                {% endif %}
+
+                            {% elif user.status is defined %}
+
+                                {% if user.status|string|lower == 'active' %}
+                                    <span class="status-active">Active</span>
+                                {% else %}
+                                    <span class="status-inactive">
+                                        {{ user.status }}
+                                    </span>
+                                {% endif %}
+
+                            {% else %}
+
+                                <span class="status-active">Active</span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            <h3>No Users Found</h3>
+            <p>There are currently no registered users to display.</p>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<script>
+    function searchUsers() {
+
+        const input = document.getElementById("userSearch");
+        const filter = input.value.toLowerCase();
+        const table = document.getElementById("usersTable");
+
+        if (!table) {
+            return;
+        }
+
+        const rows = table.getElementsByTagName("tbody")[0]
+            .getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+
+            const rowText = rows[i].textContent.toLowerCase();
+
+            if (rowText.includes(filter)) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+</script>
+```
+
+</div>
