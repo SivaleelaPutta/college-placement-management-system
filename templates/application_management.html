@@ -1,4 +1,3 @@
-
 <div class="dashboard-content">
 
     <style>
@@ -330,7 +329,7 @@
         </div>
 
 
-        <!-- APPLICATION TABLE -->
+        <!-- APPLICATION MANAGEMENT -->
         <div class="management-card">
 
             <!-- SEARCH + FILTER -->
@@ -362,3 +361,250 @@
             </div>
 
 
+            <!-- APPLICATION TABLE -->
+            <div class="table-wrapper">
+
+                {% if applications %}
+
+                <table
+                    class="applications-table"
+                    id="applicationsTable"
+                >
+
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Roll No</th>
+                            <th>Company</th>
+                            <th>Job Role</th>
+                            <th>Status</th>
+                            <th>Applied Date</th>
+                            <th>Update Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for application in applications %}
+
+                        <tr>
+
+                            <!-- STUDENT -->
+                            <td>
+                                <div class="student-name">
+                                    {{ application.student_name }}
+                                </div>
+
+                                <div class="student-email">
+                                    {{ application.student_email }}
+                                </div>
+                            </td>
+
+
+                            <!-- ROLL NUMBER -->
+                            <td>
+                                {{ application.roll_number }}
+                            </td>
+
+
+                            <!-- COMPANY -->
+                            <td>
+                                <div class="company-name">
+                                    {{ application.company_name }}
+                                </div>
+
+                                {% if application.location %}
+                                <div class="small-text">
+                                    {{ application.location }}
+                                </div>
+                                {% endif %}
+                            </td>
+
+
+                            <!-- JOB ROLE -->
+                            <td>
+                                <div class="job-title">
+                                    {{ application.job_title }}
+                                </div>
+                            </td>
+
+
+                            <!-- STATUS -->
+                            <td>
+
+                                <span class="status-badge status-{{ application.status|lower }}">
+                                    {{ application.status }}
+                                </span>
+
+                            </td>
+
+
+                            <!-- APPLICATION DATE -->
+                            <td>
+                                {{ application.application_date }}
+                            </td>
+
+
+                            <!-- UPDATE STATUS -->
+                            <td>
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for(
+                                        'update_application_status',
+                                        application_id=application.application_id
+                                    ) }}"
+                                    class="status-form"
+                                >
+
+                                    <select name="status">
+
+                                        <option
+                                            value="Applied"
+                                            {% if application.status == 'Applied' %}
+                                            selected
+                                            {% endif %}
+                                        >
+                                            Applied
+                                        </option>
+
+                                        <option
+                                            value="Shortlisted"
+                                            {% if application.status == 'Shortlisted' %}
+                                            selected
+                                            {% endif %}
+                                        >
+                                            Shortlisted
+                                        </option>
+
+                                        <option
+                                            value="Interview"
+                                            {% if application.status == 'Interview' %}
+                                            selected
+                                            {% endif %}
+                                        >
+                                            Interview
+                                        </option>
+
+                                        <option
+                                            value="Selected"
+                                            {% if application.status == 'Selected' %}
+                                            selected
+                                            {% endif %}
+                                        >
+                                            Selected
+                                        </option>
+
+                                        <option
+                                            value="Rejected"
+                                            {% if application.status == 'Rejected' %}
+                                            selected
+                                            {% endif %}
+                                        >
+                                            Rejected
+                                        </option>
+
+                                    </select>
+
+                                    <button
+                                        type="submit"
+                                        class="update-btn"
+                                    >
+                                        Update
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+                {% else %}
+
+                <!-- EMPTY STATE -->
+                <div class="empty-state">
+
+                    <i class="fas fa-file-alt"></i>
+
+                    <h3>No Applications Found</h3>
+
+                    <p>
+                        No students have applied for any placement drives yet.
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SEARCH + FILTER JAVASCRIPT -->
+<script>
+
+function filterApplications() {
+
+    const searchInput =
+        document.getElementById("applicationSearch");
+
+    const statusFilter =
+        document.getElementById("statusFilter");
+
+    const table =
+        document.getElementById("applicationsTable");
+
+    if (!table) {
+        return;
+    }
+
+    const searchValue =
+        searchInput.value.toLowerCase().trim();
+
+    const selectedStatus =
+        statusFilter.value;
+
+    const rows =
+        table.querySelectorAll("tbody tr");
+
+    rows.forEach(function(row) {
+
+        const rowText =
+            row.innerText.toLowerCase();
+
+        const statusElement =
+            row.querySelector(".status-badge");
+
+        const rowStatus =
+            statusElement
+                ? statusElement.innerText.trim()
+                : "";
+
+        const matchesSearch =
+            rowText.includes(searchValue);
+
+        const matchesStatus =
+            selectedStatus === "All" ||
+            rowStatus === selectedStatus;
+
+        if (matchesSearch && matchesStatus) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+
+    })
+}
+
+</script>
