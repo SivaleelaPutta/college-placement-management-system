@@ -111,6 +111,132 @@ def get_db_connection():
 
         return None
 
+# ============================================================
+# NOTIFICATION FUNCTIONS
+# ============================================================
+
+def create_notification(user_id, title, message):
+
+    connection = get_db_connection()
+
+    if connection is None:
+        print("NOTIFICATION: Database connection failed.")
+        return False
+
+    cursor = connection.cursor()
+
+    try:
+
+        cursor.execute(
+            """
+            INSERT INTO notifications
+            (
+                user_id,
+                title,
+                message
+            )
+            VALUES
+            (
+                %s,
+                %s,
+                %s
+            )
+            """,
+            (
+                user_id,
+                title,
+                message
+            )
+        )
+
+        connection.commit()
+
+        return True
+
+    except Error as e:
+
+        connection.rollback()
+
+        print(
+            "CREATE NOTIFICATION ERROR:",
+            e
+        )
+
+        return False
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+def get_unread_notification_count(user_id):
+
+    connection = get_db_connection()
+
+    if connection is None:
+        return 0
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT COUNT(*) AS total
+            FROM notifications
+            WHERE user_id = %s
+            AND is_read = FALSE
+            """,
+            (user_id,)
+        )
+
+        result = cursor.fetchone()
+
+        if result:
+            return result["total"]
+
+        return 0
+
+    except Error as e:
+
+        print(
+            "NOTIFICATION COUNT ERROR:",
+            e
+        )
+
+        return 0
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# NOTIFICATION COUNT FOR ALL PAGES
+# ============================================================
+
+@app.context_processor
+def inject_notification_count():
+
+    unread_notifications = 0
+
+    if session.get("logged_in") is True:
+
+        user_id = session.get("user_id")
+
+        if user_id:
+
+            unread_notifications = (
+                get_unread_notification_count(user_id)
+            )
+
+    return {
+        "unread_notifications": unread_notifications
+    }
 
 # ============================================================
 # REGISTER BLUEPRINTS
@@ -1842,9 +1968,15 @@ def apply_for_drive(drive_id):
 
     try:
 
+        # ----------------------------------------------------
+        # GET STUDENT
+        # ----------------------------------------------------
+
         cursor.execute(
             """
-            SELECT student_id
+            SELECT
+                student_id,
+                user_id
             FROM students
             WHERE user_id = %s
             """,
@@ -1866,14 +1998,23 @@ def apply_for_drive(drive_id):
 
         student_id = student["student_id"]
 
+        # ----------------------------------------------------
+        # GET DRIVE
+        # ----------------------------------------------------
+
         cursor.execute(
             """
             SELECT
-                drive_id,
-                application_deadline,
-                status
-            FROM placement_drives
-            WHERE drive_id = %s
+                pd.drive_id,
+                pd.company_id,
+                pd.job_title,
+                pd.application_deadline,
+                pd.status,
+                c.company_name
+            FROM placement_drives pd
+            INNER JOIN companies c
+                ON pd.company_id = c.company_id
+            WHERE pd.drive_id = %s
             """,
             (drive_id,)
         )
@@ -1891,6 +2032,10 @@ def apply_for_drive(drive_id):
                 url_for("placement_drives")
             )
 
+        # ----------------------------------------------------
+        # CHECK DRIVE STATUS
+        # ----------------------------------------------------
+
         if str(
             drive["status"] or ""
         ).lower() != "open":
@@ -1903,6 +2048,10 @@ def apply_for_drive(drive_id):
             return redirect(
                 url_for("placement_drives")
             )
+
+        # ----------------------------------------------------
+        # CHECK DEADLINE
+        # ----------------------------------------------------
 
         if (
             drive["application_deadline"]
@@ -1918,6 +2067,10 @@ def apply_for_drive(drive_id):
             return redirect(
                 url_for("placement_drives")
             )
+
+        # ----------------------------------------------------
+        # CHECK DUPLICATE APPLICATION
+        # ----------------------------------------------------
 
         cursor.execute(
             """
@@ -1945,6 +2098,10 @@ def apply_for_drive(drive_id):
                 url_for("applications")
             )
 
+        # ----------------------------------------------------
+        # INSERT APPLICATION
+        # ----------------------------------------------------
+
         cursor.execute(
             """
             INSERT INTO applications
@@ -1965,6 +2122,51 @@ def apply_for_drive(drive_id):
                 drive_id
             )
         )
+
+        # ----------------------------------------------------
+        # NOTIFY ADMIN AND CDPC
+        # ----------------------------------------------------
+
+        student_name = session.get(
+            "full_name",
+            "Student"
+        )
+
+        cursor.execute(
+            """
+            SELECT user_id
+            FROM users
+            WHERE role IN ('admin', 'cdpc')
+            """
+        )
+
+        staff_users = cursor.fetchall()
+
+        for staff in staff_users:
+
+            cursor.execute(
+                """
+                INSERT INTO notifications
+                (
+                    user_id,
+                    title,
+                    message
+                )
+                VALUES
+                (
+                    %s,
+                    %s,
+                    %s
+                )
+                """,
+                (
+                    staff["user_id"],
+                    "New Placement Application",
+                    f"{student_name} has applied for "
+                    f"{drive['job_title']} at "
+                    f"{drive['company_name']}."
+                )
+            )
 
         connection.commit()
 
@@ -1999,8 +2201,6 @@ def apply_for_drive(drive_id):
 
         cursor.close()
         connection.close()
-
-
 # ============================================================
 # STUDENT APPLICATIONS
 # ============================================================
@@ -2581,11 +2781,39 @@ def update_application_status(application_id):
 
     try:
 
+        # ----------------------------------------------------
+        # GET APPLICATION DETAILS
+        # ----------------------------------------------------
+
         cursor.execute(
             """
-            SELECT application_id
-            FROM applications
-            WHERE application_id = %s
+            SELECT
+                a.application_id,
+                a.status AS old_status,
+
+                s.user_id AS student_user_id,
+
+                u.full_name AS student_name,
+
+                pd.job_title,
+
+                c.company_name
+
+            FROM applications a
+
+            INNER JOIN students s
+                ON a.student_id = s.student_id
+
+            INNER JOIN users u
+                ON s.user_id = u.user_id
+
+            INNER JOIN placement_drives pd
+                ON a.drive_id = pd.drive_id
+
+            INNER JOIN companies c
+                ON pd.company_id = c.company_id
+
+            WHERE a.application_id = %s
             """,
             (application_id,)
         )
@@ -2603,6 +2831,12 @@ def update_application_status(application_id):
                 url_for("application_management")
             )
 
+        old_status = application["old_status"]
+
+        # ----------------------------------------------------
+        # UPDATE STATUS
+        # ----------------------------------------------------
+
         cursor.execute(
             """
             UPDATE applications
@@ -2614,6 +2848,47 @@ def update_application_status(application_id):
                 application_id
             )
         )
+
+        # ----------------------------------------------------
+        # NOTIFY STUDENT
+        # ----------------------------------------------------
+
+        if old_status != new_status:
+
+            notification_title = (
+                "Application Status Updated"
+            )
+
+            notification_message = (
+                f"Your application for "
+                f"{application['job_title']} at "
+                f"{application['company_name']} "
+                f"has been updated from "
+                f"{old_status} to "
+                f"{new_status}."
+            )
+
+            cursor.execute(
+                """
+                INSERT INTO notifications
+                (
+                    user_id,
+                    title,
+                    message
+                )
+                VALUES
+                (
+                    %s,
+                    %s,
+                    %s
+                )
+                """,
+                (
+                    application["student_user_id"],
+                    notification_title,
+                    notification_message
+                )
+            )
 
         connection.commit()
 
@@ -2648,7 +2923,6 @@ def update_application_status(application_id):
 
         cursor.close()
         connection.close()
-
 
 # ============================================================
 # INTERVIEWS
@@ -3795,6 +4069,98 @@ def skill():
         page="skill_assessment.html"
     )
 
+# ============================================================
+# NOTIFICATIONS
+# ============================================================
+
+@app.route("/notifications")
+def notifications():
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    user_id = session.get("user_id")
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT
+                notification_id,
+                title,
+                message,
+                is_read,
+                created_at
+            FROM notifications
+            WHERE user_id = %s
+            ORDER BY created_at DESC
+            """,
+            (user_id,)
+        )
+
+        notification_list = cursor.fetchall()
+
+        # Mark notifications as read
+        cursor.execute(
+            """
+            UPDATE notifications
+            SET is_read = TRUE
+            WHERE user_id = %s
+            AND is_read = FALSE
+            """,
+            (user_id,)
+        )
+
+        connection.commit()
+
+        return render_template(
+            "homepage.html",
+            page="notifications.html",
+            notifications=notification_list
+        )
+
+    except Error as e:
+
+        connection.rollback()
+
+        print(
+            "NOTIFICATIONS ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to load notifications.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
 
 # ============================================================
 # HELP

@@ -1141,20 +1141,26 @@ body{
 
 
             <!-- Notifications -->
+             <!-- Notifications -->
+              <a
+    href="{{ url_for('notifications') }}"
+    class="nav-btn notification-btn"
+    title="Notifications"
+>
+    <i class="fas fa-bell"></i>
 
-            <a
-                href="#"
-                class="nav-btn notification-btn"
-                title="Notifications"
-            >
-                <i class="fas fa-bell"></i>
+    {% if unread_notifications > 0 %}
 
-                <span class="notification-badge">
-                    3
-                </span>
-            </a>
+        <span class="notification-badge">
+            {{ unread_notifications }}
+        </span>
 
+    {% endif %}
 
+</a>
+
+            
+            
             <!-- Settings -->
 
             <a
