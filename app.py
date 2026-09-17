@@ -42,10 +42,11 @@ app.secret_key = "CPMS_RGUKT_SECRET_KEY_2026"
 # ============================================================
 
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "sivaleela",
-    "password": "Sivaleela@19",
-    "database": "cpms_db"
+    "host": os.getenv("MYSQLHOST"),
+    "port": int(os.getenv("MYSQLPORT", 3306)),
+    "user": os.getenv("MYSQLUSER"),
+    "password": os.getenv("MYSQLPASSWORD"),
+    "database": os.getenv("MYSQLDATABASE")
 }
 
 
