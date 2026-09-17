@@ -4,3 +4,4 @@ Werkzeug
 gunicorn
 pypdf==6.1.0
 python-docx
+# force dependency rebuild
