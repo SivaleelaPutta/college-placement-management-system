@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+import os
 import mysql.connector
 
 interview_bp = Blueprint('interview_bp', __name__)
@@ -8,10 +9,11 @@ interview_bp = Blueprint('interview_bp', __name__)
 # ============================================================
 try:
     db = mysql.connector.connect(
-        host="localhost",
-        user="placement_user",
-        password="Sivaleela@19",
-        database="placement_db"
+	host=os.getenv("MYSQLHOST", "localhost"),
+        port=int(os.getenv("MYSQLPORT", 3306)),
+        user=os.getenv("MYSQLUSER"),
+        password=os.getenv("MYSQLPASSWORD"),
+        database=os.getenv("MYSQLDATABASE")
     )
     cursor = db.cursor(dictionary=True)
     print("Interview BP: MySQL database connected successfully.")
