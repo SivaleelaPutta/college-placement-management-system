@@ -3,11 +3,11 @@
 -- FINAL DATABASE
 -- =========================================================
 
-DROP DATABASE IF EXISTS cpms_db;
 
-CREATE DATABASE cpms_db;
 
-USE cpms_db;
+
+
+
 
 
 -- =========================================================
