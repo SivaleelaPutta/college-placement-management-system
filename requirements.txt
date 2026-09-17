@@ -4,3 +4,4 @@ Werkzeug
 gunicorn
 pypdf
 # force railway rebuild
+python-docx
