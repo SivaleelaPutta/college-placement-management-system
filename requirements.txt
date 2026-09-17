@@ -2,6 +2,5 @@ Flask
 mysql-connector-python
 Werkzeug
 gunicorn
-pypdf
-# force railway rebuild
+pypdf==6.1.0
 python-docx
