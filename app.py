@@ -4161,7 +4161,308 @@ def notifications():
 
         cursor.close()
         connection.close()
+# ============================================================
+# SETTINGS
+# ============================================================
 
+@app.route("/settings")
+def settings():
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    user_id = session.get("user_id")
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        cursor.execute(
+            """
+            SELECT
+                user_id,
+                full_name,
+                email,
+                role,
+                created_at
+            FROM users
+            WHERE user_id = %s
+            """,
+            (user_id,)
+        )
+
+        user = cursor.fetchone()
+
+        if user is None:
+
+            flash(
+                "User information not found.",
+                "error"
+            )
+
+            return redirect(
+                url_for("dashboard")
+            )
+
+        return render_template(
+            "homepage.html",
+            page="settings.html",
+            user=user
+        )
+
+    except Error as e:
+
+        print(
+            "SETTINGS ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to load settings.",
+            "error"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+
+
+# ============================================================
+# CHANGE PASSWORD
+# ============================================================
+
+@app.route(
+    "/change-password",
+    methods=["POST"]
+)
+def change_password():
+
+    if not login_required():
+
+        return redirect(
+            url_for("login")
+        )
+
+    user_id = session.get("user_id")
+
+    current_password = request.form.get(
+        "current_password",
+        ""
+    )
+
+    new_password = request.form.get(
+        "new_password",
+        ""
+    )
+
+    confirm_password = request.form.get(
+        "confirm_password",
+        ""
+    )
+
+    # --------------------------------------------------------
+    # VALIDATION
+    # --------------------------------------------------------
+
+    if not current_password:
+
+        flash(
+            "Please enter your current password.",
+            "error"
+        )
+
+        return redirect(
+            url_for("settings")
+        )
+
+    if not new_password:
+
+        flash(
+            "Please enter a new password.",
+            "error"
+        )
+
+        return redirect(
+            url_for("settings")
+        )
+
+    if len(new_password) < 6:
+
+        flash(
+            "New password must contain at least 6 characters.",
+            "error"
+        )
+
+        return redirect(
+            url_for("settings")
+        )
+
+    if new_password != confirm_password:
+
+        flash(
+            "New password and confirm password do not match.",
+            "error"
+        )
+
+        return redirect(
+            url_for("settings")
+        )
+
+    if current_password == new_password:
+
+        flash(
+            "New password must be different from your current password.",
+            "error"
+        )
+
+        return redirect(
+            url_for("settings")
+        )
+
+    connection = get_db_connection()
+
+    if connection is None:
+
+        flash(
+            "Database connection failed.",
+            "error"
+        )
+
+        return redirect(
+            url_for("settings")
+        )
+
+    cursor = connection.cursor(
+        dictionary=True
+    )
+
+    try:
+
+        # ----------------------------------------------------
+        # GET CURRENT PASSWORD
+        # ----------------------------------------------------
+
+        cursor.execute(
+            """
+            SELECT password
+            FROM users
+            WHERE user_id = %s
+            """,
+            (user_id,)
+        )
+
+        user = cursor.fetchone()
+
+        if user is None:
+
+            flash(
+                "User account not found.",
+                "error"
+            )
+
+            return redirect(
+                url_for("settings")
+            )
+
+        # ----------------------------------------------------
+        # VERIFY CURRENT PASSWORD
+        # ----------------------------------------------------
+
+        if not check_password_hash(
+            user["password"],
+            current_password
+        ):
+
+            flash(
+                "Current password is incorrect.",
+                "error"
+            )
+
+            return redirect(
+                url_for("settings")
+            )
+
+        # ----------------------------------------------------
+        # HASH NEW PASSWORD
+        # ----------------------------------------------------
+
+        new_password_hash = generate_password_hash(
+            new_password
+        )
+
+        # ----------------------------------------------------
+        # UPDATE PASSWORD
+        # ----------------------------------------------------
+
+        cursor.execute(
+            """
+            UPDATE users
+            SET password = %s
+            WHERE user_id = %s
+            """,
+            (
+                new_password_hash,
+                user_id
+            )
+        )
+
+        connection.commit()
+
+        flash(
+            "Password changed successfully.",
+            "success"
+        )
+
+        return redirect(
+            url_for("settings")
+        )
+
+    except Error as e:
+
+        connection.rollback()
+
+        print(
+            "CHANGE PASSWORD ERROR:",
+            e
+        )
+
+        flash(
+            "Unable to change password.",
+            "error"
+        )
+
+        return redirect(
+            url_for("settings")
+        )
+
+    finally:
+
+        cursor.close()
+        connection.close()
+        
 # ============================================================
 # HELP
 # ============================================================
