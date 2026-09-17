@@ -35,11 +35,14 @@ app.secret_key = "CPMS_RGUKT_SECRET_KEY_2026"
 # MYSQL DATABASE CONFIGURATION
 # ============================================================
 
+
+
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "sivaleela",
-    "password": "Sivaleela@19",
-    "database": "cpms_db"
+    "host": os.getenv("MYSQLHOST"),
+    "port": int(os.getenv("MYSQLPORT", 3306)),
+    "user": os.getenv("MYSQLUSER"),
+    "password": os.getenv("MYSQLPASSWORD"),
+    "database": os.getenv("MYSQLDATABASE")
 }
 
 
@@ -1764,10 +1767,10 @@ def confirm_logout():
 # RUN APPLICATION
 # ============================================================
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     app.run(
-        host="127.0.0.1",
-        port=5000,
-        debug=True
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=False
     )
